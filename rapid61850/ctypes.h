@@ -25,6 +25,7 @@
 extern "C" {
 #endif
 
+#include <QtGlobal>
 #include <string.h>
 
 #ifndef LITTLE_ENDIAN
@@ -32,28 +33,28 @@ extern "C" {
 #endif
 #define TIMESTAMP_SUPPORTED		0
 #define GOOSE_FIXED_SIZE		0	// set to 1 to enable fixed-sized GOOSE encoding, which is slightly more efficient to encode.
-#define HIGH_LEVEL_INTERFACE	1	//
+#define HIGH_LEVEL_INTERFACE	0	//
 
 #define LOCAL_MAC_ADDRESS_VALUE	{0x01, 0x0C, 0xCD, 0x01, 0x00, 0x02}
 
 // platform-specific data types to conform to SV type sizes (Table 14 in IEC 61850-9-2)
-#define CTYPE_BOOLEAN		unsigned char
-#define CTYPE_INT8			char
-#define CTYPE_INT16			short
-#define CTYPE_INT32			int
-#define CTYPE_INT8U			unsigned char
-#define CTYPE_INT16U		unsigned short
-#define CTYPE_INT32U		unsigned int
+#define CTYPE_BOOLEAN		quint8
+#define CTYPE_INT8			qint8
+#define CTYPE_INT16			qint16
+#define CTYPE_INT32			qint32
+#define CTYPE_INT8U			quint8
+#define CTYPE_INT16U		quint16
+#define CTYPE_INT32U		quint32
 #if GOOSE_FIXED_SIZE == 1
-#define CTYPE_ENUM			CTYPE_INT8
+#define CTYPE_ENUM			qint8
 #else
-#define CTYPE_ENUM			CTYPE_INT32
+#define CTYPE_ENUM			qint32
 #endif
 #define CTYPE_FLOAT32		float
 #define CTYPE_FLOAT64		double
 #define CTYPE_VISSTRING255	char *
 #define CTYPE_DBPOS			int
-#define CTYPE_QUALITY		CTYPE_INT16U
+#define CTYPE_QUALITY		quint16
 #define CTYPE_TIMESTAMP		long long
 
 // sampled value dataset type sizes, in bytes

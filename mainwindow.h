@@ -4,6 +4,8 @@
 #include <QtGui/QMainWindow>
 #include <QTableView>
 #include <QVBoxLayout>
+#include <QLabel>
+#include <QComboBox>
 #include "streamtablemodel.h"
 
 class MainWindow : public QMainWindow
@@ -17,6 +19,8 @@ public:
 private:
     StreamTableModel *tableModel;
     QTableView *tableView;
+    QComboBox *interfaceComboBox;
+    QLabel *networkInterfaceLabel;
 };
 
 #endif // MAINWINDOW_H

@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = discover
 TEMPLATE = app
 
+CONFIG += console
 
 SOURCES += main.cpp\
         mainwindow.cpp \

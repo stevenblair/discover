@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QHeaderView>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -8,17 +9,36 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setModel(tableModel);
     tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-    tableView->setSortingEnabled(true);
+    tableView->horizontalHeader()->setHighlightSections(false);
+
+    interfaceComboBox = new QComboBox;
+    networkInterfaceLabel = new QLabel(tr("Network interface:"));
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addWidget(tableView, 0, Qt::AlignCenter);
+    QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
+    QVBoxLayout *streamsLayout = new QVBoxLayout;
+    QGridLayout *graphLayout = new QGridLayout;
 
-    setCentralWidget(tableView);
+    networkInterfaceLayout->addWidget(networkInterfaceLabel);
+    networkInterfaceLayout->addWidget(interfaceComboBox, 1);
 
-    tableModel->addStreamData("MU01");
-    tableModel->addStreamData("MU02");
-    tableModel->addStreamData("MU03");
-    tableModel->addStreamData("MU02");
+    streamsLayout->addWidget(tableView);
+
+    mainLayout->addLayout(networkInterfaceLayout, 0);
+    //mainLayout->addWidget(tableView, 1, Qt::AlignCenter);
+    mainLayout->addLayout(streamsLayout);
+    mainLayout->addLayout(graphLayout, 0);
+
+    QWidget *centralWidget = new QWidget(this);
+    centralWidget->setLayout(mainLayout);
+
+    setCentralWidget(centralWidget);
+
+    LE_IED_MUnn_PhsMeas1 dataset = {{0}};
+    tableModel->addStreamData("MU01", "01-00-00-00-00-00", &dataset, 0);
+    tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
+    tableModel->addStreamData("MU03", "01-00-00-00-00-00", &dataset, 0);
+    tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
 
     tableView->resizeColumnsToContents();
 

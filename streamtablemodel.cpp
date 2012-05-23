@@ -1,5 +1,7 @@
 #include "streamtablemodel.h"
 
+//#include<QDebug>
+
 StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
 }
@@ -46,6 +48,8 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
                     return ((Stream*) i.value())->getVoltage();
                 case STREAM_TABLE_COLUMNS_CURRENT:
                     return ((Stream*) i.value())->getCurrent();
+                case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
+                    return ((Stream*) i.value())->getSamplesPerCycle();
                 default:
                     return QVariant();
                 }
@@ -76,6 +80,8 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
             return tr(STREAM_TABLE_COLUMNS_VOLTAGE_TITLE);
         case STREAM_TABLE_COLUMNS_CURRENT:
             return tr(STREAM_TABLE_COLUMNS_CURRENT_TITLE);
+        case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
+            return tr(STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE);
         default:
             return QVariant();
         }
@@ -84,17 +90,23 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
     return QVariant();
 }
 
-void StreamTableModel::addStreamData(QString svID)
+void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 {
-    if (streams.contains(svID)) {
-        Stream *existingStream = streams.value(svID);
+    Stream *stream;
 
-        //TODO: add data to stream
+    // find stream; create new if doesn't exist
+    if (streams.contains(svID)) {
+        stream = streams.value(svID);
     }
     else {
-        Stream *newStream = new Stream(svID);
-        streams.insert(svID, newStream);
-
-        //TODO: add data to stream
+        stream = new Stream(svID, sourceMAC);
+        streams.insert(svID, stream);
     }
+
+    stream->addSample(dataset, smpCnt);
+}
+
+void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
+{
+    addStreamData(svID, sourceMAC, &dataset, smpCnt);
 }

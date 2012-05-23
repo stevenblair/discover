@@ -4,13 +4,13 @@
 #include "sample.h"
 #include "rapid61850/iec61850.h"
 
-#define MAX_SAMPLES 512         // 256 max samples/cycle * 2 cycles
+#define MAX_SAMPLES 15360         // 256 max samples/cycle * 2 cycles
 
 
 class Stream
 {
 public:
-    explicit Stream(QString svID);
+    explicit Stream(QString svID, QString sourceMAC);
 
     void addSample(struct LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt);
 
@@ -19,6 +19,9 @@ public:
     QString getFreq();
     QString getVoltage();
     QString getCurrent();
+    QString getSamplesPerCycle();
+
+    bool isAnalysed();
 
 private:
     QString svID;

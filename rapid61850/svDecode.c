@@ -101,14 +101,16 @@ int decode_LE_IED_MUnn_PhsMeas1(unsigned char *buf, CTYPE_INT16U smpCnt, struct 
 }
 
 void svDecodeDataset(unsigned char *dataset, int datasetLength, int ASDU, unsigned char *svID, int svIDLength, CTYPE_INT16U smpCnt) {
+    decode_LE_IED_MUnn_PhsMeas1(dataset, smpCnt, &LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1);
+    //TODO: emit addStreamDataSlot()
 
-	if (svIDLength == 10 && strncmp((const char *) svID, "0000MU0001", svIDLength) == 0) {
+    /*if (svIDLength == 10 && strncmp((const char *) svID, "0000MU0001", svIDLength) == 0) {
 		decode_LE_IED_MUnn_PhsMeas1(dataset, smpCnt, &LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1);
 		LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt = smpCnt;
 		if (LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone != NULL) {
 			LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone(smpCnt);
 		}
-	}
+    }*/
 }
 
 
