@@ -1,4 +1,5 @@
 #include "stream.h"
+#include <QDebug>
 
 Stream::Stream(QString svID, QString sourceMAC)
 {
@@ -10,6 +11,12 @@ Stream::Stream(QString svID, QString sourceMAC)
 void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 {
     if (smpCnt >= 0 && smpCnt < MAX_SAMPLES) {
+        if (capturedSamples == 3999) {
+            analysed = true;
+            qDebug() << "got 3999" << smpCnt;
+        }
+        qDebug() << smpCnt;
+
         if (smpCnt == 0) {
             capturedSamples = 1;
         }

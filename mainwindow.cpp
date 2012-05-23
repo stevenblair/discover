@@ -36,12 +36,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     setCentralWidget(centralWidget);
 
-    LE_IED_MUnn_PhsMeas1 dataset = {{0}};
+    /*LE_IED_MUnn_PhsMeas1 dataset = {{0}};
     tableModel->addStreamData("MU01", "01-00-00-00-00-00", &dataset, 0);
     tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
     tableModel->addStreamData("MU03", "01-00-00-00-00-00", &dataset, 0);
     tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
-    tableModel->addStreamData("MU00", "01-00-00-00-00-00", &dataset, 0);
+    tableModel->addStreamData("MU00", "01-00-00-00-00-00", &dataset, 0);*/
 
     tableView->resizeColumnsToContents();
 

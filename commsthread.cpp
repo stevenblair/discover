@@ -31,6 +31,8 @@ CommsThread::CommsThread(QObject *parent) : QThread(parent)
 void CommsThread::proxyPacketReceived() {
     emit addSample(QString("svID_here"), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
 
+    printf("smpCnt: %i\n", LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
+    fflush(stdout);
     //emit setPacketReceived(true);
 }
 
