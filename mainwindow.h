@@ -15,6 +15,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    StreamTableModel *getStreamTableModel();
+    QTableView *getStreamTableView();
+
+public slots:
+    void addInterface(int value, QString name);
 
 private:
     StreamTableModel *tableModel;

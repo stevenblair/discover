@@ -1,6 +1,6 @@
 #include "streamtablemodel.h"
 
-//#include<QDebug>
+#include<QDebug>
 
 StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -97,10 +97,12 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
     // find stream; create new if doesn't exist
     if (streams.contains(svID)) {
         stream = streams.value(svID);
+        qDebug() << "updating";
     }
     else {
         stream = new Stream(svID, sourceMAC);
         streams.insert(svID, stream);
+        qDebug() << "new stream";
     }
 
     stream->addSample(dataset, smpCnt);
@@ -108,5 +110,6 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
 
 void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
 {
+    //qDebug() << "got " << svID << ", " << dataset.MUnn_TCTR_1_Amp_instMag.i;
     addStreamData(svID, sourceMAC, &dataset, smpCnt);
 }

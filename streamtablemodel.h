@@ -35,6 +35,7 @@ public:
     void addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt); // TODO: make private
     
 signals:
+    void resizeColumnsToContents();
     
 public slots:
     void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);

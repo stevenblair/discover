@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     rapid61850/encodePacket.c \
     rapid61850/decodePacket.c \
     rapid61850/datatypes.c \
-    rapid61850/ctypes.c
+    rapid61850/ctypes.c \
+    commsthread.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     rapid61850/encodePacket.h \
     rapid61850/decodePacket.h \
     rapid61850/datatypes.h \
-    rapid61850/ctypes.h
+    rapid61850/ctypes.h \
+    commsthread.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

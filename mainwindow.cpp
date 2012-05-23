@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     tableView->setSelectionMode(QAbstractItemView::SingleSelection);
     tableView->horizontalHeader()->setHighlightSections(false);
+    tableView->verticalHeader()->hide();
+    tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -39,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
     tableModel->addStreamData("MU03", "01-00-00-00-00-00", &dataset, 0);
     tableModel->addStreamData("MU02", "01-00-00-00-00-00", &dataset, 0);
+    tableModel->addStreamData("MU00", "01-00-00-00-00-00", &dataset, 0);
 
     tableView->resizeColumnsToContents();
 
@@ -48,4 +51,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 MainWindow::~MainWindow()
 {
+}
+
+StreamTableModel *MainWindow::getStreamTableModel()
+{
+    return tableModel;
+}
+
+QTableView *MainWindow::getStreamTableView()
+{
+    return tableView;
+}
+
+void MainWindow::addInterface(int value, QString name) {
+    interfaceComboBox->addItem(name, value);
 }
