@@ -101,17 +101,41 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
     else {
         beginInsertRows(QModelIndex(), streams.size(), streams.size());
         stream = new Stream(svID, sourceMAC);
+        QObject::connect(stream, SIGNAL(sampleRateDetermined(QString)), this, SLOT(sampleRateDetermined(QString)));
         streams.insert(svID, stream);
         endInsertRows();
+        emit resizeColumnsToContents();
     }
 
     stream->addSample(dataset, smpCnt);
-    emit resizeColumnsToContents();
+
+    // TODO: keep this here? or rely on flag in Stream for updating GUI (which will be independent of sample rate)?
+    //       or just send emit from Stream for any update type?
+    if (smpCnt == 3999 /*&& stream->getNumberOfSamplesCaptured() == */) {
+        QModelIndex top = createIndex(0, 0, 0);
+        QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+
+        emit dataChanged(top, bottom);
+        emit resizeColumnsToContents();
+    }
 }
 
 void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
 {
     addStreamData(svID, sourceMAC, &dataset, smpCnt);
+}
 
-    //emit dataChanged(QModelIndex(), QModelIndex());
+void StreamTableModel::sampleRateDetermined(QString svID)
+{
+    Stream *stream;
+
+    if (streams.contains(svID)) {
+        stream = streams.value(svID);
+
+        QModelIndex top = createIndex(0, 0, 0);
+        QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+
+        emit dataChanged(top, bottom);
+        emit resizeColumnsToContents();
+    }
 }

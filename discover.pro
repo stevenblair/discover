@@ -10,6 +10,7 @@ TARGET = discover
 TEMPLATE = app
 
 CONFIG += console
+QMAKE_CFLAGS_RELEASE	= -O3
 
 SOURCES += main.cpp\
         mainwindow.cpp \

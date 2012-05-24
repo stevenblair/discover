@@ -1,21 +1,39 @@
 #include "stream.h"
 #include <QDebug>
 
-Stream::Stream(QString svID, QString sourceMAC)
+
+Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
     this->analysed = false;
     this->svID = svID;
     this->sourceMAC = sourceMAC;
+    this->sampleRate = RateUnknown;
 }
 
 void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 {
     if (smpCnt >= 0 && smpCnt < MAX_SAMPLES) {
-        if (capturedSamples == 3999) {
-            analysed = true;
-            qDebug() << "got 3999" << smpCnt;
+        //qDebug() << smpCnt << ", " << capturedSamples;
+
+        // determine sampling rate and nominal frequency
+        if (smpCnt == 0 && this->sampleRate == RateUnknown) {
+            if (capturedSamples == 4000) {
+                sampleRate = Rate80samples50Hz;
+            }
+            else if (capturedSamples == 4800) {
+                sampleRate = Rate80samples60Hz;
+            }
+            else if (capturedSamples == 12800) {
+                sampleRate = Rate256samples50Hz;
+            }
+            else if (capturedSamples == 15600) {
+                sampleRate = Rate256samples60Hz;
+            }
+
+            // TODO: find invalid sample rate values
+
+            emit sampleRateDetermined(QString(this->svID));
         }
-        qDebug() << smpCnt;
 
         if (smpCnt == 0) {
             capturedSamples = 1;
@@ -41,8 +59,6 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         samples[smpCnt].currentQuality[2] = dataset->MUnn_TCTR_3_Amp_q;
         samples[smpCnt].current[3] = dataset->MUnn_TCTR_4_Amp_instMag.i;
         samples[smpCnt].currentQuality[3] = dataset->MUnn_TCTR_4_Amp_q;
-
-        // TODO: do/emit something if particular count is reached?
     }
 }
 
@@ -88,15 +104,31 @@ QString Stream::getCurrent()
 
 QString Stream::getSamplesPerCycle()
 {
-    if (analysed) {
+    if (this->sampleRate == Rate80samples50Hz || this->sampleRate == Rate80samples60Hz) {
         return QString("80");
+    }
+    else if (this->sampleRate == Rate256samples50Hz || this->sampleRate == Rate256samples60Hz) {
+        return QString("256");
+    }
+    else if (this->sampleRate == RateInvalid) {
+        return QString("invalid");
     }
     else {
         return QString("--");
     }
 }
 
+quint32 Stream::getNumberOfSamplesCaptured()
+{
+    return this->capturedSamples;
+}
+
 bool Stream::isAnalysed()
 {
     return analysed;
+}
+
+void Stream::setAnalysed(bool analysed)
+{
+    this->analysed = analysed;
 }

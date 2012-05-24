@@ -113,5 +113,3 @@ void svDecodeDataset(unsigned char *dataset, int datasetLength, int ASDU, unsign
 		}
     }*/
 }
-
-
