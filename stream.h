@@ -1,6 +1,7 @@
 #ifndef STREAM_H
 #define STREAM_H
 #include <QObject>
+#include <QFutureWatcher>
 #include "sample.h"
 #include "rapid61850/iec61850.h"
 
@@ -33,8 +34,11 @@ signals:
     void sampleRateDetermined(QString svID);
 
 public slots:
+    void handleAnalysisFinished();
 
 private:
+    void analyse();
+
     QString svID;
     QString sourceMAC;
     QString destMAC;

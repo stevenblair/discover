@@ -1,5 +1,5 @@
 #include "stream.h"
-#include <QDebug>
+//#include <QDebug>
 
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
@@ -19,6 +19,12 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         if (smpCnt == 0 && this->sampleRate == RateUnknown) {
             if (capturedSamples == 4000) {
                 sampleRate = Rate80samples50Hz;
+
+                QFutureWatcher<void> watcher;
+                connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
+
+                QFuture<void> future = QtConcurrent::run(this, &Stream::analyse);
+                watcher.setFuture(future);
             }
             else if (capturedSamples == 4800) {
                 sampleRate = Rate80samples60Hz;
@@ -30,10 +36,12 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
                 sampleRate = Rate256samples60Hz;
             }
 
-            // TODO: find invalid sample rate values
+            // TODO: find invalid sample rate values, and count valid packets recv'd?
 
             emit sampleRateDetermined(QString(this->svID));
         }
+
+        // TODO: schedule analysis thread
 
         if (smpCnt == 0) {
             capturedSamples = 1;
@@ -131,4 +139,12 @@ bool Stream::isAnalysed()
 void Stream::setAnalysed(bool analysed)
 {
     this->analysed = analysed;
+}
+
+void Stream::handleAnalysisFinished()
+{
+}
+
+void Stream::analyse()
+{
 }
