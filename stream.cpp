@@ -8,8 +8,12 @@ Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(paren
     this->svID = svID;
     this->sourceMAC = sourceMAC;
     this->sampleRate = RateUnknown;
+}
 
-    //measure_M = &measure_M_;
+Stream::~Stream()
+{
+    future.cancel();
+    watcher.cancel();
 }
 
 void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
@@ -36,18 +40,17 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
                 analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
             }
 
+            emit updateModel(true);
+
             // TODO: find invalid sample rate values, and count valid packets recv'd?
         }
 
         // TODO: better checking of watcher/future state
         if (!isAnalysed() && !watcher.isRunning() &&/*&future == NULL &&*/ sampleRate != RateUnknown) {
-            connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
 
-            future = QtConcurrent::run(this, &Stream::analyse);
-            watcher.setFuture(future);
+            emit doAnalyse();
 
             //emit sampleRateDetermined(QString(this->svID));
-            emit updateModel(true);
         }
 
         if (smpCnt == 0) {
@@ -152,6 +155,17 @@ void Stream::handleAnalysisFinished()
 {
     qDebug() << "done analysis";
     emit updateModel(true);
+
+    QTimer::singleShot(RECALCULATE_ANALYSIS_TIME, this, SLOT(doAnalyse()));
+}
+
+void Stream::doAnalyse() {
+    qDebug() << "in timer";
+    // TODO: check not running; remove code from above
+
+    connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
+    future = QtConcurrent::run(this, &Stream::analyse);
+    watcher.setFuture(future);
 }
 
 void Stream::analyse()

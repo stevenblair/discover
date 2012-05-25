@@ -3,7 +3,7 @@
 #include "measure_private.h"
 #include "measure_parameters.h"
 
-Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
+const Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
     1.0E-9,
     1.0,
     1.0,
@@ -1179,7 +1179,7 @@ Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
     1
   };                                   /* Modifiable parameters */
 
-Parameters_measure measure_P_50Hz_80_samples_per_cycle = {
+const Parameters_measure measure_P_50Hz_80_samples_per_cycle = {
   1.0E-9,
   1.0,
   1.0,
@@ -2355,7 +2355,7 @@ Parameters_measure measure_P_50Hz_80_samples_per_cycle = {
   1
 };
 
-Parameters_measure measure_P_50Hz_256_samples_per_cycle = {
+const Parameters_measure measure_P_50Hz_256_samples_per_cycle = {
     1.0E-9,
     1.0,
     1.0,
@@ -3532,7 +3532,7 @@ Parameters_measure measure_P_50Hz_256_samples_per_cycle = {
   };                                   /* Modifiable parameters */
 
 
-Parameters_measure measure_P_60Hz_256_samples_per_cycle = {
+const Parameters_measure measure_P_60Hz_256_samples_per_cycle = {
     1.0E-9,
     1.0,
     1.0,

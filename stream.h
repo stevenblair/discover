@@ -11,7 +11,8 @@
 #include "measure/measure_parameters.h"
 //}
 
-#define MAX_SAMPLES 15360         // 256 samples/cycle * 60 cycles
+#define MAX_SAMPLES                 15360   // 256 samples/cycle * 60 cycles
+#define RECALCULATE_ANALYSIS_TIME   1000   // milliseconds
 
 enum StreamSampleRate {RateUnknown, Rate80samples50Hz, Rate80samples60Hz, Rate256samples50Hz, Rate256samples60Hz, RateInvalid};
 
@@ -21,6 +22,7 @@ class Stream : public QObject
 
 public:
     explicit Stream(QString svID, QString sourceMAC = 0, QObject *parent = 0);
+    ~Stream();
 
     void addSample(struct LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt);
 
@@ -42,6 +44,7 @@ signals:
 
 public slots:
     void handleAnalysisFinished();
+    void doAnalyse();
 
 private:
     void analyse();
