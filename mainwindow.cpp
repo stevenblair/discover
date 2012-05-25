@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QHeaderView>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -24,21 +25,29 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     streamsLayout->addWidget(tableView);
 
-    //scene = new QGraphicsScene;
     //scene->addText("hello world");
-
-    //currentPhasor->setScene(scene);
-    //graphLayout->addWidget(currentPhasor->viewport());
-
     mainLayout->addLayout(networkInterfaceLayout, 0);
     //mainLayout->addWidget(tableView, 1, Qt::AlignCenter);
     mainLayout->addLayout(streamsLayout);
     mainLayout->addLayout(graphLayout, 0);
 
+    currentPhasorScene = new Phasor();
+    voltagePhasorScene = new Phasor();
+
+    connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(slotLoadTransaction(const QItemSelection &, const QItemSelection &)));
+
+    currentPhasorView = new QGraphicsView;
+    voltagePhasorView = new QGraphicsView;
+    currentPhasorView->setScene(currentPhasorScene);
+    voltagePhasorView->setScene(voltagePhasorScene);
+    graphLayout->addWidget(currentPhasorView, 0, 0, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(voltagePhasorView, 1, 0, 1, 1, Qt::AlignCenter);
+
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
 
+    //currentPhasorView->show();
     tableView->resizeColumnsToContents();
 
     setWindowTitle(tr("discover"));

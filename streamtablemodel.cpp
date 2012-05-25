@@ -1,6 +1,6 @@
 #include "streamtablemodel.h"
 
-//#include<QDebug>
+#include<QDebug>
 
 StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -149,5 +149,16 @@ void StreamTableModel::updateAll(bool resizeColumns) {
 
     if (resizeColumns) {
         emit resizeColumnsToContents();
+    }
+}
+
+
+void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev)
+{
+    QModelIndex index = createIndex(selected.first().top(), STREAM_TABLE_COLUMNS_SVID, 0);
+
+    if (!selected.isEmpty()) {
+        QString svID = QString(selected.first().model()->data(index).toString());
+        emit streamSelected(svID);
     }
 }

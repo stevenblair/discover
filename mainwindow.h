@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QGraphicsView>
 #include "streamtablemodel.h"
+#include "phasor.h"
 
 class MainWindow : public QMainWindow
 {
@@ -29,8 +30,10 @@ private:
     StreamTableModel *tableModel;
     QTableView *tableView;
 
-    QGraphicsScene *scene;
-    QGraphicsView *currentPhasor;
+    QGraphicsScene *currentPhasorScene;
+    QGraphicsScene *voltagePhasorScene;
+    QGraphicsView *currentPhasorView;
+    QGraphicsView *voltagePhasorView;
 };
 
 #endif // MAINWINDOW_H

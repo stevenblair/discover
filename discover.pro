@@ -40,7 +40,8 @@ SOURCES += main.cpp\
     commsthread.cpp \
     measure/measure.cpp \
     measure/measure_parameters.cpp \
-    phasorline.cpp
+    phasorline.cpp \
+    phasor.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -70,7 +71,8 @@ HEADERS  += mainwindow.h \
     measure/measure_private.h \
     measure/measure.h \
     measure/measure_parameters.h \
-    phasorline.h
+    phasorline.h \
+    phasor.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include
