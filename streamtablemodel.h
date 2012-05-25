@@ -16,9 +16,9 @@
 
 #define STREAM_TABLE_COLUMNS_SVID_TITLE                 "svID"
 #define STREAM_TABLE_COLUMNS_FREQ_TITLE                 "Frequency"
-#define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "Voltage"
-#define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "Current"
-#define STREAM_TABLE_COLUMNS_SOURCE_MAC_TITLE           "Source MAC"
+#define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "RMS L-L Voltage"
+#define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "RMS L-L Current"
+#define STREAM_TABLE_COLUMNS_SOURCE_MAC_TITLE           "Source MAC Address"
 #define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE    "Samples/cycle"
 
 
@@ -40,6 +40,7 @@ signals:
 public slots:
     void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
     void sampleRateDetermined(QString svID);
+    void updateAll(bool resizeColumns);
 
 private:
     QMap<QString, Stream*> streams;

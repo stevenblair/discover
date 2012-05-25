@@ -37,7 +37,9 @@ SOURCES += main.cpp\
     rapid61850/decodePacket.c \
     rapid61850/datatypes.c \
     rapid61850/ctypes.c \
-    commsthread.cpp
+    commsthread.cpp \
+    measure/measure.cpp \
+    measure/measure_parameters.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -61,7 +63,12 @@ HEADERS  += mainwindow.h \
     rapid61850/decodePacket.h \
     rapid61850/datatypes.h \
     rapid61850/ctypes.h \
-    commsthread.h
+    commsthread.h \
+    measure/rtwtypes.h \
+    measure/measure_types.h \
+    measure/measure_private.h \
+    measure/measure.h \
+    measure/measure_parameters.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

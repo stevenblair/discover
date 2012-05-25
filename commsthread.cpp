@@ -116,6 +116,8 @@ void CommsThread::triggerUpdateUI() {
 
 void CommsThread::run()
 {
+    initialise_iec61850();
+
     findNetworkInterfaces();
 
     fp = initWinpcap(interfaceNumber);

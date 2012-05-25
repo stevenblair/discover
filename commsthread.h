@@ -7,7 +7,10 @@
 #define HAVE_REMOTE
 #include <pcap.h>
 #include <windows.h>
+
+extern "C" {
 #include "rapid61850/iec61850.h"
+}
 
 #define BUFFER_LENGTH	1024
 

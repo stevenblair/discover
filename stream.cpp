@@ -1,5 +1,5 @@
 #include "stream.h"
-//#include <QDebug>
+#include <QDebug>
 
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
@@ -8,6 +8,8 @@ Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(paren
     this->svID = svID;
     this->sourceMAC = sourceMAC;
     this->sampleRate = RateUnknown;
+
+    //measure_M = &measure_M_;
 }
 
 void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
@@ -19,29 +21,34 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         if (smpCnt == 0 && this->sampleRate == RateUnknown) {
             if (capturedSamples == 4000) {
                 sampleRate = Rate80samples50Hz;
-
-                QFutureWatcher<void> watcher;
-                connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
-
-                QFuture<void> future = QtConcurrent::run(this, &Stream::analyse);
-                watcher.setFuture(future);
+                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);
             }
             else if (capturedSamples == 4800) {
                 sampleRate = Rate80samples60Hz;
+                analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
             }
             else if (capturedSamples == 12800) {
                 sampleRate = Rate256samples50Hz;
+                analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
             }
             else if (capturedSamples == 15600) {
                 sampleRate = Rate256samples60Hz;
+                analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
             }
 
             // TODO: find invalid sample rate values, and count valid packets recv'd?
-
-            emit sampleRateDetermined(QString(this->svID));
         }
 
-        // TODO: schedule analysis thread
+        // TODO: better checking of watcher/future state
+        if (!isAnalysed() && !watcher.isRunning() &&/*&future == NULL &&*/ sampleRate != RateUnknown) {
+            connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
+
+            future = QtConcurrent::run(this, &Stream::analyse);
+            watcher.setFuture(future);
+
+            //emit sampleRateDetermined(QString(this->svID));
+            emit updateModel(true);
+        }
 
         if (smpCnt == 0) {
             capturedSamples = 1;
@@ -83,7 +90,7 @@ QString Stream::getSourceMAC()
 QString Stream::getFreq()
 {
     if (analysed) {
-        return QString("50.1 Hz");
+        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency);
     }
     else {
         return QString("--");
@@ -93,7 +100,7 @@ QString Stream::getFreq()
 QString Stream::getVoltage()
 {
     if (analysed) {
-        return QString("11.0 kV");
+        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0);
     }
     else {
         return QString("--");
@@ -103,7 +110,7 @@ QString Stream::getVoltage()
 QString Stream::getCurrent()
 {
     if (analysed) {
-        return QString("1.05 kA");
+        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0);
     }
     else {
         return QString("--");
@@ -143,8 +150,33 @@ void Stream::setAnalysed(bool analysed)
 
 void Stream::handleAnalysisFinished()
 {
+    qDebug() << "done analysis";
+    emit updateModel(true);
 }
 
 void Stream::analyse()
 {
+    qDebug() << "in analysis";
+
+    QElapsedTimer timer;
+    timer.start();
+
+    analysisInstance.initialize();
+
+    for (int t = 0; t < 4000; t++) {
+        analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
+        analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
+        analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
+        analysisInstance.measure_U.IabcAmps[0] = samples[t].current[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor;
+        analysisInstance.measure_U.IabcAmps[1] = samples[t].current[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor;
+        analysisInstance.measure_U.IabcAmps[2] = samples[t].current[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor;
+
+        analysisInstance.step();
+    }
+
+    analysisInstance.terminate();  // TODO: need?
+
+    setAnalysed(true);
+
+    qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

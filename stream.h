@@ -1,9 +1,15 @@
 #ifndef STREAM_H
 #define STREAM_H
+#include <QtCore>
 #include <QObject>
 #include <QFutureWatcher>
 #include "sample.h"
 #include "rapid61850/iec61850.h"
+//extern "C" {
+#include "measure/measure.h"
+#include "measure/rtwtypes.h"
+#include "measure/measure_parameters.h"
+//}
 
 #define MAX_SAMPLES 15360         // 256 samples/cycle * 60 cycles
 
@@ -31,7 +37,8 @@ public:
     void setAnalysed(bool analysed);
 
 signals:
-    void sampleRateDetermined(QString svID);
+    //void sampleRateDetermined(QString svID);
+    void updateModel(bool resizeColumns);
 
 public slots:
     void handleAnalysisFinished();
@@ -53,6 +60,15 @@ private:
     QString freqSummary;
     QString voltageSummary;
     QString currentSummary;
+
+//    RT_MODEL_measure measure_M;
+//    //static RT_MODEL_measure *const measure_M;/* Real-time model */
+//    D_Work_measure measure_DWork;   /* Observable states */
+//    ExternalInputs_measure measure_U;/* External inputs */
+//    ExternalOutputs_measure measure_Y;/* External outputs */
+    measureModelClass analysisInstance;
+    QFuture<void> future;
+    QFutureWatcher<void> watcher;
 };
 
 #endif // STREAM_H
