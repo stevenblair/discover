@@ -13,11 +13,7 @@ void sendPacket(pcap_t *fp, const u_char *buf, int length) {
 }
 
 void packet_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pkt_data) {
-    //if (header->len > 260) {
-        gse_sv_packet_filter((unsigned char *) pkt_data, header->len);
-        //printf("got packet\n");
-        //fflush(stdout);
-    //}
+    gse_sv_packet_filter((unsigned char *) pkt_data, header->len);
 }
 
 CommsThread::CommsThread(QObject *parent) : QThread(parent)
@@ -109,9 +105,9 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
     return fpl;
 }
 
-void CommsThread::triggerUpdateUI() {
+/*void CommsThread::triggerUpdateUI() {
     emit updateUI();
-}
+}*/
 
 void SVRecv(CTYPE_INT16U smpCnt) {
     commsThreadPtr->proxyPacketReceived();
@@ -121,7 +117,6 @@ void CommsThread::run()
 {
     initialise_iec61850();
     LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone = &SVRecv;
-    //PC_IED4.P1.CTRL.CTRL_LPHD1_1.gse_inputs_GOOSE_outputs_control.datasetDecodeDone = &callbackGOOSE;
 
     findNetworkInterfaces();
 
@@ -131,12 +126,11 @@ void CommsThread::run()
     forever {
         //Sleep(1);
 
-        //Capture GOOSE packets, read them and copy binary data in BinInput[]
         if (fp != NULL) {
             pcap_loop(fp, 1, packet_handler, NULL);
         }
 
-        emit updateUI();
+        //emit updateUI();    // TODO: need this? and above function?
 
         if (scheduledNewInterface == true) {
             scheduledNewInterface = false;

@@ -37,7 +37,7 @@ protected:
     int interfaceNumber;
 
 signals:
-    void updateUI();
+    //void updateUI();
     void setLastTATL(int value);
     void setLastStNum(int value);
     void setLastSqNum(int value);

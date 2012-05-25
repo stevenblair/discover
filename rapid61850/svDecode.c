@@ -105,11 +105,7 @@ void svDecodeDataset(unsigned char *dataset, int datasetLength, int ASDU, unsign
     decode_LE_IED_MUnn_PhsMeas1(dataset, smpCnt, &LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1);
     LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt = smpCnt;
 
-    /*if (svIDLength == 10 && strncmp((const char *) svID, "0000MU0001", svIDLength) == 0) {
-		decode_LE_IED_MUnn_PhsMeas1(dataset, smpCnt, &LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1);
-		LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt = smpCnt;
-		if (LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone != NULL) {
-			LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone(smpCnt);
-		}
-    }*/
+    if (LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone != NULL) {
+        LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone(smpCnt);
+    }
 }
