@@ -15,7 +15,6 @@ void sendPacket(pcap_t *fp, const u_char *buf, int length) {
 void packet_handler(u_char *param, const struct pcap_pkthdr *header, const u_char *pkt_data) {
     //if (header->len > 260) {
         gse_sv_packet_filter((unsigned char *) pkt_data, header->len);
-        commsThreadPtr->proxyPacketReceived();  // TODO: only perform if SV
         //printf("got packet\n");
         //fflush(stdout);
     //}
@@ -114,9 +113,15 @@ void CommsThread::triggerUpdateUI() {
     emit updateUI();
 }
 
+void SVRecv(CTYPE_INT16U smpCnt) {
+    commsThreadPtr->proxyPacketReceived();
+}
+
 void CommsThread::run()
 {
     initialise_iec61850();
+    LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.datasetDecodeDone = &SVRecv;
+    //PC_IED4.P1.CTRL.CTRL_LPHD1_1.gse_inputs_GOOSE_outputs_control.datasetDecodeDone = &callbackGOOSE;
 
     findNetworkInterfaces();
 
