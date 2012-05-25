@@ -57,6 +57,8 @@ extern "C" {
 #define CTYPE_QUALITY		quint16
 #define CTYPE_TIMESTAMP		long long
 
+#define SVID_LENGTH_MAX		129
+
 // sampled value dataset type sizes, in bytes
 #define SV_GET_LENGTH_FLOAT32				4
 #define SV_GET_LENGTH_FLOAT64				8

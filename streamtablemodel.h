@@ -8,18 +8,18 @@
 #define STREAM_TABLE_NUMBER_OF_COLUMNS          6
 
 #define STREAM_TABLE_COLUMNS_SVID               0
-#define STREAM_TABLE_COLUMNS_FREQ               1
-#define STREAM_TABLE_COLUMNS_VOLTAGE            2
-#define STREAM_TABLE_COLUMNS_CURRENT            3
-#define STREAM_TABLE_COLUMNS_SOURCE_MAC         4
-#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE  5
+#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE  1
+#define STREAM_TABLE_COLUMNS_FREQ               2
+#define STREAM_TABLE_COLUMNS_VOLTAGE            3
+#define STREAM_TABLE_COLUMNS_CURRENT            4
+#define STREAM_TABLE_COLUMNS_SOURCE_MAC         5
 
 #define STREAM_TABLE_COLUMNS_SVID_TITLE                 "svID"
+#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE    "Samples/cycle"
 #define STREAM_TABLE_COLUMNS_FREQ_TITLE                 "Frequency"
 #define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "RMS L-L Voltage"
 #define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "RMS L-L Current"
 #define STREAM_TABLE_COLUMNS_SOURCE_MAC_TITLE           "Source MAC Address"
-#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE    "Samples/cycle"
 
 
 class StreamTableModel : public QAbstractTableModel

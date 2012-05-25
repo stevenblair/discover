@@ -1,9 +1,7 @@
 #include "commsthread.h"
 
 CommsThread *commsThreadPtr;
-//extern QString interfaceName;
 
-//char errbuf[PCAP_ERRBUF_SIZE];
 unsigned char buf[BUFFER_LENGTH] = {0};
 
 void sendPacket(pcap_t *fp, const u_char *buf, int length) {
@@ -24,7 +22,7 @@ CommsThread::CommsThread(QObject *parent) : QThread(parent)
 }
 
 void CommsThread::proxyPacketReceived() {
-    emit addSample(QString("svID_here"), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
+    emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
 
     //printf("smpCnt: %i\n", LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
     //fflush(stdout);
@@ -105,10 +103,6 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
     return fpl;
 }
 
-/*void CommsThread::triggerUpdateUI() {
-    emit updateUI();
-}*/
-
 void SVRecv(CTYPE_INT16U smpCnt) {
     commsThreadPtr->proxyPacketReceived();
 }
@@ -129,8 +123,6 @@ void CommsThread::run()
         if (fp != NULL) {
             pcap_loop(fp, 1, packet_handler, NULL);
         }
-
-        //emit updateUI();    // TODO: need this? and above function?
 
         if (scheduledNewInterface == true) {
             scheduledNewInterface = false;

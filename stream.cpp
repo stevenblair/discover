@@ -21,38 +21,6 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
     if (smpCnt >= 0 && smpCnt < MAX_SAMPLES) {
         //qDebug() << smpCnt << ", " << capturedSamples;
 
-        // determine sampling rate and nominal frequency
-        if (smpCnt == 0 && this->sampleRate == RateUnknown) {
-            if (capturedSamples == 4000) {
-                sampleRate = Rate80samples50Hz;
-                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);
-            }
-            else if (capturedSamples == 4800) {
-                sampleRate = Rate80samples60Hz;
-                analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
-            }
-            else if (capturedSamples == 12800) {
-                sampleRate = Rate256samples50Hz;
-                analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
-            }
-            else if (capturedSamples == 15600) {
-                sampleRate = Rate256samples60Hz;
-                analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
-            }
-
-            emit updateModel(true);
-
-            // TODO: find invalid sample rate values, and count valid packets recv'd?
-        }
-
-        // TODO: better checking of watcher/future state
-        if (!isAnalysed() && !watcher.isRunning() &&/*&future == NULL &&*/ sampleRate != RateUnknown) {
-
-            emit doAnalyse();
-
-            //emit sampleRateDetermined(QString(this->svID));
-        }
-
         if (smpCnt == 0) {
             capturedSamples = 1;
         }
@@ -77,6 +45,36 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         samples[smpCnt].currentQuality[2] = dataset->MUnn_TCTR_3_Amp_q;
         samples[smpCnt].current[3] = dataset->MUnn_TCTR_4_Amp_instMag.i;
         samples[smpCnt].currentQuality[3] = dataset->MUnn_TCTR_4_Amp_q;
+
+        // determine sampling rate and nominal frequency
+        if (/*smpCnt == 0 && */this->sampleRate == RateUnknown) {
+            if (capturedSamples == SAMPLES_50HZ_80_PER_CYCLE) {
+                sampleRate = Rate80samples50Hz;
+                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);
+            }
+            else if (capturedSamples == SAMPLES_60HZ_80_PER_CYCLE) {
+                sampleRate = Rate80samples60Hz;
+                analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
+            }
+            else if (capturedSamples == SAMPLES_50HZ_256_PER_CYCLE) {
+                sampleRate = Rate256samples50Hz;
+                analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
+            }
+            else if (capturedSamples == SAMPLES_60HZ_256_PER_CYCLE) {
+                sampleRate = Rate256samples60Hz;
+                analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
+            }
+
+            if (sampleRate != RateUnknown) {
+                samplesPerSecond = capturedSamples;
+
+                emit updateModel(true);
+                connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
+                emit doAnalyse();
+            }
+
+            // TODO: find invalid sample rate values, and count valid packets recv'd?
+        }
     }
 }
 
@@ -161,11 +159,12 @@ void Stream::handleAnalysisFinished()
 
 void Stream::doAnalyse() {
     qDebug() << "in timer";
-    // TODO: check not running; remove code from above
 
-    connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
-    future = QtConcurrent::run(this, &Stream::analyse);
-    watcher.setFuture(future);
+    // TODO: better checking of watcher/future state
+    if (/*!isAnalysed() &&*/!watcher.isRunning() &&/*&future == NULL &&*/ sampleRate != RateUnknown) {
+        future = QtConcurrent::run(this, &Stream::analyse);
+        watcher.setFuture(future);
+    }
 }
 
 void Stream::analyse()
@@ -177,7 +176,7 @@ void Stream::analyse()
 
     analysisInstance.initialize();
 
-    for (int t = 0; t < 4000; t++) {
+    for (quint32 t = 0; t < samplesPerSecond; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
@@ -187,8 +186,6 @@ void Stream::analyse()
 
         analysisInstance.step();
     }
-
-    analysisInstance.terminate();  // TODO: need?
 
     setAnalysed(true);
 

@@ -91,6 +91,7 @@ struct IEC_61850_9_2LETCTR {
 		struct LE_IED_MUnn_PhsMeas1 LE_IED_MUnn_PhsMeas1;
 		void (*datasetDecodeDone)(CTYPE_INT16U smpCnt);
 		CTYPE_INT16U smpCnt;
+        char *svID[SVID_LENGTH_MAX];
 	} sv_inputs_MSVCB01;
 };
 struct IEC_61850_9_2LETVTR {
@@ -98,8 +99,6 @@ struct IEC_61850_9_2LETVTR {
 };
 
 void init_datatypes();
-
-
 
 
 #ifdef __cplusplus /* If this is a C++ compiler, end C linkage */
