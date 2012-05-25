@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     rapid61850/ctypes.c \
     commsthread.cpp \
     measure/measure.cpp \
-    measure/measure_parameters.cpp
+    measure/measure_parameters.cpp \
+    phasorline.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -68,7 +69,8 @@ HEADERS  += mainwindow.h \
     measure/measure_types.h \
     measure/measure_private.h \
     measure/measure.h \
-    measure/measure_parameters.h
+    measure/measure_parameters.h \
+    phasorline.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

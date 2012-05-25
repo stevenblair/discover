@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QComboBox>
+#include <QGraphicsView>
 #include "streamtablemodel.h"
 
 class MainWindow : public QMainWindow
@@ -22,10 +23,14 @@ public slots:
     void addInterface(int value, QString name);
 
 private:
+    QLabel *networkInterfaceLabel;
+    QComboBox *interfaceComboBox;
+
     StreamTableModel *tableModel;
     QTableView *tableView;
-    QComboBox *interfaceComboBox;
-    QLabel *networkInterfaceLabel;
+
+    QGraphicsScene *scene;
+    QGraphicsView *currentPhasor;
 };
 
 #endif // MAINWINDOW_H

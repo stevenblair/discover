@@ -49,7 +49,7 @@ signals:
 
 public slots:
     void handleAnalysisFinished();
-    void doAnalyse();
+    void scheduleAnalysis();
 
 private:
     void analyse();
