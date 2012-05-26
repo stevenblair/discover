@@ -4,17 +4,19 @@
 #include <QtGui/QColor>
 #include <QtGui/QGraphicsItem>
 #include <QPainter>
+#include "stream.h"
+#include "phasorscene.h".h"
 
 class PhasorLine : public QGraphicsItem
 {
 public:
-    explicit PhasorLine(double mag, double phase);
+    explicit PhasorLine(PhasorScene *phasorScene);
 
     QRectF boundingRect() const;
     //QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget);
 
-    void setPhasorData(double mag, double phase);
+    void setPhasorData(Stream *stream);
     
 signals:
     
@@ -25,9 +27,13 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-private:    // TODO: should not store local copy, but pointer to data
-    double mag;
-    double phase;   // radians
+private:            // TODO: pointer to Stream; treat as model; and check for it's existence on paint()
+                    //       or, connect data by slot/signal; disconnect when selection changed
+    PhasorScene *phasorScene;
+    //Stream *stream;
+    //double *mag;
+    //double *phase;   // radians
+
 };
 
 #endif // PHASORLINE_H

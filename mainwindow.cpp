@@ -30,8 +30,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     mainLayout->addLayout(streamsLayout);
     mainLayout->addLayout(graphLayout, 0);
 
-    currentPhasorScene = new PhasorScene(tableModel);   //TODO: probably easiest to subclass for current and voltage
-    voltagePhasorScene = new PhasorScene(tableModel);
+    currentPhasorScene = new CurrentPhasorScene(tableModel);
+    voltagePhasorScene = new VoltagePhasorScene(tableModel);
     connect(tableModel, SIGNAL(streamSelected(QString)), currentPhasorScene, SLOT(streamSelectionChanged(QString)));
     connect(tableModel, SIGNAL(streamSelected(QString)), voltagePhasorScene, SLOT(streamSelectionChanged(QString)));
 

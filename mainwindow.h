@@ -30,8 +30,8 @@ private:
     StreamTableModel *tableModel;
     QTableView *tableView;
 
-    PhasorScene *currentPhasorScene;
-    PhasorScene *voltagePhasorScene;
+    CurrentPhasorScene *currentPhasorScene;
+    VoltagePhasorScene *voltagePhasorScene;
     QGraphicsView *currentPhasorView;
     QGraphicsView *voltagePhasorView;
 };

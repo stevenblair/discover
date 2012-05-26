@@ -72,7 +72,7 @@ HEADERS  += mainwindow.h \
     measure/measure.h \
     measure/measure_parameters.h \
     phasorline.h \
-    phasor.h
+    phasorscene.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include
