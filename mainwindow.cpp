@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     streamsLayout->addWidget(tableView);
+    connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
+
 
     //scene->addText("hello world");
     mainLayout->addLayout(networkInterfaceLayout, 0);
@@ -31,10 +33,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     mainLayout->addLayout(streamsLayout);
     mainLayout->addLayout(graphLayout, 0);
 
-    currentPhasorScene = new Phasor();
-    voltagePhasorScene = new Phasor();
-
-    connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(slotLoadTransaction(const QItemSelection &, const QItemSelection &)));
+    currentPhasorScene = new PhasorScene(tableModel);
+    voltagePhasorScene = new PhasorScene(tableModel);
+    connect(tableModel, SIGNAL(streamSelected(QString)), currentPhasorScene, SLOT(streamSelectionChanged(QString)));
+    connect(tableModel, SIGNAL(streamSelected(QString)), voltagePhasorScene, SLOT(streamSelectionChanged(QString)));
 
     currentPhasorView = new QGraphicsView;
     voltagePhasorView = new QGraphicsView;

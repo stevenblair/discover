@@ -3,14 +3,19 @@
 
 #include <QGraphicsScene>
 #include "phasorline.h"
+#include "streamtablemodel.h"
 
-class Phasor : public QGraphicsScene
+class PhasorScene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
-    Phasor();
+    PhasorScene(StreamTableModel *tableModel, QObject *parent = 0);
+public slots:
+    void streamSelectionChanged(QString svID);
 
 private:
     QGraphicsItem *phasorLine[3];
+    StreamTableModel *tableModel;
 };
 
 #endif // PHASOR_H
