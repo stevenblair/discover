@@ -13,6 +13,8 @@ public:
     QRectF boundingRect() const;
     //QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget);
+
+    void setPhasorData(double mag, double phase);
     
 signals:
     
@@ -23,7 +25,7 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
-private:
+private:    // TODO: should not store local copy, but pointer to data
     double mag;
     double phase;   // radians
 };

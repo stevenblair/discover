@@ -90,6 +90,20 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
     return QVariant();
 }
 
+Stream *StreamTableModel::getPhasorData(QString svID)
+{
+    Stream *stream;
+
+    // find stream; create new if doesn't exist
+    if (streams.contains(svID)) {
+        stream = streams.value(svID);
+
+        return stream;
+    }
+
+    return NULL;
+}
+
 void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 {
     Stream *stream;

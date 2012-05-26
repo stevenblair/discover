@@ -26,14 +26,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     streamsLayout->addWidget(tableView);
     connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
 
-
-    //scene->addText("hello world");
     mainLayout->addLayout(networkInterfaceLayout, 0);
-    //mainLayout->addWidget(tableView, 1, Qt::AlignCenter);
     mainLayout->addLayout(streamsLayout);
     mainLayout->addLayout(graphLayout, 0);
 
-    currentPhasorScene = new PhasorScene(tableModel);
+    currentPhasorScene = new PhasorScene(tableModel);   //TODO: probably easiest to subclass for current and voltage
     voltagePhasorScene = new PhasorScene(tableModel);
     connect(tableModel, SIGNAL(streamSelected(QString)), currentPhasorScene, SLOT(streamSelectionChanged(QString)));
     connect(tableModel, SIGNAL(streamSelected(QString)), voltagePhasorScene, SLOT(streamSelectionChanged(QString)));
@@ -51,6 +48,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     //currentPhasorView->show();
     tableView->resizeColumnsToContents();
+    currentPhasorView->setRenderHint(QPainter::Antialiasing, true);
+    voltagePhasorView->setRenderHint(QPainter::Antialiasing, true);
 
     setWindowTitle(tr("discover"));
     setMinimumWidth(700);

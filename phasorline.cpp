@@ -1,4 +1,5 @@
 #include "phasorline.h"
+#include <qmath.h>
 
 PhasorLine::PhasorLine(double mag, double phase)
 {
@@ -6,16 +7,24 @@ PhasorLine::PhasorLine(double mag, double phase)
     this->phase = phase;
 }
 
+void PhasorLine::setPhasorData(double mag, double phase)
+{
+    this->mag = mag;
+    this->phase = phase;
+
+    update();
+}
+
 QRectF PhasorLine::boundingRect() const
 {
-    return QRectF(100.0, 50.0, 110.0, 70.0);
+    return QRectF(0.0, 0.0, mag * cos(phase), -1 * mag * sin(phase));
 }
 
 void PhasorLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget)
 {
     Q_UNUSED(widget);
 
-    painter->drawLine(15, 54, 94, 54);
+    painter->drawLine(0.0, 0.0, mag * cos(phase), -1 * mag * sin(phase));
 }
 
 void PhasorLine::mousePressEvent(QGraphicsSceneMouseEvent *event)

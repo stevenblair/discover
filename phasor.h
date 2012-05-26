@@ -14,7 +14,7 @@ public slots:
     void streamSelectionChanged(QString svID);
 
 private:
-    QGraphicsItem *phasorLine[3];
+    PhasorLine *phasorLine[3];
     StreamTableModel *tableModel;
 };
 

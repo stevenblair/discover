@@ -1,5 +1,5 @@
 #include "phasor.h"
-#include <QDebug>
+#include "phasorline.h"
 
 PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraphicsScene(parent)
 {
@@ -16,5 +16,11 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
 
 void PhasorScene::streamSelectionChanged(QString svID)
 {
-    qDebug() << svID;
+    Stream *stream = tableModel->getPhasorData(svID);
+
+    if (stream != NULL && stream->isAnalysed()) {
+        phasorLine[0]->setPhasorData(10.0, -60.0);     // TODO: use actual data from stream
+        phasorLine[1]->setPhasorData(-10.0, 60.0);
+        phasorLine[2]->setPhasorData(10.5, 30.0);
+    }
 }

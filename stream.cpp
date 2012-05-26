@@ -151,6 +151,11 @@ void Stream::setAnalysed(bool analysed)
     this->analysed = analysed;
 }
 
+ExternalOutputs_measure *Stream::getStreamData()
+{
+    return &analysisInstance.measure_Y;
+}
+
 void Stream::handleAnalysisFinished()
 {
     //qDebug() << "done analysis";
@@ -177,6 +182,8 @@ void Stream::analyse()
 
     //QElapsedTimer timer;
     //timer.start();
+
+    setAnalysed(false);
 
     analysisInstance.initialize();
 

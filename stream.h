@@ -42,6 +42,7 @@ public:
 
     bool isAnalysed();
     void setAnalysed(bool analysed);
+    ExternalOutputs_measure *getStreamData();
 
 signals:
     //void sampleRateDetermined(QString svID);
