@@ -1,5 +1,7 @@
 #include "phasorscene.h"
 #include "phasorline.h"
+#include "mainwindow.h"
+#include <QDebug>
 
 PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraphicsScene(parent)
 {
@@ -20,14 +22,29 @@ void PhasorScene::streamSelectionChanged(Stream *stream)
 {
     this->stream = stream;
 
+    qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
+    qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
+
     //TODO: scale mags to maximum View size; always centre on (0,0)
     for (int i = 0; i < 3; i++) {
-        phaseLine[i]->setLine(0.0, 0.0, getPhasorMag(i) * cos(getPhasorAngle(i)), -1.0 * getPhasorMag(i) * sin(getPhasorAngle(i)));
+        qreal mag = scaleFactor * getPhasorMag(i);
+        qreal angle = getPhasorAngle(i);
+
+        qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag;
+
+        phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
     }
 
     //((QGraphicsView *) this->views().first())->update();
     //((QGraphicsView *) this->views().first())->fitInView(this->itemsBoundingRect(), Qt::KeepAspectRatio);
+    //((QGraphicsView *) this->views().first())->scale(0.5, 0.5);
     ((QGraphicsView *) this->views().first())->centerOn(0.0, 0.0);
+    //((QGraphicsView *) this->views().first())->fitInView(QRect(0, 0, 300, 300));
+
+    const QRectF rect = QRectF(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
+    //((QGraphicsView *) this->views().first())->fitInView(rect, Qt::KeepAspectRatio);
+    ((QGraphicsView *) this->views().first())->setSceneRect(rect);
+
     invalidate(this->itemsBoundingRect());
 }
 

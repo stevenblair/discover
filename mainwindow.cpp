@@ -35,14 +35,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPhasorScene, SLOT(streamSelectionChanged(Stream*)));    // TODO: connect directly between TableView and Phasors?
     connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePhasorScene, SLOT(streamSelectionChanged(Stream*)));
 
-    currentPhasorView = new QGraphicsView;
-    voltagePhasorView = new QGraphicsView;
-    currentPhasorView->setDragMode(QGraphicsView::RubberBandDrag);
-    voltagePhasorView->setDragMode(QGraphicsView::RubberBandDrag);
-    currentPhasorView->setRenderHint(QPainter::Antialiasing);
-    voltagePhasorView->setRenderHint(QPainter::Antialiasing);
-    currentPhasorView->setMinimumSize(200, 200);
-    voltagePhasorView->setMinimumSize(200, 200);
+    currentPhasorView = new PhasorView;
+    voltagePhasorView = new PhasorView;
+
+    /*currentPhasorView->centerOn(0.0, 0.0);
+    voltagePhasorView->centerOn(0.0, 0.0);
+    currentPhasorView->fitInView(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE);
+    voltagePhasorView->fitInView(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE);*/
     currentPhasorView->setScene(currentPhasorScene);
     voltagePhasorView->setScene(voltagePhasorScene);
     graphLayout->addWidget(voltagePhasorView, 0, 0, 1, 1, Qt::AlignCenter);
@@ -54,8 +53,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     //currentPhasorView->show();
     tableView->resizeColumnsToContents();
-    currentPhasorView->setRenderHint(QPainter::Antialiasing, true);
-    voltagePhasorView->setRenderHint(QPainter::Antialiasing, true);
 
     setWindowTitle(tr("discover"));
     setMinimumWidth(700);

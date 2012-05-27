@@ -9,6 +9,7 @@
 #include <QGraphicsView>
 #include "streamtablemodel.h"
 #include "phasorscene.h"
+#include "phasorview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -32,8 +33,8 @@ private:
 
     CurrentPhasorScene *currentPhasorScene;
     VoltagePhasorScene *voltagePhasorScene;
-    QGraphicsView *currentPhasorView;
-    QGraphicsView *voltagePhasorView;
+    PhasorView *currentPhasorView;
+    PhasorView *voltagePhasorView;
 };
 
 #endif // MAINWINDOW_H
