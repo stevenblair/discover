@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     measure/measure.cpp \
     measure/measure_parameters.cpp \
     phasorscene.cpp \
-    phasorview.cpp
+    phasorview.cpp \
+    statuscolumndelegate.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -72,7 +73,8 @@ HEADERS  += mainwindow.h \
     measure/measure.h \
     measure/measure_parameters.h \
     phasorscene.h \
-    phasorview.h
+    phasorview.h \
+    statuscolumndelegate.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

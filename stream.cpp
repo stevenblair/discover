@@ -4,6 +4,7 @@
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
+    this->alive = true;
     this->analysed = false;
     this->svID = svID;
     this->sourceMAC = sourceMAC;
@@ -144,6 +145,11 @@ quint32 Stream::getNumberOfSamplesCaptured()
 bool Stream::isAnalysed()
 {
     return analysed;
+}
+
+bool Stream::isAlive()
+{
+    return this->alive;
 }
 
 void Stream::setAnalysed(bool analysed)

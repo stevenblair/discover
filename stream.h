@@ -43,6 +43,7 @@ public:
     quint32 getNumberOfSamplesCaptured();
 
     bool isAnalysed();
+    bool isAlive();
     void setAnalysed(bool analysed);
     ExternalOutputs_measure *getStreamData();
 
@@ -65,6 +66,7 @@ private:
     quint32 samplesPerSecond;
     Sample samples[MAX_SAMPLES];
     bool analysed;
+    bool alive;
 
     StreamSampleRate sampleRate;
 

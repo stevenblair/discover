@@ -7,15 +7,17 @@
 #include <QItemSelectionModel>
 #include "stream.h"
 
-#define STREAM_TABLE_NUMBER_OF_COLUMNS                  6
+#define STREAM_TABLE_NUMBER_OF_COLUMNS                  7
 
-#define STREAM_TABLE_COLUMNS_SVID                       0
-#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE          1
-#define STREAM_TABLE_COLUMNS_FREQ                       2
-#define STREAM_TABLE_COLUMNS_VOLTAGE                    3
-#define STREAM_TABLE_COLUMNS_CURRENT                    4
-#define STREAM_TABLE_COLUMNS_SOURCE_MAC                 5
+#define STREAM_TABLE_COLUMNS_STATUS                     0
+#define STREAM_TABLE_COLUMNS_SVID                       1
+#define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE          2
+#define STREAM_TABLE_COLUMNS_FREQ                       3
+#define STREAM_TABLE_COLUMNS_VOLTAGE                    4
+#define STREAM_TABLE_COLUMNS_CURRENT                    5
+#define STREAM_TABLE_COLUMNS_SOURCE_MAC                 6
 
+#define STREAM_TABLE_COLUMNS_STATUS_TITLE               "Status"
 #define STREAM_TABLE_COLUMNS_SVID_TITLE                 "svID"
 #define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE    "Samples/cycle"
 #define STREAM_TABLE_COLUMNS_FREQ_TITLE                 "Frequency"

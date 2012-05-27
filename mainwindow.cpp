@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "statuscolumndelegate.h"
 #include <QHeaderView>
 #include <QDebug>
 
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->horizontalHeader()->setHighlightSections(false);
     tableView->verticalHeader()->hide();
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
 
     streamsLayout->addWidget(tableView);
     connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));

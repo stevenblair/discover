@@ -4,6 +4,7 @@
 
 StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
+
 }
 
 int StreamTableModel::rowCount(const QModelIndex &parent) const
@@ -38,6 +39,8 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
             i.next();
             if (index.row() == row) {
                 switch (index.column()) {
+                case STREAM_TABLE_COLUMNS_STATUS:
+                    return ((Stream*) i.value())->isAlive();
                 case STREAM_TABLE_COLUMNS_SVID:
                     return ((Stream*) i.value())->getSvID();
                 case STREAM_TABLE_COLUMNS_SOURCE_MAC:
@@ -70,6 +73,8 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
 
     if (orientation == Qt::Horizontal) {
         switch (section) {
+        case STREAM_TABLE_COLUMNS_STATUS:
+            return tr(STREAM_TABLE_COLUMNS_STATUS_TITLE);
         case STREAM_TABLE_COLUMNS_SVID:
             return tr(STREAM_TABLE_COLUMNS_SVID_TITLE);
         case STREAM_TABLE_COLUMNS_SOURCE_MAC:

@@ -28,6 +28,9 @@ private:
     QPen plotLinePen;
     QGraphicsLineItem *phaseLine[3];
     QGraphicsEllipseItem *outerPlotLine;
+    QGraphicsEllipseItem *innerPlotLine;
+    QGraphicsLineItem *horizontalPlotLine;
+    QGraphicsLineItem *verticalPlotLine;
 };
 
 

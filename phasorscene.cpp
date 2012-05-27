@@ -7,18 +7,22 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
 {
     this->tableModel = tableModel;  //TODO: remove?
 
-    QColor lineColors[3] = {QColor(180, 33, 38, 230), QColor(222, 215, 20, 230), QColor(36, 78, 198, 230)};
-    QColor plotLineColor = QColor(200, 200, 200);
+    QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(222, 215, 20, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
+    QColor plotLineColor = QColor(180, 180, 180);
+
+    plotLinePen = QPen(plotLineColor);
+    outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
+    outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE / 2, -PHASOR_VIEW_MAX_PHASOR_SIZE / 2, PHASOR_VIEW_MAX_PHASOR_SIZE, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
+    horizontalPlotLine = QGraphicsScene::addLine(-PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, plotLinePen);
+    verticalPlotLine = QGraphicsScene::addLine(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
+    // TODO: phasor area shown still not perfect
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
         pen[i].setWidth(4);
         pen[i].setCapStyle(Qt::RoundCap);
-        this->phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
+        phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
     }
-
-    plotLinePen = QPen(plotLineColor);
-    outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
 }
 
 void PhasorScene::streamSelectionChanged(Stream *stream)
