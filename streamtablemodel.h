@@ -39,7 +39,8 @@ public:
 
 signals:
     void resizeColumnsToContents();
-    void streamSelected(QString svID);
+    //void streamSelected(QString svID);
+    void streamSelected(Stream* stream);
     
 public slots:
     void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);

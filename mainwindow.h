@@ -8,7 +8,7 @@
 #include <QComboBox>
 #include <QGraphicsView>
 #include "streamtablemodel.h"
-#include "phasor.h"
+#include "phasorscene.h"
 
 class MainWindow : public QMainWindow
 {

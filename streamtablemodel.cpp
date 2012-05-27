@@ -169,10 +169,22 @@ void StreamTableModel::updateAll(bool resizeColumns) {
 
 void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev)
 {
+    Q_UNUSED(prev);
     QModelIndex index = createIndex(selected.first().top(), STREAM_TABLE_COLUMNS_SVID, 0);
 
     if (!selected.isEmpty()) {
-        QString svID = QString(selected.first().model()->data(index).toString());
-        emit streamSelected(svID);
+        QMapIterator<QString, Stream*> i (streams);
+        int row = 0;
+        while (i.hasNext()) {
+            i.next();
+            if (index.row() == row) {
+                emit streamSelected((Stream*) i.value());
+                return;
+            }
+            row++;
+        }
+
+        //QString svID = QString(selected.first().model()->data(index).toString());
+        //emit streamSelected(svID);
     }
 }

@@ -40,8 +40,7 @@ SOURCES += main.cpp\
     commsthread.cpp \
     measure/measure.cpp \
     measure/measure_parameters.cpp \
-    phasorline.cpp \
-    phasor.cpp
+    phasorscene.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -71,7 +70,6 @@ HEADERS  += mainwindow.h \
     measure/measure_private.h \
     measure/measure.h \
     measure/measure_parameters.h \
-    phasorline.h \
     phasorscene.h
 
 # winpcap

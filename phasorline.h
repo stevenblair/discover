@@ -5,7 +5,7 @@
 #include <QtGui/QGraphicsItem>
 #include <QPainter>
 #include "stream.h"
-#include "phasorscene.h".h"
+#include "phasorscene.h"
 
 class PhasorLine : public QGraphicsItem
 {

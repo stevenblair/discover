@@ -32,15 +32,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     currentPhasorScene = new CurrentPhasorScene(tableModel);
     voltagePhasorScene = new VoltagePhasorScene(tableModel);
-    connect(tableModel, SIGNAL(streamSelected(QString)), currentPhasorScene, SLOT(streamSelectionChanged(QString)));
-    connect(tableModel, SIGNAL(streamSelected(QString)), voltagePhasorScene, SLOT(streamSelectionChanged(QString)));
+    connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPhasorScene, SLOT(streamSelectionChanged(Stream*)));    // TODO: connect directly between TableView and Phasors?
+    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePhasorScene, SLOT(streamSelectionChanged(Stream*)));
 
     currentPhasorView = new QGraphicsView;
     voltagePhasorView = new QGraphicsView;
+    currentPhasorView->setRenderHint(QPainter::Antialiasing);
+    voltagePhasorView->setRenderHint(QPainter::Antialiasing);
+    currentPhasorView->setMinimumSize(200, 200);
+    voltagePhasorView->setMinimumSize(200, 200);
     currentPhasorView->setScene(currentPhasorScene);
     voltagePhasorView->setScene(voltagePhasorScene);
-    graphLayout->addWidget(currentPhasorView, 0, 0, 1, 1, Qt::AlignCenter);
-    graphLayout->addWidget(voltagePhasorView, 1, 0, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(voltagePhasorView, 0, 0, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(currentPhasorView, 1, 0, 1, 1, Qt::AlignCenter);
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);
