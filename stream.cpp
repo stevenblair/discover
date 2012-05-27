@@ -93,7 +93,7 @@ QString Stream::getSourceMAC()
 QString Stream::getFreq()
 {
     if (analysed) {
-        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency);
+        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
     }
     else {
         return QString("--");
@@ -103,7 +103,7 @@ QString Stream::getFreq()
 QString Stream::getVoltage()
 {
     if (analysed) {
-        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0);
+        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
     }
     else {
         return QString("--");
@@ -113,7 +113,7 @@ QString Stream::getVoltage()
 QString Stream::getCurrent()
 {
     if (analysed) {
-        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0);
+        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
     }
     else {
         return QString("--");

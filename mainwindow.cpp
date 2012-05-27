@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     currentPhasorView = new QGraphicsView;
     voltagePhasorView = new QGraphicsView;
+    currentPhasorView->setDragMode(QGraphicsView::RubberBandDrag);
+    voltagePhasorView->setDragMode(QGraphicsView::RubberBandDrag);
     currentPhasorView->setRenderHint(QPainter::Antialiasing);
     voltagePhasorView->setRenderHint(QPainter::Antialiasing);
     currentPhasorView->setMinimumSize(200, 200);

@@ -13,11 +13,9 @@ public:
     PhasorScene(StreamTableModel *tableModel, QObject *parent = 0);
 
 public slots:
-    //virtual void streamSelectionChanged(QString svID);
     void streamSelectionChanged(Stream *stream);
 
 protected:
-    //PhasorLine *phasorLine[3];
     StreamTableModel *tableModel;
     Stream *stream;
 
@@ -25,12 +23,14 @@ protected:
     virtual qreal getPhasorAngle(int phase);
 
 private:
-    //TODO: add lines and circles for plot
-    QPen pen;
-    QGraphicsLineItem *phaseA;      // TODO: refactor to array
-    QGraphicsLineItem *phaseB;
-    QGraphicsLineItem *phaseC;
+    //TODO: add lines, circles and text labels for plot
+    QPen pen[3];
+    QGraphicsLineItem *phaseLine[3];
 };
+
+
+
+
 
 class CurrentPhasorScene : public PhasorScene
 {
@@ -47,6 +47,10 @@ protected:
     qreal getPhasorAngle(int phase);
 
 };
+
+
+
+
 
 class VoltagePhasorScene : public PhasorScene
 {

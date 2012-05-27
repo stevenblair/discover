@@ -19,6 +19,8 @@
 
 #define RECALCULATE_ANALYSIS_TIME   2000                        // milliseconds
 
+#define SIGNIFICANT_DIGITS_DIPLAYED 3
+
 enum StreamSampleRate {RateUnknown, Rate80samples50Hz, Rate80samples60Hz, Rate256samples50Hz, Rate256samples60Hz, RateInvalid};
 
 class Stream : public QObject

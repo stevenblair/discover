@@ -3,23 +3,17 @@
 
 PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraphicsScene(parent)
 {
-    this->pen = QPen();
-    pen.setWidth(4);
-    pen.setCapStyle(Qt::RoundCap);
+    this->tableModel = tableModel;  //TODO: remove?
 
-    this->tableModel = tableModel;
+    QColor lineColors[3] = {QColor(180, 33, 38, 230), QColor(222, 215, 20, 230), QColor(36, 78, 198, 230)};
 
-    this->phaseA = QGraphicsScene::addLine(0.0, 0.0, 1.0, 0.0, pen);
-    this->phaseB = QGraphicsScene::addLine(0.0, 0.0, 0.0, 1.0, pen);
-    this->phaseC = QGraphicsScene::addLine(0.0, 0.0, 1.0, 1.0, pen);
-
-//    phasorLine[0] = new PhasorLine();
-//    phasorLine[1] = new PhasorLine();
-//    phasorLine[2] = new PhasorLine();
-
-//    this->addItem(phasorLine[0]);
-//    this->addItem(phasorLine[1]);
-//    this->addItem(phasorLine[2]);
+    for (int i = 0; i < 3; i++) {
+        pen[i] = QPen();
+        pen[i].setColor(lineColors[i]);
+        pen[i].setWidth(4);
+        pen[i].setCapStyle(Qt::RoundCap);
+        this->phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
+    }
 }
 
 void PhasorScene::streamSelectionChanged(Stream *stream)
@@ -27,9 +21,9 @@ void PhasorScene::streamSelectionChanged(Stream *stream)
     this->stream = stream;
 
     //TODO: scale mags to maximum View size; always centre on (0,0)
-    phaseA->setLine(0.0, 0.0, getPhasorMag(0) * cos(getPhasorAngle(0)), -1.0 * getPhasorMag(0) * sin(getPhasorAngle(0)));
-    phaseB->setLine(0.0, 0.0, getPhasorMag(1) * cos(getPhasorAngle(1)), -1.0 * getPhasorMag(1) * sin(getPhasorAngle(1)));
-    phaseC->setLine(0.0, 0.0, getPhasorMag(2) * cos(getPhasorAngle(2)), -1.0 * getPhasorMag(2) * sin(getPhasorAngle(2)));
+    for (int i = 0; i < 3; i++) {
+        phaseLine[i]->setLine(0.0, 0.0, getPhasorMag(i) * cos(getPhasorAngle(i)), -1.0 * getPhasorMag(i) * sin(getPhasorAngle(i)));
+    }
 
     //((QGraphicsView *) this->views().first())->update();
     //((QGraphicsView *) this->views().first())->fitInView(this->itemsBoundingRect(), Qt::KeepAspectRatio);
@@ -46,17 +40,6 @@ qreal PhasorScene::getPhasorAngle(int phase)
 {
     return 0.0;
 }
-
-//void CurrentPhasorScene::streamSelectionChanged(QString svID)
-//{
-//    Stream *stream = tableModel->getPhasorData(svID);
-
-//    if (stream != NULL && stream->isAnalysed()) {
-//        phasorLine[0]->setPhasorData(stream/*->getStreamData()->Current[0], &stream->getStreamData()->Current[4]*/);
-//        phasorLine[1]->setPhasorData(stream/*->getStreamData()->Current[1], &stream->getStreamData()->Current[5]*/);
-//        phasorLine[2]->setPhasorData(stream/*->getStreamData()->Current[2], &stream->getStreamData()->Current[6]*/);
-//    }
-//}
 
 
 
@@ -85,16 +68,6 @@ qreal CurrentPhasorScene::getPhasorAngle(int phase)
 }
 
 
-//void VoltagePhasorScene::streamSelectionChanged(QString svID)
-//{
-//    Stream *stream = tableModel->getPhasorData(svID);
-
-//    if (stream != NULL && stream->isAnalysed()) {
-//        phasorLine[0]->setPhasorData(stream/*->getStreamData()->Voltage[0], &stream->getStreamData()->Voltage[4]*/);
-//        phasorLine[1]->setPhasorData(stream/*->getStreamData()->Voltage[1], &stream->getStreamData()->Voltage[5]*/);
-//        phasorLine[2]->setPhasorData(stream/*->getStreamData()->Voltage[2], &stream->getStreamData()->Voltage[6]*/);
-//    }
-//}
 
 VoltagePhasorScene::VoltagePhasorScene(StreamTableModel *tableModel, QObject *parent) : PhasorScene(tableModel, parent)
 {
