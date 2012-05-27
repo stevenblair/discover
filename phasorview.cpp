@@ -1,6 +1,6 @@
 #include "phasorview.h"
 
-PhasorView::PhasorView(QObject *parent)/* : QGraphicsView(parent)*/
+PhasorView::PhasorView(QObject *parent)
 {
     this->setDragMode(QGraphicsView::RubberBandDrag);
     this->setRenderHint(QPainter::Antialiasing);

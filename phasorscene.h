@@ -25,7 +25,9 @@ protected:
 private:
     //TODO: add lines, circles and text labels for plot
     QPen pen[3];
+    QPen plotLinePen;
     QGraphicsLineItem *phaseLine[3];
+    QGraphicsEllipseItem *outerPlotLine;
 };
 
 
