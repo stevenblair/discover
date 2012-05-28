@@ -10,6 +10,7 @@
 #include "streamtablemodel.h"
 #include "phasorscene.h"
 #include "phasorview.h"
+#include "plotview.h"
 
 class MainWindow : public QMainWindow
 {
@@ -35,6 +36,8 @@ private:
     VoltagePhasorScene *voltagePhasorScene;
     PhasorView *currentPhasorView;
     PhasorView *voltagePhasorView;
+    PlotView *currentPlotView;
+    PlotView *voltagePlotView;
 };
 
 #endif // MAINWINDOW_H

@@ -2,4 +2,5 @@
 
 StatusColumnDelegate::StatusColumnDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
+
 }

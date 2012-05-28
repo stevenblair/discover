@@ -1,8 +1,8 @@
-#include "phasorview.h"
+#include "plotview.h"
 
-PhasorView::PhasorView(QObject *parent)
+PlotView::PlotView(QObject *parent)
 {
-    this->setMinimumSize(PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
+    this->setMinimumSize(PLOT_VIEW_WIDTH, PLOT_VIEW_HEIGHT);
     this->setDragMode(QGraphicsView::RubberBandDrag);
     this->setRenderHint(QPainter::Antialiasing);
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

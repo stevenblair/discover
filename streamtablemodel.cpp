@@ -32,7 +32,6 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::DisplayRole) {
-
         QMapIterator<QString, Stream*> i (streams);
         int row = 0;
         while (i.hasNext()) {
@@ -53,6 +52,28 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
                     return ((Stream*) i.value())->getCurrent();
                 case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
                     return ((Stream*) i.value())->getSamplesPerCycle();
+                default:
+                    return QVariant();
+                }
+            }
+            row++;
+        }
+    }
+    else if (role == Qt::ToolTipRole) {
+        QMapIterator<QString, Stream*> i (streams);
+        int row = 0;
+        while (i.hasNext()) {
+            i.next();
+            if (index.row() == row) {
+                switch (index.column()) {
+                case STREAM_TABLE_COLUMNS_STATUS:
+                    return ((Stream*) i.value())->isAlive() ? QString(tr("Stream is being transmitted")) : QString(tr("Stream has stopped being transmitted"));
+                case STREAM_TABLE_COLUMNS_VOLTAGE:
+                    return ((Stream*) i.value())->getVoltage();
+                case STREAM_TABLE_COLUMNS_CURRENT:
+                    return ((Stream*) i.value())->getCurrent();
+                case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
+                    return QVariant(((Stream*) i.value())->getSamplesPerCycle() + " samples per cycle");
                 default:
                     return QVariant();
                 }

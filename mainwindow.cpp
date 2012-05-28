@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     currentPhasorView = new PhasorView;
     voltagePhasorView = new PhasorView;
+    currentPlotView = new PlotView;
+    voltagePlotView = new PlotView;
 
     /*currentPhasorView->centerOn(0.0, 0.0);
     voltagePhasorView->centerOn(0.0, 0.0);
@@ -48,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     voltagePhasorView->setScene(voltagePhasorScene);
     graphLayout->addWidget(voltagePhasorView, 0, 0, 1, 1, Qt::AlignCenter);
     graphLayout->addWidget(currentPhasorView, 1, 0, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(currentPlotView, 0, 1, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(voltagePlotView, 1, 1, 1, 1, Qt::AlignCenter);
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);

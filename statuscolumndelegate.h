@@ -6,7 +6,7 @@
 #include <QApplication>
 #include "streamtablemodel.h"
 
-#define STATUS_ICON_RADIUS      4.0
+#define STATUS_ICON_RADIUS      4
 
 class StatusColumnDelegate : public QStyledItemDelegate
 {
