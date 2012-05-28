@@ -5,24 +5,31 @@
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
     this->alive = true;
+    this->checkAlive = false;
     this->analysed = false;
     this->svID = svID;
     this->sourceMAC = sourceMAC;
     this->sampleRate = RateUnknown;
-    //this->capturedSamples = 1;
 
     connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
 }
 
 Stream::~Stream()
 {
+    emit removeView();
+
     future.cancel();
     watcher.cancel();
+
+    if (timer != NULL && timer->isActive()) {
+        timer->stop();
+    }
 }
 
 void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 {
     if (smpCnt >= 0 && smpCnt < MAX_SAMPLES) {
+        checkAlive = true;
         //qDebug() << smpCnt  << capturedSamples << samplesPerSecond;
 
         samples[smpCnt].voltage[0] = dataset->MUnn_TVTR_1_Vol_instMag.i;
@@ -167,7 +174,13 @@ void Stream::handleAnalysisFinished()
     //qDebug() << "done analysis";
     emit updateModel(true);         //TODO: updates still twitchy
 
-    QTimer::singleShot(RECALCULATE_ANALYSIS_TIME, this, SLOT(scheduleAnalysis()));
+    if (timer == NULL) {
+        timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+        timer->start(RECALCULATE_ANALYSIS_TIME);
+    }
+
+    //QTimer::singleShot(RECALCULATE_ANALYSIS_TIME, this, SLOT(scheduleAnalysis()));
 }
 
 void Stream::scheduleAnalysis() {
@@ -182,10 +195,29 @@ void Stream::scheduleAnalysis() {
     // TODO: invalidate samples per cycle info here too?
 }
 
+void Stream::timeout()
+{
+    bool prevAlive = alive;
+
+    if (checkAlive == false) {
+        alive = false;
+    }
+    else {
+        alive = true;
+        scheduleAnalysis();
+    }
+
+    if (alive != prevAlive) {
+        emit updateModel(false);    // TODO: mostly unneeded: only update appropriate cell?
+    }
+    emit updateView();
+
+    checkAlive = false;
+}
+
 void Stream::analyse()
 {
     //qDebug() << "in analysis";
-
     //QElapsedTimer timer;
     //timer.start();
 

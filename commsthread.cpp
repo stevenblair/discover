@@ -40,13 +40,19 @@ void CommsThread::setNetworkInterface(int value) {
             pcap_close(fp);
         }
         interfaceNumber = value;
-        emit networkInterfaceStopped();
+
+        QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
     }
+}
+
+void CommsThread::timerDone()
+{
+    emit networkInterfaceStopped();
 }
 
 void CommsThread::startNetworkInterface()
 {
-    modelReady = true;  // TODO: still not a clean transition; maybe start one-shot, then call emit networkInterfaceStopped()?
+    modelReady = true;
 }
 
 

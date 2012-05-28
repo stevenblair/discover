@@ -14,6 +14,8 @@ public:
 
 public slots:
     void streamSelectionChanged(Stream *stream);
+    void streamChanged();
+    void streamRemoved();
 
 protected:
     StreamTableModel *tableModel;
@@ -23,6 +25,8 @@ protected:
     virtual qreal getPhasorAngle(int phase);
 
 private:
+    void draw();
+
     //TODO: add lines, circles and text labels for plot
     QPen pen[3];
     QPen plotLinePen;

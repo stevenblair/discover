@@ -2,6 +2,7 @@
 #define COMMSTHREAD_H
 
 #include <QThread>
+#include <QTimer>
 
 #define WPCAP
 #define HAVE_REMOTE
@@ -12,7 +13,9 @@ extern "C" {
 #include "rapid61850/iec61850.h"
 }
 
-#define BUFFER_LENGTH	1024
+#define BUFFER_LENGTH               1024
+
+#define NETWORK_INTERFACE_OFF_DELAY 50  // milliseconds
 
 
 class CommsThread : public QThread
@@ -43,6 +46,7 @@ signals:
 public slots:
     void setNetworkInterface(int value);
     void startNetworkInterface();
+    void timerDone();
 
 private:
     bool scheduledNewInterface;

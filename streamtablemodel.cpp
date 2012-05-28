@@ -224,8 +224,8 @@ void StreamTableModel::networkInterfaceStopped()
         i.next();
         streams.remove(((Stream*) i.value())->getSvID());
         ((Stream*) i.value())->deleteLater();
-
     }
     endResetModel();
+
     emit streamTableEmpty();
 }
