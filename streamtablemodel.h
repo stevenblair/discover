@@ -49,7 +49,7 @@ public slots:
     void sampleRateDetermined(QString svID);
     void updateAll(bool resizeColumns);
     void getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev);
-    void networkInterfaceChanged();
+    void networkInterfaceStopped();
 
 private:
     QMap<QString, Stream*> streams;

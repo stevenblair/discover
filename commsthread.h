@@ -38,6 +38,7 @@ signals:
     //void setPacketReceived(bool state);
     void addInterface(int value, QString name);
     void addSample(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
+    void networkInterfaceStopped();
     
 public slots:
     void setNetworkInterface(int value);

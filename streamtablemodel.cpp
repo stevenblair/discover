@@ -215,7 +215,7 @@ void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QIt
     }
 }
 
-void StreamTableModel::networkInterfaceChanged()
+void StreamTableModel::networkInterfaceStopped()
 {
     QMapIterator<QString, Stream*> i (streams);
 

@@ -14,6 +14,10 @@ void packet_handler(u_char *param, const struct pcap_pkthdr *header, const u_cha
     gse_sv_packet_filter((unsigned char *) pkt_data, header->len);
 }
 
+void SVRecv(CTYPE_INT16U smpCnt) {
+    commsThreadPtr->proxyPacketReceived();
+}
+
 CommsThread::CommsThread(QObject *parent) : QThread(parent)
 {
     commsThreadPtr = this;
@@ -26,22 +30,25 @@ void CommsThread::proxyPacketReceived() {
     if (scheduledNewInterface == false) {
         emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
     }
-
-    //printf("smpCnt: %i\n", LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
-    //fflush(stdout);
-    //emit setPacketReceived(true);
 }
 
 void CommsThread::setNetworkInterface(int value) {
-    //emit setPacketReceived(false);
     if (value != interfaceNumber) {
         scheduledNewInterface = true;
         if (fp != NULL) {
             pcap_breakloop(fp);
+            pcap_close(fp);
         }
         interfaceNumber = value;
+        emit networkInterfaceStopped();
     }
 }
+
+void CommsThread::startNetworkInterface()
+{
+    modelReady = true;  // TODO: still not a clean transition; maybe start one-shot, then call emit networkInterfaceStopped()?
+}
+
 
 void CommsThread::findNetworkInterfaces() {
     pcap_if_t *list_if;
@@ -90,11 +97,11 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
     //fprintf(stdout, "%s\n", /*interfaceName.toLocal8Bit().data()*/used_if->description);
     //fflush(stdout);
 
-    if ((fpl = pcap_open_live(used_if->name,		// name of the device
-                             65536,			// portion of the packet to capture. It doesn't matter in this case
-                             1,				// promiscuous mode (nonzero means promiscuous)
-                             1, 			// read timeout
-                             errbuf			// error buffer
+    if ((fpl = pcap_open_live(used_if->name,    // name of the device
+                             65536,             // portion of the packet to capture. It doesn't matter in this case
+                             1,                 // promiscuous mode (nonzero means promiscuous)
+                             1,                 // read timeout
+                             errbuf             // error buffer
                              )) == NULL)
     {
         fprintf(stderr, "\nUnable to open the adapter. %s is not supported by WinPcap\n", alldevs->name);
@@ -104,10 +111,6 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
     pcap_freealldevs(alldevs);
 
     return fpl;
-}
-
-void SVRecv(CTYPE_INT16U smpCnt) {
-    commsThreadPtr->proxyPacketReceived();
 }
 
 void CommsThread::run()
@@ -131,13 +134,8 @@ void CommsThread::run()
             scheduledNewInterface = false;
             modelReady = false;
 
-            pcap_close(fp);
+            //pcap_close(fp);
             fp = initWinpcap(interfaceNumber);
         }
     }
-}
-
-void CommsThread::startNetworkInterface()
-{
-    modelReady = true;
 }
