@@ -214,3 +214,18 @@ void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QIt
         //emit streamSelected(svID);
     }
 }
+
+void StreamTableModel::networkInterfaceChanged()
+{
+    QMapIterator<QString, Stream*> i (streams);
+
+    beginResetModel();
+    while (i.hasNext()) {
+        i.next();
+        streams.remove(((Stream*) i.value())->getSvID());
+        ((Stream*) i.value())->deleteLater();
+
+    }
+    endResetModel();
+    emit streamTableEmpty();
+}

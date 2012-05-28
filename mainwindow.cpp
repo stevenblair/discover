@@ -75,6 +75,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
             qApp->desktop()->availableGeometry()
         )
     );
+
+    connect(interfaceComboBox, SIGNAL(currentIndexChanged(int)), tableModel, SLOT(networkInterfaceChanged()));
+    connect(interfaceComboBox, SIGNAL(currentIndexChanged(int)), &commsThread, SLOT(setNetworkInterface(int)));
+    connect(tableModel, SIGNAL(streamTableEmpty()), &commsThread, SLOT(startNetworkInterface()));
 }
 
 MainWindow::~MainWindow()

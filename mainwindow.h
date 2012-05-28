@@ -11,6 +11,9 @@
 #include "phasorscene.h"
 #include "phasorview.h"
 #include "plotview.h"
+#include "commsthread.h"
+
+extern CommsThread commsThread;
 
 class MainWindow : public QMainWindow
 {

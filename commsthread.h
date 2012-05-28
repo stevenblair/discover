@@ -33,20 +33,20 @@ public:
 protected:
     void run();
 
-    bool scheduledNewInterface;
-    int interfaceNumber;
-
 signals:
-    void setLastTATL(int value);
-    void setLastStNum(int value);
-    void setLastSqNum(int value);
-    void setButton(bool state);
+    //void setButton(bool state);
+    //void setPacketReceived(bool state);
     void addInterface(int value, QString name);
-    void setPacketReceived(bool state);
     void addSample(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
     
 public slots:
     void setNetworkInterface(int value);
+    void startNetworkInterface();
+
+private:
+    bool scheduledNewInterface;
+    int interfaceNumber;
+    bool modelReady;
 };
 
 #endif // COMMSTHREAD_H

@@ -19,10 +19,13 @@ CommsThread::CommsThread(QObject *parent) : QThread(parent)
     commsThreadPtr = this;
     interfaceNumber = 0;
     scheduledNewInterface = false;
+    modelReady = false;
 }
 
 void CommsThread::proxyPacketReceived() {
-    emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
+    if (scheduledNewInterface == false) {
+        emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
+    }
 
     //printf("smpCnt: %i\n", LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
     //fflush(stdout);
@@ -30,13 +33,13 @@ void CommsThread::proxyPacketReceived() {
 }
 
 void CommsThread::setNetworkInterface(int value) {
-    emit setPacketReceived(false);
+    //emit setPacketReceived(false);
     if (value != interfaceNumber) {
+        scheduledNewInterface = true;
         if (fp != NULL) {
             pcap_breakloop(fp);
         }
         interfaceNumber = value;
-        scheduledNewInterface = true;
     }
 }
 
@@ -118,17 +121,23 @@ void CommsThread::run()
     //pcap_setmintocopy(fp, 1);
 
     forever {
-        //Sleep(1);
+        //msleep(1);
 
-        if (fp != NULL) {
+        if (fp != NULL && scheduledNewInterface == false) {
             pcap_loop(fp, 1, packet_handler, NULL);
         }
 
-        if (scheduledNewInterface == true) {
+        if (scheduledNewInterface == true && modelReady == true) {
             scheduledNewInterface = false;
+            modelReady = false;
 
             pcap_close(fp);
             fp = initWinpcap(interfaceNumber);
         }
     }
+}
+
+void CommsThread::startNetworkInterface()
+{
+    modelReady = true;
 }

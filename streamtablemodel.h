@@ -41,14 +41,15 @@ public:
 
 signals:
     void resizeColumnsToContents();
-    //void streamSelected(QString svID);
     void streamSelected(Stream* stream);
+    void streamTableEmpty();                // inform comms thread to begin receiving on new network interface
     
 public slots:
     void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
     void sampleRateDetermined(QString svID);
     void updateAll(bool resizeColumns);
     void getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev);
+    void networkInterfaceChanged();
 
 private:
     QMap<QString, Stream*> streams;
