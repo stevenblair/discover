@@ -2,6 +2,7 @@
 #include "statuscolumndelegate.h"
 #include <QHeaderView>
 #include <QDebug>
+#include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -24,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->verticalHeader()->hide();
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
+    tableView->setMinimumHeight(200);
 
     streamsLayout->addWidget(tableView);
     connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
@@ -48,10 +50,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     voltagePhasorView->fitInView(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE);*/
     currentPhasorView->setScene(currentPhasorScene);
     voltagePhasorView->setScene(voltagePhasorScene);
-    graphLayout->addWidget(voltagePhasorView, 0, 0, 1, 1, Qt::AlignCenter);
-    graphLayout->addWidget(currentPhasorView, 1, 0, 1, 1, Qt::AlignCenter);
-    graphLayout->addWidget(currentPlotView, 0, 1, 1, 1, Qt::AlignCenter);
-    graphLayout->addWidget(voltagePlotView, 1, 1, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignCenter);
+    graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignCenter);
+    graphLayout->addWidget(currentPlotView, 0, 1, Qt::AlignCenter);
+    graphLayout->addWidget(voltagePlotView, 1, 1, Qt::AlignCenter);
+    graphLayout->setColumnStretch(0, 0);
+    graphLayout->setColumnStretch(1, 1);
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);
@@ -62,6 +66,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     setWindowTitle(tr("discover"));
     setMinimumWidth(700);
+
+    this->setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            this->size(),
+            qApp->desktop()->availableGeometry()
+        )
+    );
 }
 
 MainWindow::~MainWindow()

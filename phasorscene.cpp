@@ -29,6 +29,8 @@ void PhasorScene::streamSelectionChanged(Stream *stream)
 {
     this->stream = stream;
 
+    // TODO: connect to stream for updates; first disconnect any updates from an old stream
+
     qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
     qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
 
