@@ -208,7 +208,7 @@ void Stream::timeout()
     }
 
     if (alive != prevAlive) {
-        emit updateModel(false);    // TODO: mostly unneeded: only update appropriate cell?
+        emit updateModel(false);    // TODO: only update appropriate cell?
     }
     emit updateView();
 
