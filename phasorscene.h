@@ -29,16 +29,17 @@ protected:
 
     virtual qreal getPhasorMag(int phase);
     virtual qreal getPhasorAngle(int phase);
+    QString phaseNumberToText(int phase);
 
 private:
     void draw();
     virtual QString getToolTipText(int phase);
 
-    //TODO: add lines, circles and text labels for plot
     QPen pen[3];
     QPen plotLinePen;
     QPen plotLineCiclePen;
     QGraphicsLineItem *phaseLine[3];
+    QGraphicsTextItem *phaseLabel[3];
     QGraphicsEllipseItem *outerPlotLine;
     QGraphicsEllipseItem *innerPlotLine;
     QGraphicsLineItem *horizontalPlotLine;

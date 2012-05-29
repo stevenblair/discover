@@ -31,12 +31,19 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     minusNinetyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
     minusNinetyDegText->setDefaultTextColor(plotLineColor);
 
+    //QFont font;
+    //font.setBold(true);
+
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
         pen[i].setWidth(5);
         pen[i].setCapStyle(Qt::RoundCap);
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
         phaseLine[i]->hide();
+        phaseLabel[i] = QGraphicsScene::addText(QString("Vb")); //TODO: set properly
+        //phaseLabel[i]->setFont(font);
+        phaseLabel[i]->setDefaultTextColor(lineColors[i]);
+        phaseLabel[i]->hide();
         //connect(phaseLine[i], hoverEnterEvent(QGraphicsSceneEvent *);     // need to sub-class to get this?
     }
 }
@@ -99,6 +106,7 @@ void PhasorScene::streamRemoved()
     for (int i = 0; i < 3; i++) {
         phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
         phaseLine[i]->hide();
+        phaseLabel[i]->hide();
     }
     //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
 }
@@ -120,6 +128,26 @@ void PhasorScene::draw() {
             phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
             phaseLine[i]->setToolTip(this->getToolTipText(i));
             phaseLine[i]->show();
+
+            QPointF labelPoint;
+            if (angle > 0.0 && angle <= M_PI_2) {
+                labelPoint = phaseLine[i]->boundingRect().topRight();
+                labelPoint.setY(labelPoint.y() - phaseLabel[i]->boundingRect().height());
+            }
+            else if (angle > M_PI_2 && angle <= M_PI) {
+                labelPoint = phaseLine[i]->boundingRect().topLeft();
+                labelPoint.setX(labelPoint.x() - phaseLabel[i]->boundingRect().width());
+                labelPoint.setY(labelPoint.y() - phaseLabel[i]->boundingRect().height());
+            }
+            else if (angle <= 0.0 && angle > -M_PI_2) {
+                labelPoint = phaseLine[i]->boundingRect().bottomRight();
+            }
+            else if (angle <= -M_PI_2 && angle > -M_PI) {
+                labelPoint = phaseLine[i]->boundingRect().bottomLeft();
+                labelPoint.setX(labelPoint.x() - phaseLabel[i]->boundingRect().width());
+            }
+            phaseLabel[i]->setPos(labelPoint);
+            phaseLabel[i]->show();
         }
         PhasorView *view = ((PhasorView *)this->views().first());
         QMatrix matrix;
@@ -142,6 +170,19 @@ qreal PhasorScene::getPhasorMag(int phase)
 qreal PhasorScene::getPhasorAngle(int phase)
 {
     return 0.0;
+}
+
+QString PhasorScene::phaseNumberToText(int phase) {
+    if (phase == 0) {
+        return QString("a");
+    }
+    else if (phase == 1) {
+        return QString("b");
+    }
+    else if (phase == 2) {
+        return QString("c");
+    }
+    return QString("");
 }
 
 
@@ -173,8 +214,9 @@ qreal CurrentPhasorScene::getPhasorAngle(int phase)
 
 QString CurrentPhasorScene::getToolTipText(int phase)
 {
-    return QString("Phase %1: %2 %3 %4° kA").arg(phase + 1).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
+    return QString("I%1: %2 %3 %4° kA").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
 }
+
 
 
 
@@ -204,5 +246,5 @@ qreal VoltagePhasorScene::getPhasorAngle(int phase)
 
 QString VoltagePhasorScene::getToolTipText(int phase)
 {
-    return QString("Phase %1: %2 %3 %4° kV").arg(phase + 1).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
+    return QString("V%1: %2 %3 %4° kV").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
 }
