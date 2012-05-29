@@ -92,6 +92,7 @@ struct IEC_61850_9_2LETCTR {
 		void (*datasetDecodeDone)(CTYPE_INT16U smpCnt);
 		CTYPE_INT16U smpCnt;
         char *svID[SVID_LENGTH_MAX];
+        unsigned char sourceMac[6];
 	} sv_inputs_MSVCB01;
 };
 struct IEC_61850_9_2LETVTR {

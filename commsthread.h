@@ -52,6 +52,8 @@ private:
     bool scheduledNewInterface;
     int interfaceNumber;
     bool modelReady;
+
+    QString macFromChar(unsigned char* mac);
 };
 
 #endif // COMMSTHREAD_H

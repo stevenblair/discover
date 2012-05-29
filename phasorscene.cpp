@@ -16,24 +16,24 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     plotLineCiclePen.setStyle(Qt::DashLine);
     outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, plotLineCiclePen);
     outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE / 2, -PHASOR_VIEW_MAX_PHASOR_SIZE / 2, PHASOR_VIEW_MAX_PHASOR_SIZE, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLineCiclePen);
-    horizontalPlotLine = QGraphicsScene::addLine(-PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, plotLinePen);
-    verticalPlotLine = QGraphicsScene::addLine(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
+    horizontalPlotLine = QGraphicsScene::addLine(-PHASOR_VIEW_MAX_SIZE, 0.0, PHASOR_VIEW_MAX_SIZE, 0.0, plotLinePen);
+    verticalPlotLine = QGraphicsScene::addLine(0.0, -PHASOR_VIEW_MAX_SIZE, 0.0, PHASOR_VIEW_MAX_SIZE, plotLinePen);
     zeroDegText = QGraphicsScene::addText(QString("0°"));
     zeroDegText->setPos(PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0);
     zeroDegText->setDefaultTextColor(plotLineColor);
     nintyDegText = QGraphicsScene::addText(QString("90°"));
-    nintyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
+    nintyDegText->setPos(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE/* - twoSeventyDegText->boundingRect().height()*/);
     nintyDegText->setDefaultTextColor(plotLineColor);
     oneEightyDegText = QGraphicsScene::addText(QString("180°"));
-    oneEightyDegText->setPos(-PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0);
+    oneEightyDegText->setPos(-PHASOR_VIEW_MAX_PHASOR_SIZE/* - oneEightyDegText->boundingRect().width()*/, 0.0);
     oneEightyDegText->setDefaultTextColor(plotLineColor);
-    twoSeventyDegText = QGraphicsScene::addText(QString("270°"));
-    twoSeventyDegText->setPos(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE);
-    twoSeventyDegText->setDefaultTextColor(plotLineColor);
+    minusNinetyDegText = QGraphicsScene::addText(QString("-90°"));
+    minusNinetyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
+    minusNinetyDegText->setDefaultTextColor(plotLineColor);
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
-        pen[i].setWidth(4);
+        pen[i].setWidth(5);
         pen[i].setCapStyle(Qt::RoundCap);
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
         //connect(phaseLine[i], hoverEnterEvent(QGraphicsSceneEvent *);     // need to sub-class to get this?

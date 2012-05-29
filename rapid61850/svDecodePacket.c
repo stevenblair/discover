@@ -27,7 +27,7 @@
 #include <stddef.h>
 
 
-void svDecodeASDU(unsigned char *buf, int len, int noASDU) {
+void svDecodeASDU(unsigned char *buf, int len, int noASDU, unsigned char *mac) {
 	unsigned char tag;	// assumes only one byte is used
 	int lengthFieldSize;
 	int lengthValue;
@@ -70,7 +70,7 @@ void svDecodeASDU(unsigned char *buf, int len, int noASDU) {
 				break;
 			case SV_TAG_SEQUENCEOFDATA:
 				if (svID != NULL) {
-					svDecodeDataset(&buf[i + 1 + lengthFieldSize], lengthValue, noASDU, svID, svIDLength, smpCnt);
+                    svDecodeDataset(&buf[i + 1 + lengthFieldSize], lengthValue, noASDU, svID, svIDLength, smpCnt, mac);
 				}
 				break;
 			default:
@@ -81,7 +81,7 @@ void svDecodeASDU(unsigned char *buf, int len, int noASDU) {
 	}
 }
 
-void svDecodeAPDU(unsigned char *buf, int len, unsigned int ASDU, unsigned int totalASDUs) {
+void svDecodeAPDU(unsigned char *buf, int len, unsigned int ASDU, unsigned int totalASDUs, unsigned char *mac) {
 	unsigned char tag = (unsigned char) buf[0];	// assumes only one byte is used
 	int lengthFieldSize = getLengthFieldSize((unsigned char) buf[1]);
 	int lengthValue = decodeLength((unsigned char *) &buf[1]);
@@ -94,23 +94,23 @@ void svDecodeAPDU(unsigned char *buf, int len, unsigned int ASDU, unsigned int t
 
 	switch (tag) {
 		case SV_TAG_SAVPDU:
-			svDecodeAPDU(&buf[offsetForSequence], lengthValue, ASDU, totalASDUs);
+            svDecodeAPDU(&buf[offsetForSequence], lengthValue, ASDU, totalASDUs, mac);
 			break;
 		case SV_TAG_NOASDU:
 			noASDU = (unsigned int) buf[1 + lengthFieldSize];	// assuming noASDU is < 126
 			//ASDU = 0;
-			svDecodeAPDU(&buf[offsetForNonSequence], len - offsetForNonSequence, ASDU, noASDU);
+            svDecodeAPDU(&buf[offsetForNonSequence], len - offsetForNonSequence, ASDU, noASDU, mac);
 			break;
 		case SV_TAG_SEQUENCEOFASDU:
-			svDecodeAPDU(&buf[offsetForSequence], lengthValue, ASDU, totalASDUs);
+            svDecodeAPDU(&buf[offsetForSequence], lengthValue, ASDU, totalASDUs, mac);
 			break;
 		case SV_TAG_ASDU:
-			svDecodeASDU(&buf[offsetForSequence], lengthValue, ASDU);
+            svDecodeASDU(&buf[offsetForSequence], lengthValue, ASDU, mac);
 			ASDU++;
 
 			// process any more ASDUs, until max number
 			if (ASDU < totalASDUs) {
-				svDecodeAPDU(&buf[offsetForNonSequence], len - offsetForNonSequence, ASDU, totalASDUs);
+                svDecodeAPDU(&buf[offsetForNonSequence], len - offsetForNonSequence, ASDU, totalASDUs, mac);
 			}
 			break;
 		default:
@@ -128,5 +128,5 @@ void svDecode(unsigned char *buf, int len) {
 
 	unsigned short APDULength = ((buf[offset] << 8) | buf[offset + 1]) - 8;    // must use length in PDU because total bytes (len) may contain CRC
 
-	svDecodeAPDU(&buf[offset + 6], APDULength, 0, 0);    // cuts out frame header
+    svDecodeAPDU(&buf[offset + 6], APDULength, 0, 0, buf);    // cuts out frame header
 }

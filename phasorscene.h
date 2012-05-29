@@ -46,7 +46,7 @@ private:
     QGraphicsTextItem *zeroDegText;
     QGraphicsTextItem *nintyDegText;
     QGraphicsTextItem *oneEightyDegText;
-    QGraphicsTextItem *twoSeventyDegText;
+    QGraphicsTextItem *minusNinetyDegText;
 };
 
 

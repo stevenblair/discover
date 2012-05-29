@@ -101,9 +101,14 @@ int decode_LE_IED_MUnn_PhsMeas1(unsigned char *buf, CTYPE_INT16U smpCnt, struct 
 	return offset;
 }
 
-void svDecodeDataset(unsigned char *dataset, int datasetLength, int ASDU, unsigned char *svID, int svIDLength, CTYPE_INT16U smpCnt) {
+#include <stdio.h>
+
+void svDecodeDataset(unsigned char *dataset, int datasetLength, int ASDU, unsigned char *svID, int svIDLength, CTYPE_INT16U smpCnt, unsigned char *mac) {
     decode_LE_IED_MUnn_PhsMeas1(dataset, smpCnt, &LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1);
     LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt = smpCnt;
+    memcpy(LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.sourceMac, &mac[6], 6);
+
+    //printf("MAC: %x\n", LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.sourceMac[0]);
 
     if (svIDLength < SVID_LENGTH_MAX) {
         memcpy(&LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID, svID, svIDLength);

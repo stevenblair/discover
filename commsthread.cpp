@@ -28,7 +28,7 @@ CommsThread::CommsThread(QObject *parent) : QThread(parent)
 
 void CommsThread::proxyPacketReceived() {
     if (scheduledNewInterface == false) {
-        emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), QString("Source MAC placeholder"), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
+        emit addSample(QString((const char*) LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.svID), macFromChar(LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.sourceMac), LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.LE_IED_MUnn_PhsMeas1, LE_IED_RECV.S1.MUnn.IEC_61850_9_2LETCTR_1.sv_inputs_MSVCB01.smpCnt);
     }
 }
 
@@ -48,6 +48,11 @@ void CommsThread::setNetworkInterface(int value) {
 void CommsThread::timerDone()
 {
     emit networkInterfaceStopped();
+}
+
+QString CommsThread::macFromChar(unsigned char *mac)
+{
+    return QString("%1-%2-%3-%4-%5-%6").arg(QString::number(mac[0], 16), 2, '0').arg(QString::number(mac[1], 16), 2, '0').arg(QString::number(mac[2], 16), 2, '0').arg(QString::number(mac[3], 16), 2, '0').arg(QString::number(mac[4], 16), 2, '0').arg(QString::number(mac[5], 16), 2, '0');
 }
 
 void CommsThread::startNetworkInterface()
