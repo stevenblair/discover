@@ -52,8 +52,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     voltagePhasorView->setScene(voltagePhasorScene);
     graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignCenter);
     graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignCenter);
-    graphLayout->addWidget(currentPlotView, 0, 1, Qt::AlignCenter);
-    graphLayout->addWidget(voltagePlotView, 1, 1, Qt::AlignCenter);
+    graphLayout->addWidget(currentPlotView, 0, 1, Qt::AlignLeft);
+    graphLayout->addWidget(voltagePlotView, 1, 1, Qt::AlignLeft);
     graphLayout->setColumnStretch(0, 0);
     graphLayout->setColumnStretch(1, 1);
 
@@ -66,7 +66,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     setWindowTitle(tr("discover"));
     //setMinimumWidth(700);
-
     this->setGeometry(
         QStyle::alignedRect(
             Qt::LeftToRight,

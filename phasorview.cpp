@@ -1,4 +1,5 @@
 #include "phasorview.h"
+#include "phasorscene.h"
 
 PhasorView::PhasorView(QObject *parent)
 {
@@ -8,4 +9,9 @@ PhasorView::PhasorView(QObject *parent)
     this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    QMatrix matrix;
+    matrix.scale(1.0, 1.0);
+    this->setMatrix(matrix);
+    this->centerOn(0.0, 0.0);
 }
