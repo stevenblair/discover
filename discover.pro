@@ -38,12 +38,15 @@ SOURCES += main.cpp\
     rapid61850/datatypes.c \
     rapid61850/ctypes.c \
     commsthread.cpp \
-    measure/measure.cpp \
-    measure/measure_parameters.cpp \
     phasorscene.cpp \
     phasorview.cpp \
     statuscolumndelegate.cpp \
-    plotview.cpp
+    plotview.cpp \
+    measure/rtGetNaN.cpp \
+    measure/rtGetInf.cpp \
+    measure/rt_nonfinite.cpp \
+    measure/measure_parameters.cpp \
+    measure/measure.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -68,15 +71,19 @@ HEADERS  += mainwindow.h \
     rapid61850/datatypes.h \
     rapid61850/ctypes.h \
     commsthread.h \
-    measure/rtwtypes.h \
-    measure/measure_types.h \
-    measure/measure_private.h \
-    measure/measure.h \
-    measure/measure_parameters.h \
     phasorscene.h \
     phasorview.h \
     statuscolumndelegate.h \
-    plotview.h
+    plotview.h \
+    measure/rtwtypes.h \
+    measure/rtGetNaN.h \
+    measure/rtGetInf.h \
+    measure/rt_nonfinite.h \
+    measure/rt_defines.h \
+    measure/measure_private.h \
+    measure/measure_parameters.h \
+    measure/measure.h \
+    measure/measure_types.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

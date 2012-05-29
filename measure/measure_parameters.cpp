@@ -1,6 +1,6 @@
 
 #include "measure.h"
-#include "measure_private.h"
+//#include "measure_private.h"
 #include "measure_parameters.h"
 
 const Parameters_measure measure_P_60Hz_80_samples_per_cycle = {

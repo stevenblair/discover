@@ -4,7 +4,7 @@
 
 StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent)
 {
-
+    this->blockUpdates = false;
 }
 
 int StreamTableModel::rowCount(const QModelIndex &parent) const
@@ -134,6 +134,8 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
 {
     Stream *stream;
 
+    if (blockUpdates == false) {
+
     // find stream; create new if doesn't exist
     if (streams.contains(svID)) {
         stream = streams.value(svID);
@@ -159,6 +161,7 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
 //        emit dataChanged(top, bottom);
 //        emit resizeColumnsToContents();
 //    }
+    }
 }
 
 void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)

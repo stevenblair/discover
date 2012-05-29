@@ -6,11 +6,10 @@
 #include <QGraphicsScene>
 #include "sample.h"
 #include "rapid61850/iec61850.h"
-//extern "C" {
 #include "measure/measure.h"
 #include "measure/rtwtypes.h"
 #include "measure/measure_parameters.h"
-//}
+
 
 #define SAMPLES_50HZ_80_PER_CYCLE   4000
 #define SAMPLES_60HZ_80_PER_CYCLE   4800
@@ -18,7 +17,7 @@
 #define SAMPLES_60HZ_256_PER_CYCLE  15360                       // 256 samples/cycle * 60 cycles
 #define MAX_SAMPLES                 SAMPLES_60HZ_256_PER_CYCLE
 
-#define RECALCULATE_ANALYSIS_TIME   1000                        // milliseconds
+#define RECALCULATE_ANALYSIS_TIME   5000                        // milliseconds
 
 #define SIGNIFICANT_DIGITS_DIPLAYED 3
 
@@ -49,7 +48,6 @@ public:
     ExternalOutputs_measure *getStreamData();
 
 signals:
-    //void sampleRateDetermined(QString svID);
     void updateModel(bool resizeColumns);
     void updateView();
     void removeView();
@@ -57,7 +55,6 @@ signals:
 public slots:
     void handleAnalysisFinished();
     void scheduleAnalysis();
-    //void addView(QGraphicsScene *scene);
     void timeout();
 
 private:

@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->resizeColumnsToContents();
 
     setWindowTitle(tr("discover"));
-    setMinimumWidth(700);
+    //setMinimumWidth(700);
 
     this->setGeometry(
         QStyle::alignedRect(

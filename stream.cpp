@@ -54,19 +54,19 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         if (smpCnt == 0 && this->sampleRate == RateUnknown) {
             if (capturedSamples == SAMPLES_50HZ_80_PER_CYCLE) {
                 sampleRate = Rate80samples50Hz;
-                //analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);    // TODO: probably returning NaN,etc. Rebuild with latest Coder, with non-finite
+                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);    // TODO: probably returning NaN,etc. Rebuild with latest Coder, with non-finite
             }
             else if (capturedSamples == SAMPLES_60HZ_80_PER_CYCLE) {
                 sampleRate = Rate80samples60Hz;
-                //analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
+                analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
             }
             else if (capturedSamples == SAMPLES_50HZ_256_PER_CYCLE) {
                 sampleRate = Rate256samples50Hz;
-                //analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
+                analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
             }
             else if (capturedSamples == SAMPLES_60HZ_256_PER_CYCLE) {
                 sampleRate = Rate256samples60Hz;
-                //analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
+                analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
             }
 
             if (sampleRate != RateUnknown) {
@@ -172,7 +172,8 @@ ExternalOutputs_measure *Stream::getStreamData()
 void Stream::handleAnalysisFinished()
 {
     //qDebug() << "done analysis";
-    emit updateModel(true);         //TODO: updates still twitchy
+
+    emit updateModel(true);         //TODO: updates still twitchy, need more granular update?
 
     if (timer == NULL) {
         timer = new QTimer(this);
@@ -225,6 +226,7 @@ void Stream::analyse()
 
     analysisInstance.initialize();
 
+    // TODO: analysis could run for just a few cycles of iterations - probably just want to plot a few cycles anyway
     for (quint32 t = 0; t < samplesPerSecond; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;

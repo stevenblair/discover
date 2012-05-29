@@ -53,6 +53,7 @@ public slots:
 
 private:
     QMap<QString, Stream*> streams;
+    bool blockUpdates;
     
 };
 
