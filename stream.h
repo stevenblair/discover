@@ -5,23 +5,16 @@
 #include <QFutureWatcher>
 #include <QGraphicsScene>
 #include "sample.h"
+#include "samplerate.h"
 #include "rapid61850/iec61850.h"
 #include "measure/measure.h"
 #include "measure/rtwtypes.h"
 #include "measure/measure_parameters.h"
 
 
-#define SAMPLES_50HZ_80_PER_CYCLE   4000
-#define SAMPLES_60HZ_80_PER_CYCLE   4800
-#define SAMPLES_50HZ_256_PER_CYCLE  12800
-#define SAMPLES_60HZ_256_PER_CYCLE  15360                       // 256 samples/cycle * 60 cycles
-#define MAX_SAMPLES                 SAMPLES_60HZ_256_PER_CYCLE
-
-#define RECALCULATE_ANALYSIS_TIME   5000                        // milliseconds
-
+#define RECALCULATE_ANALYSIS_TIME   5000    // milliseconds
+#define NUMBER_OF_CYCLES_TO_ANALYSE 4       // must be at least 2 cycles
 #define SIGNIFICANT_DIGITS_DIPLAYED 3
-
-enum StreamSampleRate {RateUnknown, Rate80samples50Hz, Rate80samples60Hz, Rate256samples50Hz, Rate256samples60Hz, RateInvalid};
 
 class Stream : public QObject
 {
@@ -71,7 +64,7 @@ private:
     bool alive;
     bool checkAlive;
 
-    StreamSampleRate sampleRate;
+    SampleRate sampleRate;
 
     QTimer *timer;
 

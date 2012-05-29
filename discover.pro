@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     measure/rtGetInf.cpp \
     measure/rt_nonfinite.cpp \
     measure/measure_parameters.cpp \
-    measure/measure.cpp
+    measure/measure.cpp \
+    samplerate.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -83,7 +84,8 @@ HEADERS  += mainwindow.h \
     measure/measure_private.h \
     measure/measure_parameters.h \
     measure/measure.h \
-    measure/measure_types.h
+    measure/measure_types.h \
+    samplerate.h
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 MainWindow::~MainWindow()
 {
+    // TODO: kill commsThread gracefully
 }
 
 StreamTableModel *MainWindow::getStreamTableModel()

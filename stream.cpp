@@ -9,7 +9,8 @@ Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(paren
     this->analysed = false;
     this->svID = svID;
     this->sourceMAC = sourceMAC;
-    this->sampleRate = RateUnknown;
+    //this->sampleRate = RateUnknown;
+    this->sampleRate = SampleRate();
 
     connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
 }
@@ -51,32 +52,32 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         samples[smpCnt].currentQuality[3] = dataset->MUnn_TCTR_4_Amp_q;
 
         // determine sampling rate and nominal frequency
-        if (smpCnt == 0 && this->sampleRate == RateUnknown) {
+        if (smpCnt == 0 && !sampleRate.isKnown()) {
             if (capturedSamples == SAMPLES_50HZ_80_PER_CYCLE) {
-                sampleRate = Rate80samples50Hz;
-                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);    // TODO: probably returning NaN,etc. Rebuild with latest Coder, with non-finite
+                sampleRate.setSampleRate(SampleRate::NominalFreq50Hz, SampleRate::Samples80);
+                analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);
             }
             else if (capturedSamples == SAMPLES_60HZ_80_PER_CYCLE) {
-                sampleRate = Rate80samples60Hz;
+                sampleRate.setSampleRate(SampleRate::NominalFreq60Hz, SampleRate::Samples80);
                 analysisInstance.setBlockParameters(&measure_P_60Hz_80_samples_per_cycle);
             }
             else if (capturedSamples == SAMPLES_50HZ_256_PER_CYCLE) {
-                sampleRate = Rate256samples50Hz;
+                sampleRate.setSampleRate(SampleRate::NominalFreq50Hz, SampleRate::Samples256);
                 analysisInstance.setBlockParameters(&measure_P_50Hz_256_samples_per_cycle);
             }
             else if (capturedSamples == SAMPLES_60HZ_256_PER_CYCLE) {
-                sampleRate = Rate256samples60Hz;
+                sampleRate.setSampleRate(SampleRate::NominalFreq60Hz, SampleRate::Samples256);
                 analysisInstance.setBlockParameters(&measure_P_60Hz_256_samples_per_cycle);
             }
 
-            if (sampleRate != RateUnknown) {
-                samplesPerSecond = capturedSamples;
+            if (sampleRate.isKnown()) {
+                samplesPerSecond = sampleRate.getSamplesPerSecond();
 
                 emit updateModel(true);
                 emit scheduleAnalysis();
             }
 
-            // TODO: find invalid sample rate values, and count valid packets recv'd?
+            // TODO: detect invalid sample rate values, and count valid packets recv'd?
         }
 
         if (smpCnt == 0) {
@@ -130,7 +131,7 @@ QString Stream::getCurrent()
 
 QString Stream::getSamplesPerCycle()
 {
-    if (this->sampleRate == Rate80samples50Hz || this->sampleRate == Rate80samples60Hz) {
+    /*if (this->sampleRate == Rate80samples50Hz || this->sampleRate == Rate80samples60Hz) {
         return QString("80");
     }
     else if (this->sampleRate == Rate256samples50Hz || this->sampleRate == Rate256samples60Hz) {
@@ -138,6 +139,12 @@ QString Stream::getSamplesPerCycle()
     }
     else if (this->sampleRate == RateInvalid) {
         return QString("invalid");
+    }
+    else {
+        return QString("--");
+    }*/
+    if (sampleRate.isKnown()) {
+        return QString("%1").arg(sampleRate.getSamplesPerCycle());
     }
     else {
         return QString("--");
@@ -188,7 +195,7 @@ void Stream::scheduleAnalysis() {
     //qDebug() << "in timer";
 
     // TODO: better checking of watcher/future state
-    if (/*!isAnalysed() &&*/!watcher.isRunning() &&/*&future == NULL &&*/ sampleRate != RateUnknown) {
+    if (/*!isAnalysed() &&*/!watcher.isRunning() &&/*&future == NULL &&*//* sampleRate != RateUnknown*/sampleRate.isKnown()) {
         future = QtConcurrent::run(this, &Stream::analyse);
         watcher.setFuture(future);
     }
@@ -225,9 +232,10 @@ void Stream::analyse()
     setAnalysed(false);
 
     analysisInstance.initialize();
+    quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
 
     // TODO: analysis could run for just a few cycles of iterations - probably just want to plot a few cycles anyway
-    for (quint32 t = 0; t < samplesPerSecond; t++) {
+    for (quint32 t = 0; t < iterations; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_3.Vol.sVC.scaleFactor;
