@@ -17,7 +17,7 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE / 2, -PHASOR_VIEW_MAX_PHASOR_SIZE / 2, PHASOR_VIEW_MAX_PHASOR_SIZE, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLineCiclePen);
     horizontalPlotLine = QGraphicsScene::addLine(-PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, plotLinePen);
     verticalPlotLine = QGraphicsScene::addLine(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLinePen);
-    // TODO: phasor area shown still not perfect; why do these setting work?
+    // TODO: phasor area shown still not perfect
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
@@ -98,8 +98,15 @@ void PhasorScene::draw() {
             //qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag << "coords:" << 0.0 << 0.0 << mag * cos(angle) << -1.0 * mag * sin(angle);
 
             phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
+            phaseLine[i]->setToolTip(this->getToolTipText(i));
         }
     }
+}
+
+QString PhasorScene::getToolTipText(int phase)
+{
+    Q_UNUSED(phase);
+    return QString();
 }
 
 qreal PhasorScene::getPhasorMag(int phase)
@@ -139,6 +146,11 @@ qreal CurrentPhasorScene::getPhasorAngle(int phase)
     }
 }
 
+QString CurrentPhasorScene::getToolTipText(int phase)
+{
+    return QString("Phase %1: %2 %3 %4° kA").arg(phase + 1).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase), 0, 'f', 1);
+}
+
 
 
 VoltagePhasorScene::VoltagePhasorScene(StreamTableModel *tableModel, QObject *parent) : PhasorScene(tableModel, parent)
@@ -163,4 +175,9 @@ qreal VoltagePhasorScene::getPhasorAngle(int phase)
     else {
         return PhasorScene::getPhasorAngle(phase);
     }
+}
+
+QString VoltagePhasorScene::getToolTipText(int phase)
+{
+    return QString("Phase %1: %2 %3 %4° kV").arg(phase + 1).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase), 0, 'f', 1);
 }

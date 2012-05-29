@@ -26,6 +26,7 @@ protected:
 
 private:
     void draw();
+    virtual QString getToolTipText(int phase);
 
     //TODO: add lines, circles and text labels for plot
     QPen pen[3];
@@ -56,6 +57,9 @@ protected:
     qreal getPhasorMag(int phase);
     qreal getPhasorAngle(int phase);
 
+private:
+
+    QString getToolTipText(int phase);
 };
 
 
@@ -76,6 +80,9 @@ protected:
     qreal getPhasorMag(int phase);
     qreal getPhasorAngle(int phase);
 
+private:
+
+    QString getToolTipText(int phase);
 };
 
 #endif // PHASOR_H

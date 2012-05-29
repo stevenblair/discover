@@ -195,7 +195,7 @@ void Stream::scheduleAnalysis() {
     //qDebug() << "in timer";
 
     // TODO: better checking of watcher/future state
-    if (/*!isAnalysed() &&*/!watcher.isRunning() &&/*&future == NULL &&*//* sampleRate != RateUnknown*/sampleRate.isKnown()) {
+    if (!watcher.isRunning() &&sampleRate.isKnown()) {
         future = QtConcurrent::run(this, &Stream::analyse);
         watcher.setFuture(future);
     }
@@ -234,7 +234,6 @@ void Stream::analyse()
     analysisInstance.initialize();
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
 
-    // TODO: analysis could run for just a few cycles of iterations - probably just want to plot a few cycles anyway
     for (quint32 t = 0; t < iterations; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;

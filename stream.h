@@ -12,7 +12,7 @@
 #include "measure/measure_parameters.h"
 
 
-#define RECALCULATE_ANALYSIS_TIME   5000    // milliseconds
+#define RECALCULATE_ANALYSIS_TIME   3000    // milliseconds
 #define NUMBER_OF_CYCLES_TO_ANALYSE 4       // must be at least 2 cycles
 #define SIGNIFICANT_DIGITS_DIPLAYED 3
 
