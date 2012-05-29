@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QFutureWatcher>
 #include <QGraphicsScene>
+#include <QPainter>
 #include "sample.h"
 #include "samplerate.h"
 #include "rapid61850/iec61850.h"
@@ -21,6 +22,8 @@ class Stream : public QObject
     Q_OBJECT
 
 public:
+    enum PowerSystemQuantity {Voltage, Current};
+
     explicit Stream(QString svID, QString sourceMAC = 0, QObject *parent = 0);
     ~Stream();
 
@@ -32,8 +35,8 @@ public:
     QString getVoltage();
     QString getCurrent();
     QString getSamplesPerCycle();
-
     quint32 getNumberOfSamplesCaptured();
+    QPainterPath *getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase);
 
     bool isAnalysed();
     bool isAlive();

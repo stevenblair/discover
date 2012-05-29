@@ -24,6 +24,7 @@ public:
     NominalFrequency getNominalFrequency();
     SamplesPerCycle getSamplesPerCycle();
     bool isKnown();
+    qreal getTimestep();
 
 private:
     bool known;

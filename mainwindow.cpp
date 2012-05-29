@@ -41,8 +41,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     currentPhasorView = new PhasorView;
     voltagePhasorView = new PhasorView;
+
+    currentPlotScene = new CurrentPlotScene();
+    voltagePlotScene = new VoltagePlotScene();
+
     currentPlotView = new PlotView;
     voltagePlotView = new PlotView;
+    currentPlotView->setScene(currentPlotScene);
+    voltagePlotView->setScene(voltagePlotScene);
+    connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPlotScene, SLOT(streamSelectionChanged(Stream*)));
+    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePlotScene, SLOT(streamSelectionChanged(Stream*)));
 
     /*currentPhasorView->centerOn(0.0, 0.0);
     voltagePhasorView->centerOn(0.0, 0.0);

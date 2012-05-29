@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     measure/rt_nonfinite.cpp \
     measure/measure_parameters.cpp \
     measure/measure.cpp \
-    samplerate.cpp
+    samplerate.cpp \
+    plotscene.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -85,7 +86,10 @@ HEADERS  += mainwindow.h \
     measure/measure_parameters.h \
     measure/measure.h \
     measure/measure_types.h \
-    samplerate.h
+    samplerate.h \
+    plotscene.h
+
+contains(QT_CONFIG, opengl):QT += opengl
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include

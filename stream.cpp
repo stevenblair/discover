@@ -151,6 +151,35 @@ QString Stream::getSamplesPerCycle()
     }
 }
 
+QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase)
+{
+    quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
+    qreal Ts = sampleRate.getTimestep();
+
+    for (quint32 t = 0; t < iterations; t++) {
+        if (powerSystemQuantity == Stream::Current) {
+            if (t == 0) {
+                path->moveTo((qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+            }
+            else {
+                path->lineTo((qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+            }
+        }
+        else if (powerSystemQuantity == Stream::Voltage) {
+            if (t == 0) {
+                path->moveTo((qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+            }
+            else {
+                path->lineTo((qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+            }
+        }
+
+        //qDebug() << (qreal) t * Ts << (qreal) samples[t].current[phase] * 0.01;
+    }
+
+    return path;
+}
+
 quint32 Stream::getNumberOfSamplesCaptured()
 {
     return this->capturedSamples;

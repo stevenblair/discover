@@ -8,7 +8,7 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     this->tableModel = tableModel;  //TODO: remove?
     setSceneRect(PHASOR_VIEW_WIDTH / -2.0, PHASOR_VIEW_WIDTH / -2.0, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
 
-    QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(222, 215, 20, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
+    QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
     QColor plotLineColor = QColor(180, 180, 180);
 
     plotLinePen = QPen(plotLineColor);
@@ -31,8 +31,9 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     minusNinetyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
     minusNinetyDegText->setDefaultTextColor(plotLineColor);
 
-    //QFont font;
-    //font.setBold(true);
+    QFont font;
+    font.setBold(true);
+    font.setPointSize(9);
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
@@ -41,7 +42,7 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
         phaseLine[i]->hide();
         phaseLabel[i] = QGraphicsScene::addText(QString("Vb")); //TODO: set properly
-        //phaseLabel[i]->setFont(font);
+        phaseLabel[i]->setFont(font);
         phaseLabel[i]->setDefaultTextColor(lineColors[i]);
         phaseLabel[i]->hide();
         //connect(phaseLine[i], hoverEnterEvent(QGraphicsSceneEvent *);     // need to sub-class to get this?
@@ -112,7 +113,7 @@ void PhasorScene::streamRemoved()
 }
 
 void PhasorScene::draw() {
-    if (this->stream != NULL) {
+    if (this->stream != NULL && stream->isAnalysed()) {
         // TODO: connect to stream for updates; first disconnect any updates from an old stream
 
         qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));

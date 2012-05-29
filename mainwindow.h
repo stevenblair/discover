@@ -10,6 +10,7 @@
 #include "streamtablemodel.h"
 #include "phasorscene.h"
 #include "phasorview.h"
+#include "plotscene.h"
 #include "plotview.h"
 #include "commsthread.h"
 
@@ -37,6 +38,8 @@ private:
 
     CurrentPhasorScene *currentPhasorScene;
     VoltagePhasorScene *voltagePhasorScene;
+    CurrentPlotScene *currentPlotScene;
+    VoltagePlotScene *voltagePlotScene;
     PhasorView *currentPhasorView;
     PhasorView *voltagePhasorView;
     PlotView *currentPlotView;

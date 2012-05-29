@@ -21,8 +21,8 @@
 #define STREAM_TABLE_COLUMNS_SVID_TITLE                 "svID"
 #define STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE    "Samples/cycle"
 #define STREAM_TABLE_COLUMNS_FREQ_TITLE                 "Frequency"
-#define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "RMS L-L Voltage"
-#define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "RMS L-L Current"
+#define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "Voltage (RMS, L-L)"
+#define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "Current (RMS, L-L)"
 #define STREAM_TABLE_COLUMNS_SOURCE_MAC_TITLE           "Source MAC Address"
 
 
