@@ -36,12 +36,18 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
         pen[i].setWidth(5);
         pen[i].setCapStyle(Qt::RoundCap);
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
+        phaseLine[i]->hide();
         //connect(phaseLine[i], hoverEnterEvent(QGraphicsSceneEvent *);     // need to sub-class to get this?
     }
 }
 
 void PhasorScene::streamSelectionChanged(Stream *stream)
 {
+    if (this->stream != NULL) {
+        disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
+        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
+    }
+
     this->stream = stream;
 
     if (this->stream != NULL) {
@@ -92,6 +98,7 @@ void PhasorScene::streamRemoved()
     this->stream = NULL;
     for (int i = 0; i < 3; i++) {
         phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
+        phaseLine[i]->hide();
     }
     //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
 }
@@ -112,6 +119,7 @@ void PhasorScene::draw() {
 
             phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
             phaseLine[i]->setToolTip(this->getToolTipText(i));
+            phaseLine[i]->show();
         }
         PhasorView *view = ((PhasorView *)this->views().first());
         QMatrix matrix;
