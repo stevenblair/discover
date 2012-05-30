@@ -10,7 +10,10 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
     QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
     QColor plotLineColor = QColor(180, 180, 180);
 
-
+    for (int i = 0; i < 3; i++) {
+        plot[i] = QGraphicsScene::addPath(path[i], QPen(QColor(lineColors[i])));
+        plot[i]->hide();
+    }
 }
 
 void PlotScene::streamSelectionChanged(Stream *stream)
@@ -32,14 +35,14 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 void PlotScene::draw() {
     if (stream != NULL) {
         for (int i = 0; i < 3; i++) {
-            QPainterPath path;
-            stream->getPainterPath(&path, getPowerSystemQuantity(), i);
-            plot[i] =  QGraphicsScene::addPath(path);
+            stream->getPainterPath(&path[i], getPowerSystemQuantity(), i);
+            plot[i]->setPath(path[i]);
+            plot[i]->show();
             //update();
 
             QGraphicsView *view = ((PlotView *) this->views().first());
-            QRectF rect = plot[i]->boundingRect();
-            QRectF rectView = view->sceneRect();
+            //QRectF rect = plot[i]->boundingRect();
+            //QRectF rectView = view->sceneRect();
 
             //qDebug() << rect << rectView;
 

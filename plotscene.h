@@ -20,7 +20,7 @@ protected:
 
 private:
     Stream *stream;
-    QPainterPath *path;
+    QPainterPath path[3];
     QGraphicsPathItem *plot[3];
 
     void draw();
