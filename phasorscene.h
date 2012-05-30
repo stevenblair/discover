@@ -6,7 +6,7 @@
 #include <QGraphicsView>
 #include "streamtablemodel.h"
 
-#define PHASOR_VIEW_MAX_PHASOR_SIZE 80.0
+#define PHASOR_VIEW_MAX_PHASOR_SIZE 75.0
 #define PHASOR_VIEW_MAX_SIZE        (PHASOR_VIEW_MAX_PHASOR_SIZE + 25.0)    // defines max distance from centre in any direction
 #define PHASOR_VIEW_WIDTH           (2.0 * PHASOR_VIEW_MAX_SIZE)
 
@@ -29,6 +29,8 @@ protected:
 
     virtual qreal getPhasorMag(int phase);
     virtual qreal getPhasorAngle(int phase);
+    virtual QString getPhaseLabel(int phase);
+    virtual QString getUnits();
     QString phaseNumberToText(int phase);
 
 private:
@@ -48,6 +50,7 @@ private:
     QGraphicsTextItem *nintyDegText;
     QGraphicsTextItem *oneEightyDegText;
     QGraphicsTextItem *minusNinetyDegText;
+    QGraphicsTextItem *onePuText;
 };
 
 
@@ -67,6 +70,8 @@ protected:
 
     qreal getPhasorMag(int phase);
     qreal getPhasorAngle(int phase);
+    QString getPhaseLabel(int phase);
+    QString getUnits();
 
 private:
 
@@ -90,6 +95,8 @@ protected:
 
     qreal getPhasorMag(int phase);
     qreal getPhasorAngle(int phase);
+    QString getPhaseLabel(int phase);
+    QString getUnits();
 
 private:
 

@@ -31,6 +31,11 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
     minusNinetyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
     minusNinetyDegText->setDefaultTextColor(plotLineColor);
 
+    onePuText = QGraphicsScene::addText(QString("mag"));
+    onePuText->setPos(PHASOR_VIEW_MAX_PHASOR_SIZE * 0.4, -PHASOR_VIEW_MAX_PHASOR_SIZE * 0.92 - onePuText->boundingRect().height());
+    onePuText->setDefaultTextColor(plotLineColor);
+    onePuText->hide();
+
     QFont font;
     font.setBold(true);
     font.setPointSize(9);
@@ -41,7 +46,7 @@ PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraph
         pen[i].setCapStyle(Qt::RoundCap);
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
         phaseLine[i]->hide();
-        phaseLabel[i] = QGraphicsScene::addText(QString("Vb")); //TODO: set properly
+        phaseLabel[i] = QGraphicsScene::addText(getPhaseLabel(i));
         phaseLabel[i]->setFont(font);
         phaseLabel[i]->setDefaultTextColor(lineColors[i]);
         phaseLabel[i]->hide();
@@ -108,6 +113,7 @@ void PhasorScene::streamRemoved()
         phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
         phaseLine[i]->hide();
         phaseLabel[i]->hide();
+        onePuText->hide();
     }
     //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
 }
@@ -118,6 +124,9 @@ void PhasorScene::draw() {
 
         qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
         qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
+
+        onePuText->setPlainText(QString("%1 %2").arg(maxMag / 1000.0, 0, 'g', 3).arg(getUnits()));
+        onePuText->show();
 
         //TODO: scale mags to maximum View size; always centre on (0,0)
         for (int i = 0; i < 3; i++) {
@@ -147,6 +156,7 @@ void PhasorScene::draw() {
                 labelPoint = phaseLine[i]->boundingRect().bottomLeft();
                 labelPoint.setX(labelPoint.x() - phaseLabel[i]->boundingRect().width());
             }
+            phaseLabel[i]->setPlainText(getPhaseLabel(i));
             phaseLabel[i]->setPos(labelPoint);
             phaseLabel[i]->show();
         }
@@ -171,6 +181,16 @@ qreal PhasorScene::getPhasorMag(int phase)
 qreal PhasorScene::getPhasorAngle(int phase)
 {
     return 0.0;
+}
+
+QString PhasorScene::getPhaseLabel(int phase)
+{
+    return QString();
+}
+
+QString PhasorScene::getUnits()
+{
+    return QString();
 }
 
 QString PhasorScene::phaseNumberToText(int phase) {
@@ -213,9 +233,19 @@ qreal CurrentPhasorScene::getPhasorAngle(int phase)
     }
 }
 
+QString CurrentPhasorScene::getPhaseLabel(int phase)
+{
+    return QString("I" + phaseNumberToText(phase));
+}
+
+QString CurrentPhasorScene::getUnits()
+{
+    return QString("kA");
+}
+
 QString CurrentPhasorScene::getToolTipText(int phase)
 {
-    return QString("I%1: %2 %3 %4° kA").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
+    return QString("I%1: %2 %3 %4° %5").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1).arg(getUnits());
 }
 
 
@@ -245,7 +275,17 @@ qreal VoltagePhasorScene::getPhasorAngle(int phase)
     }
 }
 
+QString VoltagePhasorScene::getPhaseLabel(int phase)
+{
+    return QString("V" + phaseNumberToText(phase));
+}
+
+QString VoltagePhasorScene::getUnits()
+{
+    return QString("kV");
+}
+
 QString VoltagePhasorScene::getToolTipText(int phase)
 {
-    return QString("V%1: %2 %3 %4° kV").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1);
+    return QString("V%1: %2 %3 %4° %5").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1).arg(getUnits());
 }
