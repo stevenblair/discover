@@ -42,6 +42,7 @@ public:
     bool isAlive();
     void setAnalysed(bool analysed);
     ExternalOutputs_measure *getStreamData();
+    SampleRate *getSampleRate();
 
 signals:
     void updateModel(bool resizeColumns);

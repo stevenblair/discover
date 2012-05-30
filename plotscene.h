@@ -14,14 +14,20 @@ signals:
 
 public slots:
     void streamSelectionChanged(Stream *stream);
+    void streamChanged();
 
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
 
 private:
     Stream *stream;
+
+    QPen pen[3];
+    QPen plotLinePen;
     QPainterPath path[3];
     QGraphicsPathItem *plot[3];
+    QGraphicsLineItem *horizontalPlotLine;
+    QGraphicsLineItem *verticalPlotLine;
 
     void draw();
 

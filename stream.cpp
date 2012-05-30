@@ -159,18 +159,18 @@ QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity pow
     for (quint32 t = 0; t < iterations; t++) {
         if (powerSystemQuantity == Stream::Current) {
             if (t == 0) {
-                path->moveTo((qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
             }
             else {
-                path->lineTo((qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
             }
         }
         else if (powerSystemQuantity == Stream::Voltage) {
             if (t == 0) {
-                path->moveTo((qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
             }
             else {
-                path->lineTo((qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
             }
         }
 
@@ -203,6 +203,11 @@ void Stream::setAnalysed(bool analysed)
 ExternalOutputs_measure *Stream::getStreamData()
 {
     return &analysisInstance.measure_Y;
+}
+
+SampleRate *Stream::getSampleRate()
+{
+    return &sampleRate;
 }
 
 void Stream::handleAnalysisFinished()
