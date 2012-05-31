@@ -42,6 +42,7 @@ public:
     bool isAlive();
     void setAnalysed(bool analysed);
     ExternalOutputs_measure *getStreamData();
+    qreal getMaxInstantaneous(PowerSystemQuantity powerSystemQuantity);
     SampleRate *getSampleRate();
 
 signals:
@@ -73,6 +74,8 @@ private:
     QTimer *timer;
 
     measureModelClass analysisInstance;
+    qreal maxInstantaneousVoltage;
+    qreal maxInstantaneousCurrent;
     QFuture<void> future;
     QFutureWatcher<void> watcher;
 };

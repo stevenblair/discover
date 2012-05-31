@@ -29,6 +29,7 @@ private:
     QGraphicsLineItem *horizontalPlotLine;
     QGraphicsLineItem *verticalPlotLine;
 
+    bool drawnOnce;
     void draw();
 
 };

@@ -160,10 +160,13 @@ void PhasorScene::draw() {
             phaseLabel[i]->setPos(labelPoint);
             phaseLabel[i]->show();
         }
-        PhasorView *view = ((PhasorView *)this->views().first());
-        QMatrix matrix;
-        matrix.scale(1.0, 1.0);
-        view->setMatrix(matrix);
+
+        // TODO: need this?
+//        PhasorView *view = ((PhasorView *)this->views().first());
+//        /*QMatrix matrix;
+//        matrix.scale(1.0, 1.0);
+//        view->setMatrix(matrix);*/
+//        view->fitInView(sceneRect(), Qt::IgnoreAspectRatio);
     }
 }
 

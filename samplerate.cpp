@@ -39,7 +39,6 @@ qreal SampleRate::getTimestep()
     return 1.0 / ((qreal) nominalFrequency * samplesPerCycle);
 }
 
-
 void SampleRate::setSampleRate(SampleRate::NominalFrequency nominalFrequency, SampleRate::SamplesPerCycle samplesPerCycle)
 {
     known = true;

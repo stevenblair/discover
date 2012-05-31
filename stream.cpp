@@ -151,6 +151,7 @@ QString Stream::getSamplesPerCycle()
     }
 }
 
+// TODO: put this processing in analysis thread?
 QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase)
 {
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
@@ -159,18 +160,18 @@ QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity pow
     for (quint32 t = 0; t < iterations; t++) {
         if (powerSystemQuantity == Stream::Current) {
             if (t == 0) {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
             }
             else {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
             }
         }
         else if (powerSystemQuantity == Stream::Voltage) {
             if (t == 0) {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
             }
             else {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * 0.01);
+                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
             }
         }
 
@@ -205,6 +206,17 @@ ExternalOutputs_measure *Stream::getStreamData()
     return &analysisInstance.measure_Y;
 }
 
+qreal Stream::getMaxInstantaneous(Stream::PowerSystemQuantity powerSystemQuantity)
+{
+    if (powerSystemQuantity == Stream::Voltage) {
+        return maxInstantaneousVoltage;
+    }
+    else if (powerSystemQuantity == Stream::Current) {
+        return maxInstantaneousCurrent;
+    }
+    return 0.0;
+}
+
 SampleRate *Stream::getSampleRate()
 {
     return &sampleRate;
@@ -221,6 +233,8 @@ void Stream::handleAnalysisFinished()
         connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
         timer->start(RECALCULATE_ANALYSIS_TIME);
     }
+
+    emit updateView();  // TODO: Safe to put this here? Could be race condition?
 
     //QTimer::singleShot(RECALCULATE_ANALYSIS_TIME, this, SLOT(scheduleAnalysis()));
 }
@@ -252,7 +266,6 @@ void Stream::timeout()
     if (alive != prevAlive) {
         emit updateModel(false);    // TODO: only update appropriate cell?
     }
-    emit updateView();
 
     checkAlive = false;
 }
@@ -268,6 +281,9 @@ void Stream::analyse()
     analysisInstance.initialize();
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
 
+    maxInstantaneousVoltage = 0.0;
+    maxInstantaneousCurrent = 0.0;
+
     for (quint32 t = 0; t < iterations; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
@@ -275,6 +291,15 @@ void Stream::analyse()
         analysisInstance.measure_U.IabcAmps[0] = samples[t].current[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor;
         analysisInstance.measure_U.IabcAmps[1] = samples[t].current[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_2.Amp.sVC.scaleFactor;
         analysisInstance.measure_U.IabcAmps[2] = samples[t].current[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_3.Amp.sVC.scaleFactor;
+
+        qreal timestepMaxVoltage = qMax(qAbs(analysisInstance.measure_U.Vabcpu[0]), qMax(qAbs(analysisInstance.measure_U.Vabcpu[1]), qAbs(analysisInstance.measure_U.Vabcpu[2])));
+        if (timestepMaxVoltage > maxInstantaneousVoltage) {
+            maxInstantaneousVoltage = timestepMaxVoltage;
+        }
+        qreal timestepMaxCurrent = qMax(qAbs(analysisInstance.measure_U.IabcAmps[0]), qMax(qAbs(analysisInstance.measure_U.IabcAmps[1]), qAbs(analysisInstance.measure_U.IabcAmps[2])));
+        if (timestepMaxCurrent > maxInstantaneousCurrent) {
+            maxInstantaneousCurrent = timestepMaxCurrent;
+        }
 
         analysisInstance.step();
     }

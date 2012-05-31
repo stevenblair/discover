@@ -19,13 +19,22 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 
     horizontalPlotLine = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, plotLinePen);
     verticalPlotLine = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, plotLinePen);
+
+    drawnOnce = false;
 }
 
 void PlotScene::streamSelectionChanged(Stream *stream)
 {
+    /*if (this->stream != NULL) {
+        //disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));  // TODO: enable this?
+        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
+    }*/
+
     this->stream = stream;
 
     if (this->stream != NULL) {
+        drawnOnce = false;
+
         // pre-initialise paths with the correct number of elements
         quint32 iterations = stream->getSampleRate()->getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
         for (int i = 0; i < 3; i++) {
@@ -54,20 +63,31 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 
 void PlotScene::draw() {
     if (stream != NULL) {
+        // TODO: add padding, of a certain percentage of total width/height, at sides
+        qreal maxValue = stream->getMaxInstantaneous(this->getPowerSystemQuantity());
+        qreal totalTime = ((qreal) NUMBER_OF_CYCLES_TO_ANALYSE) / stream->getSampleRate()->getNominalFrequency();
+        qreal yAxis = maxValue * 1.2;
+        qreal xAxis = totalTime * 1.1;
+
+        //qDebug() << getPowerSystemQuantity() << xAxis << yAxis;
+        //qDebug() << getPowerSystemQuantity() << stream->getMaxInstantaneous(Stream::Voltage) << stream->getMaxInstantaneous(Stream::Current) << this->sceneRect().height();
+
+        horizontalPlotLine->setLine(xAxis * -0.1, 0.0, xAxis, 0.0);
+        verticalPlotLine->setLine(0.0, -yAxis, 0.0, yAxis);
+
+        if (drawnOnce == false && !this->views().isEmpty()) {
+            QGraphicsView *view = ((PlotView *) this->views().first());
+            //view->fitInView(plot[i], Qt::IgnoreAspectRatio);
+            //view->fitInView(horizontalPlotLine, Qt::IgnoreAspectRatio);
+            //view->fitInView(verticalPlotLine, Qt::IgnoreAspectRatio);
+            view->fitInView(sceneRect(), Qt::IgnoreAspectRatio);
+        }
+
         for (int i = 0; i < 3; i++) {
             stream->getPainterPath(&path[i], getPowerSystemQuantity(), i);
             plot[i]->setPath(path[i]);
             plot[i]->show();
             //update();
-
-            QGraphicsView *view = ((PlotView *) this->views().first());
-            //QRectF rect = plot[i]->boundingRect();
-            //QRectF rectView = view->sceneRect();
-
-            //qDebug() << rect << rectView;
-            //qDebug() << i << path[i].length();
-
-            view->fitInView(plot[i], Qt::IgnoreAspectRatio);        // only if not first plot, or not overridden
             //view->update();
 
             //view->scale(rectView.height() / rect.height(), rectView.width() / rect.width());
@@ -76,14 +96,14 @@ void PlotScene::draw() {
 
             //((PlotView *) this->views().first())->ensureVisible(item);
             //this->invalidate(this->);
+
+            // only fit in view the first time being plotted
         }
 
-        // TODO: use max instantaneous value for height
-        // TODO: add padding, of a certain percentage of total width/height, at sides
-        horizontalPlotLine->setLine(0.0, 0.0, plot[0]->boundingRect().width(), 0.0);
-        verticalPlotLine->setLine(0.0, plot[0]->boundingRect().height() / -2.0, 0.0, plot[0]->boundingRect().height() / 2.0);
+        drawnOnce = true;
     }
 }
+
 
 
 

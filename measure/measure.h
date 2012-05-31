@@ -993,8 +993,8 @@ typedef struct {
 
 typedef struct {
   real_T Frequency;
-  real_T Voltage[10];
-  real_T Current[10];
+  real_T Voltage[11];
+  real_T Current[11];
   real_T Power[4];
 } ExternalOutputs_measure;
 
@@ -1005,6 +1005,8 @@ struct Parameters_measure_ {
   real_T Constant_Value_p;
   real_T Constant_Value_b;
   real_T Constant_Value_bj;
+  real_T Gain1_Gain;
+  real_T Gain1_Gain_d;
   real_T double_Value;
   real_T double_Value_o;
   real_T double_Value_of;
@@ -1057,7 +1059,7 @@ struct Parameters_measure_ {
   real_T Bias_Bias_c;
   real_T Bias1_Bias_c;
   real_T Gain_Gain;
-  real_T Gain1_Gain;
+  real_T Gain1_Gain_h;
   real_T Constant1_Value_n;
   real_T Bias_Bias_n;
   real_T Constant_Value_n;
@@ -1306,7 +1308,7 @@ struct Parameters_measure_ {
   real_T Constant8_Value[3];
   real_T Gain_Gain_h;
   real_T Bias_Bias_j;
-  real_T Gain1_Gain_d;
+  real_T Gain1_Gain_dt;
   real_T UnitDelay1_X0_i;
   real_T UnitDelay2_X0_l;
   real_T Gain_Gain_j;
@@ -1340,7 +1342,7 @@ struct Parameters_measure_ {
   real_T Constant_Value_hpxmkfinoy;
   real_T UnitDelay4_X0_nes;
   real_T UnitDelay2_X0_nesm;
-  real_T Gain1_Gain_h;
+  real_T Gain1_Gain_hp;
   real_T Gain_Gain_hpxm;
   real_T UnitDelay4_X0_nesm;
   real_T UnitDelay2_X0_nesmw;
@@ -1520,10 +1522,6 @@ struct Parameters_measure_ {
   real_T Constant_Value_i5;
   real_T Constant1_Value_m2;
   real_T Gain3_Gain;
-  real_T Gain6_Gain;
-  real_T Gain4_Gain;
-  real_T Constant_Value_jw;
-  real_T Gain3_Gain_i;
   real_T ScaleRMSoutputsto1pu_Gain;
   real_T UnitDelay4_X0_bln4djb4g;
   real_T UnitDelay2_X0_bln4djb4g;
@@ -1563,6 +1561,11 @@ struct Parameters_measure_ {
   real_T Constant_Value_e0r1hmwt;
   real_T Gain_Gain_e0r;
   real_T Constant_Value_e0r1hmwtw;
+  real_T Gain6_Gain;
+  real_T Gain4_Gain;
+  real_T Constant_Value_jw;
+  real_T Gain3_Gain_i;
+  real_T Gain_Gain_cg;
   real_T UnitDelay1_X0_h;
   real_T UnitDelay2_X0_c;
   real_T Gain_Gain_d2;
@@ -1632,10 +1635,6 @@ struct Parameters_measure_ {
   real_T UnitDelay4_X0_db;
   real_T UnitDelay2_X0_db;
   real_T IpktoIrms_Gain_j;
-  real_T Gain6_Gain_h;
-  real_T Gain4_Gain_o;
-  real_T Constant_Value_or;
-  real_T Gain3_Gain_l;
   real_T ScaleRMSoutputsto1pu_Gain_o;
   real_T UnitDelay4_X0_ff;
   real_T UnitDelay2_X0_ff;
@@ -1675,6 +1674,12 @@ struct Parameters_measure_ {
   real_T Constant_Value_c5;
   real_T Gain_Gain_ofaw;
   real_T Constant_Value_ps;
+  real_T Gain6_Gain_h;
+  real_T Gain4_Gain_o;
+  real_T Constant_Value_or;
+  real_T Gain3_Gain_l;
+  real_T Gain_Gain_g4;
+  real_T Gain1_Gain_br;
   real_T IpktoIrmsconversion_Gain;
   real_T IpktoIrmsconversion_Gain_m;
   real_T IpktoIrmsconversion_Gain_f;
