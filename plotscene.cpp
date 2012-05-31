@@ -11,11 +11,16 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
     QColor plotLineColor = QColor(180, 180, 180);
 
     plotLinePen = QPen(plotLineColor);
+    plotLinePen.setCosmetic(true);
+    plotLinePen.setWidth(2);
+    plotLinePen.setCapStyle(Qt::RoundCap);
     plotLinePenDashed = QPen(plotLineColor);
+    plotLinePenDashed.setCosmetic(true);
     plotLinePenDashed.setStyle(Qt::DashLine);
 
     for (int i = 0; i < 3; i++) {
-        plot[i] = QGraphicsScene::addPath(path[i], QPen(QColor(lineColors[i])));
+        pen[i] = QPen(QColor(lineColors[i]));
+        plot[i] = QGraphicsScene::addPath(path[i], pen[i]);
         plot[i]->hide();
     }
 
@@ -62,8 +67,9 @@ QRectF PlotScene::itemsBoundingRectWithoutText() {
     QRectF total = QRectF();
 
     foreach (item, items) {
-        if (item->type() != QGraphicsTextItem::Type) {
-            total = total.unite(item->boundingRect());
+        if (item->type() != QGraphicsTextItem::Type && item->boundingRect().width() < 1.0) {    //TODO: better way to ignore line widths
+            //qDebug() << item->boundingRect().width();
+            total = total.united(item->boundingRect());
         }
     }
 
@@ -118,6 +124,10 @@ void PlotScene::draw() {
         //qDebug() << getPowerSystemQuantity() << xAxis << yAxis;
         //qDebug() << getPowerSystemQuantity() << stream->getMaxInstantaneous(Stream::Voltage) << stream->getMaxInstantaneous(Stream::Current) << this->sceneRect().height();
 
+        /*plotLinePen.setWidthF(0.0002);
+        verticalPlotLine->setPen(plotLinePen);
+        horizontalPlotLine->setPen(plotLinePen);*/
+
         horizontalPlotLine->setLine(xAxis * -0.1, 0.0, xAxis, 0.0);
         verticalPlotLine->setLine(0.0, -yAxis, 0.0, yAxis);
 
@@ -128,8 +138,8 @@ void PlotScene::draw() {
             xAxisLabels[i]->show();
 
             if (i > 0) {
-                xAxisTicks[i - 1]->setLine(timeValue, -maxValue, timeValue, maxValue);
-                xAxisLabels[i - 1]->show();
+                xAxisTicks[i - 1]->setLine(timeValue, -yAxis, timeValue, yAxis);
+                xAxisTicks[i - 1]->show();
             }
         }
 
@@ -149,6 +159,9 @@ void PlotScene::draw() {
             //view->fitInView(plot[i], Qt::IgnoreAspectRatio);
             //view->fitInView(horizontalPlotLine, Qt::IgnoreAspectRatio);
             //view->fitInView(verticalPlotLine, Qt::IgnoreAspectRatio);
+
+            //qDebug() << itemsBoundingRectWithoutText().width();
+
             view->fitInView(itemsBoundingRectWithoutText(), Qt::IgnoreAspectRatio);
         }
 
