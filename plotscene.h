@@ -9,7 +9,6 @@ class PlotScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit PlotScene(QObject *parent = 0);
-
 signals:
 
 public slots:
@@ -19,15 +18,23 @@ public slots:
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
 
+    QRectF itemsBoundingRectWithoutText();
+
 private:
     Stream *stream;
 
     QPen pen[3];
     QPen plotLinePen;
+    QPen plotLinePenDashed;
     QPainterPath path[3];
     QGraphicsPathItem *plot[3];
     QGraphicsLineItem *horizontalPlotLine;
     QGraphicsLineItem *verticalPlotLine;
+    QGraphicsTextItem *xAxisLabels[NUMBER_OF_CYCLES_TO_ANALYSE + 1];
+    QGraphicsTextItem *yAxisLabelPositive;
+    QGraphicsTextItem *yAxisLabelNegative;
+    QGraphicsLineItem *xAxisTicks[NUMBER_OF_CYCLES_TO_ANALYSE];     // don't need a tick at (0.0, 0.0)
+    QGraphicsLineItem *yAxisTicks[2];
 
     bool drawnOnce;
     void draw();

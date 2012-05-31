@@ -92,7 +92,7 @@ void PlotView::wheelEvent(QWheelEvent* event) {
     QPointF screenCenter = GetCenter(); //CurrentCenterPoint; //(visRect.center());
 
     //Scale the view ie. do the zoom
-    double scaleFactor = 1.15; //How fast we zoom
+    double scaleFactor = 1.25; //How fast we zoom
     if(event->delta() > 0) {
         //Zoom in
         scale(scaleFactor, scaleFactor);
