@@ -2,6 +2,7 @@
 #include <QGraphicsPathItem>
 #include "plotview.h"
 #include "phasorscene.h"
+#include <QGraphicsView>
 
 PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 {
@@ -12,7 +13,7 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 
     plotLinePen = QPen(plotLineColor);
     plotLinePen.setCosmetic(true);
-    plotLinePen.setWidth(2);
+    //plotLinePen.setWidth(2);
     plotLinePen.setCapStyle(Qt::RoundCap);
     plotLinePenDashed = QPen(plotLineColor);
     plotLinePenDashed.setCosmetic(true);
@@ -61,19 +62,26 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
     this->stream = NULL;
 }
 
-QRectF PlotScene::itemsBoundingRectWithoutText() {
+
+
+QRectF PlotScene::itemsBoundingRect() const {
     QList<QGraphicsItem *> items = this->items();
     QGraphicsItem *item;
     QRectF total = QRectF();
 
     foreach (item, items) {
-        if (item->type() != QGraphicsTextItem::Type && item->boundingRect().width() < 1.0) {    //TODO: better way to ignore line widths
+        if (!(item->flags() & QGraphicsItem::ItemIgnoresTransformations)) {
             //qDebug() << item->boundingRect().width();
             total = total.united(item->boundingRect());
         }
     }
 
     return total;
+}
+
+QRectF PlotScene::sceneRect() const
+{
+    return this->itemsBoundingRect();
 }
 
 void PlotScene::streamSelectionChanged(Stream *stream)
@@ -160,9 +168,10 @@ void PlotScene::draw() {
             //view->fitInView(horizontalPlotLine, Qt::IgnoreAspectRatio);
             //view->fitInView(verticalPlotLine, Qt::IgnoreAspectRatio);
 
-            //qDebug() << itemsBoundingRectWithoutText().width();
+            //qDebug() << "total itemsBoundingRectWithoutText():" << itemsBoundingRect().width();
+            //qDebug() << "total itemsBoundingRect():" << itemsBoundingRect().width();
 
-            view->fitInView(itemsBoundingRectWithoutText(), Qt::IgnoreAspectRatio);
+            view->fitInView(itemsBoundingRect(), Qt::IgnoreAspectRatio);
         }
 
         for (int i = 0; i < 3; i++) {

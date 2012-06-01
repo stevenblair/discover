@@ -1,8 +1,7 @@
 
-#include "measure.h"
 #include "measure_parameters.h"
 
-const Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
+const Parameters_measure measure_P_50Hz_80_samples_per_cycle = {
     1.0E-9,
     1.0,
     1.0,
@@ -1183,7 +1182,7 @@ const Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
     1
   };
 
-const Parameters_measure measure_P_50Hz_80_samples_per_cycle = {
+const Parameters_measure measure_P_60Hz_80_samples_per_cycle = {
     1.0E-9,
     1.0,
     1.0,

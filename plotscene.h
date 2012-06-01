@@ -9,6 +9,9 @@ class PlotScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit PlotScene(QObject *parent = 0);
+    QRectF itemsBoundingRect() const;
+    QRectF sceneRect() const;
+
 signals:
 
 public slots:
@@ -18,7 +21,8 @@ public slots:
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
 
-    QRectF itemsBoundingRectWithoutText();
+    //QRectF itemsBoundingRectWithoutText();
+    //QRectF itemsBoundingRect() const;
 
 private:
     Stream *stream;
