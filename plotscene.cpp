@@ -125,10 +125,14 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 
 void PlotScene::draw() {
     if (stream != NULL) {
+        //TODO: use below to get pixel size of viewport; use to scale all heights and widths?
+        //QGraphicsView *view = ((PlotView *) this->views().first());
+        //qDebug() << view->viewport()->size().width() << view->viewport()->size().height();
+
         qreal maxValue = stream->getMaxInstantaneous(this->getPowerSystemQuantity());
         qreal totalTime = 1000.0 * ((qreal) NUMBER_OF_CYCLES_TO_ANALYSE) / stream->getSampleRate()->getNominalFrequency();
-        qreal yAxis = maxValue * 1.2;
-        qreal xAxis = totalTime * 1.1;
+        qreal yAxis = maxValue * (1.0 + Y_AXIS_OVERSHOOT);
+        qreal xAxis = totalTime * (1.0 + X_AXIS_OVERSHOOT);
 
         //qDebug() << getPowerSystemQuantity() << xAxis << yAxis;
         //qDebug() << getPowerSystemQuantity() << stream->getMaxInstantaneous(Stream::Voltage) << stream->getMaxInstantaneous(Stream::Current) << this->sceneRect().height();
@@ -137,7 +141,7 @@ void PlotScene::draw() {
         verticalPlotLine->setPen(plotLinePen);
         horizontalPlotLine->setPen(plotLinePen);*/
 
-        horizontalPlotLine->setLine(xAxis * -0.1, 0.0, xAxis, 0.0);
+        horizontalPlotLine->setLine(xAxis * -X_AXIS_OVERSHOOT, 0.0, xAxis, 0.0);
         verticalPlotLine->setLine(0.0, -yAxis, 0.0, yAxis);
 
         for (int i = 0; i < NUMBER_OF_CYCLES_TO_ANALYSE + 1; i++) {

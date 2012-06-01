@@ -25,7 +25,7 @@
 #define STREAM_TABLE_COLUMNS_FREQ_TITLE                 "Frequency"
 #define STREAM_TABLE_COLUMNS_VOLTAGE_TITLE              "Voltage (RMS, L-L)"
 #define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "Current (RMS, L-L)"
-#define STREAM_TABLE_COLUMNS_POWER_TITLE                "Power"
+#define STREAM_TABLE_COLUMNS_POWER_TITLE                "Power (3-phase)"
 
 
 class StreamTableModel : public QAbstractTableModel

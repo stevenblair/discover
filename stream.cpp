@@ -238,7 +238,7 @@ void Stream::handleAnalysisFinished()
 {
     //qDebug() << "done analysis";
 
-    emit updateModel(true);         //TODO: updates still twitchy, need more granular update?
+    emit updateModel(false);         //TODO: updates still twitchy, need more granular update?
 
     if (timer == NULL) {
         timer = new QTimer(this);

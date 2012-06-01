@@ -4,6 +4,9 @@
 #include <QGraphicsScene>
 #include "stream.h"
 
+#define X_AXIS_OVERSHOOT    0.1
+#define Y_AXIS_OVERSHOOT    0.2
+
 class PlotScene : public QGraphicsScene
 {
     Q_OBJECT
