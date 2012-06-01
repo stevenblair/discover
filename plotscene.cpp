@@ -125,7 +125,7 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 void PlotScene::draw() {
     if (stream != NULL) {
         qreal maxValue = stream->getMaxInstantaneous(this->getPowerSystemQuantity());
-        qreal totalTime = ((qreal) NUMBER_OF_CYCLES_TO_ANALYSE) / stream->getSampleRate()->getNominalFrequency();
+        qreal totalTime = 1000.0 * ((qreal) NUMBER_OF_CYCLES_TO_ANALYSE) / stream->getSampleRate()->getNominalFrequency();
         qreal yAxis = maxValue * 1.2;
         qreal xAxis = totalTime * 1.1;
 
@@ -141,12 +141,13 @@ void PlotScene::draw() {
 
         for (int i = 0; i < NUMBER_OF_CYCLES_TO_ANALYSE + 1; i++) {
             qreal timeValue = (qreal) i * (1.0 / stream->getSampleRate()->getNominalFrequency());
-            xAxisLabels[i]->setPlainText(QString("%1 ms").arg(timeValue * 1000.0));
-            xAxisLabels[i]->setPos(timeValue, 0.0);
+            qreal timeValueMillisconds = 1000.0 * timeValue;
+            xAxisLabels[i]->setPlainText(QString("%1 ms").arg(timeValue * 1000.0, 0, 'g', 3));
+            xAxisLabels[i]->setPos(timeValueMillisconds, 0.0);
             xAxisLabels[i]->show();
 
             if (i > 0) {
-                xAxisTicks[i - 1]->setLine(timeValue, -yAxis, timeValue, yAxis);
+                xAxisTicks[i - 1]->setLine(timeValueMillisconds, -yAxis, timeValueMillisconds, yAxis);
                 xAxisTicks[i - 1]->show();
             }
         }

@@ -166,7 +166,9 @@ void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUn
 
 void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
 {
-    addStreamData(svID, sourceMAC, &dataset, smpCnt);
+    //if (this->blockUpdates == false) {
+        addStreamData(svID, sourceMAC, &dataset, smpCnt);
+    //}
 }
 
 void StreamTableModel::sampleRateDetermined(QString svID)
@@ -220,6 +222,8 @@ void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QIt
 
 void StreamTableModel::networkInterfaceStopped()
 {
+    //this->blockSignals(true);
+
     QMapIterator<QString, Stream*> i (streams);
 
     beginResetModel();

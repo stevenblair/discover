@@ -158,20 +158,22 @@ QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity pow
     qreal Ts = sampleRate.getTimestep();
 
     for (quint32 t = 0; t < iterations; t++) {
+        qreal tMilliseconds = (qreal) t * Ts * 1000.0;
+
         if (powerSystemQuantity == Stream::Current) {
             if (t == 0) {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
             }
             else {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 *samples[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
             }
         }
         else if (powerSystemQuantity == Stream::Voltage) {
             if (t == 0) {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
             }
             else {
-                path->setElementPositionAt(t, (qreal) t * Ts, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 *samples[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
             }
         }
 
