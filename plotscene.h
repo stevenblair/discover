@@ -20,6 +20,11 @@ public slots:
 
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
+    QString getXUnits() {return xUnits;}
+    QString getYUnits() {return yUnits;}
+
+    QString xUnits;
+    QString yUnits;
 
     //QRectF itemsBoundingRectWithoutText();
     //QRectF itemsBoundingRect() const;

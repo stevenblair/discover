@@ -36,6 +36,7 @@ public:
     QString getCurrent();
     QString getSamplesPerCycle();
     quint32 getNumberOfSamplesCaptured();
+    QString getPower();
     QPainterPath *getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase);
 
     bool isAnalysed();

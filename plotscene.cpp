@@ -7,6 +7,7 @@
 PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 {
     //path = new QPainterPath();
+    xUnits = QString("ms");
 
     QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
     QColor plotLineColor = QColor(180, 180, 180);
@@ -142,7 +143,7 @@ void PlotScene::draw() {
         for (int i = 0; i < NUMBER_OF_CYCLES_TO_ANALYSE + 1; i++) {
             qreal timeValue = (qreal) i * (1.0 / stream->getSampleRate()->getNominalFrequency());
             qreal timeValueMillisconds = 1000.0 * timeValue;
-            xAxisLabels[i]->setPlainText(QString("%1 ms").arg(timeValue * 1000.0, 0, 'g', 3));
+            xAxisLabels[i]->setPlainText(QString("%1 %2").arg(timeValue * 1000.0, 0, 'g', 3).arg(getXUnits()));
             xAxisLabels[i]->setPos(timeValueMillisconds, 0.0);
             xAxisLabels[i]->show();
 
@@ -152,8 +153,10 @@ void PlotScene::draw() {
             }
         }
 
-        yAxisLabelPositive->setPlainText(QString("%1 kA").arg(maxValue / 1000.0, 0, 'g', 3));
-        yAxisLabelNegative->setPlainText(QString("%1 kA").arg(maxValue / -1000.0, 0, 'g', 3));
+        //qDebug() << this->stream->getStreamData()->Voltage[6];
+
+        yAxisLabelPositive->setPlainText(QString("%1 %2").arg(maxValue / 1000.0, 0, 'g', 3).arg(getYUnits()));
+        yAxisLabelNegative->setPlainText(QString("%1 %2").arg(maxValue / -1000.0, 0, 'g', 3).arg(getYUnits()));
         yAxisLabelPositive->setPos(0.0, -maxValue /*- yAxisLabelPositive->boundingRect().height()*/);
         yAxisLabelNegative->setPos(0.0, maxValue);
         yAxisLabelPositive->show();
@@ -201,6 +204,7 @@ void PlotScene::draw() {
 
 VoltagePlotScene::VoltagePlotScene(QObject *parent) : PlotScene(parent)
 {
+    yUnits = QString("kV");
 }
 
 Stream::PowerSystemQuantity VoltagePlotScene::getPowerSystemQuantity()
@@ -215,6 +219,7 @@ Stream::PowerSystemQuantity VoltagePlotScene::getPowerSystemQuantity()
 
 CurrentPlotScene::CurrentPlotScene(QObject *parent) : PlotScene(parent)
 {
+    yUnits = QString("kA");
 }
 
 Stream::PowerSystemQuantity CurrentPlotScene::getPowerSystemQuantity()

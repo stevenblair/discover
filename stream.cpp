@@ -119,6 +119,16 @@ QString Stream::getVoltage()
     }
 }
 
+QString Stream::getPower()
+{
+    if (analysed) {
+        return QString("%1 kVA, p.f. %2").arg(analysisInstance.measure_Y.Power[0] / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(analysisInstance.measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+    }
+    else {
+        return QString("--");
+    }
+}
+
 QString Stream::getCurrent()
 {
     if (analysed) {
