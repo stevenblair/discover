@@ -74,13 +74,10 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
             if (sampleRate.isKnown()) {
                 samplesPerSecond = sampleRate.getSamplesPerSecond();
 
-                StreamTableRow *row = new StreamTableRow(this);
-
-                row->moveToThread(QApplication::instance()->thread());  // move to UI thread
-                emit setStreamTableRow(row);
+                updateStreamTableModel();
 
                 //emit updateModel(true);
-                //emit scheduleAnalysis();
+                emit scheduleAnalysis();
             }
 
             // TODO: detect invalid sample rate values, and count valid packets recv'd?
@@ -93,6 +90,14 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
             capturedSamples++;
         }
     }
+}
+
+void Stream::updateStreamTableModel() {
+    StreamTableRow *row = new StreamTableRow(this);
+
+    row->moveToThread(QApplication::instance()->thread());  // move to UI thread
+
+    emit setStreamTableRow(row);
 }
 
 QString Stream::getSvID()
@@ -230,9 +235,10 @@ SampleRate *Stream::getSampleRate()
 
 void Stream::handleAnalysisFinished()
 {
-    //qDebug() << "done analysis";
+    qDebug() << "done analysis";
 
-    emit updateModel(false);         //TODO: updates still twitchy, need more granular update?
+    //emit updateModel(false);         //TODO: updates still twitchy, need more granular update?
+    updateStreamTableModel();
 
     if (timer == NULL) {
         timer = new QTimer(this);
@@ -246,10 +252,10 @@ void Stream::handleAnalysisFinished()
 }
 
 void Stream::scheduleAnalysis() {
-    //qDebug() << "in timer";
+    //qDebug() << "in scheduleAnalysis";
 
     // TODO: better checking of watcher/future state
-    if (!watcher.isRunning() &&sampleRate.isKnown()) {
+    if (!watcher.isRunning() && sampleRate.isKnown()) {
         future = QtConcurrent::run(this, &Stream::analyse);
         watcher.setFuture(future);
     }
@@ -259,6 +265,7 @@ void Stream::scheduleAnalysis() {
 
 void Stream::timeout()
 {
+    qDebug() << "in timeout";
     bool prevAlive = alive;
 
     if (checkAlive == false) {
@@ -278,9 +285,9 @@ void Stream::timeout()
 
 void Stream::analyse()
 {
-    //qDebug() << "in analysis";
-    //QElapsedTimer timer;
-    //timer.start();
+    qDebug() << "in analysis";
+    QElapsedTimer timer;
+    timer.start();
 
     setAnalysed(false);
 
@@ -290,7 +297,7 @@ void Stream::analyse()
     maxInstantaneousVoltage = 0.0;
     maxInstantaneousCurrent = 0.0;
 
-    //TODO: need to ignore first sample?
+    //TODO: why the need to ignore the first sample?
     for (quint32 t = 1; t < iterations; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
@@ -313,5 +320,5 @@ void Stream::analyse()
 
     setAnalysed(true);
 
-    //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
+    qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

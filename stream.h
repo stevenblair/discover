@@ -65,6 +65,7 @@ public slots:
 
 private:
     void analyse();
+    void updateStreamTableModel();
 
     //TODO: add QPainterPath which is explicitly shared with UI thread?
 
