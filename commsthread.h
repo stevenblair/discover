@@ -32,6 +32,7 @@ public:
     bool initialised;
     void findNetworkInterfaces();
     void proxyPacketReceived();
+    StreamManager *getStreamManager() {return &(this->streamManager);}
 
 protected:
     void run();

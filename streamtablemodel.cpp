@@ -10,7 +10,7 @@ StreamTableModel::StreamTableModel(QObject *parent) : QAbstractTableModel(parent
 int StreamTableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return streams.size();  // TODO: +1 for header row? Should return 0 when parent is valid?
+    return rows.size();  // TODO: +1 for header row? Should return 0 when parent is valid?
 }
 
 int StreamTableModel::columnCount(const QModelIndex &parent) const
@@ -26,34 +26,34 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (index.row() >= streams.size() || index.row() < 0)
+    if (index.row() >= rows.size() || index.row() < 0)
     {
         return QVariant();
     }
 
     if (role == Qt::DisplayRole) {
-        QMapIterator<QString, Stream*> i (streams);
+        QMapIterator<QString, StreamTableRow*> i (rows);
         int row = 0;
         while (i.hasNext()) {
             i.next();
             if (index.row() == row) {
                 switch (index.column()) {
                 case STREAM_TABLE_COLUMNS_STATUS:
-                    return ((Stream*) i.value())->isAlive();
+                    return ((StreamTableRow*) i.value())->isAlive();
                 case STREAM_TABLE_COLUMNS_SVID:
-                    return ((Stream*) i.value())->getSvID();
+                    return ((StreamTableRow*) i.value())->getSvID();
                 case STREAM_TABLE_COLUMNS_SOURCE_MAC:
-                    return ((Stream*) i.value())->getSourceMAC();
+                    return ((StreamTableRow*) i.value())->getSourceMAC();
                 case STREAM_TABLE_COLUMNS_FREQ:
-                    return ((Stream*) i.value())->getFreq();
+                    return ((StreamTableRow*) i.value())->getFreq();
                 case STREAM_TABLE_COLUMNS_VOLTAGE:
-                    return ((Stream*) i.value())->getVoltage();
+                    return ((StreamTableRow*) i.value())->getVoltage();
                 case STREAM_TABLE_COLUMNS_CURRENT:
-                    return ((Stream*) i.value())->getCurrent();
+                    return ((StreamTableRow*) i.value())->getCurrent();
                 case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
-                    return ((Stream*) i.value())->getSamplesPerCycle();
+                    return ((StreamTableRow*) i.value())->getSamplesPerCycle();
                 case STREAM_TABLE_COLUMNS_POWER:
-                    return ((Stream*) i.value())->getPower();
+                    return ((StreamTableRow*) i.value())->getPower();
                 default:
                     return QVariant();
                 }
@@ -62,20 +62,20 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
         }
     }
     else if (role == Qt::ToolTipRole) {
-        QMapIterator<QString, Stream*> i (streams);
+        QMapIterator<QString, StreamTableRow*> i (rows);
         int row = 0;
         while (i.hasNext()) {
             i.next();
             if (index.row() == row) {
                 switch (index.column()) {
                 case STREAM_TABLE_COLUMNS_STATUS:
-                    return ((Stream*) i.value())->isAlive() ? QString(tr("Stream is being transmitted")) : QString(tr("Stream has stopped being transmitted"));
+                    return ((StreamTableRow*) i.value())->isAlive() ? QString(tr("Stream is being transmitted")) : QString(tr("Stream has stopped being transmitted"));
                 case STREAM_TABLE_COLUMNS_VOLTAGE:
-                    return ((Stream*) i.value())->getVoltage();
+                    return ((StreamTableRow*) i.value())->getVoltage();
                 case STREAM_TABLE_COLUMNS_CURRENT:
-                    return ((Stream*) i.value())->getCurrent();
+                    return ((StreamTableRow*) i.value())->getCurrent();
                 case STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE:
-                    return QVariant(((Stream*) i.value())->getSamplesPerCycle() + " samples per cycle");
+                    return QVariant(((StreamTableRow*) i.value())->getSamplesPerCycle() + " samples per cycle");
                 default:
                     return QVariant();
                 }
@@ -245,4 +245,30 @@ void StreamTableModel::networkInterfaceStopped()
     endResetModel();
 
     emit streamTableEmpty();
+}
+
+void StreamTableModel::setStreamTableRow(StreamTableRow *row)
+{
+
+    // find stream; create new if doesn't exist
+    if (rows.contains(row->getSvID())) {
+        qDebug() << "updating existing row";
+
+        StreamTableRow *existingRow = rows.value(row->getSvID());
+        StreamTableRow *existingRowCopy = existingRow;
+        existingRow = row;
+
+        existingRowCopy->deleteLater();
+    }
+    else {
+        qDebug() << "adding new row";
+
+        beginInsertRows(QModelIndex(), rows.size(), rows.size());
+        rows.insert(row->getSvID(), row);
+        //QObject::connect(stream, SIGNAL(sampleRateDetermined(QString)), this, SLOT(sampleRateDetermined(QString)));
+        //QObject::connect(stream, SIGNAL(updateModel(bool)), this, SLOT(updateAll(bool)));
+        endInsertRows();
+
+        emit resizeColumnsToContents();
+    }
 }

@@ -52,8 +52,10 @@ public slots:
     void updateAll(bool resizeColumns);
     void getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev);
     void networkInterfaceStopped();
+    void setStreamTableRow(StreamTableRow *row);
 
 private:
+    QMap<QString, StreamTableRow*> rows;
     QMap<QString, Stream*> streams;
     bool blockUpdates;
     

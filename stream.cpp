@@ -77,7 +77,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
                 StreamTableRow *row = new StreamTableRow(this);
 
                 row->moveToThread(QApplication::instance()->thread());  // move to UI thread
-                //emit functionToNotifyStreamTableModelWithPtrTo(row);
+                emit setStreamTableRow(row);
 
                 //emit updateModel(true);
                 //emit scheduleAnalysis();
@@ -147,18 +147,6 @@ QString Stream::getCurrent()
 
 QString Stream::getSamplesPerCycle()
 {
-    /*if (this->sampleRate == Rate80samples50Hz || this->sampleRate == Rate80samples60Hz) {
-        return QString("80");
-    }
-    else if (this->sampleRate == Rate256samples50Hz || this->sampleRate == Rate256samples60Hz) {
-        return QString("256");
-    }
-    else if (this->sampleRate == RateInvalid) {
-        return QString("invalid");
-    }
-    else {
-        return QString("--");
-    }*/
     if (sampleRate.isKnown()) {
         return QString("%1").arg(sampleRate.getSamplesPerCycle());
     }

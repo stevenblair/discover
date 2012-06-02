@@ -1,5 +1,8 @@
 #ifndef STREAM_H
 #define STREAM_H
+
+class StreamTableRow;
+
 #include <QtCore>
 #include <QObject>
 #include <QFutureWatcher>
@@ -53,6 +56,7 @@ signals:
     void updateModel(bool resizeColumns);
     void updateView();
     void removeView();
+    void setStreamTableRow(StreamTableRow *row);
 
 public slots:
     void handleAnalysisFinished();
