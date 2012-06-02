@@ -48,7 +48,9 @@ SOURCES += main.cpp\
     measure/measure_parameters.cpp \
     measure/measure.cpp \
     samplerate.cpp \
-    plotscene.cpp
+    plotscene.cpp \
+    streammanager.cpp \
+    streamtablerow.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -87,7 +89,9 @@ HEADERS  += mainwindow.h \
     measure/measure.h \
     measure/measure_types.h \
     samplerate.h \
-    plotscene.h
+    plotscene.h \
+    streammanager.h \
+    streamtablerow.h
 
 contains(QT_CONFIG, opengl):QT += opengl
 

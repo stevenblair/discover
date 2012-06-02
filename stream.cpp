@@ -1,5 +1,6 @@
 #include "stream.h"
 #include <QDebug>
+#include <QApplication>
 
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
@@ -73,8 +74,13 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
             if (sampleRate.isKnown()) {
                 samplesPerSecond = sampleRate.getSamplesPerSecond();
 
-                emit updateModel(true);
-                emit scheduleAnalysis();
+                StreamTableRow *row = new StreamTableRow(this);
+
+                row->moveToThread(QApplication::instance()->thread());  // move to UI thread
+                //emit functionToNotifyStreamTableModelWithPtrTo(row);
+
+                //emit updateModel(true);
+                //emit scheduleAnalysis();
             }
 
             // TODO: detect invalid sample rate values, and count valid packets recv'd?

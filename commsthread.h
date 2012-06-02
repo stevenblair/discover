@@ -8,10 +8,10 @@
 #define HAVE_REMOTE
 #include <pcap.h>
 #include <windows.h>
-
 extern "C" {
 #include "rapid61850/iec61850.h"
 }
+#include "streammanager.h"
 
 #define BUFFER_LENGTH               1024
 
@@ -52,6 +52,7 @@ private:
     bool scheduledNewInterface;
     int interfaceNumber;
     bool modelReady;
+    StreamManager streamManager;
 
     QString macFromChar(unsigned char* mac);
 };

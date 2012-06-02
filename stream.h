@@ -7,10 +7,13 @@
 #include <QPainter>
 #include "sample.h"
 #include "samplerate.h"
+extern "C" {
 #include "rapid61850/iec61850.h"
+}
 #include "measure/measure.h"
 #include "measure/rtwtypes.h"
 #include "measure/measure_parameters.h"
+#include "streamtablerow.h"
 
 
 #define RECALCULATE_ANALYSIS_TIME   3000    // milliseconds
@@ -58,6 +61,8 @@ public slots:
 
 private:
     void analyse();
+
+    //TODO: add QPainterPath which is explicitly shared with UI thread?
 
     QString svID;
     QString sourceMAC;
