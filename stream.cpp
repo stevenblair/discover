@@ -296,7 +296,8 @@ void Stream::analyse()
     maxInstantaneousVoltage = 0.0;
     maxInstantaneousCurrent = 0.0;
 
-    for (quint32 t = 0; t < iterations; t++) {
+    //TODO: need to ignore first sample?
+    for (quint32 t = 1; t < iterations; t++) {
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_3.Vol.sVC.scaleFactor;
