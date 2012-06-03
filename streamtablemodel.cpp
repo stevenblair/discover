@@ -255,11 +255,12 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
     if (rows.contains(row->getSvID())) {
         qDebug() << "updating existing row";
 
-        StreamTableRow *existingRow = rows.value(row->getSvID());
-        StreamTableRow *existingRowCopy = existingRow;
-        existingRow = row;
+//        StreamTableRow *existingRow = rows.value(row->getSvID());
+//        StreamTableRow *existingRowCopy = existingRow;
+//        existingRow = row;
+        rows.insert(row->getSvID(), row);
 
-        existingRowCopy->deleteLater();
+        //existingRowCopy->deleteLater();
 
         QModelIndex top = createIndex(0, 0, 0);
         QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);

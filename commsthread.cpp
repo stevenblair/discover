@@ -138,8 +138,9 @@ void CommsThread::run()
         //msleep(1);
 
         if (fp != NULL && scheduledNewInterface == false) {
-            pcap_loop(fp, 1, packet_handler, NULL);
+            pcap_dispatch(fp, 32, packet_handler, NULL);
         }
+        QCoreApplication::processEvents();
 
         if (scheduledNewInterface == true && modelReady == true) {
             scheduledNewInterface = false;
