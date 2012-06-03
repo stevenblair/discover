@@ -246,7 +246,7 @@ void Stream::handleAnalysisFinished()
         timer->start(RECALCULATE_ANALYSIS_TIME);
     }
 
-    emit updateView();  // TODO: Safe to put this here? Could be race condition?
+    //emit updateView();  // TODO: Safe to put this here? Could be race condition?
 
     //QTimer::singleShot(RECALCULATE_ANALYSIS_TIME, this, SLOT(scheduleAnalysis()));
 }
@@ -256,7 +256,7 @@ void Stream::scheduleAnalysis() {
 
     // TODO: better checking of watcher/future state
     if (!watcher.isRunning() && sampleRate.isKnown()) {
-        future = QtConcurrent::run(this, &Stream::analyse);
+        future = QtConcurrent::run(this, &Stream::analyse);     // TODO: can only use this (and timers) if using exec(); explicitly create other thread?
         watcher.setFuture(future);
     }
 
@@ -285,9 +285,9 @@ void Stream::timeout()
 
 void Stream::analyse()
 {
-    qDebug() << "in analysis";
-    QElapsedTimer timer;
-    timer.start();
+    //qDebug() << "in analysis";
+    //QElapsedTimer timer;
+    //timer.start();
 
     setAnalysed(false);
 
@@ -320,5 +320,5 @@ void Stream::analyse()
 
     setAnalysed(true);
 
-    qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
+    //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

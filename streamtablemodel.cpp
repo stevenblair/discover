@@ -214,12 +214,13 @@ void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QIt
     QModelIndex index = createIndex(selected.first().top(), STREAM_TABLE_COLUMNS_SVID, 0);
 
     if (!selected.isEmpty()) {
-        QMapIterator<QString, Stream*> i (streams);
+        QMapIterator<QString, StreamTableRow*> i (rows);
         int row = 0;
         while (i.hasNext()) {
             i.next();
             if (index.row() == row) {
-                emit streamSelected((Stream*) i.value());
+                // TODO: emit something here
+                //emit streamSelected((StreamTableRow*) i.value());
                 return;
             }
             row++;
@@ -259,6 +260,11 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
         existingRow = row;
 
         existingRowCopy->deleteLater();
+
+        QModelIndex top = createIndex(0, 0, 0);
+        QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+
+        emit dataChanged(top, bottom);
     }
     else {
         qDebug() << "adding new row";
