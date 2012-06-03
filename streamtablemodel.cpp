@@ -235,13 +235,13 @@ void StreamTableModel::networkInterfaceStopped()
 {
     //this->blockSignals(true);
 
-    QMapIterator<QString, Stream*> i (streams);
+    QMapIterator<QString, StreamTableRow*> i (rows);
 
     beginResetModel();
     while (i.hasNext()) {
         i.next();
-        streams.remove(((Stream*) i.value())->getSvID());
-        ((Stream*) i.value())->deleteLater();
+        rows.remove(((StreamTableRow*) i.value())->getSvID());
+        //((StreamTableRow*) i.value())->deleteLater();
     }
     endResetModel();
 

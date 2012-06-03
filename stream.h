@@ -37,12 +37,12 @@ public:
 
     QString getSvID();
     QString getSourceMAC();
-    QString getFreq();
-    QString getVoltage();
-    QString getCurrent();
-    QString getSamplesPerCycle();
+//    QString getFreq();
+//    QString getVoltage();
+//    QString getCurrent();
+//    QString getSamplesPerCycle();
+//    QString getPower();
     quint32 getNumberOfSamplesCaptured();
-    QString getPower();
     QPainterPath *getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase);
 
     bool isAnalysed();
@@ -57,6 +57,8 @@ signals:
     void updateView();
     void removeView();
     void setStreamTableRow(StreamTableRow *row);
+    void stopTimer();
+    void stopWatcher();
 
 public slots:
     void handleAnalysisFinished();

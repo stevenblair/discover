@@ -12,9 +12,9 @@ class StreamManager : public QObject
 public:
     explicit StreamManager(QObject *parent = 0);
     void addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt);
+    void removeAll();
 
     void setTableModelPtr(StreamTableModel *model) {this->model = model;}
-    
 signals:
     
 public slots:

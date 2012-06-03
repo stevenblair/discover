@@ -25,3 +25,17 @@ void StreamManager::addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_P
 
     stream->addSample(dataset, smpCnt);
 }
+
+void StreamManager::removeAll() {
+    QMapIterator<QString, Stream*> i (streams);
+
+    while (i.hasNext()) {
+        i.next();
+
+        Stream *stream = ((Stream*) i.value());
+
+        streams.remove(stream->getSvID());
+        //((Stream*) i.value())->deleteLater();
+        delete stream;
+    }
+}

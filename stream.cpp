@@ -10,21 +10,34 @@ Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(paren
     this->analysed = false;
     this->svID = svID;
     this->sourceMAC = sourceMAC;
-    //this->sampleRate = RateUnknown;
     this->sampleRate = SampleRate();
 
     connect(&watcher, SIGNAL(finished()), this, SLOT(handleAnalysisFinished()));
+    connect(this, SIGNAL(stopWatcher()), &watcher, SLOT(cancel()));
 }
 
 Stream::~Stream()
 {
-    emit removeView();
+    qDebug() << "destroying Stream";
 
-    future.cancel();
-    watcher.cancel();
+    //emit removeView();
+
+    //future.cancel();
+    //watcher.cancel();
+
+    //future.cancel();
+    if (future.isRunning()) {
+        future.cancel();
+    }
+
+    if (watcher.isRunning()) {
+        emit stopWatcher();
+    }
 
     if (timer != NULL && timer->isActive()) {
-        timer->stop();
+        //timer->stop();
+        //timer->disconnect();
+        emit stopTimer();
     }
 }
 
@@ -77,7 +90,8 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
                 updateStreamTableModel();
 
                 //emit updateModel(true);
-                emit scheduleAnalysis();
+
+                //emit scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.
             }
 
             // TODO: detect invalid sample rate values, and count valid packets recv'd?
@@ -110,55 +124,55 @@ QString Stream::getSourceMAC()
     return this->sourceMAC;
 }
 
-QString Stream::getFreq()
-{
-    if (analysed) {
-        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-    }
-    else {
-        return QString("--");
-    }
-}
+//QString Stream::getFreq()
+//{
+//    if (analysed) {
+//        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+//    }
+//    else {
+//        return QString("--");
+//    }
+//}
 
-QString Stream::getVoltage()
-{
-    if (analysed) {
-        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-    }
-    else {
-        return QString("--");
-    }
-}
+//QString Stream::getVoltage()
+//{
+//    if (analysed) {
+//        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+//    }
+//    else {
+//        return QString("--");
+//    }
+//}
 
-QString Stream::getPower()
-{
-    if (analysed) {
-        return QString("%1 kVA, p.f. %2").arg(analysisInstance.measure_Y.Power[0] / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(analysisInstance.measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
-    }
-    else {
-        return QString("--");
-    }
-}
+//QString Stream::getPower()
+//{
+//    if (analysed) {
+//        return QString("%1 kVA, p.f. %2").arg(analysisInstance.measure_Y.Power[0] / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(analysisInstance.measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+//    }
+//    else {
+//        return QString("--");
+//    }
+//}
 
-QString Stream::getCurrent()
-{
-    if (analysed) {
-        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-    }
-    else {
-        return QString("--");
-    }
-}
+//QString Stream::getCurrent()
+//{
+//    if (analysed) {
+//        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+//    }
+//    else {
+//        return QString("--");
+//    }
+//}
 
-QString Stream::getSamplesPerCycle()
-{
-    if (sampleRate.isKnown()) {
-        return QString("%1").arg(sampleRate.getSamplesPerCycle());
-    }
-    else {
-        return QString("--");
-    }
-}
+//QString Stream::getSamplesPerCycle()
+//{
+//    if (sampleRate.isKnown()) {
+//        return QString("%1").arg(sampleRate.getSamplesPerCycle());
+//    }
+//    else {
+//        return QString("--");
+//    }
+//}
 
 // TODO: put this processing in analysis thread?
 QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase)
@@ -235,7 +249,7 @@ SampleRate *Stream::getSampleRate()
 
 void Stream::handleAnalysisFinished()
 {
-    qDebug() << "done analysis";
+    //qDebug() << "done analysis";
 
     //emit updateModel(false);         //TODO: updates still twitchy, need more granular update?
     updateStreamTableModel();
@@ -243,6 +257,7 @@ void Stream::handleAnalysisFinished()
     if (timer == NULL) {
         timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+        connect(this, SIGNAL(stopTimer()), timer, SLOT(stop()));
         timer->start(RECALCULATE_ANALYSIS_TIME);
     }
 
@@ -265,7 +280,7 @@ void Stream::scheduleAnalysis() {
 
 void Stream::timeout()
 {
-    qDebug() << "in timeout";
+    //qDebug() << "in timeout";
     bool prevAlive = alive;
 
     if (checkAlive == false) {
@@ -277,7 +292,8 @@ void Stream::timeout()
     }
 
     if (alive != prevAlive) {
-        emit updateModel(false);    // TODO: only update appropriate cell?
+        //emit updateModel(false);    // TODO: only update appropriate cell?
+        updateStreamTableModel();
     }
 
     checkAlive = false;
