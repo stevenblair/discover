@@ -52,6 +52,8 @@ public:
     qreal getMaxInstantaneous(PowerSystemQuantity powerSystemQuantity);
     SampleRate *getSampleRate();
 
+    void disable() {disabled = true;}
+
 signals:
     void updateModel(bool resizeColumns);
     void updateView();
@@ -70,6 +72,8 @@ private:
     void updateStreamTableModel();
 
     //TODO: add QPainterPath which is explicitly shared with UI thread?
+
+    bool disabled;
 
     QString svID;
     QString sourceMAC;

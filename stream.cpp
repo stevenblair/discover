@@ -87,11 +87,12 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
             if (sampleRate.isKnown()) {
                 samplesPerSecond = sampleRate.getSamplesPerSecond();
 
-                updateStreamTableModel();
+                if (disabled == false) {
+                    updateStreamTableModel();
 
-                //emit updateModel(true);
-
-                //emit scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.
+                    //emit updateModel(true);
+                    emit scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.
+                }
             }
 
             // TODO: detect invalid sample rate values, and count valid packets recv'd?
@@ -252,13 +253,16 @@ void Stream::handleAnalysisFinished()
     //qDebug() << "done analysis";
 
     //emit updateModel(false);         //TODO: updates still twitchy, need more granular update?
-    updateStreamTableModel();
 
-    if (timer == NULL) {
-        timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
-        connect(this, SIGNAL(stopTimer()), timer, SLOT(stop()));
-        timer->start(RECALCULATE_ANALYSIS_TIME);
+    if (disabled == false) {
+        updateStreamTableModel();
+
+        if (timer == NULL) {
+            timer = new QTimer(this);
+            connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+            connect(this, SIGNAL(stopTimer()), timer, SLOT(stop()));
+            timer->start(RECALCULATE_ANALYSIS_TIME);
+        }
     }
 
     //emit updateView();  // TODO: Safe to put this here? Could be race condition?
@@ -281,22 +285,28 @@ void Stream::scheduleAnalysis() {
 void Stream::timeout()
 {
     //qDebug() << "in timeout";
-    bool prevAlive = alive;
+    if (disabled == false) {
+        bool prevAlive = alive;
 
-    if (checkAlive == false) {
-        alive = false;
+        if (checkAlive == false) {
+            alive = false;
+        }
+        else {
+            alive = true;
+            scheduleAnalysis();
+        }
+
+        if (alive != prevAlive) {
+            //emit updateModel(false);    // TODO: only update appropriate cell?
+            updateStreamTableModel();
+        }
+
+        checkAlive = false;
     }
     else {
-        alive = true;
-        scheduleAnalysis();
+        emit stopTimer();
+        emit deleteLater();
     }
-
-    if (alive != prevAlive) {
-        //emit updateModel(false);    // TODO: only update appropriate cell?
-        updateStreamTableModel();
-    }
-
-    checkAlive = false;
 }
 
 void Stream::analyse()

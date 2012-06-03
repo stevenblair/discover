@@ -31,7 +31,7 @@ void CommsThread::proxyPacketReceived() {
 }
 
 void CommsThread::setNetworkInterface(int value) {
-    if (value != interfaceNumber) {
+    if (value != interfaceNumber && scheduledNewInterface == false) {
         qDebug() << "got signal from UI";
         scheduledNewInterface = true;
         interfaceNumber = value;
@@ -129,7 +129,7 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
 
     pcap_freealldevs(alldevs);
 
-    pcap_setnonblock(fpl, 1, errbuf);
+    //pcap_setnonblock(fpl, 1, errbuf);
 
     return fpl;
 }

@@ -15,6 +15,7 @@ public:
     void removeAll();
 
     void setTableModelPtr(StreamTableModel *model) {this->model = model;}
+
 signals:
     
 public slots:

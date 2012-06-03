@@ -35,7 +35,8 @@ void StreamManager::removeAll() {
         Stream *stream = ((Stream*) i.value());
 
         streams.remove(stream->getSvID());
+        stream->disable();
         //((Stream*) i.value())->deleteLater();
-        delete stream;
+        //delete stream;
     }
 }
