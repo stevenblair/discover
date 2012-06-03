@@ -3,9 +3,8 @@
 #include "phasorview.h"
 #include <QDebug>
 
-PhasorScene::PhasorScene(StreamTableModel *tableModel, QObject *parent) : QGraphicsScene(parent)
+PhasorScene::PhasorScene(QObject *parent) : QGraphicsScene(parent)
 {
-    this->tableModel = tableModel;  //TODO: remove?
     setSceneRect(PHASOR_VIEW_WIDTH / -2.0, PHASOR_VIEW_WIDTH / -2.0, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
 
     QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
@@ -212,7 +211,7 @@ QString PhasorScene::phaseNumberToText(int phase) {
 
 
 
-CurrentPhasorScene::CurrentPhasorScene(StreamTableModel *tableModel, QObject *parent) : PhasorScene(tableModel, parent)
+CurrentPhasorScene::CurrentPhasorScene(QObject *parent) : PhasorScene(parent)
 {
 }
 
@@ -254,7 +253,7 @@ QString CurrentPhasorScene::getToolTipText(int phase)
 
 
 
-VoltagePhasorScene::VoltagePhasorScene(StreamTableModel *tableModel, QObject *parent) : PhasorScene(tableModel, parent)
+VoltagePhasorScene::VoltagePhasorScene(QObject *parent) : PhasorScene(parent)
 {
 }
 

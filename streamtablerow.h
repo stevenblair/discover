@@ -14,7 +14,6 @@ class StreamTableRow : public QObject
 {
     Q_OBJECT
 public:
-    explicit StreamTableRow(QObject *parent = 0);
     explicit StreamTableRow(Stream *stream, QObject *parent = 0);
 
     bool isAlive() {return this->status;}
@@ -75,6 +74,7 @@ signals:
 public slots:
 
 private:
+    //Stream *stream;
     bool status;
     QString svID;
     QString sourceMAC;

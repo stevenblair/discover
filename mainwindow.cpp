@@ -4,12 +4,15 @@
 #include <QDebug>
 #include <QDesktopWidget>
 
+#include <QDoubleSpinBox>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
     QVBoxLayout *streamsLayout = new QVBoxLayout;
-    QGridLayout *graphLayout = new QGridLayout;
+    tabWidget = new QTabWidget;
+    phasorPlotWidget = new PhasorPlotWidget;
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -32,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
     mainLayout->addLayout(streamsLayout);
-    mainLayout->addLayout(graphLayout, 0);
+    mainLayout->addWidget(tabWidget, 0);/*
 
     currentPhasorScene = new CurrentPhasorScene(tableModel);
     voltagePhasorScene = new VoltagePhasorScene(tableModel);
@@ -50,20 +53,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     currentPlotView->setScene(currentPlotScene);
     voltagePlotView->setScene(voltagePlotScene);
     connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPlotScene, SLOT(streamSelectionChanged(Stream*)));
-    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePlotScene, SLOT(streamSelectionChanged(Stream*)));
+    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePlotScene, SLOT(streamSelectionChanged(Stream*)));*/
 
-    /*currentPhasorView->centerOn(0.0, 0.0);
-    voltagePhasorView->centerOn(0.0, 0.0);
-    currentPhasorView->fitInView(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE);
-    voltagePhasorView->fitInView(-PHASOR_VIEW_MAX_SIZE, -PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE, PHASOR_VIEW_MAX_SIZE);*/
-    currentPhasorView->setScene(currentPhasorScene);
-    voltagePhasorView->setScene(voltagePhasorScene);
-    graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignCenter);
-    graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignCenter);
-    graphLayout->addWidget(voltagePlotView, 0, 1, Qt::AlignLeft);
-    graphLayout->addWidget(currentPlotView, 1, 1, Qt::AlignLeft);
-    graphLayout->setColumnStretch(0, 0);
-    graphLayout->setColumnStretch(1, 1);
+    tabWidget->addTab(phasorPlotWidget, tr("Phasors and waveforms"));
+    tabWidget->addTab(new QDoubleSpinBox(), tr("Power quality"));
 
     QWidget *centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);

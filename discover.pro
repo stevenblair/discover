@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     samplerate.cpp \
     plotscene.cpp \
     streammanager.cpp \
-    streamtablerow.cpp
+    streamtablerow.cpp \
+    phasorplotwidget.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -91,7 +92,8 @@ HEADERS  += mainwindow.h \
     samplerate.h \
     plotscene.h \
     streammanager.h \
-    streamtablerow.h
+    streamtablerow.h \
+    phasorplotwidget.h
 
 contains(QT_CONFIG, opengl):QT += opengl
 

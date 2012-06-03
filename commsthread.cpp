@@ -32,19 +32,20 @@ void CommsThread::proxyPacketReceived() {
 
 void CommsThread::setNetworkInterface(int value) {
     if (value != interfaceNumber && scheduledNewInterface == false) {
-        qDebug() << "got signal from UI";
+        //qDebug() << "got signal from UI";
         scheduledNewInterface = true;
         interfaceNumber = value;
+
         if (fp != NULL) {
             pcap_breakloop(fp);
             pcap_close(fp);
         }
 
         streamManager.removeAll();
+        //emit networkInterfaceStopped();
 
-        emit networkInterfaceStopped();
-
-        //QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
+        // TODO: still not correct: "left over" data in table
+        QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
     }
 }
 
@@ -147,9 +148,6 @@ void CommsThread::run()
     forever {
         if (fp != NULL && scheduledNewInterface == false) {
             pcap_dispatch(fp, 32, packet_handler, NULL);
-        }
-        else {
-            //qDebug() << "blocking pcap_dispatch()";
         }
 
         QCoreApplication::processEvents();

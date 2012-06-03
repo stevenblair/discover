@@ -15,7 +15,7 @@ extern "C" {
 
 #define BUFFER_LENGTH               1024
 
-#define NETWORK_INTERFACE_OFF_DELAY 50  // milliseconds
+#define NETWORK_INTERFACE_OFF_DELAY 1000  // milliseconds
 
 
 class CommsThread : public QThread
