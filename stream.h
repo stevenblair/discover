@@ -51,6 +51,7 @@ public:
     ExternalOutputs_measure *getStreamData();
     qreal getMaxInstantaneous(PowerSystemQuantity powerSystemQuantity);
     SampleRate *getSampleRate();
+    Sample *getSampleAt(quint32 i);
 
     void disable() {disabled = true;}
 

@@ -253,7 +253,7 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
     // find stream; create new if doesn't exist
     if (rows.contains(row->getSvID())) {
-        qDebug() << "updating existing row";
+        //qDebug() << "updating existing row";
 
 //        StreamTableRow *existingRow = rows.value(row->getSvID());
 //        StreamTableRow *existingRowCopy = existingRow;
@@ -268,7 +268,7 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
         emit dataChanged(top, bottom);
     }
     else {
-        qDebug() << "adding new row";
+        //qDebug() << "adding new row";
 
         beginInsertRows(QModelIndex(), rows.size(), rows.size());
         rows.insert(row->getSvID(), row);

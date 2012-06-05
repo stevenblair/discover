@@ -47,6 +47,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         checkAlive = true;
         //qDebug() << smpCnt  << capturedSamples << samplesPerSecond;
 
+        samples[smpCnt].smpCount = smpCnt;
         samples[smpCnt].voltage[0] = dataset->MUnn_TVTR_1_Vol_instMag.i;
         samples[smpCnt].voltageQuality[0] = dataset->MUnn_TVTR_1_Vol_q;
         samples[smpCnt].voltage[1] = dataset->MUnn_TVTR_2_Vol_instMag.i;
@@ -246,6 +247,15 @@ qreal Stream::getMaxInstantaneous(Stream::PowerSystemQuantity powerSystemQuantit
 SampleRate *Stream::getSampleRate()
 {
     return &sampleRate;
+}
+
+Sample *Stream::getSampleAt(quint32 i)
+{
+    if (i >= 0 && i < MAX_SAMPLES) {
+        return &(samples[i]);
+    }
+
+    return NULL;
 }
 
 void Stream::handleAnalysisFinished()

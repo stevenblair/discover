@@ -9,6 +9,7 @@ class Stream;
 #include "measure/measure.h"
 
 #define SIGNIFICANT_DIGITS_DIPLAYED 3
+//#define MAX_SAMPLES                 (256 * NUMBER_OF_CYCLES_TO_ANALYSE)
 
 class StreamTableRow : public QObject
 {
@@ -83,6 +84,9 @@ private:
 
     bool analysed;
     ExternalOutputs_measure measure_Y;
+    QPainterPath paths[8];
+    //qreal sampledData[8][MAX_SAMPLES];
+    QList<Sample> sampledData;
     
 };
 

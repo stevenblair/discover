@@ -3,12 +3,13 @@
 
 #include <QWidget>
 #include <QVBoxLayout>
+#include "tabviewwidget.h"
 #include "phasorscene.h"
 #include "phasorview.h"
 #include "plotscene.h"
 #include "plotview.h"
 
-class PhasorPlotWidget : public QWidget
+class PhasorPlotWidget : public TabViewWidget
 {
     Q_OBJECT
 public:

@@ -1,6 +1,6 @@
 #include "phasorplotwidget.h"
 
-PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : QWidget(parent)
+PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
 {
     QGridLayout *graphLayout = new QGridLayout;
 

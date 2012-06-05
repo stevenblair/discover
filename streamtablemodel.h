@@ -45,6 +45,7 @@ signals:
     void resizeColumnsToContents();
     void streamSelected(Stream* stream);
     void streamTableEmpty();                // inform comms thread to begin receiving on new network interface
+    void setGraphicsViewRow(StreamTableRow *row);
     
 public slots:
     void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
