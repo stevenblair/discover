@@ -2,16 +2,20 @@
 #define PHASORPLOTVIEW_H
 
 #include <QAbstractItemView>
+#include "tabviewwidget.h"
 
 class PhasorPlotView : public QAbstractItemView
 {
     Q_OBJECT
 public:
-    PhasorPlotView(QWidget *parent = 0);
+    PhasorPlotView(TabViewWidget *widget, QWidget *parent = 0);
 
     QRect visualRect(const QModelIndex &index) const;
     void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);
     QModelIndex indexAt(const QPoint &point) const;
+
+public slots:
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
 protected slots:
     void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight);
@@ -30,6 +34,7 @@ protected:
     bool isIndexHidden(const QModelIndex &index) const;
 
     void setSelection(const QRect&, QItemSelectionModel::SelectionFlags command);
+    //void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 
     void mousePressEvent(QMouseEvent *event);
 
@@ -43,6 +48,7 @@ protected:
     QRegion visualRegionForSelection(const QItemSelection &selection) const;
 
 private:
+    TabViewWidget *widget;
 
 };
 

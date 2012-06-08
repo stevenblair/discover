@@ -1,7 +1,10 @@
 #include "phasorplotview.h"
+#include <QDebug>
 
-PhasorPlotView::PhasorPlotView(QWidget *parent) : QAbstractItemView(parent)
+
+PhasorPlotView::PhasorPlotView(TabViewWidget *widget, QWidget *parent) : QAbstractItemView(parent)
 {
+    this->widget = widget;
 }
 
 QRect PhasorPlotView::visualRect(const QModelIndex &index) const
@@ -21,6 +24,8 @@ QModelIndex PhasorPlotView::indexAt(const QPoint &point) const
 void PhasorPlotView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     QAbstractItemView::dataChanged(topLeft, bottomRight);
+
+
 }
 
 void PhasorPlotView::rowsInserted(const QModelIndex &parent, int start, int end)
@@ -49,6 +54,15 @@ QRegion PhasorPlotView::visualRegionForSelection(const QItemSelection &selection
 
 void PhasorPlotView::setSelection(const QRect &, QItemSelectionModel::SelectionFlags command)
 {
+    //qDebug() << "in setSelection()";
+}
+
+void PhasorPlotView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
+{
+    //qDebug() << "in selectionChanged()";
+
+    //TODO: error checking on size
+    this->widget->setSelectedRowIndex(selected.indexes().first());
 }
 
 void PhasorPlotView::mousePressEvent(QMouseEvent *event)

@@ -3,6 +3,7 @@
 #include <QHeaderView>
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QItemSelectionModel>
 
 #include <QDoubleSpinBox>
 
@@ -30,11 +31,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
     tableView->setMinimumHeight(200);
 
-    phasorPlotView = new PhasorPlotView();
+    phasorPlotView = new PhasorPlotView(phasorPlotWidget);
     phasorPlotView->setModel(tableModel);
+
+    // TODO: is this necessary? where do PersistentSelectionModels fit in?
+    QItemSelectionModel *itemSelectionModel = new QItemSelectionModel(tableModel);
+    phasorPlotView->setSelectionModel(itemSelectionModel);
+    tableView->setSelectionModel(itemSelectionModel);
 
     streamsLayout->addWidget(tableView);
     connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
+    connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotView, SLOT(selectionChanged(QItemSelection &,QItemSelection &)));
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
     mainLayout->addLayout(streamsLayout);

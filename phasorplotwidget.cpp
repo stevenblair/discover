@@ -29,5 +29,10 @@ PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
     graphLayout->setColumnStretch(0, 0);
     graphLayout->setColumnStretch(1, 1);
 
+    this->views.append(currentPhasorView);
+    this->views.append(voltagePhasorView);
+    this->views.append(currentPlotView);
+    this->views.append(voltagePlotView);
+
     setLayout(graphLayout);
 }
