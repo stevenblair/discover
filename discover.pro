@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     streammanager.cpp \
     streamtablerow.cpp \
     phasorplotwidget.cpp \
-    tabviewwidget.cpp
+    tabviewwidget.cpp \
+    phasorplotview.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -95,9 +96,10 @@ HEADERS  += mainwindow.h \
     streammanager.h \
     streamtablerow.h \
     phasorplotwidget.h \
-    tabviewwidget.h
+    tabviewwidget.h \
+    phasorplotview.h
 
-contains(QT_CONFIG, opengl):QT += opengl
+#contains(QT_CONFIG, opengl):QT += opengl
 
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include
