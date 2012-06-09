@@ -4,11 +4,11 @@
 #include <QAbstractItemView>
 #include "tabviewwidget.h"
 
-class PhasorPlotView : public QAbstractItemView
+class ProxyItemView : public QAbstractItemView
 {
     Q_OBJECT
 public:
-    PhasorPlotView(TabViewWidget *widget, QWidget *parent = 0);
+    explicit ProxyItemView(TabViewWidget *widget, QWidget *parent = 0);
 
     QRect visualRect(const QModelIndex &index) const;
     void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);
@@ -25,8 +25,7 @@ protected slots:
 protected:
 
     bool edit(const QModelIndex &index, EditTrigger trigger, QEvent *event);
-    QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction,
-                           Qt::KeyboardModifiers modifiers);
+    QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers);
 
     int horizontalOffset() const;
     int verticalOffset() const;

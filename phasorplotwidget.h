@@ -20,6 +20,9 @@ signals:
 public slots:
 
 private:
+    void update();
+    QList<QGraphicsView*> views;
+
     CurrentPhasorScene *currentPhasorScene;
     VoltagePhasorScene *voltagePhasorScene;
     CurrentPlotScene *currentPlotScene;

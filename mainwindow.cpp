@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
     tableView->setMinimumHeight(200);
 
-    phasorPlotView = new PhasorPlotView(phasorPlotWidget);
+    phasorPlotView = new ProxyItemView(phasorPlotWidget);
     phasorPlotView->setModel(tableModel);
 
     // TODO: is this necessary? where do PersistentSelectionModels fit in?
@@ -41,13 +41,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     streamsLayout->addWidget(tableView);
     connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
-    connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotView, SLOT(selectionChanged(QItemSelection &,QItemSelection &)));
+    connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
-    mainLayout->addLayout(streamsLayout);
-    mainLayout->addWidget(tabWidget, 0);/*
+    mainLayout->addLayout(streamsLayout, 1);
+    mainLayout->addWidget(tabWidget, 0);
 
-    currentPhasorScene = new CurrentPhasorScene(tableModel);
+    /*currentPhasorScene = new CurrentPhasorScene(tableModel);
     voltagePhasorScene = new VoltagePhasorScene(tableModel);
     connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPhasorScene, SLOT(streamSelectionChanged(Stream*)));    // TODO: connect directly between TableView and Phasors?
     connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePhasorScene, SLOT(streamSelectionChanged(Stream*)));

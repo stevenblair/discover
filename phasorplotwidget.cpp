@@ -1,5 +1,15 @@
 #include "phasorplotwidget.h"
 
+void PhasorPlotWidget::update()
+{
+    QListIterator<QGraphicsView*> i (views);
+
+    while (i.hasNext()) {
+        const QGraphicsView *view = i.next();
+        view->scene()->update();        // TODO: may need to override this (or other function or slot) in subclass?
+    }
+}
+
 PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
 {
     QGridLayout *graphLayout = new QGridLayout;

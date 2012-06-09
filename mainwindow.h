@@ -8,7 +8,7 @@
 #include <QComboBox>
 #include <QGraphicsView>
 #include <QTableWidget>
-#include "phasorplotview.h"
+#include "ProxyItemView.h"
 #include "streamtablemodel.h"
 //#include "phasorscene.h"
 //#include "phasorview.h"
@@ -38,7 +38,7 @@ private:
 
     StreamTableModel *tableModel;
     QTableView *tableView;
-    PhasorPlotView *phasorPlotView;
+    ProxyItemView *phasorPlotView;
 
     QTabWidget *tabWidget;
     PhasorPlotWidget *phasorPlotWidget;

@@ -53,7 +53,7 @@ SOURCES += main.cpp\
     streamtablerow.cpp \
     phasorplotwidget.cpp \
     tabviewwidget.cpp \
-    phasorplotview.cpp
+    ProxyItemView.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -97,7 +97,7 @@ HEADERS  += mainwindow.h \
     streamtablerow.h \
     phasorplotwidget.h \
     tabviewwidget.h \
-    phasorplotview.h
+    ProxyItemView.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
