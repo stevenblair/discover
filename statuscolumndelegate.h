@@ -12,7 +12,7 @@ class StatusColumnDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
 public:
-    explicit StatusColumnDelegate(QObject *parent = 0);
+    explicit StatusColumnDelegate(QObject *parent = 0) : QStyledItemDelegate(parent) {}
     
 protected:
 

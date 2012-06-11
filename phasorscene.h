@@ -18,6 +18,7 @@ class PhasorScene : public QGraphicsScene
 public:
     PhasorScene(QObject *parent = 0);
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
+    void streamRemoved();
 
 public slots:
     //void streamSelectionChanged(Stream *stream);

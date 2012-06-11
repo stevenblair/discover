@@ -1,7 +1,15 @@
 #include "tabviewwidget.h"
 
+#include <QPalette>
+
 TabViewWidget::TabViewWidget(QWidget *parent) : QWidget(parent)
 {
+    //this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    QPalette p(this->palette());
+    p.setColor(QPalette::Background, Qt::red);
+    this->setAutoFillBackground(true);
+    this->setPalette(p);
 }
 
 

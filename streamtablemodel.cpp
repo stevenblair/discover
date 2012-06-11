@@ -259,13 +259,17 @@ void StreamTableModel::networkInterfaceStopped()
 
     QMapIterator<QString, StreamTableRow*> i (rows);
 
-    beginResetModel();
-    while (i.hasNext()) {
-        i.next();
-        rows.remove(((StreamTableRow*) i.value())->getSvID());
-        //((StreamTableRow*) i.value())->deleteLater();
+    if (rows.size() > 0) {
+        //beginResetModel();
+        beginRemoveRows(QModelIndex(), 0, rows.size() - 1);
+        while (i.hasNext()) {
+            i.next();
+            rows.remove(((StreamTableRow*) i.value())->getSvID());
+            //((StreamTableRow*) i.value())->deleteLater();
+        }
+        endRemoveRows();
+        //endResetModel();
     }
-    endResetModel();
 
     emit streamTableEmpty();
 }

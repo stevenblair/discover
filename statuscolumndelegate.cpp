@@ -1,6 +1,6 @@
 #include "statuscolumndelegate.h"
 
-StatusColumnDelegate::StatusColumnDelegate(QObject *parent) : QStyledItemDelegate(parent)
-{
+//StatusColumnDelegate::StatusColumnDelegate(QObject *parent) : QStyledItemDelegate(parent)
+//{
 
-}
+//}

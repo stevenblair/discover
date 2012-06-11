@@ -40,7 +40,6 @@ SOURCES += main.cpp\
     commsthread.cpp \
     phasorscene.cpp \
     phasorview.cpp \
-    statuscolumndelegate.cpp \
     plotview.cpp \
     measure/rtGetNaN.cpp \
     measure/rtGetInf.cpp \
@@ -104,3 +103,6 @@ HEADERS  += mainwindow.h \
 # winpcap
 INCLUDEPATH += C:/Users/Steven/discover/Include
 LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
+
+FORMS += \
+    test.ui

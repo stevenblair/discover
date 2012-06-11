@@ -32,15 +32,14 @@ void ProxyItemView::setModel(QAbstractItemModel *model)
 void ProxyItemView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     QAbstractItemView::dataChanged(topLeft, bottomRight);
-    qDebug() << "data changed, rows" << topLeft.row() << "to" << bottomRight.row();
+    //qDebug() << "data changed, rows" << topLeft.row() << "to" << bottomRight.row();
 
     if (this->widget->getIndex()->isValid()) {
         int row = this->widget->getIndex()->row();
 
         if (row >= topLeft.row() && row <= bottomRight.row()) {
-            //this->widget->setSelectedRowIndex((QModelIndex &) topLeft);
             this->widget->update();
-            qDebug() << "data changed for row" << row;
+            //qDebug() << "data changed for row" << row;
         }
     }
 }
@@ -52,6 +51,9 @@ void ProxyItemView::rowsInserted(const QModelIndex &parent, int start, int end)
 
 void ProxyItemView::rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end)
 {
+    qDebug() << "in rowsAboutToBeRemoved()" << start << end;
+
+    this->widget->removeView();
 }
 
 bool ProxyItemView::edit(const QModelIndex &index, QAbstractItemView::EditTrigger trigger, QEvent *event)

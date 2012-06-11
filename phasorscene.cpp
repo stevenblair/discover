@@ -115,17 +115,21 @@ void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTable
 //    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
 //}
 
-//void PhasorScene::streamRemoved()
-//{
-//    //this->stream = NULL;
-//    for (int i = 0; i < 3; i++) {
-//        phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
-//        phaseLine[i]->hide();
-//        phaseLabel[i]->hide();
-//        onePuText->hide();
-//    }
-//    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-//}
+void PhasorScene::streamRemoved()
+{
+    //this->stream = NULL;
+
+    this->streamTableModel = NULL;
+    this->index = NULL;
+
+    for (int i = 0; i < 3; i++) {
+        phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
+        phaseLine[i]->hide();
+        phaseLabel[i]->hide();
+        onePuText->hide();
+    }
+    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
+}
 
 void PhasorScene::draw() {
     qDebug() << "in draw()";

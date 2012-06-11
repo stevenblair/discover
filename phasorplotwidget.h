@@ -15,6 +15,7 @@ class PhasorPlotWidget : public TabViewWidget
 public:
     explicit PhasorPlotWidget(QWidget *parent = 0);
     void update();
+    void removeView();
     
 signals:
     

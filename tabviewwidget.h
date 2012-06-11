@@ -26,6 +26,7 @@ public:
         return &this->index;
     }
     virtual void update() = 0;
+    virtual void removeView() = 0;
 
 signals:
     

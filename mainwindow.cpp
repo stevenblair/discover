@@ -9,11 +9,20 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    QWidget *centralWidget = new QWidget(this);
+    //centralWidget->setLayout(mainLayout);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
     QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
     QVBoxLayout *streamsLayout = new QVBoxLayout;
-    tabWidget = new QTabWidget;
-    phasorPlotWidget = new PhasorPlotWidget;
+    tabWidget = new QTabWidget(centralWidget);
+
+    //QHBoxLayout *tabLayout = new QHBoxLayout;
+    //tabWidget->setLayout(tabLayout);
+//    QPalette palette = tabWidget->palette();
+//    palette.setColor(QColorGroup::Background, QColor(255, 0, 0));
+//    tabWidget->setPalette(palette);
+    phasorPlotWidget = new PhasorPlotWidget(tabWidget);
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -68,12 +77,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tabWidget->addTab(phasorPlotWidget, tr("Phasors and waveforms"));
     tabWidget->addTab(new QDoubleSpinBox(), tr("Power quality"));
 
-    QWidget *centralWidget = new QWidget(this);
-    centralWidget->setLayout(mainLayout);
-    setCentralWidget(centralWidget);
-
     //currentPhasorView->show();
     tableView->resizeColumnsToContents();
+
+    setCentralWidget(centralWidget);
 
     setWindowTitle(tr("discover"));
     //setMinimumWidth(700);
