@@ -61,6 +61,8 @@ private:
     QMap<QString, StreamTableRow*> rows;
     QMap<QString, Stream*> streams;
     bool blockUpdates;
+
+    int getIndexFromKey(QString key);
     
 };
 

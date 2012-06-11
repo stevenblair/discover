@@ -188,17 +188,22 @@ void StreamTableModel::sampleRateDetermined(QString svID)
     if (streams.contains(svID)) {
         stream = streams.value(svID);
 
-        QModelIndex top = createIndex(0, 0, 0);
-        QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+        // only emit dataChanged() for changed row
+        int rowIndex = getIndexFromKey(svID);
 
-        emit dataChanged(top, bottom);
-        emit resizeColumnsToContents();
+        if (rowIndex >= 0) {
+            QModelIndex top = createIndex(rowIndex, 0, 0);
+            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+
+            emit dataChanged(top, bottom);
+            emit resizeColumnsToContents();
+        }
     }
 }
 
 void StreamTableModel::updateAll(bool resizeColumns) {
     QModelIndex top = createIndex(0, 0, 0);
-    QModelIndex bottom = createIndex(streams.size(), STREAM_TABLE_NUMBER_OF_COLUMNS, 0);
+    QModelIndex bottom = createIndex(streams.size() - 1, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
 
     emit dataChanged(top, bottom);
 
@@ -279,10 +284,15 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
         //existingRowCopy->deleteLater();
 
-        QModelIndex top = createIndex(0, 0, 0);
-        QModelIndex bottom = createIndex(0, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+        // only emit dataChanged() for changed row
+        int rowIndex = getIndexFromKey(row->getSvID());
 
-        emit dataChanged(top, bottom);
+        if (rowIndex >= 0) {
+            QModelIndex top = createIndex(rowIndex, 0, 0);
+            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+
+            emit dataChanged(top, bottom);
+        }
     }
     else {
         //qDebug() << "adding new row";
@@ -295,4 +305,20 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
         emit resizeColumnsToContents();
     }
+}
+
+int StreamTableModel::getIndexFromKey(QString key)
+{
+    QMapIterator<QString, StreamTableRow*> i (rows);
+    int rowNumber = 0;
+
+    while (i.hasNext()) {
+        i.next();
+        if (i.key().compare(key) == 0) {
+            return rowNumber;
+        }
+        rowNumber++;
+    }
+
+    return -1;
 }

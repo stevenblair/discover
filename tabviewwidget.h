@@ -10,7 +10,7 @@
 
 
 /**
-  * A generic tab container QWidget.
+  * A generic tab container widget.
   * Subclasses define the actual components to display in the tab, and must implement the update() function
   * to refresh the view, using the pointer to the StreamTableModel and the QPersistentModelIndex.
   */
@@ -22,6 +22,10 @@ public:
 
     virtual void setSelectedRowIndex(QModelIndex &index);
     void setModel(StreamTableModel *model);
+    QPersistentModelIndex *getIndex() {
+        return &this->index;
+    }
+    virtual void update() = 0;
 
 signals:
     
@@ -29,7 +33,6 @@ public slots:
     //void setRow(StreamTableRow *row);
 
 protected:
-    virtual void update() = 0;
 
     StreamTableModel *model;
     QPersistentModelIndex index;

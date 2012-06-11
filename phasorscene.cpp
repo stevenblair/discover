@@ -63,72 +63,72 @@ void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTable
     draw();
 }
 
-void PhasorScene::streamSelectionChanged(Stream *stream)
-{
-    if (this->stream != NULL) {
-        disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
-        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-    }
+//void PhasorScene::streamSelectionChanged(Stream *stream)
+//{
+//    if (this->stream != NULL) {
+//        disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
+//        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
+//    }
 
-    this->stream = stream;
-
-    if (this->stream != NULL) {
-        connect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
-        connect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-        draw();
-        //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-    }
+//    this->stream = stream;
 
 //    if (this->stream != NULL) {
-//        // TODO: connect to stream for updates; first disconnect any updates from an old stream
+//        connect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
+//        connect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
+//        draw();
+//        //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
+//    }
 
-//        qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
-//        qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
+////    if (this->stream != NULL) {
+////        // TODO: connect to stream for updates; first disconnect any updates from an old stream
 
-//        //TODO: scale mags to maximum View size; always centre on (0,0)
-//        for (int i = 0; i < 3; i++) {
-//            qreal mag = scaleFactor * getPhasorMag(i);
-//            qreal angle = getPhasorAngle(i);
+////        qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
+////        qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
 
-//            //qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag << "coords:" << 0.0 << 0.0 << mag * cos(angle) << -1.0 * mag * sin(angle);
+////        //TODO: scale mags to maximum View size; always centre on (0,0)
+////        for (int i = 0; i < 3; i++) {
+////            qreal mag = scaleFactor * getPhasorMag(i);
+////            qreal angle = getPhasorAngle(i);
 
-//            phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
-//        }
+////            //qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag << "coords:" << 0.0 << 0.0 << mag * cos(angle) << -1.0 * mag * sin(angle);
 
-//        //((QGraphicsView *) this->views().first())->update();
-//        //((QGraphicsView *) this->views().first())->fitInView(this->itemsBoundingRect(), Qt::KeepAspectRatio);
-//        //((QGraphicsView *) this->views().first())->scale(0.5, 0.5);
-//        //((QGraphicsView *) this->views().first())->centerOn(0.0, 0.0);
-//        //((QGraphicsView *) this->views().first())->fitInView(QRect(0, 0, 300, 300));
+////            phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
+////        }
 
-//        /*const QRectF rect = QRectF(-1 * PHASOR_VIEW_MAX_SIZE - 5, -1 * PHASOR_VIEW_MAX_SIZE - 5, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
-//        ((QGraphicsView *) this->views().first())->fitInView(rect, Qt::KeepAspectRatio);
-//        ((QGraphicsView *) this->views().first())->setSceneRect(rect);
+////        //((QGraphicsView *) this->views().first())->update();
+////        //((QGraphicsView *) this->views().first())->fitInView(this->itemsBoundingRect(), Qt::KeepAspectRatio);
+////        //((QGraphicsView *) this->views().first())->scale(0.5, 0.5);
+////        //((QGraphicsView *) this->views().first())->centerOn(0.0, 0.0);
+////        //((QGraphicsView *) this->views().first())->fitInView(QRect(0, 0, 300, 300));
 
-//        invalidate(this->itemsBoundingRect());*/
-    //    }
-}
+////        /*const QRectF rect = QRectF(-1 * PHASOR_VIEW_MAX_SIZE - 5, -1 * PHASOR_VIEW_MAX_SIZE - 5, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
+////        ((QGraphicsView *) this->views().first())->fitInView(rect, Qt::KeepAspectRatio);
+////        ((QGraphicsView *) this->views().first())->setSceneRect(rect);
 
-void PhasorScene::streamChanged()
-{
-    draw();
-    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-}
+////        invalidate(this->itemsBoundingRect());*/
+//    //    }
+//}
 
-void PhasorScene::streamRemoved()
-{
-    this->stream = NULL;
-    for (int i = 0; i < 3; i++) {
-        phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
-        phaseLine[i]->hide();
-        phaseLabel[i]->hide();
-        onePuText->hide();
-    }
-    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-}
+//void PhasorScene::streamChanged()
+//{
+//    draw();
+//    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
+//}
+
+//void PhasorScene::streamRemoved()
+//{
+//    //this->stream = NULL;
+//    for (int i = 0; i < 3; i++) {
+//        phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
+//        phaseLine[i]->hide();
+//        phaseLabel[i]->hide();
+//        onePuText->hide();
+//    }
+//    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
+//}
 
 void PhasorScene::draw() {
-    //qDebug() << "in draw()" << this->index->row() << this->streamTableModel;
+    qDebug() << "in draw()";
 
     // get StreamTableRow* from model and index
     StreamTableRow *stream;

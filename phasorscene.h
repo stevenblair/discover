@@ -20,12 +20,12 @@ public:
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
 
 public slots:
-    void streamSelectionChanged(Stream *stream);
-    void streamChanged();
-    void streamRemoved();
+    //void streamSelectionChanged(Stream *stream);
+    //void streamChanged();
+    //void streamRemoved();
 
 protected:
-    Stream *stream;
+    //Stream *stream;
     StreamTableModel *streamTableModel;
     QPersistentModelIndex *index;
 

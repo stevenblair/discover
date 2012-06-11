@@ -32,8 +32,17 @@ void ProxyItemView::setModel(QAbstractItemModel *model)
 void ProxyItemView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     QAbstractItemView::dataChanged(topLeft, bottomRight);
+    qDebug() << "data changed, rows" << topLeft.row() << "to" << bottomRight.row();
 
+    if (this->widget->getIndex()->isValid()) {
+        int row = this->widget->getIndex()->row();
 
+        if (row >= topLeft.row() && row <= bottomRight.row()) {
+            //this->widget->setSelectedRowIndex((QModelIndex &) topLeft);
+            this->widget->update();
+            qDebug() << "data changed for row" << row;
+        }
+    }
 }
 
 void ProxyItemView::rowsInserted(const QModelIndex &parent, int start, int end)
@@ -69,8 +78,9 @@ void ProxyItemView::selectionChanged(const QItemSelection &selected, const QItem
 {
     //qDebug() << "in selectionChanged()";
 
-    //TODO: error checking on size
-    this->widget->setSelectedRowIndex(selected.indexes().first());
+    if (selected.size() == 1) {
+        this->widget->setSelectedRowIndex(selected.indexes().first());
+    }
 }
 
 void ProxyItemView::mousePressEvent(QMouseEvent *event)

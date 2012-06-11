@@ -14,13 +14,13 @@ class PhasorPlotWidget : public TabViewWidget
     Q_OBJECT
 public:
     explicit PhasorPlotWidget(QWidget *parent = 0);
+    void update();
     
 signals:
     
 public slots:
 
 private:
-    void update();
     QList<QGraphicsView*> views;
 
     CurrentPhasorScene *currentPhasorScene;
