@@ -45,12 +45,22 @@ PhasorScene::PhasorScene(QObject *parent) : QGraphicsScene(parent)
         pen[i].setCapStyle(Qt::RoundCap);
         phaseLine[i] = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
         phaseLine[i]->hide();
-        phaseLabel[i] = QGraphicsScene::addText(getPhaseLabel(i));
+        phaseLabel[i] = QGraphicsScene::addText(getPhaseLabel(NULL, i));
         phaseLabel[i]->setFont(font);
         phaseLabel[i]->setDefaultTextColor(lineColors[i]);
         phaseLabel[i]->hide();
         //connect(phaseLine[i], hoverEnterEvent(QGraphicsSceneEvent *);     // need to sub-class to get this?
     }
+}
+
+void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index)
+{
+    this->streamTableModel = streamTableModel;
+    this->index = index;
+
+    //qDebug() << "in streamTableModelSelectionChanged()" << this->index->row() << this->streamTableModel;
+
+    draw();
 }
 
 void PhasorScene::streamSelectionChanged(Stream *stream)
@@ -118,10 +128,22 @@ void PhasorScene::streamRemoved()
 }
 
 void PhasorScene::draw() {
-    if (this->stream != NULL && stream->isAnalysed()) {
+    //qDebug() << "in draw()" << this->index->row() << this->streamTableModel;
+
+    // get StreamTableRow* from model and index
+    StreamTableRow *stream;
+
+    if (this->streamTableModel != NULL && this->index->isValid()) {
+        stream = this->streamTableModel->getRowFromIndex(this->index);
+    }
+    else {
+        return;
+    }
+
+    if (stream != NULL && stream->isAnalysed()) {
         // TODO: connect to stream for updates; first disconnect any updates from an old stream
 
-        qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
+        qreal maxMag = qMax(getPhasorMag(stream, 0), qMax(getPhasorMag(stream, 1), getPhasorMag(stream, 2)));
         qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
 
         onePuText->setPlainText(QString("%1 %2").arg(maxMag / 1000.0, 0, 'g', 3).arg(getUnits()));
@@ -129,13 +151,13 @@ void PhasorScene::draw() {
 
         //TODO: scale mags to maximum View size; always centre on (0,0)
         for (int i = 0; i < 3; i++) {
-            qreal mag = scaleFactor * getPhasorMag(i);
-            qreal angle = getPhasorAngle(i);
+            qreal mag = scaleFactor * getPhasorMag(stream, i);
+            qreal angle = getPhasorAngle(stream, i);
 
             //qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag << "coords:" << 0.0 << 0.0 << mag * cos(angle) << -1.0 * mag * sin(angle);
 
             phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
-            phaseLine[i]->setToolTip(this->getToolTipText(i));
+            phaseLine[i]->setToolTip(this->getToolTipText(stream, i));
             phaseLine[i]->show();
 
             QPointF labelPoint;
@@ -155,7 +177,7 @@ void PhasorScene::draw() {
                 labelPoint = phaseLine[i]->boundingRect().bottomLeft();
                 labelPoint.setX(labelPoint.x() - phaseLabel[i]->boundingRect().width());
             }
-            phaseLabel[i]->setPlainText(getPhaseLabel(i));
+            phaseLabel[i]->setPlainText(getPhaseLabel(stream, i));
             phaseLabel[i]->setPos(labelPoint);
             phaseLabel[i]->show();
         }
@@ -169,23 +191,24 @@ void PhasorScene::draw() {
     }
 }
 
-QString PhasorScene::getToolTipText(int phase)
+QString PhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
+    Q_UNUSED(stream);
     Q_UNUSED(phase);
     return QString();
 }
 
-qreal PhasorScene::getPhasorMag(int phase)
+qreal PhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     return 0.0;
 }
 
-qreal PhasorScene::getPhasorAngle(int phase)
+qreal PhasorScene::getPhasorAngle(StreamTableRow *stream, int phase)
 {
     return 0.0;
 }
 
-QString PhasorScene::getPhaseLabel(int phase)
+QString PhasorScene::getPhaseLabel(StreamTableRow *stream, int phase)
 {
     return QString();
 }
@@ -195,7 +218,7 @@ QString PhasorScene::getUnits()
     return QString();
 }
 
-QString PhasorScene::phaseNumberToText(int phase) {
+QString PhasorScene::phaseNumberToText(StreamTableRow *stream, int phase) {
     if (phase == 0) {
         return QString("a");
     }
@@ -215,29 +238,29 @@ CurrentPhasorScene::CurrentPhasorScene(QObject *parent) : PhasorScene(parent)
 {
 }
 
-qreal CurrentPhasorScene::getPhasorMag(int phase)
+qreal CurrentPhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getStreamData()->Current[phase];
+        return stream->getData()->Current[phase];
     }
     else {
-        return PhasorScene::getPhasorMag(phase);
+        return PhasorScene::getPhasorMag(stream, phase);
     }
 }
 
-qreal CurrentPhasorScene::getPhasorAngle(int phase)
+qreal CurrentPhasorScene::getPhasorAngle(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getStreamData()->Current[phase + 3];
+        return stream->getData()->Current[phase + 3];
     }
     else {
-        return PhasorScene::getPhasorAngle(phase);
+        return PhasorScene::getPhasorAngle(stream, phase);
     }
 }
 
-QString CurrentPhasorScene::getPhaseLabel(int phase)
+QString CurrentPhasorScene::getPhaseLabel(StreamTableRow *stream, int phase)
 {
-    return QString("I" + phaseNumberToText(phase));
+    return QString("I" + phaseNumberToText(stream, phase));
 }
 
 QString CurrentPhasorScene::getUnits()
@@ -245,9 +268,14 @@ QString CurrentPhasorScene::getUnits()
     return QString("kA");
 }
 
-QString CurrentPhasorScene::getToolTipText(int phase)
+QString CurrentPhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
-    return QString("I%1: %2 %3 %4° %5").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1).arg(getUnits());
+    return QString("I%1: %2 %3 %4° %5")
+            .arg(phaseNumberToText(stream, phase))
+            .arg(getPhasorMag(stream, phase), 0, 'f', 1)
+            .arg(QString::fromUtf8("\u2220"))
+            .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
+            .arg(getUnits());
 }
 
 
@@ -257,29 +285,29 @@ VoltagePhasorScene::VoltagePhasorScene(QObject *parent) : PhasorScene(parent)
 {
 }
 
-qreal VoltagePhasorScene::getPhasorMag(int phase)
+qreal VoltagePhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getStreamData()->Voltage[phase];
+        return stream->getData()->Voltage[phase];
     }
     else {
-        return PhasorScene::getPhasorMag(phase);
+        return PhasorScene::getPhasorMag(stream, phase);
     }
 }
 
-qreal VoltagePhasorScene::getPhasorAngle(int phase)
+qreal VoltagePhasorScene::getPhasorAngle(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getStreamData()->Voltage[phase + 3];
+        return stream->getData()->Voltage[phase + 3];
     }
     else {
-        return PhasorScene::getPhasorAngle(phase);
+        return PhasorScene::getPhasorAngle(stream, phase);
     }
 }
 
-QString VoltagePhasorScene::getPhaseLabel(int phase)
+QString VoltagePhasorScene::getPhaseLabel(StreamTableRow *stream, int phase)
 {
-    return QString("V" + phaseNumberToText(phase));
+    return QString("V" + phaseNumberToText(stream, phase));
 }
 
 QString VoltagePhasorScene::getUnits()
@@ -287,7 +315,12 @@ QString VoltagePhasorScene::getUnits()
     return QString("kV");
 }
 
-QString VoltagePhasorScene::getToolTipText(int phase)
+QString VoltagePhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
-    return QString("V%1: %2 %3 %4° %5").arg(phaseNumberToText(phase)).arg(getPhasorMag(phase), 0, 'f', 1).arg(QString::fromUtf8("\u2220")).arg(getPhasorAngle(phase) * 180.0 / M_PI, 0, 'f', 1).arg(getUnits());
+    return QString("V%1: %2 %3 %4° %5")
+            .arg(phaseNumberToText(stream, phase))
+            .arg(getPhasorMag(stream, phase), 0, 'f', 1)
+            .arg(QString::fromUtf8("\u2220"))
+            .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
+            .arg(getUnits());
 }

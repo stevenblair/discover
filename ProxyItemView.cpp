@@ -22,6 +22,13 @@ QModelIndex ProxyItemView::indexAt(const QPoint &point) const
     return QModelIndex();
 }
 
+void ProxyItemView::setModel(QAbstractItemModel *model)
+{
+    QAbstractItemView::setModel(model);
+
+    this->widget->setModel((StreamTableModel *) model);
+}
+
 void ProxyItemView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     QAbstractItemView::dataChanged(topLeft, bottomRight);

@@ -2,8 +2,10 @@
 
 void PhasorPlotWidget::update()
 {
-    QListIterator<QGraphicsView*> i (views);
+    currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
+    voltagePhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
 
+    QListIterator<QGraphicsView*> i (views);
     while (i.hasNext()) {
         const QGraphicsView *view = i.next();
         view->scene()->update();        // TODO: may need to override this (or other function or slot) in subclass?

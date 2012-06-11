@@ -26,13 +26,13 @@ public:
 signals:
     
 public slots:
-    void setRow(StreamTableRow *row);
+    //void setRow(StreamTableRow *row);
 
 protected:
     virtual void update() = 0;
 
-    QPersistentModelIndex index;
     StreamTableModel *model;
+    QPersistentModelIndex index;
 
 private:
 

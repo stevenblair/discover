@@ -14,6 +14,8 @@ public:
     void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);
     QModelIndex indexAt(const QPoint &point) const;
 
+    virtual void setModel(QAbstractItemModel *model);
+
 public slots:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
 

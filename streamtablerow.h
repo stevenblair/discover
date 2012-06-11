@@ -69,6 +69,14 @@ public:
             return QString("--");
         }
     }
+
+    bool isAnalysed() {
+        return this->analysed;
+    }
+
+    ExternalOutputs_measure *getData() {
+        return &measure_Y;
+    }
     
 signals:
     

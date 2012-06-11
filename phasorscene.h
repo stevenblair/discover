@@ -17,6 +17,7 @@ class PhasorScene : public QGraphicsScene
     Q_OBJECT
 public:
     PhasorScene(QObject *parent = 0);
+    void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
 
 public slots:
     void streamSelectionChanged(Stream *stream);
@@ -25,16 +26,18 @@ public slots:
 
 protected:
     Stream *stream;
+    StreamTableModel *streamTableModel;
+    QPersistentModelIndex *index;
 
-    virtual qreal getPhasorMag(int phase);
-    virtual qreal getPhasorAngle(int phase);
-    virtual QString getPhaseLabel(int phase);
+    virtual qreal getPhasorMag(StreamTableRow *stream, int phase);
+    virtual qreal getPhasorAngle(StreamTableRow *stream, int phase);
+    virtual QString getPhaseLabel(StreamTableRow * stream, int phase);
+    QString phaseNumberToText(StreamTableRow *stream, int phase);
     virtual QString getUnits();
-    QString phaseNumberToText(int phase);
 
 private:
     void draw();
-    virtual QString getToolTipText(int phase);
+    virtual QString getToolTipText(StreamTableRow *stream, int phase);
 
     QPen pen[3];
     QPen plotLinePen;
@@ -67,14 +70,14 @@ public slots:
 
 protected:
 
-    qreal getPhasorMag(int phase);
-    qreal getPhasorAngle(int phase);
-    QString getPhaseLabel(int phase);
+    qreal getPhasorMag(StreamTableRow *stream, int phase);
+    qreal getPhasorAngle(StreamTableRow *stream, int phase);
+    QString getPhaseLabel(StreamTableRow *stream, int phase);
     QString getUnits();
 
 private:
 
-    QString getToolTipText(int phase);
+    QString getToolTipText(StreamTableRow *stream, int phase);
 };
 
 
@@ -92,14 +95,14 @@ public slots:
 
 protected:
 
-    qreal getPhasorMag(int phase);
-    qreal getPhasorAngle(int phase);
-    QString getPhaseLabel(int phase);
+    qreal getPhasorMag(StreamTableRow *stream, int phase);
+    qreal getPhasorAngle(StreamTableRow *stream, int phase);
+    QString getPhaseLabel(StreamTableRow *stream, int phase);
     QString getUnits();
 
 private:
 
-    QString getToolTipText(int phase);
+    QString getToolTipText(StreamTableRow *stream, int phase);
 };
 
 #endif // PHASOR_H

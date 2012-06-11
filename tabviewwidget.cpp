@@ -26,6 +26,6 @@ void TabViewWidget::setModel(StreamTableModel *model)
     this->model = model;
 }
 
-void TabViewWidget::setRow(StreamTableRow *row)
-{
-}
+//void TabViewWidget::setRow(StreamTableRow *row)
+//{
+//}

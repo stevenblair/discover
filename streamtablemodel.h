@@ -41,6 +41,8 @@ public:
     Stream *getPhasorData(QString svID);
     void addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt); // TODO: make private
 
+    StreamTableRow *getRowFromIndex(QPersistentModelIndex *index);
+
 signals:
     void resizeColumnsToContents();
     void streamSelected(Stream* stream);

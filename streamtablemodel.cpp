@@ -207,6 +207,23 @@ void StreamTableModel::updateAll(bool resizeColumns) {
     }
 }
 
+StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
+{
+    if (index->isValid()) {
+        QMapIterator<QString, StreamTableRow*> i (rows);
+        int rowNumber = 0;
+        while (i.hasNext()) {
+            //StreamTableRow *row = i.next().value();
+            i.next();
+            if (index->row() == rowNumber) {
+                return i.value();
+            }
+            rowNumber++;
+        }
+    }
+
+    return NULL;
+}
 
 void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev)
 {

@@ -2,9 +2,10 @@
 #include "phasorscene.h"
 
 #include <QtGui>
-#ifndef QT_NO_OPENGL
-#include <QtOpenGL>
-#endif
+
+//#ifndef QT_NO_OPENGL
+//#include <QtOpenGL>
+//#endif
 
 PlotView::PlotView(QObject *parent)
 {
@@ -21,6 +22,7 @@ PlotView::PlotView(QObject *parent)
     matrix.scale(7000.0, 0.05);
     this->setMatrix(matrix);*/
     //this->centerOn(0.0, 0.0);
+
     //setViewport(new QGLWidget);
 }
 
