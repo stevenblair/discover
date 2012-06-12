@@ -282,17 +282,17 @@ void Stream::analyse()
     // TODO: must not overwrite samples arrays during this
 
     setAnalysed(false);
+    quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
+
     row = new StreamTableRow();
 
     analysisInstance.initialize();
-    quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
 
     maxInstantaneousVoltage = 0.0;
-    maxInstantaneousCurrent = 0.0;
+    maxInstantaneousCurrent = 0.0;;
 
     //TODO: why the need to ignore the first sample?
     for (quint32 t = 1; t < iterations; t++) {
-
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_3.Vol.sVC.scaleFactor;
@@ -314,30 +314,32 @@ void Stream::analyse()
 
     quint32 len = this->sampleRate.getLargestPowerOfTwo();
     qreal inputFrequency = this->sampleRate.getSamplesPerSecond();
-    ffft::FFTReal <float> fft_object(len);
-    float x[len];
-    float f[len];
-    float mag[len];
+    ffft::FFTReal <qreal> fft_object(len);
+    qreal x[8][len];
+    qreal f[8][len];
 
-    for (quint32 t = 0; t < len; ++t) {
-        x[t] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor / maxInstantaneousVoltage;
-        x[t] = x[t] * 0.5 * (1 - qCos((2 * M_PI * t) / (len - 1)));     // use Hann Window
-    }
-
-    fft_object.do_fft(f, x);
-
-    for (quint32 i = 2; i <= len / 2; ++i) {
-        qreal frequency = qreal(i * inputFrequency) / (len);
-        const qreal real = f[i];
-        qreal imag = 0.0;
-
-        if (i > 0 && i < len / 2) {
-            imag = f[len / 2 + i];
+    for (int signal = 0; signal < 8; signal++) {
+        for (quint32 t = 0; t < len; ++t) {
+            x[signal][t] = samples[t].getSampleValue(signal);
+            x[signal][t] = x[signal][t] * 0.5 * (1 - qCos((2 * M_PI * t) / (len - 1)));     // apply Hann Window to sample
         }
 
-        mag[i] = qSqrt(real*real + imag*imag);
+        fft_object.do_fft(f[signal], x[signal]);
 
-        row->appendFreqPoint(0, frequency, mag[i]);
+        for (quint32 i = 2; i <= len / 2; ++i) {
+            qreal frequency = qreal(i * inputFrequency) / (len);
+            const qreal real = f[signal][i];
+            qreal imaginary = 0.0;
+            qreal mag = 0.0;
+
+            if (i > 0 && i < len / 2) {
+                imaginary = f[signal][len / 2 + i];
+            }
+
+            mag = qSqrt(real*real + imaginary*imaginary);
+
+            row->appendFreqPoint(signal, frequency, mag);
+        }
     }
 
     setAnalysed(true);

@@ -15,7 +15,6 @@ QMAKE_CFLAGS_RELEASE	= -O3
 SOURCES += main.cpp\
         mainwindow.cpp \
     stream.cpp \
-    sample.cpp \
     streamtablemodel.cpp \
     rapid61850/svEncodePacket.c \
     rapid61850/svEncodeBasic.c \
