@@ -111,7 +111,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 }
 
 void Stream::updateStreamTableModel() {
-    if (row != NULL) {
+    if (row != NULL && row->isAnalysed()) {
         qDebug() << "in updateStreamTableModel()";
 
         row->moveToThread(QApplication::instance()->thread());  // moves the object to UI thread
@@ -279,7 +279,10 @@ void Stream::analyse()
     //QElapsedTimer timer;
     //timer.start();
 
+    // TODO: must not overwrite samples arrays during this
+
     setAnalysed(false);
+    row = new StreamTableRow();
 
     analysisInstance.initialize();
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
@@ -289,6 +292,7 @@ void Stream::analyse()
 
     //TODO: why the need to ignore the first sample?
     for (quint32 t = 1; t < iterations; t++) {
+
         analysisInstance.measure_U.Vabcpu[0] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[1] = samples[t].voltage[1] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_2.Vol.sVC.scaleFactor;
         analysisInstance.measure_U.Vabcpu[2] = samples[t].voltage[2] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_3.Vol.sVC.scaleFactor;
@@ -306,7 +310,6 @@ void Stream::analyse()
         }
 
         analysisInstance.step();
-
     }
 
     quint32 len = this->sampleRate.getLargestPowerOfTwo();
@@ -334,13 +337,14 @@ void Stream::analyse()
 
         mag[i] = qSqrt(real*real + imag*imag);
 
-        //qDebug() << frequency << mag[i];
+        row->appendFreqPoint(0, frequency, mag[i]);
     }
 
     setAnalysed(true);
 
-    this->row = new StreamTableRow(this);
-    this->row->moveToThread(this->thread());    // move to original thread (commsThread)
+    // generate row and move to original thread (commsThread)
+    row->setup(this);
+    row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
 
     //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

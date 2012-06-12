@@ -19,6 +19,11 @@ public:
     explicit StreamTableRow(Stream *stream, QObject *parent = 0);
 
     void setup(Stream *stream);
+    void appendFreqPoint(quint32 i, qreal x, qreal y) {
+        if (i >= 0 && i < 8) {
+            this->freq[i].append(QPointF(x, y));
+        }
+    }
 
     bool isAlive() {return this->status;}
     QString getSvID() {return this->svID;}
@@ -97,6 +102,7 @@ private:
     QPainterPath paths[8];
     //qreal sampledData[8][MAX_SAMPLES];
     QList<Sample> sampledData;
+    QList<QPointF> freq[8];
     
 };
 
