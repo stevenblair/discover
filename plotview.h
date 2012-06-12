@@ -4,7 +4,7 @@
 #include <QGraphicsView>
 #include "phasorview.h"
 
-#define PLOT_VIEW_WIDTH     600
+#define PLOT_VIEW_WIDTH     500
 #define PLOT_VIEW_HEIGHT    PHASOR_VIEW_WIDTH
 
 class PlotView : public QGraphicsView

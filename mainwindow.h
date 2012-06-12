@@ -19,6 +19,8 @@
 
 extern CommsThread commsThread;
 
+#define TABLE_VIEW_MINIMUM_HEIGHT   150
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

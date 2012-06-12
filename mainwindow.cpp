@@ -10,18 +10,12 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     QWidget *centralWidget = new QWidget(this);
-    //centralWidget->setLayout(mainLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
     QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
     QVBoxLayout *streamsLayout = new QVBoxLayout;
     tabWidget = new QTabWidget(centralWidget);
 
-    //QHBoxLayout *tabLayout = new QHBoxLayout;
-    //tabWidget->setLayout(tabLayout);
-//    QPalette palette = tabWidget->palette();
-//    palette.setColor(QColorGroup::Background, QColor(255, 0, 0));
-//    tabWidget->setPalette(palette);
     phasorPlotWidget = new PhasorPlotWidget(tabWidget);
 
     interfaceComboBox = new QComboBox;
@@ -38,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->verticalHeader()->hide();
     tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
-    tableView->setMinimumHeight(200);
+    tableView->setMinimumHeight(TABLE_VIEW_MINIMUM_HEIGHT);
 
     phasorPlotView = new ProxyItemView(phasorPlotWidget);
     phasorPlotView->setModel(tableModel);

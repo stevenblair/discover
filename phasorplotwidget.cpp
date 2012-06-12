@@ -20,16 +20,7 @@ void PhasorPlotWidget::removeView()
 
 PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
 {
-    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    sizePolicy.setHorizontalStretch(0);
-    sizePolicy.setVerticalStretch(0);
-    sizePolicy.setHeightForWidth(this->sizePolicy().hasHeightForWidth());
-    this->setSizePolicy(sizePolicy);
-
     QGridLayout *graphLayout = new QGridLayout(this);
-    graphLayout->setSizeConstraint(QLayout::SetMinimumSize);
-    //setLayout(graphLayout);
-    //QGridLayout *graphLayout = (QGridLayout *) parent->layout();
 
     currentPhasorScene = new CurrentPhasorScene();
     voltagePhasorScene = new VoltagePhasorScene();
@@ -51,8 +42,8 @@ PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
 
     graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
     graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);
-    graphLayout->addWidget(voltagePlotView, 0, 1, Qt::AlignLeft);
-    graphLayout->addWidget(currentPlotView, 1, 1, Qt::AlignLeft);
+    graphLayout->addWidget(voltagePlotView, 0, 1, 0);
+    graphLayout->addWidget(currentPlotView, 1, 1, 0);
     graphLayout->setColumnStretch(0, 0);
     graphLayout->setColumnStretch(1, 1);
 
@@ -60,10 +51,4 @@ PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
     this->views.append(voltagePhasorView);
     this->views.append(currentPlotView);
     this->views.append(voltagePlotView);
-
-    QPalette p(this->palette());
-    p.setColor(QPalette::Background, Qt::blue);
-    this->setAutoFillBackground(true);
-    this->setPalette(p);
-
 }
