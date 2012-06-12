@@ -6,7 +6,8 @@
 
 /**
   * This class provides the view functionality for tabs containing custom QGraphicsView/QGraphicsScene widgets,
-  * to ensure that they remain consistent with the model.
+  * to ensure that they remain consistent with the model. Each QGraphicsScene object is a "slave" of an instance
+  * of this class.
   *
   * A new instance must be created for each tab. The TabViewWidget object which is "watched" must implement the
   * appropriate functions to interface with this class.

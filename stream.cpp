@@ -344,9 +344,10 @@ void Stream::analyse()
 
     setAnalysed(true);
 
-    // generate row and move to original thread (commsThread)
+    // generate row contents and move it to original thread (commsThread)
     row->setup(this);
     row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
+    //emit setStreamTableRow(row);
 
     //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

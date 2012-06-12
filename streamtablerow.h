@@ -90,7 +90,6 @@ signals:
 public slots:
 
 private:
-    //Stream *stream;
     bool status;
     QString svID;
     QString sourceMAC;

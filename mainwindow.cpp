@@ -16,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     QVBoxLayout *streamsLayout = new QVBoxLayout;
     tabWidget = new QTabWidget(centralWidget);
 
-    phasorPlotWidget = new PhasorPlotTab(tabWidget);
+    phasorPlotTab = new PhasorPlotTab(tabWidget);
+    frequencyTab = new FrequencyTab(tabWidget);
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -34,21 +35,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setItemDelegateForColumn(STREAM_TABLE_COLUMNS_STATUS, new StatusColumnDelegate());
     tableView->setMinimumHeight(TABLE_VIEW_MINIMUM_HEIGHT);
 
-    phasorPlotView = new ProxyItemView(phasorPlotWidget, tableModel);
+    phasorPlotTabView = new ProxyItemView(phasorPlotTab, tableModel);
 
     // TODO: is this necessary? where do PersistentSelectionModels fit in?
     QItemSelectionModel *itemSelectionModel = new QItemSelectionModel(tableModel);
-    phasorPlotView->setSelectionModel(itemSelectionModel);
+    phasorPlotTabView->setSelectionModel(itemSelectionModel);
     tableView->setSelectionModel(itemSelectionModel);
 
     streamsLayout->addWidget(tableView);
-    connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
+    connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotTabView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
     mainLayout->addLayout(streamsLayout, 1);
     mainLayout->addWidget(tabWidget, 0);
 
-    tabWidget->addTab(phasorPlotWidget, tr("Phasors and waveforms"));
+    tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
     tabWidget->addTab(new QGraphicsView(), tr("Sequence components"));
     tabWidget->addTab(new QGraphicsView(), tr("Frequency analysis"));
     tabWidget->addTab(new QGraphicsView(), tr("Power analysis"));

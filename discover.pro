@@ -51,7 +51,8 @@ SOURCES += main.cpp\
     streamtablerow.cpp \
     tabviewwidget.cpp \
     ProxyItemView.cpp \
-    PhasorPlotTab.cpp
+    PhasorPlotTab.cpp \
+    FrequencyTab.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -115,7 +116,8 @@ HEADERS  += mainwindow.h \
     ffft/DynArray.h \
     ffft/def.h \
     ffft/Array.hpp \
-    ffft/Array.h
+    ffft/Array.h \
+    FrequencyTab.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

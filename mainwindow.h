@@ -12,6 +12,7 @@
 #include "streamtablemodel.h"
 #include "commsthread.h"
 #include "PhasorPlotTab.h"
+#include "FrequencyTab.h"
 
 extern CommsThread commsThread;
 
@@ -37,11 +38,13 @@ private:
     // the model, and its views
     StreamTableModel *tableModel;
     QTableView *tableView;
-    ProxyItemView *phasorPlotView;
+    ProxyItemView *phasorPlotTabView;
+    ProxyItemView *frequencyTabView;
 
     // the tab container, and the tabs
     QTabWidget *tabWidget;
-    PhasorPlotTab *phasorPlotWidget;
+    PhasorPlotTab *phasorPlotTab;
+    FrequencyTab *frequencyTab;
 };
 
 #endif // MAINWINDOW_H
