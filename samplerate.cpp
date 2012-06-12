@@ -14,9 +14,9 @@ SampleRate::SampleRate(SampleRate::NominalFrequency nominalFrequency, SampleRate
     this->samplesPerCycle = samplesPerCycle;
 }
 
-qint32 SampleRate::getSamplesPerSecond()
+quint32 SampleRate::getSamplesPerSecond()
 {
-    return (qint32) (nominalFrequency * samplesPerCycle);
+    return (quint32) (nominalFrequency * samplesPerCycle);
 }
 
 SampleRate::NominalFrequency SampleRate::getNominalFrequency()

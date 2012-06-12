@@ -2,8 +2,9 @@
 #include <QDebug>
 
 
-ProxyItemView::ProxyItemView(TabViewWidget *widget, QWidget *parent) : QAbstractItemView(parent)
+ProxyItemView::ProxyItemView(TabViewWidget *widget, QAbstractItemModel *model, QWidget *parent) : QAbstractItemView(parent)
 {
+    QAbstractItemView::setModel(model);
     this->widget = widget;
     this->widget->setModel((StreamTableModel *) this->model());
 }

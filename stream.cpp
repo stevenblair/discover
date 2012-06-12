@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QApplication>
 
+#include "ffft/FFTReal.h"
+
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
@@ -109,11 +111,13 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 }
 
 void Stream::updateStreamTableModel() {
-    StreamTableRow *row = new StreamTableRow(this);
+    if (row != NULL) {
+        qDebug() << "in updateStreamTableModel()";
 
-    row->moveToThread(QApplication::instance()->thread());  // move to UI thread
-
-    emit setStreamTableRow(row);
+        row->moveToThread(QApplication::instance()->thread());  // moves the object to UI thread
+        emit setStreamTableRow(row);
+        //row = NULL;
+    }
 }
 
 QString Stream::getSvID()
@@ -125,56 +129,6 @@ QString Stream::getSourceMAC()
 {
     return this->sourceMAC;
 }
-
-//QString Stream::getFreq()
-//{
-//    if (analysed) {
-//        return QString("%1 Hz").arg(analysisInstance.measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-//    }
-//    else {
-//        return QString("--");
-//    }
-//}
-
-//QString Stream::getVoltage()
-//{
-//    if (analysed) {
-//        return QString("%1 kV").arg(sqrt(3) * (analysisInstance.measure_Y.Voltage[0] + analysisInstance.measure_Y.Voltage[1] + analysisInstance.measure_Y.Voltage[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-//    }
-//    else {
-//        return QString("--");
-//    }
-//}
-
-//QString Stream::getPower()
-//{
-//    if (analysed) {
-//        return QString("%1 kVA, p.f. %2").arg(analysisInstance.measure_Y.Power[0] / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(analysisInstance.measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
-//    }
-//    else {
-//        return QString("--");
-//    }
-//}
-
-//QString Stream::getCurrent()
-//{
-//    if (analysed) {
-//        return QString("%1 kA").arg(sqrt(3) * (analysisInstance.measure_Y.Current[0] + analysisInstance.measure_Y.Current[1] + analysisInstance.measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
-//    }
-//    else {
-//        return QString("--");
-//    }
-//}
-
-//QString Stream::getSamplesPerCycle()
-//{
-//    if (sampleRate.isKnown()) {
-//        return QString("%1").arg(sampleRate.getSamplesPerCycle());
-//    }
-//    else {
-//        return QString("--");
-//    }
-//}
 
 // TODO: put this processing in analysis thread?
 QPainterPath *Stream::getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase)
@@ -352,9 +306,41 @@ void Stream::analyse()
         }
 
         analysisInstance.step();
+
+    }
+
+    quint32 len = this->sampleRate.getLargestPowerOfTwo();
+    qreal inputFrequency = this->sampleRate.getSamplesPerSecond();
+    ffft::FFTReal <float> fft_object(len);
+    float x[len];
+    float f[len];
+    float mag[len];
+
+    for (quint32 t = 0; t < len; ++t) {
+        x[t] = samples[t].voltage[0] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor / maxInstantaneousVoltage;
+        x[t] = x[t] * 0.5 * (1 - qCos((2 * M_PI * t) / (len - 1)));     // use Hann Window
+    }
+
+    fft_object.do_fft(f, x);
+
+    for (quint32 i = 2; i <= len / 2; ++i) {
+        qreal frequency = qreal(i * inputFrequency) / (len);
+        const qreal real = f[i];
+        qreal imag = 0.0;
+
+        if (i > 0 && i < len / 2) {
+            imag = f[len / 2 + i];
+        }
+
+        mag[i] = qSqrt(real*real + imag*imag);
+
+        //qDebug() << frequency << mag[i];
     }
 
     setAnalysed(true);
+
+    this->row = new StreamTableRow(this);
+    this->row->moveToThread(this->thread());    // move to original thread (commsThread)
 
     //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }

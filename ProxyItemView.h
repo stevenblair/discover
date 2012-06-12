@@ -17,7 +17,7 @@ class ProxyItemView : public QAbstractItemView
 {
     Q_OBJECT
 public:
-    explicit ProxyItemView(TabViewWidget *widget, QWidget *parent = 0);
+    explicit ProxyItemView(TabViewWidget *widget, QAbstractItemModel *model, QWidget *parent = 0);
 
     QRect visualRect(const QModelIndex &index) const;
     void scrollTo(const QModelIndex &index, ScrollHint hint = EnsureVisible);

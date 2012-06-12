@@ -96,6 +96,8 @@ private:
     qreal maxInstantaneousCurrent;
     QFuture<void> future;
     QFutureWatcher<void> watcher;
+
+    StreamTableRow *row;
 };
 
 #endif // STREAM_H

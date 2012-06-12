@@ -3,6 +3,7 @@
 
 #include <QGlobalStatic>
 #include "sample.h"
+#include <QtCore/qmath.h>
 
 #define SAMPLES_50HZ_80_PER_CYCLE   4000
 #define SAMPLES_60HZ_80_PER_CYCLE   4800
@@ -20,11 +21,20 @@ public:
     SampleRate(NominalFrequency nominalFrequency, SamplesPerCycle samplesPerCycle);
 
     void setSampleRate(SampleRate::NominalFrequency nominalFrequency, SampleRate::SamplesPerCycle samplesPerCycle);
-    qint32 getSamplesPerSecond();
+    quint32 getSamplesPerSecond();
     NominalFrequency getNominalFrequency();
     SamplesPerCycle getSamplesPerCycle();
     bool isKnown();
     qreal getTimestep();
+    quint32 getLargestPowerOfTwo() {
+        if (this->isKnown()) {
+            qreal sampleRate = (qreal) this->getSamplesPerSecond();
+
+            return qPow(2.0, (qreal) qFloor(qLn(sampleRate) / qLn(2.0)));
+        }
+
+        return 8;
+    }
 
 private:
     bool known;

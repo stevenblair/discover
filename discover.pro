@@ -96,7 +96,27 @@ HEADERS  += mainwindow.h \
     streamtablerow.h \
     tabviewwidget.h \
     ProxyItemView.h \
-    PhasorPlotTab.h
+    PhasorPlotTab.h \
+    ffft/OscSinCos.hpp \
+    ffft/OscSinCos.h \
+    ffft/FFTRealUseTrigo.hpp \
+    ffft/FFTRealUseTrigo.h \
+    ffft/FFTRealSelect.hpp \
+    ffft/FFTRealSelect.h \
+    ffft/FFTRealPassInverse.hpp \
+    ffft/FFTRealPassInverse.h \
+    ffft/FFTRealPassDirect.hpp \
+    ffft/FFTRealPassDirect.h \
+    ffft/FFTRealFixLenParam.h \
+    ffft/FFTRealFixLen.hpp \
+    ffft/FFTRealFixLen.h \
+    ffft/FFTReal.hpp \
+    ffft/FFTReal.h \
+    ffft/DynArray.hpp \
+    ffft/DynArray.h \
+    ffft/def.h \
+    ffft/Array.hpp \
+    ffft/Array.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

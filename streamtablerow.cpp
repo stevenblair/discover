@@ -1,6 +1,15 @@
 #include "streamtablerow.h"
 
+StreamTableRow::StreamTableRow(QObject *parent) : QObject(parent)
+{
+
+}
 StreamTableRow::StreamTableRow(Stream *stream, QObject *parent) : QObject(parent)
+{
+    setup(stream);
+}
+
+void StreamTableRow::setup(Stream *stream)
 {
     //this->stream = stream;
     this->status = stream->isAlive();

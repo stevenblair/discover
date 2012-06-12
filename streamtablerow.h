@@ -15,7 +15,10 @@ class StreamTableRow : public QObject
 {
     Q_OBJECT
 public:
+    StreamTableRow(QObject *parent = 0);
     explicit StreamTableRow(Stream *stream, QObject *parent = 0);
+
+    void setup(Stream *stream);
 
     bool isAlive() {return this->status;}
     QString getSvID() {return this->svID;}
@@ -77,7 +80,6 @@ public:
     ExternalOutputs_measure *getData() {
         return &measure_Y;
     }
-    
 signals:
     
 public slots:
