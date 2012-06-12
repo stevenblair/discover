@@ -34,22 +34,14 @@ private:
     QLabel *networkInterfaceLabel;
     QComboBox *interfaceComboBox;
 
+    // the model, and its views
     StreamTableModel *tableModel;
     QTableView *tableView;
     ProxyItemView *phasorPlotView;
 
+    // the tab container, and the tabs
     QTabWidget *tabWidget;
     PhasorPlotTab *phasorPlotWidget;
-    /*
-
-    CurrentPhasorScene *currentPhasorScene;
-    VoltagePhasorScene *voltagePhasorScene;
-    CurrentPlotScene *currentPlotScene;
-    VoltagePlotScene *voltagePlotScene;
-    PhasorView *currentPhasorView;
-    PhasorView *voltagePhasorView;
-    PlotView *currentPlotView;
-    PlotView *voltagePlotView;*/
 };
 
 #endif // MAINWINDOW_H

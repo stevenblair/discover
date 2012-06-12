@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include "stream.h"
+#include "streamtablemodel.h"
 
 #define X_AXIS_OVERSHOOT    0.1
 #define Y_AXIS_OVERSHOOT    0.2
@@ -15,6 +16,7 @@ public:
     QRectF itemsBoundingRect() const;
     QRectF sceneRect() const;
 
+    void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
 signals:
 
 public slots:
@@ -28,6 +30,9 @@ protected:
 
     QString xUnits;
     QString yUnits;
+
+    StreamTableModel *streamTableModel;
+    QPersistentModelIndex *index;
 
     //QRectF itemsBoundingRectWithoutText();
     //QRectF itemsBoundingRect() const;

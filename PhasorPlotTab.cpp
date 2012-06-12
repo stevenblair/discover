@@ -3,8 +3,10 @@
 void PhasorPlotTab::update()
 {
     qDebug() << "in update()";
-    currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
     voltagePhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
+    currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
+    voltagePlotScene->streamTableModelSelectionChanged(this->model, &this->index);
+    currentPlotScene->streamTableModelSelectionChanged(this->model, &this->index);
 
     QListIterator<QGraphicsView*> i (views);
     while (i.hasNext()) {
@@ -25,8 +27,6 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 
     currentPhasorScene = new CurrentPhasorScene();
     voltagePhasorScene = new VoltagePhasorScene();
-    //connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPhasorScene, SLOT(streamSelectionChanged(Stream*)));    // TODO: connect directly between TableView and Phasors?
-    //connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePhasorScene, SLOT(streamSelectionChanged(Stream*)));
     currentPhasorView = new PhasorView(this);
     voltagePhasorView = new PhasorView(this);
     currentPhasorView->setScene(currentPhasorScene);
@@ -38,8 +38,6 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
     voltagePlotView = new PlotView(this);
     currentPlotView->setScene(currentPlotScene);
     voltagePlotView->setScene(voltagePlotScene);
-    //connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPlotScene, SLOT(streamSelectionChanged(Stream*)));
-    //connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePlotScene, SLOT(streamSelectionChanged(Stream*)));
 
     graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
     graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);

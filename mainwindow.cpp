@@ -50,7 +50,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     mainLayout->addWidget(tabWidget, 0);
 
     tabWidget->addTab(phasorPlotWidget, tr("Phasors and waveforms"));
-    tabWidget->addTab(new QDoubleSpinBox(), tr("Power quality"));
+    tabWidget->addTab(new QGraphicsView(), tr("Power analysis"));
+    tabWidget->addTab(new QGraphicsView(), tr("Power quality"));
 
     //currentPhasorView->show();
     tableView->resizeColumnsToContents();

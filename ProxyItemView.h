@@ -4,6 +4,15 @@
 #include <QAbstractItemView>
 #include "tabviewwidget.h"
 
+/**
+  * This class provides the view functionality for tabs containing custom QGraphicsView/QGraphicsScene widgets,
+  * to ensure that they remain consistent with the model.
+  *
+  * A new instance must be created for each tab. The TabViewWidget object which is "watched" must implement the
+  * appropriate functions to interface with this class.
+  *
+  * Instances of this class should NOT be added to the UI.
+  */
 class ProxyItemView : public QAbstractItemView
 {
     Q_OBJECT

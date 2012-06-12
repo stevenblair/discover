@@ -124,6 +124,8 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 }
 
 void PlotScene::draw() {
+    qDebug() << "in PlotScene::draw()";
+
     if (stream != NULL) {
         //TODO: use below to get pixel size of viewport; use to scale all heights and widths?
         //QGraphicsView *view = ((PlotView *) this->views().first());
@@ -202,6 +204,19 @@ void PlotScene::draw() {
         drawnOnce = true;
     }
 }
+
+void PlotScene::streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index)
+{
+    this->streamTableModel = streamTableModel;
+    this->index = index;
+
+    //qDebug() << "in streamTableModelSelectionChanged()" << this->index->row() << this->streamTableModel;
+
+    draw();
+}
+
+
+
 
 
 
