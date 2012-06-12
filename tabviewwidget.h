@@ -10,7 +10,8 @@
 
 
 /**
-  * A generic tab container widget.
+  * A generic tab container widget for a single tab.
+  *
   * Subclasses define the actual components to display in the tab, and must implement the update() function
   * to refresh the view, using the pointer to the StreamTableModel and the QPersistentModelIndex.
   */

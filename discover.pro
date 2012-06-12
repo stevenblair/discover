@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     tabviewwidget.cpp \
     ProxyItemView.cpp \
     PhasorPlotTab.cpp \
-    FrequencyTab.cpp
+    FrequencyTab.cpp \
+    FrequencyScene.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -117,7 +118,8 @@ HEADERS  += mainwindow.h \
     ffft/def.h \
     ffft/Array.hpp \
     ffft/Array.h \
-    FrequencyTab.h
+    FrequencyTab.h \
+    FrequencyScene.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
