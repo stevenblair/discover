@@ -214,6 +214,7 @@ void StreamTableModel::updateAll(bool resizeColumns) {
 
 StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
 {
+    qDebug() << "in getRowFromIndex()";
     if (index->isValid()) {
         QMapIterator<QString, StreamTableRow*> i (rows);
         int rowNumber = 0;
@@ -230,32 +231,33 @@ StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
     return NULL;
 }
 
-void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev)
-{
-    Q_UNUSED(prev);
-    QModelIndex index = createIndex(selected.first().top(), STREAM_TABLE_COLUMNS_SVID, 0);
+//void StreamTableModel::getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev)
+//{
+//    Q_UNUSED(prev);
+//    QModelIndex index = createIndex(selected.first().top(), STREAM_TABLE_COLUMNS_SVID, 0);
 
-    if (!selected.isEmpty()) {
-        QMapIterator<QString, StreamTableRow*> i (rows);
-        int row = 0;
-        while (i.hasNext()) {
-            i.next();
-            if (index.row() == row) {
-                // TODO: emit something here
-                //emit streamSelected((StreamTableRow*) i.value());
-                return;
-            }
-            row++;
-        }
+//    if (!selected.isEmpty()) {
+//        QMapIterator<QString, StreamTableRow*> i (rows);
+//        int row = 0;
+//        while (i.hasNext()) {
+//            i.next();
+//            if (index.row() == row) {
+//                // TODO: emit something here
+//                //emit streamSelected((StreamTableRow*) i.value());
+//                return;
+//            }
+//            row++;
+//        }
 
-        //QString svID = QString(selected.first().model()->data(index).toString());
-        //emit streamSelected(svID);
-    }
-}
+//        //QString svID = QString(selected.first().model()->data(index).toString());
+//        //emit streamSelected(svID);
+//    }
+//}
 
 void StreamTableModel::networkInterfaceStopped()
 {
     //this->blockSignals(true);
+    qDebug() << "in networkInterfaceStopped(); removing all rows";
 
     QMapIterator<QString, StreamTableRow*> i (rows);
 

@@ -117,10 +117,9 @@ void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTable
 
 void PhasorScene::streamRemoved()
 {
-    //this->stream = NULL;
-
-    this->streamTableModel = NULL;
-    this->index = NULL;
+    qDebug() << "in streamRemoved()";
+    //this->streamTableModel = NULL;
+    //this->index = NULL;
 
     for (int i = 0; i < 3; i++) {
         phaseLine[i]->setLine(0.0, 0.0, 0.0, 0.0);
@@ -137,7 +136,7 @@ void PhasorScene::draw() {
     // get StreamTableRow* from model and index
     StreamTableRow *stream;
 
-    if (this->streamTableModel != NULL && this->index->isValid()) {
+    if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
         stream = this->streamTableModel->getRowFromIndex(this->index);
     }
     else {

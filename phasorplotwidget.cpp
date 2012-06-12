@@ -2,6 +2,7 @@
 
 void PhasorPlotWidget::update()
 {
+    qDebug() << "in update()";
     currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
     voltagePhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
 
@@ -14,8 +15,8 @@ void PhasorPlotWidget::update()
 
 void PhasorPlotWidget::removeView()
 {
-    currentPhasorScene->streamRemoved();
     voltagePhasorScene->streamRemoved();
+    currentPhasorScene->streamRemoved();
 }
 
 PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
