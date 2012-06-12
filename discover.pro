@@ -50,9 +50,9 @@ SOURCES += main.cpp\
     plotscene.cpp \
     streammanager.cpp \
     streamtablerow.cpp \
-    phasorplotwidget.cpp \
     tabviewwidget.cpp \
-    ProxyItemView.cpp
+    ProxyItemView.cpp \
+    PhasorPlotTab.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -94,9 +94,9 @@ HEADERS  += mainwindow.h \
     plotscene.h \
     streammanager.h \
     streamtablerow.h \
-    phasorplotwidget.h \
     tabviewwidget.h \
-    ProxyItemView.h
+    ProxyItemView.h \
+    PhasorPlotTab.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
@@ -104,5 +104,4 @@ HEADERS  += mainwindow.h \
 INCLUDEPATH += C:/Users/Steven/discover/Include
 LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
 
-FORMS += \
-    test.ui
+FORMS +=

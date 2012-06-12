@@ -1,6 +1,6 @@
-#include "phasorplotwidget.h"
+#include "PhasorPlotTab.h"
 
-void PhasorPlotWidget::update()
+void PhasorPlotTab::update()
 {
     qDebug() << "in update()";
     currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
@@ -13,13 +13,13 @@ void PhasorPlotWidget::update()
     }
 }
 
-void PhasorPlotWidget::removeView()
+void PhasorPlotTab::removeView()
 {
     voltagePhasorScene->streamRemoved();
     currentPhasorScene->streamRemoved();
 }
 
-PhasorPlotWidget::PhasorPlotWidget(QWidget *parent) : TabViewWidget(parent)
+PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 {
     QGridLayout *graphLayout = new QGridLayout(this);
 

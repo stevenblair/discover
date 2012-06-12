@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     QVBoxLayout *streamsLayout = new QVBoxLayout;
     tabWidget = new QTabWidget(centralWidget);
 
-    phasorPlotWidget = new PhasorPlotWidget(tabWidget);
+    phasorPlotWidget = new PhasorPlotTab(tabWidget);
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -43,30 +43,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setSelectionModel(itemSelectionModel);
 
     streamsLayout->addWidget(tableView);
-    //connect(tableView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->tableModel, SLOT(getSelectedSvID(const QItemSelection &, const QItemSelection &)));
     connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
     mainLayout->addLayout(streamsLayout, 1);
     mainLayout->addWidget(tabWidget, 0);
-
-    /*currentPhasorScene = new CurrentPhasorScene(tableModel);
-    voltagePhasorScene = new VoltagePhasorScene(tableModel);
-    connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPhasorScene, SLOT(streamSelectionChanged(Stream*)));    // TODO: connect directly between TableView and Phasors?
-    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePhasorScene, SLOT(streamSelectionChanged(Stream*)));
-
-    currentPhasorView = new PhasorView;
-    voltagePhasorView = new PhasorView;
-
-    currentPlotScene = new CurrentPlotScene();
-    voltagePlotScene = new VoltagePlotScene();
-
-    currentPlotView = new PlotView;
-    voltagePlotView = new PlotView;
-    currentPlotView->setScene(currentPlotScene);
-    voltagePlotView->setScene(voltagePlotScene);
-    connect(tableModel, SIGNAL(streamSelected(Stream*)), currentPlotScene, SLOT(streamSelectionChanged(Stream*)));
-    connect(tableModel, SIGNAL(streamSelected(Stream*)), voltagePlotScene, SLOT(streamSelectionChanged(Stream*)));*/
 
     tabWidget->addTab(phasorPlotWidget, tr("Phasors and waveforms"));
     tabWidget->addTab(new QDoubleSpinBox(), tr("Power quality"));

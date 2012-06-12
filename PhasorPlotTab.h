@@ -1,5 +1,5 @@
-#ifndef PHASORPLOTWIDGET_H
-#define PHASORPLOTWIDGET_H
+#ifndef PHASORPLOTTAB_H
+#define PHASORPLOTTAB_H
 
 #include <QWidget>
 #include <QVBoxLayout>
@@ -9,11 +9,11 @@
 #include "plotscene.h"
 #include "plotview.h"
 
-class PhasorPlotWidget : public TabViewWidget
+class PhasorPlotTab : public TabViewWidget
 {
     Q_OBJECT
 public:
-    explicit PhasorPlotWidget(QWidget *parent = 0);
+    explicit PhasorPlotTab(QWidget *parent = 0);
     void update();
     void removeView();
     
@@ -35,4 +35,4 @@ private:
     
 };
 
-#endif // PHASORPLOTWIDGET_H
+#endif // PHASORPLOTTAB_H

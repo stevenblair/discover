@@ -10,12 +10,8 @@
 #include <QTableWidget>
 #include "ProxyItemView.h"
 #include "streamtablemodel.h"
-//#include "phasorscene.h"
-//#include "phasorview.h"
-//#include "plotscene.h"
-//#include "plotview.h"
 #include "commsthread.h"
-#include "phasorplotwidget.h"
+#include "PhasorPlotTab.h"
 
 extern CommsThread commsThread;
 
@@ -43,7 +39,7 @@ private:
     ProxyItemView *phasorPlotView;
 
     QTabWidget *tabWidget;
-    PhasorPlotWidget *phasorPlotWidget;
+    PhasorPlotTab *phasorPlotWidget;
     /*
 
     CurrentPhasorScene *currentPhasorScene;
