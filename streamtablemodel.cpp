@@ -259,9 +259,9 @@ void StreamTableModel::networkInterfaceStopped()
     //this->blockSignals(true);
     qDebug() << "in networkInterfaceStopped(); removing all rows";
 
-    QMapIterator<QString, StreamTableRow*> i (rows);
-
     if (rows.size() > 0) {
+        QMapIterator<QString, StreamTableRow*> i (rows);
+
         //beginResetModel();
         beginRemoveRows(QModelIndex(), 0, rows.size() - 1);
         while (i.hasNext()) {

@@ -2,11 +2,22 @@
 
 FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
 {
+    QVBoxLayout *verticalLayout = new QVBoxLayout(this);
+
+    frequencyScene = new FrequencyScene();
+    frequencyView = new QGraphicsView(this);
+    frequencyView->setScene(frequencyScene);
+
+    frequencyView->setRenderHint(QPainter::Antialiasing);    // TODO: move into subclass?
+
+    verticalLayout->addWidget(frequencyView, 0, 0);
+
+    this->views.append(frequencyView);
 }
 
 void FrequencyTab::update()
 {
-    //TODO: set model and index for GraphicsView object
+    frequencyScene->streamTableModelSelectionChanged(this->model, &this->index);
 }
 
 void FrequencyTab::removeView()

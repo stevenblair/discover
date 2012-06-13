@@ -18,3 +18,24 @@ void FrequencyScene::streamRemoved()
 {
     // TODO
 }
+
+void FrequencyScene::draw() {
+    qDebug() << "in FrequencyScene::draw()";
+    StreamTableRow *stream;
+
+    if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
+        stream = this->streamTableModel->getRowFromIndex(this->index);
+    }
+    else {
+        return;
+    }
+
+    QPainterPath path;
+
+    for (int i = 0; i < stream->getNumberOfFreqPoints(0); i++) {
+        path.lineTo(stream->getFreqPoint(0, i));
+    }
+    QGraphicsPathItem *pathItem = QGraphicsScene::addPath(path);
+    QGraphicsView *view = this->views().first();
+    view->fitInView(this->sceneRect(), Qt::IgnoreAspectRatio);
+}

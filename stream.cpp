@@ -338,7 +338,7 @@ void Stream::analyse()
 
             mag = qSqrt(real*real + imaginary*imaginary);
 
-            row->appendFreqPoint(signal, frequency, mag);
+            row->appendFreqPoint(signal, frequency, -mag);  // negate the y-coordinate, in preparation for plotting
         }
     }
 

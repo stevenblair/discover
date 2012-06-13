@@ -1,8 +1,10 @@
 #ifndef FREQUENCYTAB_H
 #define FREQUENCYTAB_H
 
-//#include <QWidget>
+#include <QWidget>
+#include <QVBoxLayout>
 #include "tabviewwidget.h"
+#include "FrequencyScene.h"
 
 class FrequencyTab : public TabViewWidget
 {
@@ -18,6 +20,9 @@ public slots:
 
 private:
     QList<QGraphicsView*> views;
+
+    FrequencyScene *frequencyScene;
+    QGraphicsView *frequencyView;
 };
 
 #endif // FREQUENCYTAB_H

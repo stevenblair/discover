@@ -8,7 +8,8 @@ class Stream;
 #include "samplerate.h"
 #include "measure/measure.h"
 
-#define SIGNIFICANT_DIGITS_DIPLAYED 3
+#define SIGNIFICANT_DIGITS_DIPLAYED      3
+#define SIGNIFICANT_DIGITS_DIPLAYED_FREQ 4
 //#define MAX_SAMPLES                 (256 * NUMBER_OF_CYCLES_TO_ANALYSE)
 
 class StreamTableRow : public QObject
@@ -24,6 +25,13 @@ public:
             this->freq[i].append(QPointF(x, y));
         }
     }
+    quint32 getNumberOfFreqPoints(quint32 signal) {
+        return this->freq[signal].size();
+    }
+
+    QPointF getFreqPoint(quint32 signal, quint32 i) {
+        return this->freq[signal].at(i);
+    }
 
     bool isAlive() {return this->status;}
     QString getSvID() {return this->svID;}
@@ -31,7 +39,7 @@ public:
     QString getFreq()
     {
         if (analysed) {
-            return QString("%1 Hz").arg(measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 Hz").arg(measure_Y.Frequency, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ);
         }
         else {
             return QString("--");

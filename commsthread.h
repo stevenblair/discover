@@ -50,6 +50,8 @@ public slots:
     void timerDone();
 
 private:
+    QTimer *interfaceTimeout;
+
     bool scheduledNewInterface;
     int interfaceNumber;
     bool modelReady;

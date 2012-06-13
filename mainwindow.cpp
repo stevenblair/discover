@@ -36,10 +36,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tableView->setMinimumHeight(TABLE_VIEW_MINIMUM_HEIGHT);
 
     phasorPlotTabView = new ProxyItemView(phasorPlotTab, tableModel);
+    frequencyTabView = new ProxyItemView(frequencyTab, tableModel);
 
     // TODO: is this necessary? where do PersistentSelectionModels fit in?
     QItemSelectionModel *itemSelectionModel = new QItemSelectionModel(tableModel);
     phasorPlotTabView->setSelectionModel(itemSelectionModel);
+    frequencyTabView->setSelectionModel(itemSelectionModel);
     tableView->setSelectionModel(itemSelectionModel);
 
     streamsLayout->addWidget(tableView);
@@ -50,10 +52,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     mainLayout->addWidget(tabWidget, 0);
 
     tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
-    tabWidget->addTab(new QGraphicsView(), tr("Sequence components"));
-    tabWidget->addTab(new QGraphicsView(), tr("Frequency analysis"));
-    tabWidget->addTab(new QGraphicsView(), tr("Power analysis"));
-    tabWidget->addTab(new QGraphicsView(), tr("Power quality"));
+    tabWidget->addTab(frequencyTab, tr("Frequency analysis"));
+    tabWidget->addTab(new QWidget(), tr("Sequence components"));
+    tabWidget->addTab(new QWidget(), tr("Power analysis"));
+    tabWidget->addTab(new QWidget(), tr("Power quality"));
 
     //currentPhasorView->show();
     tableView->resizeColumnsToContents();

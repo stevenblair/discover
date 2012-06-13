@@ -44,8 +44,23 @@ void CommsThread::setNetworkInterface(int value) {
         streamManager.removeAll();
         //emit networkInterfaceStopped();
 
+        if (interfaceTimeout == NULL) {
+            interfaceTimeout = new QTimer(this);
+            interfaceTimeout->setInterval(NETWORK_INTERFACE_OFF_DELAY);
+            interfaceTimeout->setSingleShot(true);
+            connect(interfaceTimeout, SIGNAL(timeout()), SLOT(timerDone()));
+        }
+
+        if (interfaceTimeout->isActive()) {
+            interfaceTimeout->setInterval(NETWORK_INTERFACE_OFF_DELAY);
+            qDebug() << interfaceTimeout;
+        }
+        else {
+            interfaceTimeout->start();
+        }
+
         // TODO: still not correct: "left over" data in table
-        QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
+        //QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
     }
 }
 
