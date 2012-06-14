@@ -134,12 +134,16 @@ void PhasorScene::draw() {
     //qDebug() << "in draw()";
 
     // get StreamTableRow* from model and index
-    StreamTableRow *stream;
+    QPointer<StreamTableRow> stream;
 
     if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
         stream = this->streamTableModel->getRowFromIndex(this->index);
     }
     else {
+        return;
+    }
+
+    if (stream.isNull()) {
         return;
     }
 

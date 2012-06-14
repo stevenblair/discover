@@ -32,7 +32,7 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == Qt::DisplayRole) {
-        QMapIterator<QString, StreamTableRow*> i (rows);
+        QMapIterator<QString, QPointer<StreamTableRow> > i (rows);
         int row = 0;
         while (i.hasNext()) {
             i.next();
@@ -62,7 +62,7 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
         }
     }
     else if (role == Qt::ToolTipRole) {
-        QMapIterator<QString, StreamTableRow*> i (rows);
+        QMapIterator<QString, QPointer<StreamTableRow> > i (rows);
         int row = 0;
         while (i.hasNext()) {
             i.next();
@@ -216,7 +216,7 @@ StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
 {
     //qDebug() << "in getRowFromIndex()";
     if (index->isValid()) {
-        QMapIterator<QString, StreamTableRow*> i (rows);
+        QMapIterator<QString, QPointer<StreamTableRow> > i (rows);
         int rowNumber = 0;
         while (i.hasNext()) {
             //StreamTableRow *row = i.next().value();
@@ -260,7 +260,7 @@ void StreamTableModel::networkInterfaceStopped()
     qDebug() << "in networkInterfaceStopped(); removing all rows";
 
     if (rows.size() > 0) {
-        QMapIterator<QString, StreamTableRow*> i (rows);
+        QMapIterator<QString, QPointer<StreamTableRow> > i (rows);
 
         //beginResetModel();
         beginRemoveRows(QModelIndex(), 0, rows.size() - 1);
@@ -292,10 +292,8 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
         rows.insert(row->getSvID(), row);
 
-        //qDebug() << existingRow << rows.value(row->getSvID());
+        qDebug() << existingRow << rows.value(row->getSvID());
         //qDebug() << sizeof *existingRow << sizeof *rows.value(row->getSvID());
-
-        //emit existingRow->deleteLater();
 
         // only emit dataChanged() for changed row
         int rowIndex = getIndexFromKey(row->getSvID());
@@ -306,6 +304,8 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
             emit dataChanged(top, bottom);
         }
+
+        emit existingRow->deleteLater();
     }
     else {
         //qDebug() << "adding new row";
@@ -322,7 +322,7 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 
 int StreamTableModel::getIndexFromKey(QString key)
 {
-    QMapIterator<QString, StreamTableRow*> i (rows);
+    QMapIterator<QString, QPointer<StreamTableRow> > i (rows);
     int rowNumber = 0;
 
     while (i.hasNext()) {

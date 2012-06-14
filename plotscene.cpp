@@ -124,7 +124,7 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 }
 
 void PlotScene::draw() {
-    //qDebug() << "in PlotScene::draw()";
+    qDebug() << "in PlotScene::draw()";
 
     if (stream != NULL) {
         //TODO: use below to get pixel size of viewport; use to scale all heights and widths?

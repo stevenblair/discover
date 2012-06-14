@@ -96,7 +96,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
                 capturedSamples = 0;
 
                 if (disabled == false) {
-                    updateStreamTableModel();
+                    //updateStreamTableModel();
 
                     //emit updateModel(true);
                     /*emit */scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.

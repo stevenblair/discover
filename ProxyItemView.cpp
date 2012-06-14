@@ -33,7 +33,7 @@ void ProxyItemView::setModel(QAbstractItemModel *model)
 void ProxyItemView::dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)
 {
     QAbstractItemView::dataChanged(topLeft, bottomRight);
-    //qDebug() << "data changed, rows" << topLeft.row() << "to" << bottomRight.row();
+    qDebug() << "data changed, rows" << topLeft.row() << "to" << bottomRight.row();
 
     if (this->widget->getIndex()->isValid()) {
         int row = this->widget->getIndex()->row();

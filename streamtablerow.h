@@ -18,6 +18,9 @@ class StreamTableRow : public QObject
 public:
     StreamTableRow(QObject *parent = 0);
     explicit StreamTableRow(Stream *stream, QObject *parent = 0);
+    ~StreamTableRow() {
+        qDebug() << "destoying StreamTableRow";
+    }
 
     void setup(Stream *stream);
     void appendFreqPoint(quint32 i, qreal x, qreal y) {

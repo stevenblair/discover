@@ -1,7 +1,7 @@
 #include "FrequencyScene.h"
 
-#define VOLTAGE_LINE_ALPHA  210
-#define CURRENT_LINE_ALPHA  150
+#define VOLTAGE_LINE_ALPHA  255
+#define CURRENT_LINE_ALPHA  180
 #define MIN_Y_VALUE         1       // -log10(0.1)
 
 const QColor FrequencyScene::waveformColors[8] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
@@ -66,7 +66,7 @@ void FrequencyScene::redrawFrequencyScene()
 
 void FrequencyScene::draw() {
     //qDebug() << "in FrequencyScene::draw()";
-    StreamTableRow *stream;
+    QPointer<StreamTableRow> stream;
 
     if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
         stream = this->streamTableModel->getRowFromIndex(this->index);
@@ -75,7 +75,7 @@ void FrequencyScene::draw() {
         return;
     }
 
-    if (stream == NULL) {
+    if (stream.isNull()) {
         return;
     }
 

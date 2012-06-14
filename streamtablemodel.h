@@ -58,7 +58,7 @@ public slots:
     void setStreamTableRow(StreamTableRow *row);
 
 private:
-    QMap<QString, StreamTableRow*> rows;
+    QMap<QString, QPointer<StreamTableRow> > rows;
     //QMap<QString, Stream*> streams;
     bool blockUpdates;
 
