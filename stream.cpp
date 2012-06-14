@@ -93,7 +93,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
 
             if (sampleRate.isKnown()) {
                 capturing = false;
-                //samplesPerSecond = sampleRate.getSamplesPerSecond();
+                capturedSamples = 0;
 
                 if (disabled == false) {
                     updateStreamTableModel();
@@ -255,6 +255,7 @@ void Stream::scheduleAnalysis() {
     // TODO: invalidate samples per cycle info here too?
 }
 
+// TODO: restore this timer just for checking if alive.
 void Stream::timeout()
 {
     //qDebug() << "in timeout";
@@ -358,6 +359,9 @@ void Stream::analyse()
 
     // generate row contents and move it to original thread (commsThread)
     row->setup(this);
+
+    //qDebug() << sizeof(row) << sizeof(*row);
+
     row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
     //emit setStreamTableRow(row);
 

@@ -116,7 +116,7 @@ void FrequencyScene::draw() {
         }
     }
 
-    qDebug() << stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x();
+    //qDebug() << stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x();
 
     qreal maxFreqValue = (stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
     qreal maxMagnitudeValue = -(3.0/*stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).y()*/);

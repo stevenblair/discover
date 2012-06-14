@@ -79,7 +79,7 @@ void ProxyItemView::setSelection(const QRect &, QItemSelectionModel::SelectionFl
 
 void ProxyItemView::selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
-    qDebug() << "in selectionChanged()" << selected.size() << selected.indexes().size();
+    //qDebug() << "in selectionChanged()" << selected.size() << selected.indexes().size();
 
     if (!selected.isEmpty() && selected.size() == 1) {
         this->widget->setSelectedRowIndex(selected.indexes().first());

@@ -37,11 +37,6 @@ public:
 
     QString getSvID();
     QString getSourceMAC();
-//    QString getFreq();
-//    QString getVoltage();
-//    QString getCurrent();
-//    QString getSamplesPerCycle();
-//    QString getPower();
     quint32 getNumberOfSamplesCaptured();
     QPainterPath *getPainterPath(QPainterPath *path, PowerSystemQuantity powerSystemQuantity, int phase);
 
@@ -82,7 +77,6 @@ private:
     QString destMAC;
 
     quint32 capturedSamples;
-    //quint32 samplesPerSecond;
     Sample samples[MAX_SAMPLES];
     bool analysed;
     bool alive;

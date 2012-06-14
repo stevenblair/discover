@@ -120,97 +120,97 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
     return QVariant();
 }
 
-Stream *StreamTableModel::getPhasorData(QString svID)
-{
-    Stream *stream;
+//Stream *StreamTableModel::getPhasorData(QString svID)
+//{
+//    Stream *stream;
 
-    // find stream; create new if doesn't exist
-    if (streams.contains(svID)) {
-        stream = streams.value(svID);
+//    // find stream; create new if doesn't exist
+//    if (streams.contains(svID)) {
+//        stream = streams.value(svID);
 
-        return stream;
-    }
+//        return stream;
+//    }
 
-    return NULL;
-}
+//    return NULL;
+//}
 
-void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
-{
-    Stream *stream;
+//void StreamTableModel::addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
+//{
+//    Stream *stream;
 
-    if (blockUpdates == false) {
+//    if (blockUpdates == false) {
 
-        // find stream; create new if doesn't exist
-        if (streams.contains(svID)) {
-            stream = streams.value(svID);
+//        // find stream; create new if doesn't exist
+//        if (streams.contains(svID)) {
+//            stream = streams.value(svID);
 
-            // check for consistent source MAC address; reject stream from "new" MAC address
-            if (QString::compare(stream->getSourceMAC(), sourceMAC) != 0) {
-                return;
-            }
-        }
-        else {
-            beginInsertRows(QModelIndex(), streams.size(), streams.size());
-            stream = new Stream(svID, sourceMAC);
-            //QObject::connect(stream, SIGNAL(sampleRateDetermined(QString)), this, SLOT(sampleRateDetermined(QString)));
-            QObject::connect(stream, SIGNAL(updateModel(bool)), this, SLOT(updateAll(bool)));
-            streams.insert(svID, stream);
-            endInsertRows();
+//            // check for consistent source MAC address; reject stream from "new" MAC address
+//            if (QString::compare(stream->getSourceMAC(), sourceMAC) != 0) {
+//                return;
+//            }
+//        }
+//        else {
+//            beginInsertRows(QModelIndex(), streams.size(), streams.size());
+//            stream = new Stream(svID, sourceMAC);
+//            //QObject::connect(stream, SIGNAL(sampleRateDetermined(QString)), this, SLOT(sampleRateDetermined(QString)));
+//            QObject::connect(stream, SIGNAL(updateModel(bool)), this, SLOT(updateAll(bool)));
+//            streams.insert(svID, stream);
+//            endInsertRows();
 
-            emit resizeColumnsToContents();
-        }
+//            emit resizeColumnsToContents();
+//        }
 
-        stream->addSample(dataset, smpCnt);
+//        stream->addSample(dataset, smpCnt);
 
-        // TODO: keep this here? or rely on flag in Stream for updating GUI (which will be independent of sample rate)?
-        //       or just send emit from Stream for any update type?
-    //    if (smpCnt == 3999 /*&& stream->getNumberOfSamplesCaptured() == */) {
-    //        QModelIndex top = createIndex(0, 0, 0);
-    //        QModelIndex bottom = createIndex(streams.size(), STREAM_TABLE_NUMBER_OF_COLUMNS, 0);
+//        // TODO: keep this here? or rely on flag in Stream for updating GUI (which will be independent of sample rate)?
+//        //       or just send emit from Stream for any update type?
+//    //    if (smpCnt == 3999 /*&& stream->getNumberOfSamplesCaptured() == */) {
+//    //        QModelIndex top = createIndex(0, 0, 0);
+//    //        QModelIndex bottom = createIndex(streams.size(), STREAM_TABLE_NUMBER_OF_COLUMNS, 0);
 
-    //        emit dataChanged(top, bottom);
-    //        emit resizeColumnsToContents();
-    //    }
-    }
-}
+//    //        emit dataChanged(top, bottom);
+//    //        emit resizeColumnsToContents();
+//    //    }
+//    }
+//}
 
-void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
-{
-    //if (this->blockUpdates == false) {
-        addStreamData(svID, sourceMAC, &dataset, smpCnt);
-    //}
-}
+//void StreamTableModel::addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt)
+//{
+//    //if (this->blockUpdates == false) {
+//        addStreamData(svID, sourceMAC, &dataset, smpCnt);
+//    //}
+//}
 
-void StreamTableModel::sampleRateDetermined(QString svID)
-{
-    Stream *stream;
+//void StreamTableModel::sampleRateDetermined(QString svID)
+//{
+//    Stream *stream;
 
-    if (streams.contains(svID)) {
-        stream = streams.value(svID);
+//    if (streams.contains(svID)) {
+//        stream = streams.value(svID);
 
-        // only emit dataChanged() for changed row
-        int rowIndex = getIndexFromKey(svID);
+//        // only emit dataChanged() for changed row
+//        int rowIndex = getIndexFromKey(svID);
 
-        if (rowIndex >= 0) {
-            QModelIndex top = createIndex(rowIndex, 0, 0);
-            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+//        if (rowIndex >= 0) {
+//            QModelIndex top = createIndex(rowIndex, 0, 0);
+//            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
 
-            emit dataChanged(top, bottom);
-            emit resizeColumnsToContents();
-        }
-    }
-}
+//            emit dataChanged(top, bottom);
+//            emit resizeColumnsToContents();
+//        }
+//    }
+//}
 
-void StreamTableModel::updateAll(bool resizeColumns) {
-    QModelIndex top = createIndex(0, 0, 0);
-    QModelIndex bottom = createIndex(streams.size() - 1, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+//void StreamTableModel::updateAll(bool resizeColumns) {
+//    QModelIndex top = createIndex(0, 0, 0);
+//    QModelIndex bottom = createIndex(streams.size() - 1, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
 
-    emit dataChanged(top, bottom);
+//    emit dataChanged(top, bottom);
 
-    if (resizeColumns) {
-        emit resizeColumnsToContents();
-    }
-}
+//    if (resizeColumns) {
+//        emit resizeColumnsToContents();
+//    }
+//}
 
 StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
 {
@@ -276,19 +276,26 @@ void StreamTableModel::networkInterfaceStopped()
     emit streamTableEmpty();
 }
 
+//TODO: may need to pass a copy of StreamTableRow with the signal, rather than using pointers. Or, find source of crash.
 void StreamTableModel::setStreamTableRow(StreamTableRow *row)
 {
-
     // find stream; create new if doesn't exist
     if (rows.contains(row->getSvID())) {
         //qDebug() << "updating existing row";
 
-//        StreamTableRow *existingRow = rows.value(row->getSvID());
-//        StreamTableRow *existingRowCopy = existingRow;
+        StreamTableRow *existingRow = rows.value(row->getSvID());   //TODO: need to safely delete this object
+        //StreamTableRow *existingRowCopy = existingRow;
+
+        //qDebug() << sizeof(*existingRow) << sizeof(*existingRowCopy) << sizeof(*row);
+
 //        existingRow = row;
+
         rows.insert(row->getSvID(), row);
 
-        //existingRowCopy->deleteLater();
+        //qDebug() << existingRow << rows.value(row->getSvID());
+        //qDebug() << sizeof *existingRow << sizeof *rows.value(row->getSvID());
+
+        //emit existingRow->deleteLater();
 
         // only emit dataChanged() for changed row
         int rowIndex = getIndexFromKey(row->getSvID());
