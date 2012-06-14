@@ -2,7 +2,7 @@
 
 #define VOLTAGE_LINE_ALPHA  210
 #define CURRENT_LINE_ALPHA  150
-#define MIN_Y_VALUE         2       // -log10(0.01)
+#define MIN_Y_VALUE         1       // -log10(0.1)
 
 const QColor FrequencyScene::waveformColors[8] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
                                                   QColor(240, 181, 0, VOLTAGE_LINE_ALPHA),
@@ -128,8 +128,8 @@ void FrequencyScene::draw() {
     qreal maxFreqValue = (stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
     qreal maxMagnitudeValue = -(3.0/*stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).y()*/);
 
-    horizontalPlotLine->setLine(0, -log10(0.01), maxFreqValue, -log10(0.01));
-    verticalPlotLine->setLine(0, -log10(0.01), 0, maxMagnitudeValue);
+    horizontalPlotLine->setLine(0, MIN_Y_VALUE, maxFreqValue, MIN_Y_VALUE);
+    verticalPlotLine->setLine(0, MIN_Y_VALUE, 0, maxMagnitudeValue);
 
     QGraphicsView *view = this->views().first();
     //qDebug() << this->views().size() << this->views().first();
