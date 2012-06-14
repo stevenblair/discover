@@ -131,7 +131,7 @@ void PhasorScene::streamRemoved()
 }
 
 void PhasorScene::draw() {
-    qDebug() << "in draw()";
+    //qDebug() << "in draw()";
 
     // get StreamTableRow* from model and index
     StreamTableRow *stream;

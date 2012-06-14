@@ -15,14 +15,15 @@ const QColor FrequencyScene::waveformColors[8] = {QColor(180, 33, 38, VOLTAGE_LI
 
 FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 {
-    // enable only the first waveform by default
     for (int i = 0; i < 8; i++) {
-        if (i == 0) {
-            activeWaveform[i] = true;
-        }
-        else {
-            activeWaveform[i] = false;
-        }
+        activeWaveform[i] = true;
+//        // enable only the first waveform by default
+//        if (i == 0) {
+//            activeWaveform[i] = true;
+//        }
+//        else {
+//            activeWaveform[i] = false;
+//        }
 
         pen[i] = QPen(waveformColors[i]);
         path[i] = QPainterPath();
@@ -64,7 +65,7 @@ void FrequencyScene::redrawFrequencyScene()
 }
 
 void FrequencyScene::draw() {
-    qDebug() << "in FrequencyScene::draw()";
+    //qDebug() << "in FrequencyScene::draw()";
     StreamTableRow *stream;
 
     if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
@@ -75,10 +76,8 @@ void FrequencyScene::draw() {
     }
 
     if (stream == NULL) {
-        //qDebug() << "stream is null";
         return;
     }
-    //qDebug() << "stream is not null";
 
     for (int i = 0; i < 8; i++) {
         if (this->getWaveformState(i) == true) {
@@ -106,14 +105,8 @@ void FrequencyScene::draw() {
                 }
             }
 
-//            if (pathItem[i] == NULL) {
-//                qDebug() << "pathItem[i] is null";
-//                pathItem[i] = QGraphicsScene::addPath(path[i], pen[i]);
-//            }
-//            else {
-//                pathItem[i]->setPath(path[i]);
-//            }
             pathItem[i]->setPath(path[i]);
+
             if (!pathItem[i]->isVisible()) {
                 pathItem[i]->show();
             }

@@ -214,7 +214,7 @@ void StreamTableModel::updateAll(bool resizeColumns) {
 
 StreamTableRow *StreamTableModel::getRowFromIndex(QPersistentModelIndex *index)
 {
-    qDebug() << "in getRowFromIndex()";
+    //qDebug() << "in getRowFromIndex()";
     if (index->isValid()) {
         QMapIterator<QString, StreamTableRow*> i (rows);
         int rowNumber = 0;

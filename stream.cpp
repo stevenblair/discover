@@ -7,6 +7,7 @@
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
+    this->capturing = true;
     this->alive = true;
     this->checkAlive = false;
     this->analysed = false;
@@ -49,27 +50,30 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
         checkAlive = true;
         //qDebug() << smpCnt  << capturedSamples << samplesPerSecond;
 
-        samples[smpCnt].smpCount = smpCnt;
-        samples[smpCnt].voltage[0] = dataset->MUnn_TVTR_1_Vol_instMag.i;
-        samples[smpCnt].voltageQuality[0] = dataset->MUnn_TVTR_1_Vol_q;
-        samples[smpCnt].voltage[1] = dataset->MUnn_TVTR_2_Vol_instMag.i;
-        samples[smpCnt].voltageQuality[1] = dataset->MUnn_TVTR_2_Vol_q;
-        samples[smpCnt].voltage[2] = dataset->MUnn_TVTR_3_Vol_instMag.i;
-        samples[smpCnt].voltageQuality[2] = dataset->MUnn_TVTR_3_Vol_q;
-        samples[smpCnt].voltage[3] = dataset->MUnn_TVTR_4_Vol_instMag.i;
-        samples[smpCnt].voltageQuality[3] = dataset->MUnn_TVTR_4_Vol_q;
+        if (capturing) {
+            samples[smpCnt].smpCount = smpCnt;
+            samples[smpCnt].voltage[0] = dataset->MUnn_TVTR_1_Vol_instMag.i;
+            samples[smpCnt].voltageQuality[0] = dataset->MUnn_TVTR_1_Vol_q;
+            samples[smpCnt].voltage[1] = dataset->MUnn_TVTR_2_Vol_instMag.i;
+            samples[smpCnt].voltageQuality[1] = dataset->MUnn_TVTR_2_Vol_q;
+            samples[smpCnt].voltage[2] = dataset->MUnn_TVTR_3_Vol_instMag.i;
+            samples[smpCnt].voltageQuality[2] = dataset->MUnn_TVTR_3_Vol_q;
+            samples[smpCnt].voltage[3] = dataset->MUnn_TVTR_4_Vol_instMag.i;
+            samples[smpCnt].voltageQuality[3] = dataset->MUnn_TVTR_4_Vol_q;
 
-        samples[smpCnt].current[0] = dataset->MUnn_TCTR_1_Amp_instMag.i;
-        samples[smpCnt].currentQuality[0] = dataset->MUnn_TCTR_1_Amp_q;
-        samples[smpCnt].current[1] = dataset->MUnn_TCTR_2_Amp_instMag.i;
-        samples[smpCnt].currentQuality[1] = dataset->MUnn_TCTR_2_Amp_q;
-        samples[smpCnt].current[2] = dataset->MUnn_TCTR_3_Amp_instMag.i;
-        samples[smpCnt].currentQuality[2] = dataset->MUnn_TCTR_3_Amp_q;
-        samples[smpCnt].current[3] = dataset->MUnn_TCTR_4_Amp_instMag.i;
-        samples[smpCnt].currentQuality[3] = dataset->MUnn_TCTR_4_Amp_q;
+            samples[smpCnt].current[0] = dataset->MUnn_TCTR_1_Amp_instMag.i;
+            samples[smpCnt].currentQuality[0] = dataset->MUnn_TCTR_1_Amp_q;
+            samples[smpCnt].current[1] = dataset->MUnn_TCTR_2_Amp_instMag.i;
+            samples[smpCnt].currentQuality[1] = dataset->MUnn_TCTR_2_Amp_q;
+            samples[smpCnt].current[2] = dataset->MUnn_TCTR_3_Amp_instMag.i;
+            samples[smpCnt].currentQuality[2] = dataset->MUnn_TCTR_3_Amp_q;
+            samples[smpCnt].current[3] = dataset->MUnn_TCTR_4_Amp_instMag.i;
+            samples[smpCnt].currentQuality[3] = dataset->MUnn_TCTR_4_Amp_q;
+        }
 
         // determine sampling rate and nominal frequency
-        if (smpCnt == 0 && !sampleRate.isKnown()) {
+        if (smpCnt == 0 && capturedSamples >= SAMPLES_50HZ_80_PER_CYCLE/* && !sampleRate.isKnown()*/) {
+
             if (capturedSamples == SAMPLES_50HZ_80_PER_CYCLE) {
                 sampleRate.setSampleRate(SampleRate::NominalFreq50Hz, SampleRate::Samples80);
                 analysisInstance.setBlockParameters(&measure_P_50Hz_80_samples_per_cycle);
@@ -88,31 +92,34 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
             }
 
             if (sampleRate.isKnown()) {
-                samplesPerSecond = sampleRate.getSamplesPerSecond();
+                capturing = false;
+                //samplesPerSecond = sampleRate.getSamplesPerSecond();
 
                 if (disabled == false) {
                     updateStreamTableModel();
 
                     //emit updateModel(true);
-                    emit scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.
+                    /*emit */scheduleAnalysis();  // TODO: do analysis scheduling in StreamManager? Or, set a flag to: block UI updates; wait for all timers to stop, then block them; delete itself later.
                 }
             }
 
             // TODO: detect invalid sample rate values, and count valid packets recv'd?
         }
 
-        if (smpCnt == 0) {
-            capturedSamples = 1;
-        }
-        else {
-            capturedSamples++;
+        if (capturing) {
+            if (smpCnt == 0) {
+                capturedSamples = 1;
+            }
+            else {
+                capturedSamples++;
+            }
         }
     }
 }
 
 void Stream::updateStreamTableModel() {
     if (row != NULL && row->isAnalysed()) {
-        qDebug() << "in updateStreamTableModel()";
+        //qDebug() << "in updateStreamTableModel()";
 
         row->moveToThread(QApplication::instance()->thread());  // moves the object to UI thread
         emit setStreamTableRow(row);
@@ -221,12 +228,14 @@ void Stream::handleAnalysisFinished()
     if (disabled == false) {
         updateStreamTableModel();
 
-        if (timer == NULL) {
-            timer = new QTimer(this);
-            connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
-            connect(this, SIGNAL(stopTimer()), timer, SLOT(stop()));
-            timer->start(RECALCULATE_ANALYSIS_TIME);
-        }
+        capturing = true;
+
+//        if (timer == NULL) {
+//            timer = new QTimer(this);
+//            connect(timer, SIGNAL(timeout()), this, SLOT(timeout()));
+//            connect(this, SIGNAL(stopTimer()), timer, SLOT(stop()));
+//            timer->start(RECALCULATE_ANALYSIS_TIME);
+//        }
     }
 
     //emit updateView();  // TODO: Safe to put this here? Could be race condition?

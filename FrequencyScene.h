@@ -10,6 +10,8 @@ class FrequencyScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
+    static const QColor waveformColors[8];
+
     explicit FrequencyScene(QObject *parent = 0);
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
     void streamRemoved();
@@ -36,8 +38,6 @@ protected:
     StreamTableModel *streamTableModel;
     QPersistentModelIndex *index;
     bool activeWaveform[8];
-
-    static const QColor waveformColors[8];
 
 private:
     void draw();

@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
     tabWidget->addTab(frequencyTab, tr("Frequency analysis"));
-    tabWidget->addTab(new QWidget(), tr("Sequence components"));
+    tabWidget->addTab(new QWidget(), tr("Symmetrical components"));
     tabWidget->addTab(new QWidget(), tr("Power analysis"));
     tabWidget->addTab(new QWidget(), tr("Power quality"));
 

@@ -65,23 +65,24 @@ signals:
 
 public slots:
     void handleAnalysisFinished();
-    void scheduleAnalysis();
     void timeout();
 
 private:
     void analyse();
     void updateStreamTableModel();
+    void scheduleAnalysis();
 
     //TODO: add QPainterPath which is explicitly shared with UI thread?
 
     bool disabled;
+    bool capturing;
 
     QString svID;
     QString sourceMAC;
     QString destMAC;
 
     quint32 capturedSamples;
-    quint32 samplesPerSecond;
+    //quint32 samplesPerSecond;
     Sample samples[MAX_SAMPLES];
     bool analysed;
     bool alive;
