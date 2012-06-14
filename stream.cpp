@@ -320,7 +320,7 @@ void Stream::analyse()
 
     for (int signal = 0; signal < 8; signal++) {
         for (quint32 t = 0; t < len; ++t) {
-            x[signal][t] = samples[t].getSampleValue(signal);
+            x[signal][t] = samples[t].getSampleValue(signal) / maxInstantaneousVoltage;     // TODO: set proper scale
             x[signal][t] = x[signal][t] * 0.5 * (1 - qCos((2 * M_PI * t) / (len - 1)));     // apply Hann Window to sample
         }
 
@@ -338,7 +338,10 @@ void Stream::analyse()
 
             mag = qSqrt(real*real + imaginary*imaginary);
 
-            row->appendFreqPoint(signal, frequency, -mag);  // negate the y-coordinate, in preparation for plotting
+            // TODO: define this cut-off in View, because there will be a grid line here anyway?
+            //if (mag >= 0.01) {
+                row->appendFreqPoint(signal, log10(frequency), -log10(mag));  // negate the y-coordinate, in preparation for plotting
+            //}
         }
     }
 
