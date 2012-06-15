@@ -62,7 +62,18 @@ public:
     QString getPower()
     {
         if (analysed) {
-            return QString("%1 kVA, p.f. %2").arg(measure_Y.Power[0] / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+            qreal power = measure_Y.Power[0];
+            QString units;
+            if (power > 1000.0 && power < 1000000.0) {
+                power = power / 1000.0;
+                units = QString("kVA");
+            }
+            else if (power >= 1000000.0) {
+                power = power / 1000000.0;
+                units = QString("MVA");
+            }
+
+            return QString("%1 %2, p.f. %3").arg(power, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(units).arg(measure_Y.Power[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
         }
         else {
             return QString("--");

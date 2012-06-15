@@ -117,6 +117,7 @@ void Stream::addSample(LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt)
     }
 }
 
+//TODO: this function is out of date, and can only be called after analysis, which has 'new StreamTableRow()'
 void Stream::updateStreamTableModel() {
     if (row != NULL && row->isAnalysed()) {
         //qDebug() << "in updateStreamTableModel()";

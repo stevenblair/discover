@@ -266,7 +266,9 @@ void StreamTableModel::networkInterfaceStopped()
         beginRemoveRows(QModelIndex(), 0, rows.size() - 1);
         while (i.hasNext()) {
             i.next();
-            rows.remove(((StreamTableRow*) i.value())->getSvID());
+
+            QPointer<StreamTableRow> row = rows.take(((QPointer<StreamTableRow>) i.value())->getSvID());
+            emit row->deleteLater();
             //((StreamTableRow*) i.value())->deleteLater();
         }
         endRemoveRows();
