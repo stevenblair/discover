@@ -360,9 +360,6 @@ void Stream::analyse()
 
     // generate row contents and move it to original thread (commsThread)
     row->setup(this);
-
-    //qDebug() << sizeof(row) << sizeof(*row);
-
     row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
     //emit setStreamTableRow(row);
 

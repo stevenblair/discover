@@ -117,7 +117,7 @@ void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTable
 
 void PhasorScene::streamRemoved()
 {
-    qDebug() << "in streamRemoved()";
+    //qDebug() << "in streamRemoved()";
     //this->streamTableModel = NULL;
     //this->index = NULL;
 

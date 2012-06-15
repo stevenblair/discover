@@ -54,7 +54,7 @@ void FrequencyTab::removeView()
 void FrequencyTab::setActiveWavefrom(int id)
 {
     if (id >= 0 && id < 8) {
-        qDebug() << id << activeWaveformCheckBox[id]->isChecked();
+        //qDebug() << id << activeWaveformCheckBox[id]->isChecked();
         frequencyScene->setWaveformState(id, activeWaveformCheckBox[id]->isChecked());
         emit redrawFrequencyScene();
     }

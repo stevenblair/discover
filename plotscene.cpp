@@ -14,7 +14,6 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 
     plotLinePen = QPen(plotLineColor);
     plotLinePen.setCosmetic(true);
-    //plotLinePen.setWidth(2);
     plotLinePen.setCapStyle(Qt::RoundCap);
     plotLinePenDashed = QPen(plotLineColor);
     plotLinePenDashed.setCosmetic(true);
@@ -124,7 +123,7 @@ Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 }
 
 void PlotScene::draw() {
-    qDebug() << "in PlotScene::draw()";
+    //qDebug() << "in PlotScene::draw()";
 
     if (stream != NULL) {
         //TODO: use below to get pixel size of viewport; use to scale all heights and widths?
