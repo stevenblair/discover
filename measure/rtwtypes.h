@@ -3,10 +3,10 @@
  *
  * Code generated for Simulink model 'measure'.
  *
- * Model version                  : 1.72
+ * Model version                  : 1.107
  * Simulink Coder version         : 8.1 (R2011b) 08-Jul-2011
  * TLC version                    : 8.1 (Jul  9 2011)
- * C/C++ source code generated on : Thu May 31 12:54:18 2012
+ * C/C++ source code generated on : Mon Jun 18 17:26:43 2012
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86/Pentium

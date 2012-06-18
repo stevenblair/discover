@@ -53,7 +53,8 @@ SOURCES += main.cpp\
     ProxyItemView.cpp \
     PhasorPlotTab.cpp \
     FrequencyTab.cpp \
-    FrequencyScene.cpp
+    FrequencyScene.cpp \
+    measure/measure_data.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
