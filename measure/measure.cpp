@@ -293,7 +293,7 @@ void measureModelClass::step0()
   boolean_T rtb_LogicalOperator9;
   boolean_T rtb_Compare_jsl;
   boolean_T rtb_Compare_j1k4d50fkuukjsr;
-  real_T rtb_Divide_hh0;
+  real_T rtb_Divide_hh;
   boolean_T rtb_Compare_ddcrdc;
   boolean_T rtb_Compare_ky;
   boolean_T rtb_Compare_ddcrdcv;
@@ -301,11 +301,11 @@ void measureModelClass::step0()
   boolean_T rtb_Compare_ks;
   real_T rtb_Subtract3_lri;
   real_T rtb_MathFunction_gbn2;
-  real_T rtb_Divide_m;
-  real_T rtb_Divide_hh;
+  real_T rtb_Divide_mg;
+  real_T rtb_Divide_h;
   real_T rtb_TrigonometricFunction_i;
   boolean_T rtb_LogicalOperator_eg0;
-  real_T rtb_Ts_FFT_c;
+  real_T rtb_Ts_FFT_k;
   uint32_T rtb_Switch1_pwrmj;
   real_T rtb_UnitDelay_i;
   uint32_T rtb_Switch1_pwrmjy;
@@ -409,9 +409,9 @@ void measureModelClass::step0()
   int32_T i;
   real_T tmp[6];
   boolean_T rtb_Switch6_idx;
-  real_T rtb_Add1_fs_idx;
-  real_T rtb_Add1_fs_idx_0;
-  real_T rtb_Add1_fs_idx_1;
+  real_T rtb_Add1_f_idx;
+  real_T rtb_Add1_f_idx_0;
+  real_T rtb_Add1_f_idx_1;
   real_T rtb_VpuIpktoVrmsIrms_im;
   (measure_M->Timing.RateInteraction.TID0_1)++;
   if ((measure_M->Timing.RateInteraction.TID0_1) > 199) {
@@ -508,9 +508,9 @@ void measureModelClass::step0()
     rtb_Gain_pj = fmax(rtb_Gain_pj, tmp[i + 1]);
   }
 
-  rtb_Add1_fs_idx = rtb_Gain_pj - measure_P.Constant8_Value[0];
-  rtb_Add1_fs_idx_0 = rtb_Gain_pj - measure_P.Constant8_Value[1];
-  rtb_Add1_fs_idx_1 = rtb_Gain_pj - measure_P.Constant8_Value[2];
+  rtb_Add1_f_idx = rtb_Gain_pj - measure_P.Constant8_Value[0];
+  rtb_Add1_f_idx_0 = rtb_Gain_pj - measure_P.Constant8_Value[1];
+  rtb_Add1_f_idx_1 = rtb_Gain_pj - measure_P.Constant8_Value[2];
   rtb_Sum1_p5 = ((rtb_Gain_pj - measure_P.Constant7_Value[1]) *
                  measure_P.Gain_Gain_n) + measure_P.Bias_Bias_hz;
   rtb_Sum1_p5 = ((((measure_U.Vabcpu[1] - measure_DWork.UnitDelay2_DSTATE) *
@@ -545,7 +545,7 @@ void measureModelClass::step0()
     rtb_Sum2_i += measure_P.Bias1_Bias_jc;
   } else {
     if (rtb_Sum2_i > measure_P.Constant_Value_jc) {
-      rtb_Sum2_i += measure_P.Bias_Bias_jc;
+      rtb_Sum2_i += measure_P.Bias_Bias_jcf;
     }
   }
 
@@ -560,7 +560,7 @@ void measureModelClass::step0()
   rtb_MathFunction1 = 1.0 / measure_DWork.UnitDelay_DSTATE_lm;
   if (rtb_MathFunction1 < measure_P.Constant_Value_am) {
     rtb_Switch = measure_P.Constant_Value_d0;
-  } else if (rtb_MathFunction1 > measure_P.Constant_Value_g) {
+  } else if (rtb_MathFunction1 > measure_P.Constant_Value_gr) {
     rtb_Switch = measure_P.Constant1_Value_jcfawyw2o0;
   } else {
     rtb_Switch = rtb_MathFunction1;
@@ -572,16 +572,16 @@ void measureModelClass::step0()
   } else if (rtb_Gain_pj < measure_P.Constant_Value_gg) {
     measure_B.Switch2 = rtb_Gain_pj;
   } else {
-    measure_B.Switch2 = rtb_Gain_pj + measure_P.Bias_Bias_jcfawy;
+    measure_B.Switch2 = rtb_Gain_pj + measure_P.Bias_Bias_jcfawyw;
   }
 
   {
     measure_B.SFunction = (int32_T)measure_B.Switch2;
   }
 
-  if (measure_B.SFunction < measure_P.Constant_Value_nz) {
-    measure_B.Switch2_h1wibj25mp = measure_P.Constant_Value_mwk;
-  } else if (measure_B.SFunction > measure_P.Constant_Value_eom) {
+  if (measure_B.SFunction < measure_P.Constant_Value_ir) {
+    measure_B.Switch2_h1wibj25mp = measure_P.Constant_Value_o3;
+  } else if (measure_B.SFunction > measure_P.Constant_Value_mwk) {
     measure_B.Switch2_h1wibj25mp = measure_P.Constant3_Value_jc;
   } else {
     measure_B.Switch2_h1wibj25mp = measure_B.SFunction;
@@ -703,16 +703,16 @@ void measureModelClass::step0()
   } else if (rtb_Gain_pj < measure_P.Constant_Value_ha) {
     measure_B.Switch2_h1 = rtb_Gain_pj;
   } else {
-    measure_B.Switch2_h1 = rtb_Gain_pj + measure_P.Bias_Bias_jcfawyw;
+    measure_B.Switch2_h1 = rtb_Gain_pj + measure_P.Bias_Bias_jcfawyw2;
   }
 
   {
     measure_B.SFunction_i = (int32_T)measure_B.Switch2_h1;
   }
 
-  if (measure_B.SFunction_i < measure_P.Constant_Value_ir) {
-    measure_B.Switch2_h1wibj25mpu = measure_P.Constant_Value_kb;
-  } else if (measure_B.SFunction_i > measure_P.Constant_Value_o3) {
+  if (measure_B.SFunction_i < measure_P.Constant_Value_bq) {
+    measure_B.Switch2_h1wibj25mpu = measure_P.Constant_Value_ob;
+  } else if (measure_B.SFunction_i > measure_P.Constant_Value_kbv) {
     measure_B.Switch2_h1wibj25mpu = measure_P.Constant3_Value_jcf;
   } else {
     measure_B.Switch2_h1wibj25mpu = measure_B.SFunction_i;
@@ -889,7 +889,7 @@ void measureModelClass::step0()
   }
 
   rtb_Tps2dt_cr = measure_P.Gain1_Gain_jcf * measure_P.Constant5_Value;
-  rtb_Sum2_i = rtb_Tps2dt_cr + measure_P.Bias_Bias_jcfawyw2;
+  rtb_Sum2_i = rtb_Tps2dt_cr + measure_P.Bias_Bias_jcfawyw2o;
   if (rtb_Sum2_i > measure_P.Constant_Value_o2) {
     rtb_Sum2_i = measure_P.Constant_Value_j;
   }
@@ -902,14 +902,14 @@ void measureModelClass::step0()
     rtb_Switch1_ia = measure_P.const_Value_jc;
   }
 
-  rtb_Compare_hpz455i0 = (rtb_Switch1_ia == measure_P.Constant_Value_irv);
+  rtb_Compare_hpz455i0 = (rtb_Switch1_ia == measure_P.Constant_Value_gl);
   if (rtb_Compare_mt) {
     rtb_UnitDelay1_pu5rdhlnellvz = measure_DWork.UnitDelay1_DSTATE_cmnb3jxq;
   } else {
     rtb_UnitDelay1_pu5rdhlnellvz = measure_P.const_Value_j;
   }
 
-  rtb_Compare_h4 = (rtb_UnitDelay1_pu5rdhlnellvz == measure_P.Constant_Value_gl);
+  rtb_Compare_h4 = (rtb_UnitDelay1_pu5rdhlnellvz == measure_P.Constant_Value_ku);
   if (rtb_Compare_h4) {
     if (rtb_Compare_hpz455i0) {
       if (!rtb_LogicalOperator1) {
@@ -959,7 +959,7 @@ void measureModelClass::step0()
   }
 
   if (measure_DWork.UnitDelay2_DSTATE_h5brdqci < measure_P.Constant_Value_mg) {
-    rtb_Tps2dt_cr = measure_P.Constant_Value_k;
+    rtb_Tps2dt_cr = measure_P.Constant_Value_kj;
   } else if (measure_DWork.UnitDelay2_DSTATE_h5brdqci >
              measure_P.Constant_Value_jcfawyw2o0osk24) {
     rtb_Tps2dt_cr = measure_P.Constant1_Value_jcfawyw;
@@ -973,16 +973,16 @@ void measureModelClass::step0()
   } else if (rtb_Gain_pj < measure_P.Constant_Value_de) {
     measure_B.Switch2_h1wi = rtb_Gain_pj;
   } else {
-    measure_B.Switch2_h1wi = rtb_Gain_pj + measure_P.Bias_Bias_jcfa;
+    measure_B.Switch2_h1wi = rtb_Gain_pj + measure_P.Bias_Bias_jcfaw;
   }
 
   {
     measure_B.SFunction_il = (int32_T)measure_B.Switch2_h1wi;
   }
 
-  if (measure_B.SFunction_il < measure_P.Constant_Value_bq) {
-    measure_B.Switch2_h1wibj25mpus = measure_P.Constant_Value_eo;
-  } else if (measure_B.SFunction_il > measure_P.Constant_Value_do) {
+  if (measure_B.SFunction_il < measure_P.Constant_Value_pk4) {
+    measure_B.Switch2_h1wibj25mpus = measure_P.Constant_Value_eom;
+  } else if (measure_B.SFunction_il > measure_P.Constant_Value_eo) {
     measure_B.Switch2_h1wibj25mpus = measure_P.Constant3_Value_j;
   } else {
     measure_B.Switch2_h1wibj25mpus = measure_B.SFunction_il;
@@ -1091,7 +1091,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value_jcf;
   }
 
-  rtb_Compare_jm = (rtb_UnitDelay1_c > measure_P.Constant_Value_ku);
+  rtb_Compare_jm = (rtb_UnitDelay1_c > measure_P.Constant_Value_kx);
   if (rtb_Compare_jm) {
     measure_B.Switch2_h1wib = measure_B.Switch2_h1w;
   } else {
@@ -1118,7 +1118,7 @@ void measureModelClass::step0()
     rtb_Switch1_a = measure_P.const_Value;
   }
 
-  rtb_Compare_mt = (rtb_Switch1_a == measure_P.Constant_Value_kx);
+  rtb_Compare_mt = (rtb_Switch1_a == measure_P.Constant_Value_oc);
   rtb_LogicalOperator1_fw = (rtb_Compare_mt || rtb_UnitDelay4_dmwj4s1jwn3);
   if (rtb_LogicalOperator1_fw) {
     rtb_Switch1_iew = rtb_Switch_nu;
@@ -1149,7 +1149,7 @@ void measureModelClass::step0()
   rtb_Sum = (measure_P.Gain_Gain_e * measure_DWork.UnitDelay2_DSTATE_kg) +
     measure_DWork.UnitDelay_DSTATE_p;
   if (rtb_Sum > measure_P.Constant_Value_ep34emcngn) {
-    rtb_Sum += measure_P.Bias_Bias_e;
+    rtb_Sum += measure_P.Bias_Bias_ep;
   }
 
   rtb_UnaryMinus_o = std::sin(rtb_Sum);
@@ -1162,7 +1162,7 @@ void measureModelClass::step0()
   }
 
   rtb_Divide_nfu = ((measure_DWork.UnitDelay2_DSTATE_kg - rtb_Switch4) *
-                    measure_P.FCn3_Gain) + measure_P.Bias_Bias_ep34e;
+                    measure_P.FCn3_Gain) + measure_P.Bias_Bias_ep34em;
   measure_B.Product[0] = (rtb_Sum1_lle * rtb_UnaryMinus_o) * rtb_Divide_nfu;
   measure_B.Product[1] = (rtb_Sum1_lle * rtb_Sum2_i) * rtb_Divide_nfu;
   if (rtb_LogicalOperator1_fmgwx) {
@@ -1188,16 +1188,16 @@ void measureModelClass::step0()
   } else if (rtb_Gain_pj < measure_P.Constant_Value_ep34emcngnxmt) {
     measure_B.Switch2_f = rtb_Gain_pj;
   } else {
-    measure_B.Switch2_f = rtb_Gain_pj + measure_P.Bias_Bias_ep;
+    measure_B.Switch2_f = rtb_Gain_pj + measure_P.Bias_Bias_ep3;
   }
 
   {
     measure_B.SFunction_c = (int32_T)measure_B.Switch2_f;
   }
 
-  if (measure_B.SFunction_c < measure_P.Constant_Value_ap2) {
-    measure_B.Switch2_f0yh = measure_P.Constant_Value_fgy;
-  } else if (measure_B.SFunction_c > measure_P.Constant_Value_dea) {
+  if (measure_B.SFunction_c < measure_P.Constant_Value_a2) {
+    measure_B.Switch2_f0yh = measure_P.Constant_Value_aq;
+  } else if (measure_B.SFunction_c > measure_P.Constant_Value_fgy) {
     measure_B.Switch2_f0yh = measure_P.Constant3_Value_e;
   } else {
     measure_B.Switch2_f0yh = measure_B.SFunction_c;
@@ -1782,7 +1782,7 @@ void measureModelClass::step0()
     rtb_Switch1_mf0c = measure_P.const_Value_ok;
   }
 
-  rtb_Compare_dtgasgy1ciwmtj = (rtb_Switch1_mf0c == measure_P.Constant_Value_okw);
+  rtb_Compare_dtgasgy1ciwmtj = (rtb_Switch1_mf0c == measure_P.Constant_Value_ok);
   rtb_LogicalOperator9 = !((rtb_Compare_j1k4d50fkuukj ||
     rtb_Compare_g3iwu32gm4xoq) || rtb_Compare_dtgasgy1ciwmtj);
   if (rtb_UnitDelay4_dq) {
@@ -1803,9 +1803,9 @@ void measureModelClass::step0()
                      rtb_LogicalOperator9);
   rtb_Compare_j1k4d50fkuukjsr = (rtb_Compare_jsl || (!(rtb_Compare_j1k4d50fkuukj
     || rtb_LogicalOperator9)));
-  rtb_Divide_hh0 = ((((real_T)measure_DWork.clockTickCounter_io) <
-                     measure_P.PulseGenerator1_Duty_ep) &&
-                    (measure_DWork.clockTickCounter_io >= 0)) ?
+  rtb_Divide_hh = ((((real_T)measure_DWork.clockTickCounter_io) <
+                    measure_P.PulseGenerator1_Duty_ep) &&
+                   (measure_DWork.clockTickCounter_io >= 0)) ?
     measure_P.PulseGenerator1_Amp_ep : 0.0;
   if (((real_T)measure_DWork.clockTickCounter_io) >=
       (measure_P.PulseGenerator1_Period_ep - 1.0)) {
@@ -1814,12 +1814,12 @@ void measureModelClass::step0()
     measure_DWork.clockTickCounter_io = measure_DWork.clockTickCounter_io + 1;
   }
 
-  rtb_Compare_ddcrdc = (rtb_Divide_hh0 > measure_P.Constant_Value_ep34emcngnxmtm);
+  rtb_Compare_ddcrdc = (rtb_Divide_hh > measure_P.Constant_Value_ep34emcngnxmtm);
   rtb_Compare_ky = ((!rtb_Compare_ddcrdc) && (measure_DWork.delay1_DSTATE_dt));
   rtb_Switch1_l = measure_DWork.UnitDelay3_DSTATE_i;
-  rtb_Divide_hh0 = ((((real_T)measure_DWork.clockTickCounter_iom) <
-                     measure_P.PulseGenerator1_Duty_ep3) &&
-                    (measure_DWork.clockTickCounter_iom >= 0)) ?
+  rtb_Divide_hh = ((((real_T)measure_DWork.clockTickCounter_iom) <
+                    measure_P.PulseGenerator1_Duty_ep3) &&
+                   (measure_DWork.clockTickCounter_iom >= 0)) ?
     measure_P.PulseGenerator1_Amp_ep3 : 0.0;
   if (((real_T)measure_DWork.clockTickCounter_iom) >=
       (measure_P.PulseGenerator1_Period_ep3 - 1.0)) {
@@ -1828,7 +1828,7 @@ void measureModelClass::step0()
     measure_DWork.clockTickCounter_iom = measure_DWork.clockTickCounter_iom + 1;
   }
 
-  rtb_Compare_ddcrdcv = (rtb_Divide_hh0 >
+  rtb_Compare_ddcrdcv = (rtb_Divide_hh >
     measure_P.Constant_Value_ep34emcngnxmtmb);
   rtb_Compare_enj = ((!rtb_Compare_ddcrdcv) && (measure_DWork.delay1_DSTATE_dtd));
   if (rtb_Compare_enj) {
@@ -1841,29 +1841,29 @@ void measureModelClass::step0()
 
   rtb_Gain_pj = measure_P.FCn1_Gain * rtb_Switch;
   if (rtb_Gain_pj < measure_P.Constant_Value_gq) {
-    rtb_Divide_hh0 = measure_P.Constant_Value_ep34em;
+    rtb_Divide_hh = measure_P.Constant_Value_ep34em;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_ep34e) {
-    rtb_Divide_hh0 = measure_P.Constant1_Value_ep;
+    rtb_Divide_hh = measure_P.Constant1_Value_ep;
   } else {
-    rtb_Divide_hh0 = rtb_Gain_pj;
+    rtb_Divide_hh = rtb_Gain_pj;
   }
 
-  rtb_Gain_pj = measure_P.Gain_Gain_ep34 * rtb_Divide_hh0;
+  rtb_Gain_pj = measure_P.Gain_Gain_ep34 * rtb_Divide_hh;
   if (measure_P.Constant1_Value_ep34e) {
     measure_B.Switch2_f0 = rtb_Gain_pj + measure_P.Bias1_Bias_ep;
   } else if (rtb_Gain_pj < measure_P.Constant_Value_cw5) {
     measure_B.Switch2_f0 = rtb_Gain_pj;
   } else {
-    measure_B.Switch2_f0 = rtb_Gain_pj + measure_P.Bias_Bias_ep3;
+    measure_B.Switch2_f0 = rtb_Gain_pj + measure_P.Bias_Bias_ep34;
   }
 
   {
     measure_B.SFunction_ct = (int32_T)measure_B.Switch2_f0;
   }
 
-  if (measure_B.SFunction_ct < measure_P.Constant_Value_a2) {
-    measure_B.Switch2_f0yhy = measure_P.Constant_Value_fp;
-  } else if (measure_B.SFunction_ct > measure_P.Constant_Value_aq) {
+  if (measure_B.SFunction_ct < measure_P.Constant_Value_n3) {
+    measure_B.Switch2_f0yhy = measure_P.Constant_Value_k0;
+  } else if (measure_B.SFunction_ct > measure_P.Constant_Value_fp) {
     measure_B.Switch2_f0yhy = measure_P.Constant3_Value_ep;
   } else {
     measure_B.Switch2_f0yhy = measure_B.SFunction_ct;
@@ -1915,10 +1915,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Divide_m = measure_B.Switch_lv2ap -
+    rtb_Divide_mg = measure_B.Switch_lv2ap -
       measure_B.VariableDiscreteD_amg5cres2anrb;
   } else {
-    rtb_Divide_m = measure_B.Switch_lv2aps -
+    rtb_Divide_mg = measure_B.Switch_lv2aps -
       measure_B.VariableDiscrete_amg5cres2anrbl;
   }
 
@@ -1952,11 +1952,11 @@ void measureModelClass::step0()
   rtb_MathFunction_gbn2 = rtb_Subtract3_lri * rtb_Subtract3_lri;
   rtb_Subtract3_lri = (measure_P.Gain1_Gain_ep * rtb_Subtract3_lri) -
     rtb_MathFunction_gbn2;
-  rtb_Gain_pj = rtb_Divide_m - ((measure_B.VariableDiscreteDelaywi_m0kftpo *
+  rtb_Gain_pj = rtb_Divide_mg - ((measure_B.VariableDiscreteDelaywi_m0kftpo *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywi_gpkwvfa *
     rtb_MathFunction_gbn2));
-  rtb_Divide_m = (1.0 / rtb_Divide_hh0) * measure_P.Gain_Gain_ep34e;
-  rtb_Divide_hh0 = rtb_Gain_pj * rtb_Divide_m;
+  rtb_Divide_mg = (1.0 / rtb_Divide_hh) * measure_P.Gain_Gain_ep34e;
+  rtb_Divide_hh = rtb_Gain_pj * rtb_Divide_mg;
   if (rtb_Compare_enj) {
     measure_B.Switch_lv2aps4 = measure_P.double_Value_dsc5ttdh;
   } else {
@@ -2008,10 +2008,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Divide_hh = measure_B.Switch_lv2aps4 -
+    rtb_Divide_h = measure_B.Switch_lv2aps4 -
       measure_B.VariableDiscret_amg5cres2anrbla;
   } else {
-    rtb_Divide_hh = measure_B.Switch_lv2aps4n - measure_B.VariableDiscret_i;
+    rtb_Divide_h = measure_B.Switch_lv2aps4n - measure_B.VariableDiscret_i;
   }
 
   {
@@ -2040,10 +2040,10 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_hh = (rtb_Divide_hh - ((measure_B.VariableDiscreteDelayw_m0kftpos *
+  rtb_Divide_h = (rtb_Divide_h - ((measure_B.VariableDiscreteDelayw_m0kftpos *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelayw_gpkwvfaj *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
-  rtb_TrigonometricFunction_i = rt_atan2d_snf(rtb_Divide_hh0, rtb_Divide_hh);
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_TrigonometricFunction_i = rt_atan2d_snf(rtb_Divide_hh, rtb_Divide_h);
   rtb_Add_p = rtb_TrigonometricFunction_i + rtb_Sum;
   if (rtb_Compare_j1k4d50fkuukjsr) {
     measure_B.Switch6 = rtb_Switch4;
@@ -2053,7 +2053,7 @@ void measureModelClass::step0()
       rtb_Gain_pj += measure_P.Bias1_Bias_a;
     } else {
       if (rtb_Gain_pj > measure_P.Constant_Value_a) {
-        rtb_Gain_pj += measure_P.Bias_Bias_a;
+        rtb_Gain_pj += measure_P.Bias_Bias_ap;
       }
     }
 
@@ -2089,16 +2089,16 @@ void measureModelClass::step0()
   } else if (rtb_Gain_pj < measure_P.Constant_Value_iv) {
     measure_B.Switch2_f0y = rtb_Gain_pj;
   } else {
-    measure_B.Switch2_f0y = rtb_Gain_pj + measure_P.Bias_Bias_ep34;
+    measure_B.Switch2_f0y = rtb_Gain_pj + measure_P.Bias_Bias_ep34e;
   }
 
   {
     measure_B.SFunction_ct5 = (int32_T)measure_B.Switch2_f0y;
   }
 
-  if (measure_B.SFunction_ct5 < measure_P.Constant_Value_n3) {
-    measure_B.Switch2_f0yhyr = measure_P.Constant_Value_hm;
-  } else if (measure_B.SFunction_ct5 > measure_P.Constant_Value_k0) {
+  if (measure_B.SFunction_ct5 < measure_P.Constant_Value_oo) {
+    measure_B.Switch2_f0yhyr = measure_P.Constant_Value_es;
+  } else if (measure_B.SFunction_ct5 > measure_P.Constant_Value_hm) {
     measure_B.Switch2_f0yhyr = measure_P.Constant3_Value_ep3;
   } else {
     measure_B.Switch2_f0yhyr = measure_B.SFunction_ct5;
@@ -2173,12 +2173,12 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Ts_FFT_c = ((real_T)measure_B.Switch2_f0yhyr) - rtb_Gain_pj;
-  rtb_Switch1_l = rtb_Ts_FFT_c * rtb_Ts_FFT_c;
-  rtb_Switch = (measure_P.Gain1_Gain_ep3 * rtb_Ts_FFT_c) - rtb_Switch1_l;
+  rtb_Ts_FFT_k = ((real_T)measure_B.Switch2_f0yhyr) - rtb_Gain_pj;
+  rtb_Switch1_l = rtb_Ts_FFT_k * rtb_Ts_FFT_k;
+  rtb_Switch = (measure_P.Gain1_Gain_ep3 * rtb_Ts_FFT_k) - rtb_Switch1_l;
   rtb_MathFunction1 = (1.0 / rtb_Switch_jkaja) * measure_P.Gain_Gain_ep34emc;
   if (rtb_Compare_j1k4d50fkuukjsr) {
-    rtb_Ts_FFT_c = rtb_Switch4;
+    rtb_Ts_FFT_k = rtb_Switch4;
   } else {
     if (rtb_Compare_ddcrdc) {
       rtb_Gain_pj = measure_B.Switch_b - measure_B.VariableDiscret_f;
@@ -2186,7 +2186,7 @@ void measureModelClass::step0()
       rtb_Gain_pj = measure_B.Switch_bo - measure_B.VariableDiscret_g;
     }
 
-    rtb_Ts_FFT_c = (rtb_Gain_pj - ((measure_B.VariableDiscreteDelay_m0kftposv *
+    rtb_Ts_FFT_k = (rtb_Gain_pj - ((measure_B.VariableDiscreteDelay_m0kftposv *
       rtb_Switch) + (measure_B.VariableDiscreteDelay_gpkwvfajc * rtb_Switch1_l)))
       * rtb_MathFunction1;
   }
@@ -2323,7 +2323,7 @@ void measureModelClass::step0()
     rtb_Switch1_mf0c2 = measure_P.const_Value_okw;
   }
 
-  rtb_Compare_ji = (rtb_Switch1_mf0c2 == measure_P.Constant_Value_okw1);
+  rtb_Compare_ji = (rtb_Switch1_mf0c2 == measure_P.Constant_Value_okw);
   rtb_UnitDelay_itx = measure_DWork.UnitDelay_DSTATE_mj2;
   rtb_Compare_il = (measure_DWork.UnitDelay_DSTATE_mj2 <
                     measure_P.Constant_Value_pt);
@@ -2378,7 +2378,7 @@ void measureModelClass::step0()
     rtb_Switch_jkaja = measure_P.Constant2_Value;
   }
 
-  rtb_Switch1_ie = rtb_Ts_FFT_c * rtb_Switch_jkaja;
+  rtb_Switch1_ie = rtb_Ts_FFT_k * rtb_Switch_jkaja;
   rtb_LogicalOperator1_pvh3 = (rtb_Compare_jsl || (!(rtb_Compare_g3iwu32gm4xoq ||
     rtb_LogicalOperator9)));
   rtb_Gain_pj = measure_DWork.UnitDelay3_DSTATE_i5;
@@ -2464,7 +2464,7 @@ void measureModelClass::step0()
 
   rtb_Divide_b4h = (rtb_Divide_b4h - ((measure_B.VariableDiscreteDela_m0kftposvc
     * rtb_Subtract3_lri) + (measure_B.VariableDiscreteDela_gpkwvfajco *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_Compare_enj) {
     measure_B.Switch_f0o4owl = measure_P.double_Value_d1m1hiqr;
   } else {
@@ -2549,7 +2549,7 @@ void measureModelClass::step0()
                      ((measure_B.VariableDiscreteDel_m0kftposvcp *
                        rtb_Subtract3_lri) +
                       (measure_B.VariableDiscreteDel_gpkwvfajco2 *
-                       rtb_MathFunction_gbn2))) * rtb_Divide_m;
+                       rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_TrigonometricFunction_ix = rt_atan2d_snf(rtb_Divide_b4h, rtb_Divide_b4ha);
   rtb_Add_n = rtb_TrigonometricFunction_ix + rtb_Sum;
   if (rtb_LogicalOperator1_pvh3) {
@@ -2560,7 +2560,7 @@ void measureModelClass::step0()
       rtb_Gain_pj += measure_P.Bias1_Bias_i;
     } else {
       if (rtb_Gain_pj > measure_P.Constant_Value_i2) {
-        rtb_Gain_pj += measure_P.Bias_Bias_i;
+        rtb_Gain_pj += measure_P.Bias_Bias_i2;
       }
     }
 
@@ -2765,7 +2765,7 @@ void measureModelClass::step0()
 
   rtb_Divide_nqz = (rtb_Divide_nqz - ((measure_B.VariableDiscreteD_m0kftposvcp0f
     * rtb_Subtract3_lri) + (measure_B.VariableDiscreteD_gpkwvfajco2kr *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_Compare_enj) {
     measure_B.Switch_ngeqq2os = measure_P.double_Value_m0413rfk;
   } else {
@@ -2850,7 +2850,7 @@ void measureModelClass::step0()
                      ((measure_B.VariableDiscrete_m0kftposvcp0f2 *
                        rtb_Subtract3_lri) +
                       (measure_B.VariableDiscrete_gpkwvfajco2krn *
-                       rtb_MathFunction_gbn2))) * rtb_Divide_m;
+                       rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_TrigonometricFunction_ixv = rt_atan2d_snf(rtb_Divide_nqz, rtb_Divide_nqzy);
   rtb_Add_gl = rtb_TrigonometricFunction_ixv + rtb_Sum;
   if (rtb_Compare_jsl) {
@@ -2961,7 +2961,7 @@ void measureModelClass::step0()
       * rtb_MathFunction1;
   }
 
-  rtb_Bias2 = rtb_MathFunction2_d0 + measure_P.Bias2_Bias_o4;
+  rtb_Bias2 = rtb_MathFunction2_d0 + measure_P.Bias2_Bias_o;
   if (rtb_LogicalOperator1) {
     rtb_Gain_pj = rtb_Bias2 * rtb_Bias2;
     if (rtb_Gain_pj < measure_P.Constant_Value_cw1ksrzc22qlb1) {
@@ -3016,7 +3016,7 @@ void measureModelClass::step0()
       measure_DWork.UnitDelay4_DSTATE_e) + measure_DWork.UnitDelay2_DSTATE_e5;
   }
 
-  if (measure_DWork.UnitDelay2_DSTATE_e5y < measure_P.Constant_Value_ao) {
+  if (measure_DWork.UnitDelay2_DSTATE_e5y < measure_P.Constant_Value_aow) {
     rtb_Switch_j = measure_P.Constant_Value_mqco2gbunewgp;
   } else if (measure_DWork.UnitDelay2_DSTATE_e5y >
              measure_P.Constant_Value_mqco2gbunewg) {
@@ -3038,9 +3038,9 @@ void measureModelClass::step0()
     measure_B.SFunction_j = (int32_T)measure_B.Switch2_d;
   }
 
-  if (measure_B.SFunction_j < measure_P.Constant_Value_eq) {
-    measure_B.Switch2_dmf4 = measure_P.Constant_Value_m5;
-  } else if (measure_B.SFunction_j > measure_P.Constant_Value_kt) {
+  if (measure_B.SFunction_j < measure_P.Constant_Value_pv0) {
+    measure_B.Switch2_dmf4 = measure_P.Constant_Value_d2;
+  } else if (measure_B.SFunction_j > measure_P.Constant_Value_m5) {
     measure_B.Switch2_dmf4 = measure_P.Constant3_Value_m;
   } else {
     measure_B.Switch2_dmf4 = measure_B.SFunction_j;
@@ -3143,7 +3143,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value_m;
   }
 
-  rtb_Compare_ky = (rtb_Switch_lli5ykm > measure_P.Constant_Value_jf);
+  rtb_Compare_ky = (rtb_Switch_lli5ykm > measure_P.Constant_Value_bd);
   if (rtb_Compare_ky) {
     rtb_Switch_jka = measure_B.Switch_j;
   }
@@ -3198,8 +3198,8 @@ void measureModelClass::step0()
 
   measure_Y.FrequencyValid = rtb_Switch6_idx;
   rtb_IpktoIrmsconversion = measure_P.Gain3_Gain * measure_P.Constant1_Value_m2;
-  rtb_Switch_jka = (rtb_Divide_hh * rtb_Divide_hh) + (rtb_Divide_hh0 *
-    rtb_Divide_hh0);
+  rtb_Switch_jka = (rtb_Divide_h * rtb_Divide_h) + (rtb_Divide_hh *
+    rtb_Divide_hh);
   rtb_Gain_pj = (rtb_Switch_jka < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jka))) :
     std::sqrt(rtb_Switch_jka);
   rtb_SumofElements = rtb_IpktoIrmsconversion * rtb_Gain_pj;
@@ -3385,7 +3385,7 @@ void measureModelClass::step0()
 
   rtb_UnaryMinus_g = (rtb_UnaryMinus_g - ((measure_B.VariableDiscret_ln *
     rtb_Subtract3_lri) + (measure_B.VariableDiscret_dh * rtb_MathFunction_gbn2)))
-    * rtb_Divide_m;
+    * rtb_Divide_mg;
   rtb_UnaryMinus_g = (rtb_UnaryMinus_g * rtb_UnaryMinus_g) - (rtb_Gain_pj *
     rtb_Gain_pj);
   if (rtb_UnaryMinus_g < measure_P.Constant_Value_dsc5ttd) {
@@ -3575,7 +3575,7 @@ void measureModelClass::step0()
 
   rtb_Switch_jka = (rtb_Switch_jka - ((measure_B.VariableDiscret_egn *
     rtb_Subtract3_lri) + (measure_B.VariableDiscret_mg * rtb_MathFunction_gbn2)))
-    * rtb_Divide_m;
+    * rtb_Divide_mg;
   rtb_Switch_jka = (rtb_Switch_jka * rtb_Switch_jka) - (rtb_IpktoIrms_n *
     rtb_IpktoIrms_n);
   if (rtb_Switch_jka < measure_P.Constant_Value_d1m1hiq) {
@@ -3766,7 +3766,7 @@ void measureModelClass::step0()
 
   rtb_Switch_jka = (rtb_Switch_jka - ((measure_B.VariableDiscret_by *
     rtb_Subtract3_lri) + (measure_B.VariableDiscret_bo * rtb_MathFunction_gbn2)))
-    * rtb_Divide_m;
+    * rtb_Divide_mg;
   rtb_Switch_jka = (rtb_Switch_jka * rtb_Switch_jka) - (rtb_Switch_jpt *
     rtb_Switch_jpt);
   if (rtb_Switch_jka < measure_P.Constant_Value_m0413rf) {
@@ -3784,32 +3784,32 @@ void measureModelClass::step0()
     rtb_Switch_jpt = measure_P.Constant_Value_m041;
   }
 
-  rtb_Gain_pj = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_hh) -
-                   (measure_P.Gain5_Gain_h[0].im * rtb_Divide_hh0)) +
+  rtb_Gain_pj = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_h) -
+                   (measure_P.Gain5_Gain_h[0].im * rtb_Divide_hh)) +
                   ((measure_P.Gain5_Gain_h[1].re * rtb_Divide_b4ha) -
                    (measure_P.Gain5_Gain_h[1].im * rtb_Divide_b4h))) +
                  ((measure_P.Gain5_Gain_h[2].re * rtb_Divide_nqzy) -
                   (measure_P.Gain5_Gain_h[2].im * rtb_Divide_nqz))) *
     measure_P.Gain6_Gain;
-  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_hh0) +
-                               (measure_P.Gain5_Gain_h[0].im * rtb_Divide_hh)) +
+  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_hh) +
+                               (measure_P.Gain5_Gain_h[0].im * rtb_Divide_h)) +
                               ((measure_P.Gain5_Gain_h[1].re * rtb_Divide_b4h) +
                                (measure_P.Gain5_Gain_h[1].im * rtb_Divide_b4ha)))
     + ((measure_P.Gain5_Gain_h[2].re * rtb_Divide_nqz) +
        (measure_P.Gain5_Gain_h[2].im * rtb_Divide_nqzy))) * measure_P.Gain6_Gain;
   rtb_Switch1_l = (rtb_Gain_pj * rtb_Gain_pj) + (rtb_VpuIpktoVrmsIrms_im *
     rtb_VpuIpktoVrmsIrms_im);
-  rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_hh) -
-                   (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_hh0)) +
+  rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_h) -
+                   (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_hh)) +
                   ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4ha) -
                    (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4h))) +
                  ((measure_P.Gain2_Gain_h1[2].re * rtb_Divide_nqzy) -
                   (measure_P.Gain2_Gain_h1[2].im * rtb_Divide_nqz))) *
     measure_P.Gain4_Gain;
-  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_hh0)
-    + (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_hh)) +
-    ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4h) +
-     (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4ha))) +
+  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_hh) +
+                               (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_h)) +
+                              ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4h)
+    + (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4ha))) +
     ((measure_P.Gain2_Gain_h1[2].re * rtb_Divide_nqz) +
      (measure_P.Gain2_Gain_h1[2].im * rtb_Divide_nqzy))) * measure_P.Gain4_Gain;
   rtb_Sum1_gh = (rtb_Gain_pj * rtb_Gain_pj) + (rtb_VpuIpktoVrmsIrms_im *
@@ -3833,7 +3833,7 @@ void measureModelClass::step0()
     (rtb_Switch1_l))) : std::sqrt(rtb_Switch1_l)) / rtb_Sum1_gh) *
     measure_P.Gain3_Gain_h;
   rtb_UnitDelay1_o = measure_DWork.UnitDelay1_DSTATE_f;
-  rtb_Sum1_gh = (measure_P.Gain_Gain_en * rtb_Add1_fs_idx) +
+  rtb_Sum1_gh = (measure_P.Gain_Gain_en * rtb_Add1_f_idx) +
     measure_P.Bias_Bias_n;
   rtb_Sum1_gh = ((((measure_U.IabcAmps[0] - measure_DWork.UnitDelay2_DSTATE_m) *
                    measure_P.Gain_Gain_hf) * rtb_Sum1_gh) +
@@ -4019,7 +4019,7 @@ void measureModelClass::step0()
 
   rtb_Switch1_l = (rtb_Switch1_l - ((measure_B.VariableDiscreteDelaywithTwo_br *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywithTw_frq *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_jptuzr = measure_P.double_Value_e1ror;
   } else {
@@ -4200,14 +4200,14 @@ void measureModelClass::step0()
                       ((measure_B.VariableDiscreteDelaywithT_br4j *
                         rtb_Subtract3_lri) +
                        (measure_B.VariableDiscreteDelaywith_frq2e *
-                        rtb_MathFunction_gbn2))) * rtb_Divide_m;
+                        rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_Switch_jpt = (rtb_Switch1_l * rtb_Switch1_l) + (rtb_UnaryMinus_g *
     rtb_UnaryMinus_g);
   rtb_Switch_jpt = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jpt)))
     : std::sqrt(rtb_Switch_jpt);
   rtb_IpktoIrms_n = measure_P.IpktoIrms_Gain * rtb_Switch_jpt;
   rtb_UnitDelay1_f = measure_DWork.UnitDelay1_DSTATE_d;
-  rtb_Switch_jka = (measure_P.Gain_Gain_ad * rtb_Add1_fs_idx_0) +
+  rtb_Switch_jka = (measure_P.Gain_Gain_ad * rtb_Add1_f_idx_0) +
     measure_P.Bias_Bias_n2;
   rtb_Switch_jka = ((((measure_U.IabcAmps[1] - measure_DWork.UnitDelay2_DSTATE_d)
                       * measure_P.Gain_Gain_c) * rtb_Switch_jka) +
@@ -4395,7 +4395,7 @@ void measureModelClass::step0()
 
   rtb_Switch = (rtb_Switch - ((measure_B.VariableDiscreteDelaywit_br4j50 *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywi_frq2ejb *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_jptuzrljf055wg = measure_P.double_Value_h;
   } else {
@@ -4572,14 +4572,14 @@ void measureModelClass::step0()
   rtb_MathFunction1 = (rtb_MathFunction1 -
                        ((measure_B.VariableDiscreteDelayw_br4j50fk *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelay_frq2ejbqm *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_Switch1_ie = (rtb_Switch * rtb_Switch) + (rtb_MathFunction1 *
     rtb_MathFunction1);
   rtb_Switch1_ie = (rtb_Switch1_ie < 0.0) ? (-std::sqrt(std::abs(rtb_Switch1_ie)))
     : std::sqrt(rtb_Switch1_ie);
   rtb_Switch1_iew = measure_P.IpktoIrms_Gain_g * rtb_Switch1_ie;
   rtb_UnitDelay1_pu = measure_DWork.UnitDelay1_DSTATE_b;
-  rtb_Sum1_g5i = (measure_P.Gain_Gain_eb * rtb_Add1_fs_idx_1) +
+  rtb_Sum1_g5i = (measure_P.Gain_Gain_eb * rtb_Add1_f_idx_1) +
     measure_P.Bias_Bias_ih;
   rtb_Sum1_g5i = ((((measure_U.IabcAmps[2] - measure_DWork.UnitDelay2_DSTATE_kb)
                     * measure_P.Gain_Gain_oc) * rtb_Sum1_g5i) +
@@ -4758,7 +4758,7 @@ void measureModelClass::step0()
 
   rtb_Divide_nfu = (rtb_Divide_nfu - ((measure_B.VariableDiscreteDela_br4j50fkfb
     * rtb_Subtract3_lri) + (measure_B.VariableDiscreteDel_frq2ejbqmjc *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_el = measure_P.double_Value_ai;
   } else {
@@ -4928,7 +4928,7 @@ void measureModelClass::step0()
                       ((measure_B.VariableDiscreteDe_br4j50fkfbp0 *
                         rtb_Subtract3_lri) +
                        (measure_B.VariableDiscreteD_frq2ejbqmjcpo *
-                        rtb_MathFunction_gbn2))) * rtb_Divide_m;
+                        rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_Sum2_i = (rtb_Divide_nfu * rtb_Divide_nfu) + (rtb_UnaryMinus_o *
     rtb_UnaryMinus_o);
   rtb_Gain_pj = (rtb_Sum2_i < 0.0) ? (-std::sqrt(std::abs(rtb_Sum2_i))) : std::
@@ -5104,22 +5104,22 @@ void measureModelClass::step0()
 
   rtb_Switch1_np = (rtb_Switch1_np - ((measure_B.VariableDiscrete_br4j50fkfbp0na
     * rtb_Subtract3_lri) + (measure_B.VariableDiscret_frq2ejbqmjcpojk *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+    rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   rtb_Switch1_np = (rtb_Switch1_np * rtb_Switch1_np) - (rtb_Switch_jpt *
     rtb_Switch_jpt);
-  if (rtb_Switch1_np < measure_P.Constant_Value_e1rorg3e1h) {
-    rtb_Switch1_np = measure_P.Constant_Value_e;
+  if (rtb_Switch1_np < measure_P.Constant_Value_e1rorg3e1hu) {
+    rtb_Switch1_np = measure_P.Constant_Value_e1;
   }
 
-  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hu) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1;
+  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hup) {
+    rtb_Switch_jpt = measure_P.Constant_Value_e1r;
   }
 
   rtb_Switch1_np = (((rtb_Switch1_np < 0.0) ? (-std::sqrt(std::abs
     (rtb_Switch1_np))) : std::sqrt(rtb_Switch1_np)) / rtb_Switch_jpt) *
     measure_P.Gain_Gain_e1;
-  if (rtb_Switch1_np > measure_P.Constant_Value_e1rorg3e1hup) {
-    rtb_Switch1_np = measure_P.Constant_Value_e1r;
+  if (rtb_Switch1_np > measure_P.Constant_Value_e1rorg3e1hupm) {
+    rtb_Switch1_np = measure_P.Constant_Value_e1ro;
   }
 
   rtb_Switch_jpt = measure_P.ScaleRMSoutputsto1pu_Gain_e1 * rtb_Switch_jka;
@@ -5294,22 +5294,22 @@ void measureModelClass::step0()
 
   rtb_Switch_jpt = (rtb_Switch_jpt - ((measure_B.VariableDiscret_nc *
     rtb_Subtract3_lri) + (measure_B.VariableDiscret_mf * rtb_MathFunction_gbn2)))
-    * rtb_Divide_m;
+    * rtb_Divide_mg;
   rtb_Switch_jpt = (rtb_Switch_jpt * rtb_Switch_jpt) - (rtb_Switch1_ie *
     rtb_Switch1_ie);
-  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hupm) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1ro;
+  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hupmn) {
+    rtb_Switch_jpt = measure_P.Constant_Value_e1ror;
   }
 
-  if (rtb_Switch1_ie < measure_P.Constant_Value_e1rorg3e1hupmn) {
-    rtb_Switch1_ie = measure_P.Constant_Value_e1ror;
+  if (rtb_Switch1_ie < measure_P.Constant_Value_e1rorg3e1hupmn0) {
+    rtb_Switch1_ie = measure_P.Constant_Value_e1rorg;
   }
 
   rtb_Switch1_ie = (((rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs
     (rtb_Switch_jpt))) : std::sqrt(rtb_Switch_jpt)) / rtb_Switch1_ie) *
     measure_P.Gain_Gain_e1r;
-  if (rtb_Switch1_ie > measure_P.Constant_Value_e1rorg3e1hupmn0) {
-    rtb_Switch1_ie = measure_P.Constant_Value_e1rorg;
+  if (rtb_Switch1_ie > measure_P.Constant_Value_l5) {
+    rtb_Switch1_ie = measure_P.Constant_Value_e1rorg3;
   }
 
   rtb_Switch_jpt = measure_P.ScaleRMSoutputsto1pu_Gain_e1r * rtb_Sum1_g5i;
@@ -5482,39 +5482,40 @@ void measureModelClass::step0()
 
   rtb_Switch_jpt = (rtb_Switch_jpt - ((measure_B.VariableDiscret_bt *
     rtb_Subtract3_lri) + (measure_B.VariableDiscret_lc * rtb_MathFunction_gbn2)))
-    * rtb_Divide_m;
+    * rtb_Divide_mg;
   rtb_Switch_jpt = (rtb_Switch_jpt * rtb_Switch_jpt) - (rtb_Gain_pj *
     rtb_Gain_pj);
-  if (rtb_Switch_jpt < measure_P.Constant_Value_l5) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3;
+  if (rtb_Switch_jpt < measure_P.Constant_Value_ch) {
+    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e;
   }
 
-  if (rtb_Gain_pj < measure_P.Constant_Value_ch) {
-    rtb_Gain_pj = measure_P.Constant_Value_e1rorg3e;
+  if (rtb_Gain_pj < measure_P.Constant_Value_be) {
+    rtb_Gain_pj = measure_P.Constant_Value_e1rorg3e1;
   }
 
   rtb_Switch_jpt = (((rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs
     (rtb_Switch_jpt))) : std::sqrt(rtb_Switch_jpt)) / rtb_Gain_pj) *
     measure_P.Gain_Gain_e1ro;
-  if (rtb_Switch_jpt > measure_P.Constant_Value_b) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e1;
+  if (rtb_Switch_jpt > measure_P.Constant_Value_ab) {
+    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e1h;
   }
 
-  rtb_Add1_fs_idx = ((((measure_P.Gain5_Gain_h1[0].re * rtb_Switch1_l) -
-                       (measure_P.Gain5_Gain_h1[0].im * rtb_UnaryMinus_g)) +
-                      ((measure_P.Gain5_Gain_h1[1].re * rtb_Switch) -
-                       (measure_P.Gain5_Gain_h1[1].im * rtb_MathFunction1))) +
-                     ((measure_P.Gain5_Gain_h1[2].re * rtb_Divide_nfu) -
-                      (measure_P.Gain5_Gain_h1[2].im * rtb_UnaryMinus_o))) *
+  rtb_Add1_f_idx = ((((measure_P.Gain5_Gain_h1[0].re * rtb_Switch1_l) -
+                      (measure_P.Gain5_Gain_h1[0].im * rtb_UnaryMinus_g)) +
+                     ((measure_P.Gain5_Gain_h1[1].re * rtb_Switch) -
+                      (measure_P.Gain5_Gain_h1[1].im * rtb_MathFunction1))) +
+                    ((measure_P.Gain5_Gain_h1[2].re * rtb_Divide_nfu) -
+                     (measure_P.Gain5_Gain_h1[2].im * rtb_UnaryMinus_o))) *
     measure_P.Gain6_Gain_h;
-  rtb_Add1_fs_idx_0 = ((((measure_P.Gain5_Gain_h1[0].re * rtb_UnaryMinus_g) +
-    (measure_P.Gain5_Gain_h1[0].im * rtb_Switch1_l)) +
-                        ((measure_P.Gain5_Gain_h1[1].re * rtb_MathFunction1) +
-    (measure_P.Gain5_Gain_h1[1].im * rtb_Switch))) + ((measure_P.Gain5_Gain_h1[2]
-    .re * rtb_UnaryMinus_o) + (measure_P.Gain5_Gain_h1[2].im * rtb_Divide_nfu)))
-    * measure_P.Gain6_Gain_h;
-  rtb_Add1_fs_idx_1 = (rtb_Add1_fs_idx * rtb_Add1_fs_idx) + (rtb_Add1_fs_idx_0 *
-    rtb_Add1_fs_idx_0);
+  rtb_Add1_f_idx_0 = ((((measure_P.Gain5_Gain_h1[0].re * rtb_UnaryMinus_g) +
+                        (measure_P.Gain5_Gain_h1[0].im * rtb_Switch1_l)) +
+                       ((measure_P.Gain5_Gain_h1[1].re * rtb_MathFunction1) +
+                        (measure_P.Gain5_Gain_h1[1].im * rtb_Switch))) +
+                      ((measure_P.Gain5_Gain_h1[2].re * rtb_UnaryMinus_o) +
+                       (measure_P.Gain5_Gain_h1[2].im * rtb_Divide_nfu))) *
+    measure_P.Gain6_Gain_h;
+  rtb_Add1_f_idx_1 = (rtb_Add1_f_idx * rtb_Add1_f_idx) + (rtb_Add1_f_idx_0 *
+    rtb_Add1_f_idx_0);
   rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1r[0].re * rtb_Switch1_l) -
                    (measure_P.Gain2_Gain_h1r[0].im * rtb_UnaryMinus_g)) +
                   ((measure_P.Gain2_Gain_h1r[1].re * rtb_Switch) -
@@ -5529,10 +5530,10 @@ void measureModelClass::step0()
     ((measure_P.Gain2_Gain_h1r[2].re * rtb_UnaryMinus_o) +
      (measure_P.Gain2_Gain_h1r[2].im * rtb_Divide_nfu))) *
     measure_P.Gain4_Gain_h;
-  rtb_Add1_fs_idx_0 = (rtb_Gain_pj * rtb_Gain_pj) + (rtb_VpuIpktoVrmsIrms_im *
+  rtb_Add1_f_idx_0 = (rtb_Gain_pj * rtb_Gain_pj) + (rtb_VpuIpktoVrmsIrms_im *
     rtb_VpuIpktoVrmsIrms_im);
-  rtb_Gain_pj = (rtb_Add1_fs_idx_0 < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Add1_fs_idx_0))) : std::sqrt(rtb_Add1_fs_idx_0);
+  rtb_Gain_pj = (rtb_Add1_f_idx_0 < 0.0) ? (-std::sqrt(std::abs(rtb_Add1_f_idx_0)))
+    : std::sqrt(rtb_Add1_f_idx_0);
   measure_Y.Current[0] = rtb_IpktoIrms_n;
   measure_Y.Current[1] = rtb_Switch1_iew;
   measure_Y.Current[2] = rtb_Sum2_i;
@@ -5546,8 +5547,8 @@ void measureModelClass::step0()
     rtb_Gain_pj = measure_P.Constant_Value_h1;
   }
 
-  measure_Y.Current[9] = (((rtb_Add1_fs_idx_1 < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Add1_fs_idx_1))) : std::sqrt(rtb_Add1_fs_idx_1)) / rtb_Gain_pj) *
+  measure_Y.Current[9] = (((rtb_Add1_f_idx_1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_Add1_f_idx_1))) : std::sqrt(rtb_Add1_f_idx_1)) / rtb_Gain_pj) *
     measure_P.Gain3_Gain_h1;
   rtb_SumofElements *= rtb_IpktoIrms_n;
   rtb_AbsVI *= rtb_Switch1_iew;
@@ -5555,10 +5556,10 @@ void measureModelClass::step0()
   rtb_SumofElements += rtb_AbsVI;
   rtb_SumofElements += rtb_AbsVI_k;
   rtb_UnaryMinus_g = -rtb_UnaryMinus_g;
-  rtb_Add1_fs_idx_0 = ((rtb_Divide_hh * rtb_Switch1_l) - (rtb_Divide_hh0 *
+  rtb_Add1_f_idx_0 = ((rtb_Divide_h * rtb_Switch1_l) - (rtb_Divide_hh *
     rtb_UnaryMinus_g)) * (measure_P.IpktoIrmsconversion_Gain *
     rtb_IpktoIrmsconversion);
-  rtb_Add1_fs_idx_1 = ((rtb_Divide_hh * rtb_UnaryMinus_g) + (rtb_Divide_hh0 *
+  rtb_Add1_f_idx_1 = ((rtb_Divide_h * rtb_UnaryMinus_g) + (rtb_Divide_hh *
     rtb_Switch1_l)) * (measure_P.IpktoIrmsconversion_Gain *
                        rtb_IpktoIrmsconversion);
   rtb_MathFunction1 = -rtb_MathFunction1;
@@ -5570,19 +5571,19 @@ void measureModelClass::step0()
                     rtb_IpktoIrmsconversion);
   rtb_UnaryMinus_o = -rtb_UnaryMinus_o;
   rtb_IpktoIrmsconversion *= measure_P.IpktoIrmsconversion_Gain_b4;
-  rtb_Add1_fs_idx_0 += rtb_Switch1_np;
-  rtb_Add1_fs_idx_0 += ((rtb_Divide_nqzy * rtb_Divide_nfu) - (rtb_Divide_nqz *
+  rtb_Add1_f_idx_0 += rtb_Switch1_np;
+  rtb_Add1_f_idx_0 += ((rtb_Divide_nqzy * rtb_Divide_nfu) - (rtb_Divide_nqz *
     rtb_UnaryMinus_o)) * rtb_IpktoIrmsconversion;
-  rtb_Add1_fs_idx_1 += rtb_Gain_pj;
-  rtb_Add1_fs_idx_1 += ((rtb_Divide_nqzy * rtb_UnaryMinus_o) + (rtb_Divide_nqz *
+  rtb_Add1_f_idx_1 += rtb_Gain_pj;
+  rtb_Add1_f_idx_1 += ((rtb_Divide_nqzy * rtb_UnaryMinus_o) + (rtb_Divide_nqz *
     rtb_Divide_nfu)) * rtb_IpktoIrmsconversion;
-  if (rtb_SumofElements < measure_P.Constant_Value_kj) {
-    rtb_Add1_fs_idx = measure_P.Constant_Value;
+  if (rtb_SumofElements < measure_P.Constant_Value_kjg) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_k;
   } else {
-    rtb_Add1_fs_idx = rtb_SumofElements;
+    rtb_Add1_f_idx = rtb_SumofElements;
   }
 
-  rtb_Gain_pj = rtb_Add1_fs_idx_0 / rtb_Add1_fs_idx;
+  rtb_Gain_pj = rtb_Add1_f_idx_0 / rtb_Add1_f_idx;
   if (rtb_Gain_pj < measure_P.Constant_Value_ej) {
     rtb_Switch1_np = measure_P.Constant_Value_d;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_i) {
@@ -5591,14 +5592,14 @@ void measureModelClass::step0()
     rtb_Switch1_np = rtb_Gain_pj;
   }
 
-  measure_Y.Power_fundamental[0] = rtb_SumofElements;
-  measure_Y.Power_fundamental[1] = rtb_Add1_fs_idx_0;
-  measure_Y.Power_fundamental[2] = rtb_Add1_fs_idx_1;
-  measure_Y.Power_fundamental[3] = rtb_Switch1_np;
-  rtb_Add1_fs_idx_0 = measure_P.Gain1_Gain_g * measure_P.Constant1_Value_m2;
-  measure_B.VI[0] = (rtb_Sum1_lle * rtb_Sum1_gh) * rtb_Add1_fs_idx_0;
-  measure_B.VI[1] = (rtb_Sum1_p5 * rtb_Switch_jka) * rtb_Add1_fs_idx_0;
-  measure_B.VI[2] = (rtb_Sum1_pz * rtb_Sum1_g5i) * rtb_Add1_fs_idx_0;
+  measure_Y.PowerFundamental[0] = rtb_SumofElements;
+  measure_Y.PowerFundamental[1] = rtb_Add1_f_idx_0;
+  measure_Y.PowerFundamental[2] = rtb_Add1_f_idx_1;
+  measure_Y.PowerFundamental[3] = rtb_Switch1_np;
+  rtb_Add1_f_idx_0 = measure_P.Gain1_Gain_g * measure_P.Constant1_Value_m2;
+  measure_B.VI[0] = (rtb_Sum1_lle * rtb_Sum1_gh) * rtb_Add1_f_idx_0;
+  measure_B.VI[1] = (rtb_Sum1_p5 * rtb_Switch_jka) * rtb_Add1_f_idx_0;
+  measure_B.VI[2] = (rtb_Sum1_pz * rtb_Sum1_g5i) * rtb_Add1_f_idx_0;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ez = measure_P.double_Value;
   } else {
@@ -5650,10 +5651,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_ez -
+    rtb_Add1_f_idx_0 = measure_B.Switch_ez -
       measure_B.VariableDiscreteDelaywithOneT_b;
   } else {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_h5 -
+    rtb_Add1_f_idx_0 = measure_B.Switch_h5 -
       measure_B.VariableDiscreteDelaywithOne_bb;
   }
 
@@ -5683,7 +5684,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_d = (rtb_Add1_fs_idx_0 -
+  measure_B.Divide_d = (rtb_Add1_f_idx_0 -
                         ((measure_B.VariableDiscreteDelaywithTwoT_h *
     rtb_Subtract3_lr) + (measure_B.VariableDiscreteDelaywithTwoT_i *
     rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
@@ -5738,10 +5739,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_nh -
+    rtb_Add1_f_idx_0 = measure_B.Switch_nh -
       measure_B.VariableDiscreteDelaywithOneT_d;
   } else {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_mm -
+    rtb_Add1_f_idx_0 = measure_B.Switch_mm -
       measure_B.VariableDiscreteDelaywithOne_dt;
   }
 
@@ -5771,10 +5772,11 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Add1_fs_idx_0 = (rtb_Add1_fs_idx_0 -
-                       ((measure_B.VariableDiscreteDelaywithTwoT_o *
-    rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywithTwo_fu *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+  rtb_Add1_f_idx_0 = (rtb_Add1_f_idx_0 -
+                      ((measure_B.VariableDiscreteDelaywithTwoT_o *
+                        rtb_Subtract3_lri) +
+                       (measure_B.VariableDiscreteDelaywithTwo_fu *
+                        rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_gg = measure_P.double_Value_n;
   } else {
@@ -5826,10 +5828,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Add1_fs_idx_1 = measure_B.Switch_gg -
+    rtb_Add1_f_idx_1 = measure_B.Switch_gg -
       measure_B.VariableDiscreteDelaywithOne_dd;
   } else {
-    rtb_Add1_fs_idx_1 = measure_B.Switch_p4 -
+    rtb_Add1_f_idx_1 = measure_B.Switch_p4 -
       measure_B.VariableDiscreteDelaywithOn_dd4;
   }
 
@@ -5859,7 +5861,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_g = (rtb_Add1_fs_idx_1 -
+  measure_B.Divide_g = (rtb_Add1_f_idx_1 -
                         ((measure_B.VariableDiscreteDelaywithTwo_mc *
     rtb_Subtract3_lr) + (measure_B.VariableDiscreteDelaywithTwo_hd *
     rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
@@ -5914,10 +5916,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Add1_fs_idx_1 = measure_B.Switch_ml -
+    rtb_Add1_f_idx_1 = measure_B.Switch_ml -
       measure_B.VariableDiscreteDelaywithOne_ch;
   } else {
-    rtb_Add1_fs_idx_1 = measure_B.Switch_b1 -
+    rtb_Add1_f_idx_1 = measure_B.Switch_b1 -
       measure_B.VariableDiscreteDelaywithOn_chw;
   }
 
@@ -5947,10 +5949,11 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Add1_fs_idx_1 = (rtb_Add1_fs_idx_1 -
-                       ((measure_B.VariableDiscreteDelaywithTwoT_c *
-    rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywithTwo_im *
-    rtb_MathFunction_gbn2))) * rtb_Divide_m;
+  rtb_Add1_f_idx_1 = (rtb_Add1_f_idx_1 -
+                      ((measure_B.VariableDiscreteDelaywithTwoT_c *
+                        rtb_Subtract3_lri) +
+                       (measure_B.VariableDiscreteDelaywithTwo_im *
+                        rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ny = measure_P.double_Value_o;
   } else {
@@ -6123,57 +6126,429 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_m *= rtb_Switch1_np - ((measure_B.VariableDiscreteDelaywithTwo_fb *
+  rtb_Divide_mg *= rtb_Switch1_np - ((measure_B.VariableDiscreteDelaywithTwo_fb *
     rtb_Subtract3_lri) + (measure_B.VariableDiscreteDelaywithTw_m03 *
     rtb_MathFunction_gbn2));
-  rtb_Add1_fs_idx_0 += rtb_Add1_fs_idx_1;
-  rtb_Add1_fs_idx_0 += rtb_Divide_m;
-  measure_Y.Power_harmonic = rtb_Add1_fs_idx_0;
+  rtb_Add1_f_idx_0 += rtb_Add1_f_idx_1;
+  rtb_Add1_f_idx_0 += rtb_Divide_mg;
+  measure_Y.PowerWithHarmonics = rtb_Add1_f_idx_0;
+  measure_Y.PhaseFrequency[0] = rtb_Ts_FFT_k;
+  measure_Y.PhaseFrequency[1] = rtb_Ts_FFT;
+  measure_Y.PhaseFrequency[2] = rtb_Switch4;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     measure_B.RateTransition = measure_DWork.RateTransition_Buffer0;
-    measure_B.RateTransition_f = measure_DWork.RateTransition_Buffer0_m;
-    measure_B.RateTransition_b = measure_DWork.RateTransition_Buffer0_p;
+    measure_B.RateTransition_o = measure_DWork.RateTransition_Buffer0_l;
+    measure_B.RateTransition_g = measure_DWork.RateTransition_Buffer0_b;
   }
 
-  measure_Y.Fundamentalvefreqc[0] = measure_B.RateTransition;
-  measure_Y.Fundamentalvefreqc[1] = measure_B.RateTransition_f;
-  measure_Y.Fundamentalvefreqc[2] = measure_B.RateTransition_b;
+  measure_Y.VoltageFundamentalAmplitudePosF[0] = measure_B.RateTransition;
+  measure_Y.VoltageFundamentalAmplitudePosF[1] = measure_B.RateTransition_o;
+  measure_Y.VoltageFundamentalAmplitudePosF[2] = measure_B.RateTransition_g;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_c = measure_DWork.RateTransition_Buffer0_f;
-    measure_B.RateTransition_m = measure_DWork.RateTransition_Buffer0_n;
-    measure_B.RateTransition_g = measure_DWork.RateTransition_Buffer0_c;
+    measure_B.RateTransition_gf[0] = measure_DWork.RateTransition_Buffer0_a[0];
+    measure_B.RateTransition_gf[1] = measure_DWork.RateTransition_Buffer0_a[1];
+    measure_B.RateTransition_gf[2] = measure_DWork.RateTransition_Buffer0_a[2];
+    measure_B.RateTransition_gf[3] = measure_DWork.RateTransition_Buffer0_a[3];
+    measure_B.RateTransition_gw[0] = measure_DWork.RateTransition_Buffer0_j[0];
+    measure_B.RateTransition_gw[1] = measure_DWork.RateTransition_Buffer0_j[1];
+    measure_B.RateTransition_gw[2] = measure_DWork.RateTransition_Buffer0_j[2];
+    measure_B.RateTransition_gw[3] = measure_DWork.RateTransition_Buffer0_j[3];
+    measure_B.RateTransition_n[0] = measure_DWork.RateTransition_Buffer0_ak[0];
+    measure_B.RateTransition_n[1] = measure_DWork.RateTransition_Buffer0_ak[1];
+    measure_B.RateTransition_n[2] = measure_DWork.RateTransition_Buffer0_ak[2];
+    measure_B.RateTransition_n[3] = measure_DWork.RateTransition_Buffer0_ak[3];
   }
 
-  measure_Y.Fundamentalamplitudevefreq[0] = measure_B.RateTransition_c;
-  measure_Y.Fundamentalamplitudevefreq[1] = measure_B.RateTransition_m;
-  measure_Y.Fundamentalamplitudevefreq[2] = measure_B.RateTransition_g;
+  measure_Y.VoltageAmplitudesRelativeToFund[0] = measure_B.RateTransition_gf[0];
+  measure_Y.VoltageAmplitudesRelativeToFund[1] = measure_B.RateTransition_gf[1];
+  measure_Y.VoltageAmplitudesRelativeToFund[2] = measure_B.RateTransition_gf[2];
+  measure_Y.VoltageAmplitudesRelativeToFund[3] = measure_B.RateTransition_gf[3];
+  measure_Y.VoltageAmplitudesRelativeToFund[4] = measure_B.RateTransition_gw[0];
+  measure_Y.VoltageAmplitudesRelativeToFund[5] = measure_B.RateTransition_gw[1];
+  measure_Y.VoltageAmplitudesRelativeToFund[6] = measure_B.RateTransition_gw[2];
+  measure_Y.VoltageAmplitudesRelativeToFund[7] = measure_B.RateTransition_gw[3];
+  measure_Y.VoltageAmplitudesRelativeToFund[8] = measure_B.RateTransition_n[0];
+  measure_Y.VoltageAmplitudesRelativeToFund[9] = measure_B.RateTransition_n[1];
+  measure_Y.VoltageAmplitudesRelativeToFund[10] = measure_B.RateTransition_n[2];
+  measure_Y.VoltageAmplitudesRelativeToFund[11] = measure_B.RateTransition_n[3];
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_j[0] = measure_DWork.RateTransition_Buffer0_nm[0];
-    measure_B.RateTransition_j[1] = measure_DWork.RateTransition_Buffer0_nm[1];
-    measure_B.RateTransition_j[2] = measure_DWork.RateTransition_Buffer0_nm[2];
-    measure_B.RateTransition_j[3] = measure_DWork.RateTransition_Buffer0_nm[3];
-    measure_B.RateTransition_p[0] = measure_DWork.RateTransition_Buffer0_d[0];
-    measure_B.RateTransition_p[1] = measure_DWork.RateTransition_Buffer0_d[1];
-    measure_B.RateTransition_p[2] = measure_DWork.RateTransition_Buffer0_d[2];
-    measure_B.RateTransition_p[3] = measure_DWork.RateTransition_Buffer0_d[3];
-    measure_B.RateTransition_e[0] = measure_DWork.RateTransition_Buffer0_j[0];
-    measure_B.RateTransition_e[1] = measure_DWork.RateTransition_Buffer0_j[1];
-    measure_B.RateTransition_e[2] = measure_DWork.RateTransition_Buffer0_j[2];
-    measure_B.RateTransition_e[3] = measure_DWork.RateTransition_Buffer0_j[3];
+    measure_B.RateTransition_h[0] = measure_DWork.RateTransition_Buffer0_h[0];
+    measure_B.RateTransition_h[1] = measure_DWork.RateTransition_Buffer0_h[1];
+    measure_B.RateTransition_h[2] = measure_DWork.RateTransition_Buffer0_h[2];
+    measure_B.RateTransition_h[3] = measure_DWork.RateTransition_Buffer0_h[3];
+    measure_B.RateTransition_k[0] = measure_DWork.RateTransition_Buffer0_g[0];
+    measure_B.RateTransition_k[1] = measure_DWork.RateTransition_Buffer0_g[1];
+    measure_B.RateTransition_k[2] = measure_DWork.RateTransition_Buffer0_g[2];
+    measure_B.RateTransition_k[3] = measure_DWork.RateTransition_Buffer0_g[3];
+    measure_B.RateTransition_b[0] = measure_DWork.RateTransition_Buffer0_hn[0];
+    measure_B.RateTransition_b[1] = measure_DWork.RateTransition_Buffer0_hn[1];
+    measure_B.RateTransition_b[2] = measure_DWork.RateTransition_Buffer0_hn[2];
+    measure_B.RateTransition_b[3] = measure_DWork.RateTransition_Buffer0_hn[3];
   }
 
-  measure_Y.Amplitudesrelativetofundamental[0] = measure_B.RateTransition_j[0];
-  measure_Y.Amplitudesrelativetofundamental[1] = measure_B.RateTransition_j[1];
-  measure_Y.Amplitudesrelativetofundamental[2] = measure_B.RateTransition_j[2];
-  measure_Y.Amplitudesrelativetofundamental[3] = measure_B.RateTransition_j[3];
-  measure_Y.Amplitudesrelativetofundamental[4] = measure_B.RateTransition_p[0];
-  measure_Y.Amplitudesrelativetofundamental[5] = measure_B.RateTransition_p[1];
-  measure_Y.Amplitudesrelativetofundamental[6] = measure_B.RateTransition_p[2];
-  measure_Y.Amplitudesrelativetofundamental[7] = measure_B.RateTransition_p[3];
-  measure_Y.Amplitudesrelativetofundamental[8] = measure_B.RateTransition_e[0];
-  measure_Y.Amplitudesrelativetofundamental[9] = measure_B.RateTransition_e[1];
-  measure_Y.Amplitudesrelativetofundamental[10] = measure_B.RateTransition_e[2];
-  measure_Y.Amplitudesrelativetofundamental[11] = measure_B.RateTransition_e[3];
+  measure_Y.VoltagePhasesRelativeToFundamen[0] = measure_B.RateTransition_h[0];
+  measure_Y.VoltagePhasesRelativeToFundamen[1] = measure_B.RateTransition_h[1];
+  measure_Y.VoltagePhasesRelativeToFundamen[2] = measure_B.RateTransition_h[2];
+  measure_Y.VoltagePhasesRelativeToFundamen[3] = measure_B.RateTransition_h[3];
+  measure_Y.VoltagePhasesRelativeToFundamen[4] = measure_B.RateTransition_k[0];
+  measure_Y.VoltagePhasesRelativeToFundamen[5] = measure_B.RateTransition_k[1];
+  measure_Y.VoltagePhasesRelativeToFundamen[6] = measure_B.RateTransition_k[2];
+  measure_Y.VoltagePhasesRelativeToFundamen[7] = measure_B.RateTransition_k[3];
+  measure_Y.VoltagePhasesRelativeToFundamen[8] = measure_B.RateTransition_b[0];
+  measure_Y.VoltagePhasesRelativeToFundamen[9] = measure_B.RateTransition_b[1];
+  measure_Y.VoltagePhasesRelativeToFundamen[10] = measure_B.RateTransition_b[2];
+  measure_Y.VoltagePhasesRelativeToFundamen[11] = measure_B.RateTransition_b[3];
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_a[0] = measure_DWork.RateTransition_Buffer0_e[0];
+    measure_B.RateTransition_a[1] = measure_DWork.RateTransition_Buffer0_e[1];
+    measure_B.RateTransition_a[2] = measure_DWork.RateTransition_Buffer0_e[2];
+    measure_B.RateTransition_a[3] = measure_DWork.RateTransition_Buffer0_e[3];
+    measure_B.RateTransition_gy[0] = measure_DWork.RateTransition_Buffer0_lm[0];
+    measure_B.RateTransition_gy[1] = measure_DWork.RateTransition_Buffer0_lm[1];
+    measure_B.RateTransition_gy[2] = measure_DWork.RateTransition_Buffer0_lm[2];
+    measure_B.RateTransition_gy[3] = measure_DWork.RateTransition_Buffer0_lm[3];
+    measure_B.RateTransition_m[0] = measure_DWork.RateTransition_Buffer0_az[0];
+    measure_B.RateTransition_m[1] = measure_DWork.RateTransition_Buffer0_az[1];
+    measure_B.RateTransition_m[2] = measure_DWork.RateTransition_Buffer0_az[2];
+    measure_B.RateTransition_m[3] = measure_DWork.RateTransition_Buffer0_az[3];
+  }
+
+  measure_Y.VoltageHarmonicsAnalysed[0] = measure_B.RateTransition_a[0];
+  measure_Y.VoltageHarmonicsAnalysed[1] = measure_B.RateTransition_a[1];
+  measure_Y.VoltageHarmonicsAnalysed[2] = measure_B.RateTransition_a[2];
+  measure_Y.VoltageHarmonicsAnalysed[3] = measure_B.RateTransition_a[3];
+  measure_Y.VoltageHarmonicsAnalysed[4] = measure_B.RateTransition_gy[0];
+  measure_Y.VoltageHarmonicsAnalysed[5] = measure_B.RateTransition_gy[1];
+  measure_Y.VoltageHarmonicsAnalysed[6] = measure_B.RateTransition_gy[2];
+  measure_Y.VoltageHarmonicsAnalysed[7] = measure_B.RateTransition_gy[3];
+  measure_Y.VoltageHarmonicsAnalysed[8] = measure_B.RateTransition_m[0];
+  measure_Y.VoltageHarmonicsAnalysed[9] = measure_B.RateTransition_m[1];
+  measure_Y.VoltageHarmonicsAnalysed[10] = measure_B.RateTransition_m[2];
+  measure_Y.VoltageHarmonicsAnalysed[11] = measure_B.RateTransition_m[3];
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_l = measure_DWork.RateTransition_Buffer0_m;
+    measure_B.RateTransition_gq = measure_DWork.RateTransition_Buffer0_bh;
+    measure_B.RateTransition_a0 = measure_DWork.RateTransition_Buffer0_o;
+  }
+
+  measure_Y.CurrentFundamentalAmplitudePosF[0] = measure_B.RateTransition_l;
+  measure_Y.CurrentFundamentalAmplitudePosF[1] = measure_B.RateTransition_gq;
+  measure_Y.CurrentFundamentalAmplitudePosF[2] = measure_B.RateTransition_a0;
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_j[0] = measure_DWork.RateTransition_Buffer0_aq[0];
+    measure_B.RateTransition_j[1] = measure_DWork.RateTransition_Buffer0_aq[1];
+    measure_B.RateTransition_j[2] = measure_DWork.RateTransition_Buffer0_aq[2];
+    measure_B.RateTransition_j[3] = measure_DWork.RateTransition_Buffer0_aq[3];
+    measure_B.RateTransition_c[0] = measure_DWork.RateTransition_Buffer0_oh[0];
+    measure_B.RateTransition_c[1] = measure_DWork.RateTransition_Buffer0_oh[1];
+    measure_B.RateTransition_c[2] = measure_DWork.RateTransition_Buffer0_oh[2];
+    measure_B.RateTransition_c[3] = measure_DWork.RateTransition_Buffer0_oh[3];
+    measure_B.RateTransition_ax[0] = measure_DWork.RateTransition_Buffer0_lg[0];
+    measure_B.RateTransition_ax[1] = measure_DWork.RateTransition_Buffer0_lg[1];
+    measure_B.RateTransition_ax[2] = measure_DWork.RateTransition_Buffer0_lg[2];
+    measure_B.RateTransition_ax[3] = measure_DWork.RateTransition_Buffer0_lg[3];
+  }
+
+  measure_Y.CurrentAmplitudesRelativeToFund[0] = measure_B.RateTransition_j[0];
+  measure_Y.CurrentAmplitudesRelativeToFund[1] = measure_B.RateTransition_j[1];
+  measure_Y.CurrentAmplitudesRelativeToFund[2] = measure_B.RateTransition_j[2];
+  measure_Y.CurrentAmplitudesRelativeToFund[3] = measure_B.RateTransition_j[3];
+  measure_Y.CurrentAmplitudesRelativeToFund[4] = measure_B.RateTransition_c[0];
+  measure_Y.CurrentAmplitudesRelativeToFund[5] = measure_B.RateTransition_c[1];
+  measure_Y.CurrentAmplitudesRelativeToFund[6] = measure_B.RateTransition_c[2];
+  measure_Y.CurrentAmplitudesRelativeToFund[7] = measure_B.RateTransition_c[3];
+  measure_Y.CurrentAmplitudesRelativeToFund[8] = measure_B.RateTransition_ax[0];
+  measure_Y.CurrentAmplitudesRelativeToFund[9] = measure_B.RateTransition_ax[1];
+  measure_Y.CurrentAmplitudesRelativeToFund[10] = measure_B.RateTransition_ax[2];
+  measure_Y.CurrentAmplitudesRelativeToFund[11] = measure_B.RateTransition_ax[3];
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_jz[0] = measure_DWork.RateTransition_Buffer0_n[0];
+    measure_B.RateTransition_jz[1] = measure_DWork.RateTransition_Buffer0_n[1];
+    measure_B.RateTransition_jz[2] = measure_DWork.RateTransition_Buffer0_n[2];
+    measure_B.RateTransition_jz[3] = measure_DWork.RateTransition_Buffer0_n[3];
+    measure_B.RateTransition_h2[0] = measure_DWork.RateTransition_Buffer0_c[0];
+    measure_B.RateTransition_h2[1] = measure_DWork.RateTransition_Buffer0_c[1];
+    measure_B.RateTransition_h2[2] = measure_DWork.RateTransition_Buffer0_c[2];
+    measure_B.RateTransition_h2[3] = measure_DWork.RateTransition_Buffer0_c[3];
+    measure_B.RateTransition_cc[0] = measure_DWork.RateTransition_Buffer0_cq[0];
+    measure_B.RateTransition_cc[1] = measure_DWork.RateTransition_Buffer0_cq[1];
+    measure_B.RateTransition_cc[2] = measure_DWork.RateTransition_Buffer0_cq[2];
+    measure_B.RateTransition_cc[3] = measure_DWork.RateTransition_Buffer0_cq[3];
+  }
+
+  measure_Y.CurrentPhasesRelativeToFundamen[0] = measure_B.RateTransition_jz[0];
+  measure_Y.CurrentPhasesRelativeToFundamen[1] = measure_B.RateTransition_jz[1];
+  measure_Y.CurrentPhasesRelativeToFundamen[2] = measure_B.RateTransition_jz[2];
+  measure_Y.CurrentPhasesRelativeToFundamen[3] = measure_B.RateTransition_jz[3];
+  measure_Y.CurrentPhasesRelativeToFundamen[4] = measure_B.RateTransition_h2[0];
+  measure_Y.CurrentPhasesRelativeToFundamen[5] = measure_B.RateTransition_h2[1];
+  measure_Y.CurrentPhasesRelativeToFundamen[6] = measure_B.RateTransition_h2[2];
+  measure_Y.CurrentPhasesRelativeToFundamen[7] = measure_B.RateTransition_h2[3];
+  measure_Y.CurrentPhasesRelativeToFundamen[8] = measure_B.RateTransition_cc[0];
+  measure_Y.CurrentPhasesRelativeToFundamen[9] = measure_B.RateTransition_cc[1];
+  measure_Y.CurrentPhasesRelativeToFundamen[10] = measure_B.RateTransition_cc[2];
+  measure_Y.CurrentPhasesRelativeToFundamen[11] = measure_B.RateTransition_cc[3];
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_mz[0] = measure_DWork.RateTransition_Buffer0_mb[0];
+    measure_B.RateTransition_mz[1] = measure_DWork.RateTransition_Buffer0_mb[1];
+    measure_B.RateTransition_mz[2] = measure_DWork.RateTransition_Buffer0_mb[2];
+    measure_B.RateTransition_mz[3] = measure_DWork.RateTransition_Buffer0_mb[3];
+    measure_B.RateTransition_jt[0] = measure_DWork.RateTransition_Buffer0_of[0];
+    measure_B.RateTransition_jt[1] = measure_DWork.RateTransition_Buffer0_of[1];
+    measure_B.RateTransition_jt[2] = measure_DWork.RateTransition_Buffer0_of[2];
+    measure_B.RateTransition_jt[3] = measure_DWork.RateTransition_Buffer0_of[3];
+    measure_B.RateTransition_f[0] = measure_DWork.RateTransition_Buffer0_jc[0];
+    measure_B.RateTransition_f[1] = measure_DWork.RateTransition_Buffer0_jc[1];
+    measure_B.RateTransition_f[2] = measure_DWork.RateTransition_Buffer0_jc[2];
+    measure_B.RateTransition_f[3] = measure_DWork.RateTransition_Buffer0_jc[3];
+  }
+
+  measure_Y.CurrentHarmonicsAnalysed[0] = measure_B.RateTransition_mz[0];
+  measure_Y.CurrentHarmonicsAnalysed[1] = measure_B.RateTransition_mz[1];
+  measure_Y.CurrentHarmonicsAnalysed[2] = measure_B.RateTransition_mz[2];
+  measure_Y.CurrentHarmonicsAnalysed[3] = measure_B.RateTransition_mz[3];
+  measure_Y.CurrentHarmonicsAnalysed[4] = measure_B.RateTransition_jt[0];
+  measure_Y.CurrentHarmonicsAnalysed[5] = measure_B.RateTransition_jt[1];
+  measure_Y.CurrentHarmonicsAnalysed[6] = measure_B.RateTransition_jt[2];
+  measure_Y.CurrentHarmonicsAnalysed[7] = measure_B.RateTransition_jt[3];
+  measure_Y.CurrentHarmonicsAnalysed[8] = measure_B.RateTransition_f[0];
+  measure_Y.CurrentHarmonicsAnalysed[9] = measure_B.RateTransition_f[1];
+  measure_Y.CurrentHarmonicsAnalysed[10] = measure_B.RateTransition_f[2];
+  measure_Y.CurrentHarmonicsAnalysed[11] = measure_B.RateTransition_f[3];
+  measure_B.Gain1 = measure_P.Gain1_Gain_j0 * measure_U.IabcAmps[0];
+  rtb_Add1_f_idx_0 = measure_P.Gain5_Gain * rtb_Ts_FFT_k;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_hc) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value;
+  }
+
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx_0;
+  measure_B.Gain8 = measure_P.Gain8_Gain * rtb_Gain_pj;
+
+  {
+    int_T ok = 1;
+    real_T t,a,D1,D2,D3;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1;
+    D1 = measure_DWork.SFunction_RWORK[0] - measure_B.Gain1;
+    D2 = measure_DWork.SFunction_RWORK[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK[2] - D2;
+    measure_B.SFunction_o2 = measure_DWork.SFunction_RWORK[3] + 1;
+    while (ok) {
+      t = measure_B.SFunction_o2 - measure_B.Gain8;
+      ok = (t>=0);
+      if (ok) {
+        measure_B.SFunction_o2 = t;
+        a = measure_B.Gain1 + D1*measure_B.SFunction_o2;
+        t = measure_B.SFunction_o2 * (measure_B.SFunction_o2-1);
+        a += D2*t*0.5;
+        t *= (measure_B.SFunction_o2-2);
+        a += D3*t/6;
+        measure_DWork.SFunction_IWORK++;
+        if (measure_DWork.SFunction_IWORK > (64-1) ) {
+          measure_DWork.SFunction_IWORK= 0;
+        }
+
+        FFT_Data[measure_DWork.SFunction_IWORK]= a;
+      }
+    }
+
+    measure_B.SFunction_o3 = measure_DWork.SFunction_IWORK;
+    measure_DWork.SFunction_RWORK[0] = measure_B.Gain1;
+    measure_DWork.SFunction_RWORK[1] = D1;
+    measure_DWork.SFunction_RWORK[2] = D2;
+    measure_DWork.SFunction_RWORK[3] = measure_B.SFunction_o2;
+  }
+
+  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3 - measure_P.Constant2_Value_os);
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_cq = measure_DWork.RateTransition_Buffer0_k;
+  }
+
+  for (i = 0; i < 11; i++) {
+    rtb_Add1_f_idx = (((((measure_P.Gain2_Gain_l * measure_P.Constant9_Value[(i)])
+                         * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvefre) +
+                       measure_B.RateTransition_cq) +
+                      measure_P.Constant1_Value_m5) /
+      measure_P.Constant2_Value_hp;
+    if (measure_P.Constant6_Value_i) {
+      measure_B.Switch2_dd[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_is) {
+      measure_B.Switch2_dd[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias;
+    } else {
+      measure_B.Switch2_dd[(i)] = rtb_Add1_f_idx;
+    }
+  }
+
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_dd;
+    int32_T *y0 = measure_B.SFunction2;
+    for (i1=0; i1 < 11; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    memcpy((void *)(&measure_B.RateTransition_hd[0]), (void *)
+           (&measure_B.SFunction_o1[0]), (sizeof(real_T)) << 6U);
+  }
+
+  measure_B.Gain1_n = measure_P.Gain1_Gain_gd * measure_U.IabcAmps[1];
+  rtb_Add1_f_idx_0 = measure_P.Gain5_Gain_l * rtb_Ts_FFT;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_ni) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_n;
+  }
+
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx_0;
+  measure_B.Gain8_l = measure_P.Gain8_Gain_h * rtb_Gain_pj;
+
+  {
+    int_T ok = 1;
+    real_T t,a,D1,D2,D3;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_i;
+    D1 = measure_DWork.SFunction_RWORK_i[0] - measure_B.Gain1_n;
+    D2 = measure_DWork.SFunction_RWORK_i[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK_i[2] - D2;
+    measure_B.SFunction_o2_n = measure_DWork.SFunction_RWORK_i[3] + 1;
+    while (ok) {
+      t = measure_B.SFunction_o2_n - measure_B.Gain8_l;
+      ok = (t>=0);
+      if (ok) {
+        measure_B.SFunction_o2_n = t;
+        a = measure_B.Gain1_n + D1*measure_B.SFunction_o2_n;
+        t = measure_B.SFunction_o2_n * (measure_B.SFunction_o2_n-1);
+        a += D2*t*0.5;
+        t *= (measure_B.SFunction_o2_n-2);
+        a += D3*t/6;
+        measure_DWork.SFunction_IWORK_m++;
+        if (measure_DWork.SFunction_IWORK_m > (64-1) ) {
+          measure_DWork.SFunction_IWORK_m= 0;
+        }
+
+        FFT_Data[measure_DWork.SFunction_IWORK_m]= a;
+      }
+    }
+
+    measure_B.SFunction_o3_o = measure_DWork.SFunction_IWORK_m;
+    measure_DWork.SFunction_RWORK_i[0] = measure_B.Gain1_n;
+    measure_DWork.SFunction_RWORK_i[1] = D1;
+    measure_DWork.SFunction_RWORK_i[2] = D2;
+    measure_DWork.SFunction_RWORK_i[3] = measure_B.SFunction_o2_n;
+  }
+
+  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3_o - measure_P.Constant2_Value_k);
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_lr = measure_DWork.RateTransition_Buffer0_ki;
+  }
+
+  for (i = 0; i < 10; i++) {
+    rtb_Add1_f_idx = (((((measure_P.Constant9_Value[i + 11] *
+                          measure_P.Gain2_Gain_e) * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvef_h) +
+                       measure_B.RateTransition_lr) +
+                      measure_P.Constant1_Value_a) / measure_P.Constant2_Value_j;
+    if (measure_P.Constant6_Value_e) {
+      measure_B.Switch2_h5[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias_eh;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_eh) {
+      measure_B.Switch2_h5[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias_e;
+    } else {
+      measure_B.Switch2_h5[(i)] = rtb_Add1_f_idx;
+    }
+  }
+
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_h5;
+    int32_T *y0 = measure_B.SFunction2_n;
+    for (i1=0; i1 < 10; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    memcpy((void *)(&measure_B.RateTransition_la[0]), (void *)
+           (&measure_B.SFunction_o1_i[0]), (sizeof(real_T)) << 6U);
+  }
+
+  measure_B.Gain1_p = measure_P.Gain1_Gain_jq * measure_U.IabcAmps[2];
+  rtb_Add1_f_idx_0 = measure_P.Gain5_Gain_b * rtb_Switch4;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_nd) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_m;
+  }
+
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx_0;
+  measure_B.Gain8_h = measure_P.Gain8_Gain_n * rtb_Gain_pj;
+
+  {
+    int_T ok = 1;
+    real_T t,a,D1,D2,D3;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_b;
+    D1 = measure_DWork.SFunction_RWORK_c[0] - measure_B.Gain1_p;
+    D2 = measure_DWork.SFunction_RWORK_c[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK_c[2] - D2;
+    measure_B.SFunction_o2_p = measure_DWork.SFunction_RWORK_c[3] + 1;
+    while (ok) {
+      t = measure_B.SFunction_o2_p - measure_B.Gain8_h;
+      ok = (t>=0);
+      if (ok) {
+        measure_B.SFunction_o2_p = t;
+        a = measure_B.Gain1_p + D1*measure_B.SFunction_o2_p;
+        t = measure_B.SFunction_o2_p * (measure_B.SFunction_o2_p-1);
+        a += D2*t*0.5;
+        t *= (measure_B.SFunction_o2_p-2);
+        a += D3*t/6;
+        measure_DWork.SFunction_IWORK_l++;
+        if (measure_DWork.SFunction_IWORK_l > (64-1) ) {
+          measure_DWork.SFunction_IWORK_l= 0;
+        }
+
+        FFT_Data[measure_DWork.SFunction_IWORK_l]= a;
+      }
+    }
+
+    measure_B.SFunction_o3_g = measure_DWork.SFunction_IWORK_l;
+    measure_DWork.SFunction_RWORK_c[0] = measure_B.Gain1_p;
+    measure_DWork.SFunction_RWORK_c[1] = D1;
+    measure_DWork.SFunction_RWORK_c[2] = D2;
+    measure_DWork.SFunction_RWORK_c[3] = measure_B.SFunction_o2_p;
+  }
+
+  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3_g -
+    measure_P.Constant2_Value_nz);
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    measure_B.RateTransition_aj = measure_DWork.RateTransition_Buffer0_jr;
+  }
+
+  for (i = 0; i < 10; i++) {
+    rtb_Add1_f_idx = (((((measure_P.Constant9_Value[i + 21] *
+                          measure_P.Gain2_Gain_h) * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvef_j) +
+                       measure_B.RateTransition_aj) +
+                      measure_P.Constant1_Value_mz) /
+      measure_P.Constant2_Value_o;
+    if (measure_P.Constant6_Value_iv) {
+      measure_B.Switch2_n[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias_i;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_ivc) {
+      measure_B.Switch2_n[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias_i;
+    } else {
+      measure_B.Switch2_n[(i)] = rtb_Add1_f_idx;
+    }
+  }
+
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_n;
+    int32_T *y0 = measure_B.SFunction2_l;
+    for (i1=0; i1 < 10; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
+  if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
+    memcpy((void *)(&measure_B.RateTransition_mm[0]), (void *)
+           (&measure_B.SFunction_o1_b[0]), (sizeof(real_T)) << 6U);
+  }
+
   if (rtb_Compare_mt) {
     rtb_Switch1_a = measure_P.int2_Value;
   }
@@ -6196,7 +6571,7 @@ void measureModelClass::step0()
     rtb_Switch1_a = measure_P.const_Value_jcfa;
   }
 
-  rtb_Switch6_idx = (rtb_Switch1_a == measure_P.Constant_Value_h1f);
+  rtb_Switch6_idx = (rtb_Switch1_a == measure_P.Constant_Value_ck);
   rtb_Compare_ks = (rtb_Switch6_idx && ((rtb_Compare_k || rtb_Compare_k3) ||
     rtb_Compare_k3k));
   rtb_LogicalOperator1 = (rtb_Compare_ks && (measure_DWork.delay_DSTATE_i2wj4));
@@ -6205,7 +6580,7 @@ void measureModelClass::step0()
   if (measure_P.Constant6_Value_j) {
     measure_B.Switch2_h1wibj = rtb_Gain_pj + measure_P.Bias1_Bias;
   } else {
-    measure_B.Switch2_h1wibj = rtb_Gain_pj + measure_P.Bias_Bias;
+    measure_B.Switch2_h1wibj = rtb_Gain_pj + measure_P.Bias_Bias_j;
   }
 
   {
@@ -6220,7 +6595,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value;
   }
 
-  rtb_Compare_ks = (rtb_UnitDelay1_pu5rdhlnellvz > measure_P.Constant_Value_ck);
+  rtb_Compare_ks = (rtb_UnitDelay1_pu5rdhlnellvz > measure_P.Constant_Value_ka);
   if (rtb_Compare_ks) {
     rtb_Switch1_hb = rtb_UnitDelay1_pu5rdhlnellvz;
   } else {
@@ -6236,7 +6611,7 @@ void measureModelClass::step0()
   if (measure_P.Constant6_Value_jc) {
     measure_B.Switch2_h1wibj2 = rtb_Gain_pj + measure_P.Bias1_Bias_j;
   } else {
-    measure_B.Switch2_h1wibj2 = rtb_Gain_pj + measure_P.Bias_Bias_j;
+    measure_B.Switch2_h1wibj2 = rtb_Gain_pj + measure_P.Bias_Bias_jc;
   }
 
   {
@@ -6248,7 +6623,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value_jc;
   }
 
-  rtb_Compare_ks = (rtb_UnitDelay1_pu5rdhlnellvz == measure_P.Constant_Value_ka);
+  rtb_Compare_ks = (rtb_UnitDelay1_pu5rdhlnellvz == measure_P.Constant_Value_ci);
   if (rtb_UnitDelay4_dmwj4s1jwn3 && ((rtb_RelationalOperator_o &&
         rtb_RelationalOperator_os) && rtb_RelationalOperator_osa)) {
     rtb_Switch1_ia = measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwrm;
@@ -6256,7 +6631,7 @@ void measureModelClass::step0()
     rtb_Switch1_ia = measure_P.const_Value_jcf;
   }
 
-  rtb_Compare_enj = (rtb_Switch1_ia == measure_P.Constant_Value_ci);
+  rtb_Compare_enj = (rtb_Switch1_ia == measure_P.Constant_Value_ms);
   rtb_LogicalOperator1_fmgwx = (rtb_LogicalOperator2_npqxol && (!(rtb_Compare_ks
     || rtb_Compare_enj)));
   if (rtb_Compare_enj) {
@@ -6323,10 +6698,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_hpz455i02) {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_nulzsg5y -
+    rtb_Add1_f_idx_0 = measure_B.Switch_nulzsg5y -
       measure_B.VariableDiscreteDelayw_co5gwoze;
   } else {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_nulzsg5yk -
+    rtb_Add1_f_idx_0 = measure_B.Switch_nulzsg5yk -
       measure_B.VariableDiscreteDelay_co5gwoze0;
   }
 
@@ -6356,20 +6731,20 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch = measure_B.ACripple1stestimate - ((rtb_Add1_fs_idx_0 -
+  rtb_Switch = measure_B.ACripple1stestimate - ((rtb_Add1_f_idx_0 -
     ((measure_B.VariableDiscreteDelaywithT_jwh1 * rtb_Subtract3_ca) +
      (measure_B.VariableDiscreteDelaywith_f1uva * rtb_MathFunction_mti))) *
     rtb_Tps2dt_cr);
   rtb_Switch_nulzsg5ykq = measure_DWork.UnitDelay_DSTATE_lmdwo3 +
-    measure_P.Bias_Bias_jcfawyw2o0o;
+    measure_P.Bias_Bias_jcfawyw2o0os;
   if (rtb_Switch_nulzsg5ykq < measure_DWork.UnitDelay_DSTATE_lmdwo3) {
     rtb_Switch_nulzsg5ykq = MAX_uint32_T;
   }
 
-  rtb_Divide_hh = measure_DWork.UnitDelay_DSTATE_lmd;
+  rtb_Divide_h = measure_DWork.UnitDelay_DSTATE_lmd;
   rtb_LogicalOperator16 = (measure_DWork.UnitDelay_DSTATE_lmd >
-    measure_P.Constant_Value_oky);
-  if (measure_P.Constant_Value_pe) {
+    measure_P.Constant_Value_nr);
+  if (measure_P.Constant_Value_aqm) {
     rtb_Compare_ks = (rtb_LogicalOperator16 &&
                       (measure_DWork.delay_DSTATE_i2wj4d));
   } else {
@@ -6388,7 +6763,7 @@ void measureModelClass::step0()
   if (rtb_Compare_ks) {
     rtb_Gain_pj = measure_DWork.UnitDelay_DSTATE_lmd -
       measure_DWork.UnitDelay1_DSTATE_cm;
-    if (rtb_Gain_pj < measure_P.Constant_Value_n) {
+    if (rtb_Gain_pj < measure_P.Constant_Value_ot) {
       rtb_Switch1_l = -rtb_Gain_pj;
     } else {
       rtb_Switch1_l = rtb_Gain_pj;
@@ -6407,14 +6782,13 @@ void measureModelClass::step0()
     rtb_Divide_b4h = measure_DWork.UnitDelay1_DSTATE_cmnb;
   }
 
-  rtb_Add1_fs_idx_0 = (measure_P.Gain_Gain_jcfawyw2o0os * ((real_T)rtb_Switch2_h))
+  rtb_Add1_f_idx_0 = (measure_P.Gain_Gain_jcfawyw2o0os * ((real_T)rtb_Switch2_h))
     + rtb_Divide_b4h;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_ot) {
-    rtb_Add1_fs_idx_0 = measure_P.Constant_Value_p4;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_ipk) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_p4;
   }
 
-  rtb_Divide_b4ha = (1.0 / rtb_Add1_fs_idx_0) *
-    measure_P.Gain_Gain_jcfawyw2o0osk;
+  rtb_Divide_b4ha = (1.0 / rtb_Add1_f_idx_0) * measure_P.Gain_Gain_jcfawyw2o0osk;
   if (rtb_Compare_jm) {
     rtb_Divide_nqz = measure_P.Constant_Value_jcfawyw2o0osk;
   } else {
@@ -6441,10 +6815,10 @@ void measureModelClass::step0()
 
   rtb_Gain_pj = measure_P.Gain2_Gain_j * rtb_Divide_nqz;
   if (measure_P.Constant6_Value_jcf) {
-    if (rtb_Gain_pj > measure_P.Constant_Value_ipk) {
+    if (rtb_Gain_pj > measure_P.Constant_Value_gp) {
       measure_B.Switch2_h1wibj25 = rtb_Gain_pj + measure_P.Bias1_Bias_jcf;
     } else {
-      measure_B.Switch2_h1wibj25 = rtb_Gain_pj + measure_P.Bias_Bias_jcf;
+      measure_B.Switch2_h1wibj25 = rtb_Gain_pj + measure_P.Bias_Bias_jcfa;
     }
   } else {
     measure_B.Switch2_h1wibj25 = rtb_Gain_pj;
@@ -6454,46 +6828,46 @@ void measureModelClass::step0()
     measure_B.SFunction_ilz = (int32_T)measure_B.Switch2_h1wibj25;
   }
 
-  if (((real_T)measure_B.SFunction_ilz) < measure_P.Constant_Value_gp) {
-    rtb_Add1_fs_idx = measure_P.Constant_Value_jcfawyw2o0osk2;
+  if (((real_T)measure_B.SFunction_ilz) < measure_P.Constant_Value_ehx) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_jcfawyw2o0osk2;
   } else {
-    rtb_Add1_fs_idx = (real_T)measure_B.SFunction_ilz;
+    rtb_Add1_f_idx = (real_T)measure_B.SFunction_ilz;
   }
 
-  rtb_Gain_pj = ((1.0 / rtb_Divide_nqz) * rtb_Add1_fs_idx) -
+  rtb_Gain_pj = ((1.0 / rtb_Divide_nqz) * rtb_Add1_f_idx) -
     measure_DWork.UnitDelay1_DSTATE_cmnb3j;
-  if (rtb_Gain_pj < measure_P.Constant_Value_eh) {
-    rtb_Add1_fs_idx_1 = measure_P.Constant_Value_jcfawy;
+  if (rtb_Gain_pj < measure_P.Constant_Value_li) {
+    rtb_Add1_f_idx_1 = measure_P.Constant_Value_jcfawy;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_jcfaw) {
-    rtb_Add1_fs_idx_1 = measure_P.Constant1_Value_jcfa;
+    rtb_Add1_f_idx_1 = measure_P.Constant1_Value_jcfa;
   } else {
-    rtb_Add1_fs_idx_1 = rtb_Gain_pj;
+    rtb_Add1_f_idx_1 = rtb_Gain_pj;
   }
 
-  rtb_Switch_jka = rtb_Add1_fs_idx_1 + measure_DWork.UnitDelay1_DSTATE_cmnb3j;
+  rtb_Switch_jka = rtb_Add1_f_idx_1 + measure_DWork.UnitDelay1_DSTATE_cmnb3j;
   if (rtb_Compare_jm) {
     rtb_Switch1_bt = rtb_UnitDelay1_c;
   } else {
     rtb_Switch1_bt = measure_P.int1_Value_jc;
   }
 
-  rtb_Add1_fs_idx_1 = std::exp((measure_P.Gain1_Gain_jcfawy * rtb_Divide_nqz) *
+  rtb_Add1_f_idx_1 = std::exp((measure_P.Gain1_Gain_jcfawy * rtb_Divide_nqz) *
     measure_P.Gain2_Gain_jc);
-  rtb_IpktoIrmsconversion = (measure_P.double1_Value - rtb_Add1_fs_idx_1) *
+  rtb_IpktoIrmsconversion = (measure_P.double1_Value - rtb_Add1_f_idx_1) *
     rtb_Switch;
-  rtb_SumofElements = rtb_Divide_hh * rtb_Add1_fs_idx_1;
-  rtb_Add1_fs_idx_0 = (measure_P.Gain1_Gain_jcfawyw * rtb_Add1_fs_idx_0) +
-    measure_P.Bias_Bias_jcfawyw2o;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_li) {
-    rtb_Add1_fs_idx_0 = measure_P.Constant_Value_p;
+  rtb_SumofElements = rtb_Divide_h * rtb_Add1_f_idx_1;
+  rtb_Add1_f_idx_0 = (measure_P.Gain1_Gain_jcfawyw * rtb_Add1_f_idx_0) +
+    measure_P.Bias_Bias_jcfawyw2o0;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_hb) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_pv;
   }
 
-  rtb_Gain_pj = (measure_P.Gain_Gain_jcfawyw2o0osk2 * rtb_Add1_fs_idx_0) +
-    measure_P.Bias_Bias_jcfawyw2o0;
-  if (rtb_Gain_pj < measure_P.Constant_Value_hb) {
+  rtb_Gain_pj = (measure_P.Gain_Gain_jcfawyw2o0osk2 * rtb_Add1_f_idx_0) +
+    measure_P.Bias_Bias_jcfawyw2o0o;
+  if (rtb_Gain_pj < measure_P.Constant_Value_gw) {
     rtb_Gain_pj = measure_P.Constant_Value_dl;
   } else {
-    if (rtb_Gain_pj > measure_P.Constant_Value_m) {
+    if (rtb_Gain_pj > measure_P.Constant_Value_mp) {
       rtb_Gain_pj = measure_P.Constant1_Value_jcfawyw2;
     }
   }
@@ -6501,7 +6875,7 @@ void measureModelClass::step0()
   if (measure_P.Constant6_Value_jcfa) {
     measure_B.Switch2_h1wibj25m = rtb_Gain_pj + measure_P.Bias1_Bias_jcfaw;
   } else {
-    measure_B.Switch2_h1wibj25m = rtb_Gain_pj + measure_P.Bias_Bias_jcfaw;
+    measure_B.Switch2_h1wibj25m = rtb_Gain_pj + measure_P.Bias_Bias_jcfawy;
   }
 
   {
@@ -6515,7 +6889,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value_jcfa;
   }
 
-  rtb_LogicalOperator9 = (rtb_UnitDelay1_c > measure_P.Constant_Value_ms3);
+  rtb_LogicalOperator9 = (rtb_UnitDelay1_c > measure_P.Constant_Value_icp);
   if (rtb_LogicalOperator9) {
     rtb_Switch1_fr = rtb_UnitDelay1_c;
   } else {
@@ -6523,7 +6897,7 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ks) {
-    rtb_Switch_nulzsg5ykq = measure_P.Constant_Value_bm;
+    rtb_Switch_nulzsg5ykq = measure_P.Constant_Value_dt;
   }
 
   if (rtb_Switch6_idx) {
@@ -6542,7 +6916,7 @@ void measureModelClass::step0()
   rtb_LogicalOperator1 = (rtb_LogicalOperator12 && (measure_DWork.delay_DSTATE_h));
   rtb_Any_Phases_Not_Disturbed = !rtb_LogicalOperator12;
   rtb_Gain_pj = measure_P.Gain_Gain_he * measure_P.Constant4_Value_g;
-  if (measure_P.Constant6_Value_h) {
+  if (measure_P.Constant6_Value_he) {
     measure_B.Switch2_c = rtb_Gain_pj + measure_P.Bias1_Bias_h;
   } else {
     measure_B.Switch2_c = rtb_Gain_pj + measure_P.Bias_Bias_h;
@@ -6572,7 +6946,7 @@ void measureModelClass::step0()
   rtb_LogicalOperator1 = (rtb_UnitDelay4_dq &&
     (measure_DWork.UnitDelay_DSTATE_pdoi));
   rtb_Gain_pj = measure_P.Gain_Gain_heb * measure_P.Constant3_Value;
-  if (measure_P.Constant6_Value_he) {
+  if (measure_P.Constant6_Value_heb) {
     measure_B.Switch2_c1 = rtb_Gain_pj + measure_P.Bias1_Bias_he;
   } else {
     measure_B.Switch2_c1 = rtb_Gain_pj + measure_P.Bias_Bias_he;
@@ -6610,17 +6984,17 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ah = rtb_UnitDelay1_c - measure_P.FixPtConstant_Value_hebrs;
-  rtb_Add1_fs_idx_0 = rtb_TrigonometricFunction_i -
+  rtb_Add1_f_idx_0 = rtb_TrigonometricFunction_i -
     measure_DWork.UnitDelay3_DSTATE_i5z5;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_apbn) {
-    rtb_Add1_fs_idx_0 += measure_P.Bias1_Bias_ap;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_apbn) {
+    rtb_Add1_f_idx_0 += measure_P.Bias1_Bias_ap;
   } else {
-    if (rtb_Add1_fs_idx_0 > measure_P.Constant_Value_apb) {
-      rtb_Add1_fs_idx_0 += measure_P.Bias_Bias_ap;
+    if (rtb_Add1_f_idx_0 > measure_P.Constant_Value_apb) {
+      rtb_Add1_f_idx_0 += measure_P.Bias_Bias_apb;
     }
   }
 
-  rtb_Add1_fs_idx_0 *= measure_P.Gain_Gain_ap;
+  rtb_Add1_f_idx_0 *= measure_P.Gain_Gain_ap;
   if (rtb_Compare_f) {
     rtb_UnitDelay1_lccp = measure_P.int1_Value_k;
   }
@@ -6631,11 +7005,11 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ec = rtb_Switch1_pwrmjy - measure_P.FixPtConstant_Value_ki;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_mv) {
-    rtb_Add1_fs_idx_0 = -rtb_Add1_fs_idx_0;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_mv) {
+    rtb_Add1_f_idx_0 = -rtb_Add1_f_idx_0;
   }
 
-  rtb_Sum1_g5i = measure_P.Gain_Gain_p * rtb_Add1_fs_idx_0;
+  rtb_Sum1_g5i = measure_P.Gain_Gain_p * rtb_Add1_f_idx_0;
   rtb_Switch1_np = measure_P.Gain1_Gain_p * rtb_UnitDelay_i;
   if (rtb_Compare_j1k4d50fkuukj) {
     rtb_Switch1_pwrm = measure_P.int2_Value_o;
@@ -6647,17 +7021,17 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ecsn = rtb_Switch1_pwrmj - measure_P.FixPtConstant_Value_od;
-  rtb_Add1_fs_idx_0 = rtb_TrigonometricFunction_ix -
+  rtb_Add1_f_idx_0 = rtb_TrigonometricFunction_ix -
     measure_DWork.UnitDelay3_DSTATE_i5z5o;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_i2jfb) {
-    rtb_Add1_fs_idx_0 += measure_P.Bias1_Bias_i2;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_i2jfb) {
+    rtb_Add1_f_idx_0 += measure_P.Bias1_Bias_i2;
   } else {
-    if (rtb_Add1_fs_idx_0 > measure_P.Constant_Value_i2jf) {
-      rtb_Add1_fs_idx_0 += measure_P.Bias_Bias_i2;
+    if (rtb_Add1_f_idx_0 > measure_P.Constant_Value_i2jf) {
+      rtb_Add1_f_idx_0 += measure_P.Bias_Bias_i2j;
     }
   }
 
-  rtb_Add1_fs_idx_0 *= measure_P.Gain_Gain_i2;
+  rtb_Add1_f_idx_0 *= measure_P.Gain_Gain_i2;
   if (rtb_Compare_gw) {
     rtb_Switch1_dg2as0wb = measure_P.int1_Value_m;
   }
@@ -6668,11 +7042,11 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ecsnsv = rtb_Switch1_dg2as0w - measure_P.FixPtConstant_Value_maw;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_ij) {
-    rtb_Add1_fs_idx_0 = -rtb_Add1_fs_idx_0;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_ij) {
+    rtb_Add1_f_idx_0 = -rtb_Add1_f_idx_0;
   }
 
-  rtb_Sum1_gh = measure_P.Gain_Gain_oe * rtb_Add1_fs_idx_0;
+  rtb_Sum1_gh = measure_P.Gain_Gain_oe * rtb_Add1_f_idx_0;
   rtb_AbsVI_k = measure_P.Gain1_Gain_oe * rtb_UnitDelay_it;
   if (rtb_Compare_g3iwu32gm4xoq) {
     rtb_Switch1_dg2as = measure_P.int2_Value_kc;
@@ -6685,17 +7059,17 @@ void measureModelClass::step0()
 
   rtb_FixPtSum1_ecsnsvom = rtb_Switch1_dg2as0 -
     measure_P.FixPtConstant_Value_kcq;
-  rtb_Add1_fs_idx_0 = rtb_TrigonometricFunction_ixv -
+  rtb_Add1_f_idx_0 = rtb_TrigonometricFunction_ixv -
     measure_DWork.UnitDelay3_DSTATE_i5z5oq;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_orgz) {
-    rtb_Add1_fs_idx_0 += measure_P.Bias1_Bias_or;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_orgz) {
+    rtb_Add1_f_idx_0 += measure_P.Bias1_Bias_or;
   } else {
-    if (rtb_Add1_fs_idx_0 > measure_P.Constant_Value_org) {
-      rtb_Add1_fs_idx_0 += measure_P.Bias_Bias_or;
+    if (rtb_Add1_f_idx_0 > measure_P.Constant_Value_org) {
+      rtb_Add1_f_idx_0 += measure_P.Bias_Bias_or;
     }
   }
 
-  rtb_Add1_fs_idx_0 *= measure_P.Gain_Gain_or;
+  rtb_Add1_f_idx_0 *= measure_P.Gain_Gain_or;
   if (rtb_Compare_il) {
     rtb_Switch1_mf0c25z = measure_P.int1_Value_my;
   }
@@ -6707,11 +7081,11 @@ void measureModelClass::step0()
   }
 
   rtb_Switch1_mf0c25z = rtb_Switch1_mf0c25 - measure_P.FixPtConstant_Value_my5;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_in) {
-    rtb_Add1_fs_idx_0 = -rtb_Add1_fs_idx_0;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_in) {
+    rtb_Add1_f_idx_0 = -rtb_Add1_f_idx_0;
   }
 
-  rtb_UnaryMinus_g = measure_P.Gain_Gain_jn * rtb_Add1_fs_idx_0;
+  rtb_UnaryMinus_g = measure_P.Gain_Gain_jn * rtb_Add1_f_idx_0;
   rtb_Switch_jpt = measure_P.Gain1_Gain_jn * rtb_UnitDelay_itx;
   if (rtb_Compare_dtgasgy1ciwmtj) {
     rtb_Switch1_mf0c = measure_P.int2_Value_ok;
@@ -6812,9 +7186,9 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_o) {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_lli5 - measure_B.VariableDiscret_g0z;
+    rtb_Add1_f_idx_0 = measure_B.Switch_lli5 - measure_B.VariableDiscret_g0z;
   } else {
-    rtb_Add1_fs_idx_0 = measure_B.Switch_lli5y - measure_B.VariableDiscret_ay;
+    rtb_Add1_f_idx_0 = measure_B.Switch_lli5y - measure_B.VariableDiscret_ay;
   }
 
   {
@@ -6843,7 +7217,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch = measure_B.ACripple1stestimate_n - ((rtb_Add1_fs_idx_0 -
+  rtb_Switch = measure_B.ACripple1stestimate_n - ((rtb_Add1_f_idx_0 -
     ((measure_B.VariableDiscret_iy * rtb_Switch_jkaja) +
      (measure_B.VariableDiscret_mi * rtb_MathFunction_pl))) * rtb_Switch_j);
   rtb_UnitDelay1_lccp = measure_DWork.UnitDelay_DSTATE_otr +
@@ -6854,8 +7228,8 @@ void measureModelClass::step0()
 
   rtb_AbsVI = measure_DWork.UnitDelay_DSTATE_o;
   rtb_LogicalOperator2_npqx = (measure_DWork.UnitDelay_DSTATE_o >
-    measure_P.Constant_Value_pi);
-  if (measure_P.Constant_Value_f4) {
+    measure_P.Constant_Value_m4s);
+  if (measure_P.Constant_Value_hj) {
     rtb_LogicalOperator1_pvh3 = (rtb_LogicalOperator2_npqx &&
       (measure_DWork.delay_DSTATE_j0));
   } else {
@@ -6874,7 +7248,7 @@ void measureModelClass::step0()
   if (rtb_LogicalOperator1_pvh3) {
     rtb_Gain_pj = measure_DWork.UnitDelay_DSTATE_o -
       measure_DWork.UnitDelay1_DSTATE_dgz;
-    if (rtb_Gain_pj < measure_P.Constant_Value_m4s) {
+    if (rtb_Gain_pj < measure_P.Constant_Value_c5) {
       rtb_Switch1_l = -rtb_Gain_pj;
     } else {
       rtb_Switch1_l = rtb_Gain_pj;
@@ -6892,13 +7266,13 @@ void measureModelClass::step0()
     rtb_Sum2_i = measure_DWork.UnitDelay1_DSTATE_dgzmv;
   }
 
-  rtb_Add1_fs_idx_0 = (measure_P.Gain_Gain_mqco * ((real_T)rtb_Switch1_pwrm)) +
+  rtb_Add1_f_idx_0 = (measure_P.Gain_Gain_mqco * ((real_T)rtb_Switch1_pwrm)) +
     rtb_Sum2_i;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_c5) {
-    rtb_Add1_fs_idx_0 = measure_P.Constant_Value_h1s;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_ipg) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_h1s;
   }
 
-  rtb_IpktoIrms_n = (1.0 / rtb_Add1_fs_idx_0) * measure_P.Gain_Gain_mqco2;
+  rtb_IpktoIrms_n = (1.0 / rtb_Add1_f_idx_0) * measure_P.Gain_Gain_mqco2;
   if (rtb_Compare_ky) {
     rtb_Switch1_ie = measure_P.Constant_Value_mqco2gbune;
   } else {
@@ -6925,7 +7299,7 @@ void measureModelClass::step0()
 
   rtb_Gain_pj = measure_P.Gain2_Gain_mq * rtb_Switch1_ie;
   if (measure_P.Constant6_Value_m) {
-    if (rtb_Gain_pj > measure_P.Constant_Value_ipg) {
+    if (rtb_Gain_pj > measure_P.Constant_Value_m2) {
       measure_B.Switch2_dm = rtb_Gain_pj + measure_P.Bias1_Bias_m;
     } else {
       measure_B.Switch2_dm = rtb_Gain_pj + measure_P.Bias_Bias_m;
@@ -6938,42 +7312,41 @@ void measureModelClass::step0()
     measure_B.SFunction_jf = (int32_T)measure_B.Switch2_dm;
   }
 
-  if (((real_T)measure_B.SFunction_jf) < measure_P.Constant_Value_m2) {
-    rtb_Add1_fs_idx = measure_P.Constant_Value_mqco2gbunew;
+  if (((real_T)measure_B.SFunction_jf) < measure_P.Constant_Value_lc) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_mqco2gbunew;
   } else {
-    rtb_Add1_fs_idx = (real_T)measure_B.SFunction_jf;
+    rtb_Add1_f_idx = (real_T)measure_B.SFunction_jf;
   }
 
-  rtb_Gain_pj = ((1.0 / rtb_Switch1_ie) * rtb_Add1_fs_idx) -
+  rtb_Gain_pj = ((1.0 / rtb_Switch1_ie) * rtb_Add1_f_idx) -
     measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
-  if (rtb_Gain_pj < measure_P.Constant_Value_lc) {
-    rtb_Add1_fs_idx_1 = measure_P.Constant_Value_mqc;
+  if (rtb_Gain_pj < measure_P.Constant_Value_pu) {
+    rtb_Add1_f_idx_1 = measure_P.Constant_Value_mqc;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_mq) {
-    rtb_Add1_fs_idx_1 = measure_P.Constant1_Value_m;
+    rtb_Add1_f_idx_1 = measure_P.Constant1_Value_m;
   } else {
-    rtb_Add1_fs_idx_1 = rtb_Gain_pj;
+    rtb_Add1_f_idx_1 = rtb_Gain_pj;
   }
 
-  rtb_MathFunction1 = rtb_Add1_fs_idx_1 +
-    measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
+  rtb_MathFunction1 = rtb_Add1_f_idx_1 + measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
   if (rtb_Compare_ky) {
     rtb_Switch1_pwrmjy = rtb_Switch_lli5ykm;
   } else {
     rtb_Switch1_pwrmjy = measure_P.int1_Value_mq;
   }
 
-  rtb_Add1_fs_idx_1 = std::exp((measure_P.Gain1_Gain_mqc * rtb_Switch1_ie) *
+  rtb_Add1_f_idx_1 = std::exp((measure_P.Gain1_Gain_mqc * rtb_Switch1_ie) *
     measure_P.Gain2_Gain_mqc);
-  rtb_Switch1_l = (measure_P.double1_Value_m - rtb_Add1_fs_idx_1) * rtb_Switch;
-  rtb_Add1_fs_idx_0 = (measure_P.Gain1_Gain_mqco * rtb_Add1_fs_idx_0) +
+  rtb_Switch1_l = (measure_P.double1_Value_m - rtb_Add1_f_idx_1) * rtb_Switch;
+  rtb_Add1_f_idx_0 = (measure_P.Gain1_Gain_mqco * rtb_Add1_f_idx_0) +
     measure_P.Bias_Bias_mqco;
-  if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_pu) {
-    rtb_Add1_fs_idx_0 = measure_P.Constant_Value_l;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_lg) {
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_l;
   }
 
-  rtb_Gain_pj = (measure_P.Gain_Gain_mqco2g * rtb_Add1_fs_idx_0) +
+  rtb_Gain_pj = (measure_P.Gain_Gain_mqco2g * rtb_Add1_f_idx_0) +
     measure_P.Bias_Bias_mqco2;
-  if (rtb_Gain_pj < measure_P.Constant_Value_lg) {
+  if (rtb_Gain_pj < measure_P.Constant_Value_eu) {
     rtb_Gain_pj = measure_P.Constant_Value_mqco2gbunewgpha;
   } else {
     if (rtb_Gain_pj > measure_P.Constant_Value_mqco2gbunewgph) {
@@ -6991,14 +7364,14 @@ void measureModelClass::step0()
     measure_B.SFunction_jft = (uint32_T)measure_B.Switch2_dmf;
   }
 
-  if (rtb_LogicalOperator1_pvh3 && (measure_P.Constant2_Value_m)) {
+  if (rtb_LogicalOperator1_pvh3 && (measure_P.Constant2_Value_mq)) {
     rtb_UnitDelay1_b = measure_B.SFunction_jft;
   } else {
     rtb_UnitDelay1_b = measure_DWork.UnitDelay_DSTATE_otrx -
       measure_P.FixPtConstant_Value_mq;
   }
 
-  rtb_LogicalOperator1 = (rtb_UnitDelay1_b > measure_P.Constant_Value_ob);
+  rtb_LogicalOperator1 = (rtb_UnitDelay1_b > measure_P.Constant_Value_cib);
   if (rtb_LogicalOperator1) {
     rtb_Switch1_ia = rtb_UnitDelay1_b;
   } else {
@@ -7006,7 +7379,7 @@ void measureModelClass::step0()
   }
 
   if (rtb_LogicalOperator1_pvh3) {
-    rtb_UnitDelay1_b = measure_P.Constant_Value_o2h;
+    rtb_UnitDelay1_b = measure_P.Constant_Value_id;
   } else {
     rtb_UnitDelay1_b = rtb_UnitDelay1_lccp;
   }
@@ -7016,240 +7389,239 @@ void measureModelClass::step0()
   }
 
   rtb_UnitDelay1_lccp = rtb_Switch1_a - measure_P.FixPtConstant_Value_p;
-  measure_B.Gain1 = measure_P.Gain1_Gain_k * measure_U.Vabcpu[0];
-  rtb_Ts_FFT_c *= measure_P.Gain5_Gain;
-  if (rtb_Ts_FFT_c < measure_P.Constant_Value_md) {
-    rtb_Ts_FFT_c = measure_P.Constant_Value_ok;
+  measure_B.Gain1_nt = measure_P.Gain1_Gain_b * measure_U.Vabcpu[0];
+  rtb_Ts_FFT_k *= measure_P.Gain5_Gain_li;
+  if (rtb_Ts_FFT_k < measure_P.Constant_Value_fi) {
+    rtb_Ts_FFT_k = measure_P.Constant_Value_b;
   }
 
-  rtb_Ts_FFT_c = 1.0 / rtb_Ts_FFT_c;
-  measure_B.Gain8 = measure_P.Gain8_Gain * rtb_Ts_FFT_c;
+  rtb_Ts_FFT_k = 1.0 / rtb_Ts_FFT_k;
+  measure_B.Gain8_o = measure_P.Gain8_Gain_l * rtb_Ts_FFT_k;
 
   {
     int_T ok = 1;
     real_T t,a,D1,D2,D3;
-    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1;
-    D1 = measure_DWork.SFunction_RWORK[0] - measure_B.Gain1;
-    D2 = measure_DWork.SFunction_RWORK[1] - D1;
-    D3 = measure_DWork.SFunction_RWORK[2] - D2;
-    measure_B.SFunction_o2 = measure_DWork.SFunction_RWORK[3] + 1;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_m;
+    D1 = measure_DWork.SFunction_RWORK_o[0] - measure_B.Gain1_nt;
+    D2 = measure_DWork.SFunction_RWORK_o[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK_o[2] - D2;
+    measure_B.SFunction_o2_d = measure_DWork.SFunction_RWORK_o[3] + 1;
     while (ok) {
-      t = measure_B.SFunction_o2 - measure_B.Gain8;
+      t = measure_B.SFunction_o2_d - measure_B.Gain8_o;
       ok = (t>=0);
       if (ok) {
-        measure_B.SFunction_o2 = t;
-        a = measure_B.Gain1 + D1*measure_B.SFunction_o2;
-        t = measure_B.SFunction_o2 * (measure_B.SFunction_o2-1);
+        measure_B.SFunction_o2_d = t;
+        a = measure_B.Gain1_nt + D1*measure_B.SFunction_o2_d;
+        t = measure_B.SFunction_o2_d * (measure_B.SFunction_o2_d-1);
         a += D2*t*0.5;
-        t *= (measure_B.SFunction_o2-2);
+        t *= (measure_B.SFunction_o2_d-2);
         a += D3*t/6;
-        measure_DWork.SFunction_IWORK++;
-        if (measure_DWork.SFunction_IWORK > (64-1) ) {
-          measure_DWork.SFunction_IWORK= 0;
+        measure_DWork.SFunction_IWORK_g++;
+        if (measure_DWork.SFunction_IWORK_g > (64-1) ) {
+          measure_DWork.SFunction_IWORK_g= 0;
         }
 
-        FFT_Data[measure_DWork.SFunction_IWORK]= a;
+        FFT_Data[measure_DWork.SFunction_IWORK_g]= a;
       }
     }
 
-    measure_B.SFunction_o3 = measure_DWork.SFunction_IWORK;
-    measure_DWork.SFunction_RWORK[0] = measure_B.Gain1;
-    measure_DWork.SFunction_RWORK[1] = D1;
-    measure_DWork.SFunction_RWORK[2] = D2;
-    measure_DWork.SFunction_RWORK[3] = measure_B.SFunction_o2;
+    measure_B.SFunction_o3_i = measure_DWork.SFunction_IWORK_g;
+    measure_DWork.SFunction_RWORK_o[0] = measure_B.Gain1_nt;
+    measure_DWork.SFunction_RWORK_o[1] = D1;
+    measure_DWork.SFunction_RWORK_o[2] = D2;
+    measure_DWork.SFunction_RWORK_o[3] = measure_B.SFunction_o2_d;
   }
 
-  rtb_Gain_pj = ((real_T)(measure_B.SFunction_o3 - measure_P.Constant2_Value_c0))
-    * rtb_Ts_FFT_c;
+  rtb_Gain_pj = ((real_T)(measure_B.SFunction_o3_i -
+    measure_P.Constant2_Value_dh)) * rtb_Ts_FFT_k;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_l = measure_DWork.RateTransition_Buffer0_h;
+    measure_B.RateTransition_d = measure_DWork.RateTransition_Buffer0_kg;
   }
 
   for (i = 0; i < 11; i++) {
-    rtb_Add1_fs_idx = (((((measure_P.Gain2_Gain_mf * measure_P.Constant9_Value
-      [(i)]) * rtb_Gain_pj) + measure_P.udegcompensationsinceusingvefre) +
-                        measure_B.RateTransition_l) +
-                       measure_P.Constant1_Value_b4) /
-      measure_P.Constant2_Value_g;
-    if (measure_P.Constant6_Value_g) {
-      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias;
-    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_ga) {
-      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_g;
+    rtb_Add1_f_idx = (((((measure_P.Gain2_Gain_b * measure_P.Constant9_Value[(i)])
+                         * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvef_c) +
+                       measure_B.RateTransition_d) + measure_P.Constant1_Value_o)
+      / measure_P.Constant2_Value_hw;
+    if (measure_P.Constant6_Value_iv5) {
+      measure_B.Switch2_gu[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias_iv;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_iv5) {
+      measure_B.Switch2_gu[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias_iv;
     } else {
-      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx;
+      measure_B.Switch2_gu[(i)] = rtb_Add1_f_idx;
     }
   }
 
   {
     int_T i1;
-    const real_T *u0 = measure_B.Switch2_e;
-    int32_T *y0 = measure_B.SFunction2;
+    const real_T *u0 = measure_B.Switch2_gu;
+    int32_T *y0 = measure_B.SFunction2_lk;
     for (i1=0; i1 < 11; i1++) {
       y0[i1] = (int32_T)u0[i1];
     }
   }
 
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    memcpy((void *)(&measure_B.RateTransition_a[0]), (void *)
-           (&measure_B.SFunction_o1[0]), (sizeof(real_T)) << 6U);
+    memcpy((void *)(&measure_B.RateTransition_hc[0]), (void *)
+           (&measure_B.SFunction_o1_m[0]), (sizeof(real_T)) << 6U);
   }
 
-  measure_B.Gain1_f = measure_P.Gain1_Gain_n * measure_U.Vabcpu[1];
-  rtb_Ts_FFT *= measure_P.Gain5_Gain_i;
-  if (rtb_Ts_FFT < measure_P.Constant_Value_ll) {
-    rtb_Ts_FFT = measure_P.Constant_Value_lv;
+  measure_B.Gain1_m = measure_P.Gain1_Gain_k * measure_U.Vabcpu[1];
+  rtb_Ts_FFT *= measure_P.Gain5_Gain_j;
+  if (rtb_Ts_FFT < measure_P.Constant_Value_po) {
+    rtb_Ts_FFT = measure_P.Constant_Value_n4;
   }
 
   rtb_Ts_FFT = 1.0 / rtb_Ts_FFT;
-  measure_B.Gain8_j = measure_P.Gain8_Gain_o * rtb_Ts_FFT;
+  measure_B.Gain8_p = measure_P.Gain8_Gain_d * rtb_Ts_FFT;
 
   {
     int_T ok = 1;
     real_T t,a,D1,D2,D3;
-    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_f;
-    D1 = measure_DWork.SFunction_RWORK_m[0] - measure_B.Gain1_f;
-    D2 = measure_DWork.SFunction_RWORK_m[1] - D1;
-    D3 = measure_DWork.SFunction_RWORK_m[2] - D2;
-    measure_B.SFunction_o2_l = measure_DWork.SFunction_RWORK_m[3] + 1;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_j;
+    D1 = measure_DWork.SFunction_RWORK_j[0] - measure_B.Gain1_m;
+    D2 = measure_DWork.SFunction_RWORK_j[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK_j[2] - D2;
+    measure_B.SFunction_o2_a = measure_DWork.SFunction_RWORK_j[3] + 1;
     while (ok) {
-      t = measure_B.SFunction_o2_l - measure_B.Gain8_j;
+      t = measure_B.SFunction_o2_a - measure_B.Gain8_p;
       ok = (t>=0);
       if (ok) {
-        measure_B.SFunction_o2_l = t;
-        a = measure_B.Gain1_f + D1*measure_B.SFunction_o2_l;
-        t = measure_B.SFunction_o2_l * (measure_B.SFunction_o2_l-1);
+        measure_B.SFunction_o2_a = t;
+        a = measure_B.Gain1_m + D1*measure_B.SFunction_o2_a;
+        t = measure_B.SFunction_o2_a * (measure_B.SFunction_o2_a-1);
         a += D2*t*0.5;
-        t *= (measure_B.SFunction_o2_l-2);
+        t *= (measure_B.SFunction_o2_a-2);
         a += D3*t/6;
-        measure_DWork.SFunction_IWORK_d++;
-        if (measure_DWork.SFunction_IWORK_d > (64-1) ) {
-          measure_DWork.SFunction_IWORK_d= 0;
+        measure_DWork.SFunction_IWORK_p++;
+        if (measure_DWork.SFunction_IWORK_p > (64-1) ) {
+          measure_DWork.SFunction_IWORK_p= 0;
         }
 
-        FFT_Data[measure_DWork.SFunction_IWORK_d]= a;
+        FFT_Data[measure_DWork.SFunction_IWORK_p]= a;
       }
     }
 
-    measure_B.SFunction_o3_n = measure_DWork.SFunction_IWORK_d;
-    measure_DWork.SFunction_RWORK_m[0] = measure_B.Gain1_f;
-    measure_DWork.SFunction_RWORK_m[1] = D1;
-    measure_DWork.SFunction_RWORK_m[2] = D2;
-    measure_DWork.SFunction_RWORK_m[3] = measure_B.SFunction_o2_l;
+    measure_B.SFunction_o3_p = measure_DWork.SFunction_IWORK_p;
+    measure_DWork.SFunction_RWORK_j[0] = measure_B.Gain1_m;
+    measure_DWork.SFunction_RWORK_j[1] = D1;
+    measure_DWork.SFunction_RWORK_j[2] = D2;
+    measure_DWork.SFunction_RWORK_j[3] = measure_B.SFunction_o2_a;
   }
 
-  rtb_Gain_pj = ((real_T)(measure_B.SFunction_o3_n - measure_P.Constant2_Value_p))
-    * rtb_Ts_FFT;
+  rtb_Gain_pj = ((real_T)(measure_B.SFunction_o3_p -
+    measure_P.Constant2_Value_ki)) * rtb_Ts_FFT;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_k = measure_DWork.RateTransition_Buffer0_po;
+    measure_B.RateTransition_l2 = measure_DWork.RateTransition_Buffer0_hw;
   }
 
   for (i = 0; i < 10; i++) {
-    rtb_Add1_fs_idx = (((((measure_P.Constant9_Value[i + 11] *
-      measure_P.Gain2_Gain_h) * rtb_Gain_pj) +
-                         measure_P.udegcompensationsinceusingvef_i) +
-                        measure_B.RateTransition_k) +
-                       measure_P.Constant1_Value_p) /
-      measure_P.Constant2_Value_ht;
-    if (measure_P.Constant6_Value_o) {
-      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias_o;
-    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_oe) {
-      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_oe;
+    rtb_Add1_f_idx = (((((measure_P.Constant9_Value[i + 11] *
+                          measure_P.Gain2_Gain_n) * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvef_f) +
+                       measure_B.RateTransition_l2) +
+                      measure_P.Constant1_Value_bc) /
+      measure_P.Constant2_Value_m;
+    if (measure_P.Constant6_Value_jl) {
+      measure_B.Switch2_fz[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias_jl;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_jl) {
+      measure_B.Switch2_fz[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias_jl;
     } else {
-      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx;
+      measure_B.Switch2_fz[(i)] = rtb_Add1_f_idx;
     }
   }
 
   {
     int_T i1;
-    const real_T *u0 = measure_B.Switch2_df;
-    int32_T *y0 = measure_B.SFunction2_i;
+    const real_T *u0 = measure_B.Switch2_fz;
+    int32_T *y0 = measure_B.SFunction2_fx;
     for (i1=0; i1 < 10; i1++) {
       y0[i1] = (int32_T)u0[i1];
     }
   }
 
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    memcpy((void *)(&measure_B.RateTransition_g5[0]), (void *)
-           (&measure_B.SFunction_o1_f[0]), (sizeof(real_T)) << 6U);
+    memcpy((void *)(&measure_B.RateTransition_cy[0]), (void *)
+           (&measure_B.SFunction_o1_j[0]), (sizeof(real_T)) << 6U);
   }
 
-  measure_B.Gain1_p = measure_P.Gain1_Gain_oq * measure_U.Vabcpu[2];
-  rtb_Switch4 *= measure_P.Gain5_Gain_f;
-  if (rtb_Switch4 < measure_P.Constant_Value_j1) {
-    rtb_Switch4 = measure_P.Constant_Value_gj;
+  measure_B.Gain1_j = measure_P.Gain1_Gain_d * measure_U.Vabcpu[2];
+  rtb_Switch4 *= measure_P.Gain5_Gain_l0;
+  if (rtb_Switch4 < measure_P.Constant_Value_n0) {
+    rtb_Switch4 = measure_P.Constant_Value_nq;
   }
 
   rtb_Gain_pj = 1.0 / rtb_Switch4;
-  measure_B.Gain8_d = measure_P.Gain8_Gain_n * rtb_Gain_pj;
+  measure_B.Gain8_d = measure_P.Gain8_Gain_g * rtb_Gain_pj;
 
   {
     int_T ok = 1;
     real_T t,a,D1,D2,D3;
-    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_k;
-    D1 = measure_DWork.SFunction_RWORK_o[0] - measure_B.Gain1_p;
-    D2 = measure_DWork.SFunction_RWORK_o[1] - D1;
-    D3 = measure_DWork.SFunction_RWORK_o[2] - D2;
-    measure_B.SFunction_o2_h = measure_DWork.SFunction_RWORK_o[3] + 1;
+    real_T* FFT_Data = (real_T*)measure_B.SFunction_o1_is;
+    D1 = measure_DWork.SFunction_RWORK_g[0] - measure_B.Gain1_j;
+    D2 = measure_DWork.SFunction_RWORK_g[1] - D1;
+    D3 = measure_DWork.SFunction_RWORK_g[2] - D2;
+    measure_B.SFunction_o2_b = measure_DWork.SFunction_RWORK_g[3] + 1;
     while (ok) {
-      t = measure_B.SFunction_o2_h - measure_B.Gain8_d;
+      t = measure_B.SFunction_o2_b - measure_B.Gain8_d;
       ok = (t>=0);
       if (ok) {
-        measure_B.SFunction_o2_h = t;
-        a = measure_B.Gain1_p + D1*measure_B.SFunction_o2_h;
-        t = measure_B.SFunction_o2_h * (measure_B.SFunction_o2_h-1);
+        measure_B.SFunction_o2_b = t;
+        a = measure_B.Gain1_j + D1*measure_B.SFunction_o2_b;
+        t = measure_B.SFunction_o2_b * (measure_B.SFunction_o2_b-1);
         a += D2*t*0.5;
-        t *= (measure_B.SFunction_o2_h-2);
+        t *= (measure_B.SFunction_o2_b-2);
         a += D3*t/6;
-        measure_DWork.SFunction_IWORK_a++;
-        if (measure_DWork.SFunction_IWORK_a > (64-1) ) {
-          measure_DWork.SFunction_IWORK_a= 0;
+        measure_DWork.SFunction_IWORK_k++;
+        if (measure_DWork.SFunction_IWORK_k > (64-1) ) {
+          measure_DWork.SFunction_IWORK_k= 0;
         }
 
-        FFT_Data[measure_DWork.SFunction_IWORK_a]= a;
+        FFT_Data[measure_DWork.SFunction_IWORK_k]= a;
       }
     }
 
-    measure_B.SFunction_o3_n1 = measure_DWork.SFunction_IWORK_a;
-    measure_DWork.SFunction_RWORK_o[0] = measure_B.Gain1_p;
-    measure_DWork.SFunction_RWORK_o[1] = D1;
-    measure_DWork.SFunction_RWORK_o[2] = D2;
-    measure_DWork.SFunction_RWORK_o[3] = measure_B.SFunction_o2_h;
+    measure_B.SFunction_o3_f = measure_DWork.SFunction_IWORK_k;
+    measure_DWork.SFunction_RWORK_g[0] = measure_B.Gain1_j;
+    measure_DWork.SFunction_RWORK_g[1] = D1;
+    measure_DWork.SFunction_RWORK_g[2] = D2;
+    measure_DWork.SFunction_RWORK_g[3] = measure_B.SFunction_o2_b;
   }
 
-  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3_n1 -
-    measure_P.Constant2_Value_kj);
+  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3_f - measure_P.Constant2_Value_b);
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_j2 = measure_DWork.RateTransition_Buffer0_e;
+    measure_B.RateTransition_p = measure_DWork.RateTransition_Buffer0_kc;
   }
 
   for (i = 0; i < 10; i++) {
-    rtb_Add1_fs_idx = (((((measure_P.Constant9_Value[i + 21] *
-      measure_P.Gain2_Gain_o) * rtb_Gain_pj) +
-                         measure_P.udegcompensationsinceusingvef_f) +
-                        measure_B.RateTransition_j2) +
-                       measure_P.Constant1_Value_l) /
-      measure_P.Constant2_Value_k;
-    if (measure_P.Constant6_Value_fe) {
-      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias_f;
-    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_feg) {
-      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_f;
+    rtb_Add1_f_idx = (((((measure_P.Constant9_Value[i + 21] *
+                          measure_P.Gain2_Gain_bd) * rtb_Gain_pj) +
+                        measure_P.udegcompensationsinceusingvef_p) +
+                       measure_B.RateTransition_p) +
+                      measure_P.Constant1_Value_io) /
+      measure_P.Constant2_Value_p;
+    if (measure_P.Constant6_Value_l) {
+      measure_B.Switch2_b[(i)] = rtb_Add1_f_idx + measure_P.Bias2_Bias_l;
+    } else if (rtb_Add1_f_idx < measure_P.Constant_Value_l4) {
+      measure_B.Switch2_b[(i)] = rtb_Add1_f_idx + measure_P.Bias_Bias_l;
     } else {
-      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx;
+      measure_B.Switch2_b[(i)] = rtb_Add1_f_idx;
     }
   }
 
   {
     int_T i1;
     const real_T *u0 = measure_B.Switch2_b;
-    int32_T *y0 = measure_B.SFunction2_kp;
+    int32_T *y0 = measure_B.SFunction2_g0;
     for (i1=0; i1 < 10; i1++) {
       y0[i1] = (int32_T)u0[i1];
     }
   }
 
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    memcpy((void *)(&measure_B.RateTransition_gx[0]), (void *)
-           (&measure_B.SFunction_o1_k[0]), (sizeof(real_T)) << 6U);
+    memcpy((void *)(&measure_B.RateTransition_fo[0]), (void *)
+           (&measure_B.SFunction_o1_is[0]), (sizeof(real_T)) << 6U);
   }
 
   {
@@ -7549,7 +7921,7 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay_DSTATE_lmdwo = rtb_Switch1_hb;
   measure_DWork.UnitDelay_DSTATE_lmdwo300 = rtb_LogicalOperator1_fmgwx;
   measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwr = rtb_FixPtSum1_cotn;
-  measure_DWork.UnitDelay_DSTATE_lmdwo300i = measure_P.Constant_Value_fw;
+  measure_DWork.UnitDelay_DSTATE_lmdwo300i = measure_P.Constant_Value_pe;
   measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwrm = rtb_FixPtSum1_cot;
   measure_DWork.UnitDelay4_DSTATE_czl44j1i = measure_B.ACripple1stestimate;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0 = measure_B.Switch_nulzsg5y;
@@ -7562,9 +7934,9 @@ void measureModelClass::step0()
     rtb_SumofElements;
   measure_DWork.delay_DSTATE_i2wj4d = !rtb_LogicalOperator16;
   measure_DWork.delay1_DSTATE_ces = rtb_LogicalOperator16;
-  measure_DWork.UnitDelay_DSTATE_lmdwo300ig = measure_P.Constant_Value_aqm;
+  measure_DWork.UnitDelay_DSTATE_lmdwo300ig = measure_P.Constant_Value_ml;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j4 = rtb_Switch2_h;
-  measure_DWork.UnitDelay1_DSTATE_cm = rtb_Divide_hh;
+  measure_DWork.UnitDelay1_DSTATE_cm = rtb_Divide_h;
   measure_DWork.UnitDelay1_DSTATE_cmn = rtb_Divide_nqzy;
   measure_DWork.UnitDelay4_DSTATE_czl44j1ipa = rtb_Divide_nqzy;
   measure_DWork.UnitDelay1_DSTATE_cmnb = rtb_Divide_b4h;
@@ -7588,11 +7960,11 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay1_DSTATE_dg = rtb_IpktoIrms_n;
   measure_DWork.UnitDelay_DSTATE_otr = rtb_UnitDelay1_b;
   measure_DWork.UnitDelay2_DSTATE_e5yc1iho = rtb_LogicalOperator1;
-  measure_DWork.UnitDelay_DSTATE_o = (rtb_AbsVI * rtb_Add1_fs_idx_1) +
+  measure_DWork.UnitDelay_DSTATE_o = (rtb_AbsVI * rtb_Add1_f_idx_1) +
     rtb_Switch1_l;
   measure_DWork.delay_DSTATE_j0 = !rtb_LogicalOperator2_npqx;
   measure_DWork.delay1_DSTATE_kz = rtb_LogicalOperator2_npqx;
-  measure_DWork.UnitDelay_DSTATE_otrxo = measure_P.Constant_Value_hj;
+  measure_DWork.UnitDelay_DSTATE_otrxo = measure_P.Constant_Value_k4;
   measure_DWork.UnitDelay2_DSTATE_e5yc1ih = rtb_Switch1_pwrm;
   measure_DWork.UnitDelay1_DSTATE_dgz = rtb_AbsVI;
   measure_DWork.UnitDelay1_DSTATE_dgzm = rtb_Switch1_iew;
@@ -7607,256 +7979,621 @@ void measureModelClass::step1()
 {
   real_T rtb_ComplextoMagnitudeAngle2_o2;
   real_T rtb_ComplextoMagnitudeAngle2_o1;
-  real_T rtb_Product1_mc[4];
-  real_T rtb_ComplextoMagnitudeAngle2_ek;
-  real_T rtb_ComplextoMagnitudeAngle2__e;
-  real_T rtb_Product1_j[4];
-  real_T rtb_ComplextoMagnitudeAngle2_jw;
+  real_T rtb_Product1_a0[4];
+  real_T rtb_ComplextoMagnitudeAngle2__i;
   real_T rtb_ComplextoMagnitudeAngle2__j;
+  real_T rtb_Product1_ag[4];
+  real_T rtb_ComplextoMagnitudeAngle2__m;
+  real_T rtb_ComplextoMagnitudeAngle2__e;
+  real_T rtb_Product1_d2[4];
+  real_T rtb_ComplextoMagnitudeAngle2_e3;
+  real_T rtb_ComplextoMagnitudeAngle2_mf;
+  real_T rtb_Product1_at[4];
+  real_T rtb_ComplextoMagnitudeAngle2__g;
+  real_T rtb_ComplextoMagnitudeAngle2__k;
+  real_T rtb_Product1_ii[4];
+  real_T rtb_ComplextoMagnitudeAngle2__a;
+  real_T rtb_ComplextoMagnitudeAngle2__c;
   creal_T rtb_FFT[64];
-  creal_T rtb_FFT_n[64];
-  creal_T rtb_FFT_o[64];
+  real_T rtb_Sum3[4];
+  real_T rtb_Sum3_n[4];
+  real_T rtb_Sum3_a[4];
+  real_T rtb_Sum3_o[4];
+  real_T rtb_Sum3_i[4];
+  real_T rtb_Sum2_op_idx;
+  real_T rtb_Sum2_op_idx_0;
+  real_T rtb_Sum2_op_idx_1;
+  real_T rtb_Sum2_op_idx_2;
   real_T rtb_Divide_g_idx;
   real_T rtb_Divide_g_idx_0;
   real_T rtb_Divide_g_idx_1;
   real_T rtb_Divide_g_idx_2;
-  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_a[0], &rtb_FFT[0U], 1,
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_hd[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
                        FALSE);
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2_o1 = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2_o2 = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Divide_g_idx_2 = ((rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-    ((measure_P.Gain3_Gain_o[0] * rtb_ComplextoMagnitudeAngle2_o2) +
-     measure_P.Bias1_Bias_ar[0])) + measure_P.Constant1_Value_o) /
-    measure_P.Constant2_Value_hr;
-  rtb_Divide_g_idx_1 = ((rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-    ((measure_P.Gain3_Gain_o[1] * rtb_ComplextoMagnitudeAngle2_o2) +
-     measure_P.Bias1_Bias_ar[1])) + measure_P.Constant1_Value_o) /
-    measure_P.Constant2_Value_hr;
-  rtb_Divide_g_idx_0 = ((rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-    ((measure_P.Gain3_Gain_o[2] * rtb_ComplextoMagnitudeAngle2_o2) +
-     measure_P.Bias1_Bias_ar[2])) + measure_P.Constant1_Value_o) /
-    measure_P.Constant2_Value_hr;
-  rtb_Divide_g_idx = ((rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                       ((measure_P.Gain3_Gain_o[3] *
-    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_ar[3])) +
-                      measure_P.Constant1_Value_o) /
-    measure_P.Constant2_Value_hr;
-  if (measure_P.Constant6_Value_p) {
-    measure_B.Switch2_l[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_l[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_l[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_l[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_e;
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_l[0] *
+    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[0])) +
+    measure_P.Constant1_Value_g;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_l[1] *
+    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[1])) +
+    measure_P.Constant1_Value_g;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_l[2] *
+    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[2])) +
+    measure_P.Constant1_Value_g;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_l[3] *
+                       rtb_ComplextoMagnitudeAngle2_o2) +
+                      measure_P.Bias1_Bias_d[3])) + measure_P.Constant1_Value_g;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_l;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_l;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_l;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_l;
+  if (measure_P.Constant6_Value_d) {
+    measure_B.Switch2_p[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_e;
+    measure_B.Switch2_p[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_e;
+    measure_B.Switch2_p[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_e;
+    measure_B.Switch2_p[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_e;
   } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_ms) {
-      measure_B.Switch2_l[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_l;
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_db) {
+      measure_B.Switch2_p[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_a;
     } else {
-      measure_B.Switch2_l[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_p[0] = rtb_Divide_g_idx_2;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_ms) {
-      measure_B.Switch2_l[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_l;
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_db) {
+      measure_B.Switch2_p[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_a;
     } else {
-      measure_B.Switch2_l[1] = rtb_Divide_g_idx_1;
+      measure_B.Switch2_p[1] = rtb_Divide_g_idx_1;
     }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_ms) {
-      measure_B.Switch2_l[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_l;
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_db) {
+      measure_B.Switch2_p[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_a;
     } else {
-      measure_B.Switch2_l[2] = rtb_Divide_g_idx_0;
+      measure_B.Switch2_p[2] = rtb_Divide_g_idx_0;
     }
 
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_ms) {
-      measure_B.Switch2_l[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_l;
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_db) {
+      measure_B.Switch2_p[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_a;
     } else {
-      measure_B.Switch2_l[3] = rtb_Divide_g_idx;
+      measure_B.Switch2_p[3] = rtb_Divide_g_idx;
     }
   }
 
-  measure_B.SFunction2_g[0] = (int32_T)measure_B.Switch2_l[0];
-  measure_B.SFunction2_g[1] = (int32_T)measure_B.Switch2_l[1];
-  measure_B.SFunction2_g[2] = (int32_T)measure_B.Switch2_l[2];
-  measure_B.SFunction2_g[3] = (int32_T)measure_B.Switch2_l[3];
-  if (rtb_ComplextoMagnitudeAngle2_o1 < measure_P.Constant_Value_lj) {
-    rtb_Divide_g_idx_2 = measure_P.Constant_Value_ko;
+  measure_B.SFunction2_b[0] = (int32_T)measure_B.Switch2_p[0];
+  measure_B.SFunction2_b[1] = (int32_T)measure_B.Switch2_p[1];
+  measure_B.SFunction2_b[2] = (int32_T)measure_B.Switch2_p[2];
+  measure_B.SFunction2_b[3] = (int32_T)measure_B.Switch2_p[3];
+  rtb_Sum3[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_b[0]) *
+    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
+  rtb_Sum3[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_b[1]) *
+    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
+  rtb_Sum3[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_b[2]) *
+    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
+  rtb_Sum3[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_b[3]) *
+    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
+  if (rtb_ComplextoMagnitudeAngle2_o1 < measure_P.Constant_Value_er) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_p;
   } else {
-    rtb_Divide_g_idx_2 = rtb_ComplextoMagnitudeAngle2_o1;
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2_o1;
   }
 
-  rtb_Product1_mc[0] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT[2].re,
-    rtb_FFT[2].im);
-  rtb_Product1_mc[1] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT[3].re,
-    rtb_FFT[3].im);
-  rtb_Product1_mc[2] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT[4].re,
-    rtb_FFT[4].im);
-  rtb_Product1_mc[3] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT[5].re,
-    rtb_FFT[5].im);
-  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_g5[0], &rtb_FFT_n[0U],
-    1, 64);
-  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT_n[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
+  rtb_Product1_a0[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
+    .im);
+  rtb_Product1_a0[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
+    .im);
+  rtb_Product1_a0[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
+    .im);
+  rtb_Product1_a0[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
+    .im);
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_la[0], &rtb_FFT[0U], 1,
+    64);
+  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
                        FALSE);
-  MWDSPCG_FFT_DblLen_Z(&rtb_FFT_n[0U], 1, 64, measure_ConstP.pooled1, 1);
-  rtb_ComplextoMagnitudeAngle2__e = hypot(rtb_FFT_n[1].re, rtb_FFT_n[1].im);
-  rtb_ComplextoMagnitudeAngle2_ek = rt_atan2d_snf(rtb_FFT_n[1].im, rtb_FFT_n[1].
-    re);
-  rtb_Divide_g_idx_2 = ((rt_atan2d_snf(rtb_FFT_n[2].im, rtb_FFT_n[2].re) -
-    ((measure_P.Gain3_Gain_l[0] * rtb_ComplextoMagnitudeAngle2_ek) +
-     measure_P.Bias1_Bias_l[0])) + measure_P.Constant1_Value_px) /
-    measure_P.Constant2_Value_j;
-  rtb_Divide_g_idx_1 = ((rt_atan2d_snf(rtb_FFT_n[3].im, rtb_FFT_n[3].re) -
-    ((measure_P.Gain3_Gain_l[1] * rtb_ComplextoMagnitudeAngle2_ek) +
-     measure_P.Bias1_Bias_l[1])) + measure_P.Constant1_Value_px) /
-    measure_P.Constant2_Value_j;
-  rtb_Divide_g_idx_0 = ((rt_atan2d_snf(rtb_FFT_n[4].im, rtb_FFT_n[4].re) -
-    ((measure_P.Gain3_Gain_l[2] * rtb_ComplextoMagnitudeAngle2_ek) +
-     measure_P.Bias1_Bias_l[2])) + measure_P.Constant1_Value_px) /
-    measure_P.Constant2_Value_j;
-  rtb_Divide_g_idx = ((rt_atan2d_snf(rtb_FFT_n[5].im, rtb_FFT_n[5].re) -
-                       ((measure_P.Gain3_Gain_l[3] *
-    rtb_ComplextoMagnitudeAngle2_ek) + measure_P.Bias1_Bias_l[3])) +
-                      measure_P.Constant1_Value_px) /
-    measure_P.Constant2_Value_j;
-  if (measure_P.Constant6_Value_n) {
-    measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_g;
+  MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
+  rtb_ComplextoMagnitudeAngle2__j = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
+  rtb_ComplextoMagnitudeAngle2__i = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_f[0] *
+    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[0])) +
+    measure_P.Constant1_Value_d;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_f[1] *
+    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[1])) +
+    measure_P.Constant1_Value_d;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_f[2] *
+    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[2])) +
+    measure_P.Constant1_Value_d;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_f[3] *
+                       rtb_ComplextoMagnitudeAngle2__i) +
+                      measure_P.Bias1_Bias_a0[3])) + measure_P.Constant1_Value_d;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_d;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_d;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_d;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_d;
+  if (measure_P.Constant6_Value_h) {
+    measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_d;
+    measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_d;
+    measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_d;
+    measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_d;
   } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_br) {
-      measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_lc;
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_px) {
+      measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_ek;
     } else {
       measure_B.Switch2_g[0] = rtb_Divide_g_idx_2;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_br) {
-      measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_lc;
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_px) {
+      measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_ek;
     } else {
       measure_B.Switch2_g[1] = rtb_Divide_g_idx_1;
     }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_br) {
-      measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_lc;
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_px) {
+      measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_ek;
     } else {
       measure_B.Switch2_g[2] = rtb_Divide_g_idx_0;
     }
 
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_br) {
-      measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_lc;
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_px) {
+      measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_ek;
     } else {
       measure_B.Switch2_g[3] = rtb_Divide_g_idx;
     }
   }
 
-  measure_B.SFunction2_k[0] = (int32_T)measure_B.Switch2_g[0];
-  measure_B.SFunction2_k[1] = (int32_T)measure_B.Switch2_g[1];
-  measure_B.SFunction2_k[2] = (int32_T)measure_B.Switch2_g[2];
-  measure_B.SFunction2_k[3] = (int32_T)measure_B.Switch2_g[3];
-  if (rtb_ComplextoMagnitudeAngle2__e < measure_P.Constant_Value_iz) {
-    rtb_Divide_g_idx_2 = measure_P.Constant_Value_av;
+  measure_B.SFunction2_j[0] = (int32_T)measure_B.Switch2_g[0];
+  measure_B.SFunction2_j[1] = (int32_T)measure_B.Switch2_g[1];
+  measure_B.SFunction2_j[2] = (int32_T)measure_B.Switch2_g[2];
+  measure_B.SFunction2_j[3] = (int32_T)measure_B.Switch2_g[3];
+  rtb_Sum3_n[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_j[0]) *
+    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
+  rtb_Sum3_n[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_j[1]) *
+    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
+  rtb_Sum3_n[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_j[2]) *
+    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
+  rtb_Sum3_n[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_j[3]) *
+    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
+  if (rtb_ComplextoMagnitudeAngle2__j < measure_P.Constant_Value_kb) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_e;
   } else {
-    rtb_Divide_g_idx_2 = rtb_ComplextoMagnitudeAngle2__e;
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__j;
   }
 
-  rtb_Product1_j[0] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT_n[2].re,
-    rtb_FFT_n[2].im);
-  rtb_Product1_j[1] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT_n[3].re,
-    rtb_FFT_n[3].im);
-  rtb_Product1_j[2] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT_n[4].re,
-    rtb_FFT_n[4].im);
-  rtb_Product1_j[3] = (1.0 / rtb_Divide_g_idx_2) * hypot(rtb_FFT_n[5].re,
-    rtb_FFT_n[5].im);
-  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_gx[0], &rtb_FFT_o[0U],
-    1, 64);
-  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT_o[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
+  rtb_Product1_ag[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
+    .im);
+  rtb_Product1_ag[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
+    .im);
+  rtb_Product1_ag[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
+    .im);
+  rtb_Product1_ag[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
+    .im);
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_mm[0], &rtb_FFT[0U], 1,
+    64);
+  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
                        FALSE);
-  MWDSPCG_FFT_DblLen_Z(&rtb_FFT_o[0U], 1, 64, measure_ConstP.pooled1, 1);
-  rtb_ComplextoMagnitudeAngle2__j = hypot(rtb_FFT_o[1].re, rtb_FFT_o[1].im);
-  rtb_ComplextoMagnitudeAngle2_jw = rt_atan2d_snf(rtb_FFT_o[1].im, rtb_FFT_o[1].
-    re);
-  rtb_Divide_g_idx_2 = ((rt_atan2d_snf(rtb_FFT_o[2].im, rtb_FFT_o[2].re) -
-    ((measure_P.Gain3_Gain_d[0] * rtb_ComplextoMagnitudeAngle2_jw) +
-     measure_P.Bias1_Bias_a4[0])) + measure_P.Constant1_Value_n) /
-    measure_P.Constant2_Value_o;
-  rtb_Divide_g_idx_1 = ((rt_atan2d_snf(rtb_FFT_o[3].im, rtb_FFT_o[3].re) -
-    ((measure_P.Gain3_Gain_d[1] * rtb_ComplextoMagnitudeAngle2_jw) +
-     measure_P.Bias1_Bias_a4[1])) + measure_P.Constant1_Value_n) /
-    measure_P.Constant2_Value_o;
-  rtb_Divide_g_idx_0 = ((rt_atan2d_snf(rtb_FFT_o[4].im, rtb_FFT_o[4].re) -
-    ((measure_P.Gain3_Gain_d[2] * rtb_ComplextoMagnitudeAngle2_jw) +
-     measure_P.Bias1_Bias_a4[2])) + measure_P.Constant1_Value_n) /
-    measure_P.Constant2_Value_o;
-  rtb_Divide_g_idx = ((rt_atan2d_snf(rtb_FFT_o[5].im, rtb_FFT_o[5].re) -
-                       ((measure_P.Gain3_Gain_d[3] *
-    rtb_ComplextoMagnitudeAngle2_jw) + measure_P.Bias1_Bias_a4[3])) +
-                      measure_P.Constant1_Value_n) / measure_P.Constant2_Value_o;
-  if (measure_P.Constant6_Value_e) {
-    measure_B.Switch2_b2[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_gx;
-    measure_B.Switch2_b2[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_gx;
-    measure_B.Switch2_b2[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_gx;
-    measure_B.Switch2_b2[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_gx;
+  MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
+  rtb_ComplextoMagnitudeAngle2__e = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
+  rtb_ComplextoMagnitudeAngle2__m = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_o[0] *
+    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[0])) +
+    measure_P.Constant1_Value_bk;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_o[1] *
+    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[1])) +
+    measure_P.Constant1_Value_bk;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_o[2] *
+    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[2])) +
+    measure_P.Constant1_Value_bk;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_o[3] *
+                       rtb_ComplextoMagnitudeAngle2__m) +
+                      measure_P.Bias1_Bias_o3[3])) +
+    measure_P.Constant1_Value_bk;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_cs;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_cs;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_cs;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_cs;
+  if (measure_P.Constant6_Value_o) {
+    measure_B.Switch2_j[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_g;
+    measure_B.Switch2_j[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_g;
+    measure_B.Switch2_j[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_g;
+    measure_B.Switch2_j[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_g;
   } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_or0) {
-      measure_B.Switch2_b2[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_lz;
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_abn) {
+      measure_B.Switch2_j[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_d;
     } else {
-      measure_B.Switch2_b2[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_j[0] = rtb_Divide_g_idx_2;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_or0) {
-      measure_B.Switch2_b2[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_lz;
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_abn) {
+      measure_B.Switch2_j[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_d;
     } else {
-      measure_B.Switch2_b2[1] = rtb_Divide_g_idx_1;
+      measure_B.Switch2_j[1] = rtb_Divide_g_idx_1;
     }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_or0) {
-      measure_B.Switch2_b2[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_lz;
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_abn) {
+      measure_B.Switch2_j[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_d;
     } else {
-      measure_B.Switch2_b2[2] = rtb_Divide_g_idx_0;
+      measure_B.Switch2_j[2] = rtb_Divide_g_idx_0;
     }
 
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_or0) {
-      measure_B.Switch2_b2[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_lz;
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_abn) {
+      measure_B.Switch2_j[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_d;
     } else {
-      measure_B.Switch2_b2[3] = rtb_Divide_g_idx;
+      measure_B.Switch2_j[3] = rtb_Divide_g_idx;
     }
   }
 
-  measure_B.SFunction2_n[0] = (int32_T)measure_B.Switch2_b2[0];
-  measure_B.SFunction2_n[1] = (int32_T)measure_B.Switch2_b2[1];
-  measure_B.SFunction2_n[2] = (int32_T)measure_B.Switch2_b2[2];
-  measure_B.SFunction2_n[3] = (int32_T)measure_B.Switch2_b2[3];
-  if (rtb_ComplextoMagnitudeAngle2__j < measure_P.Constant_Value_h4) {
-    rtb_Divide_g_idx_2 = measure_P.Constant_Value_ht;
+  measure_B.SFunction2_g[0] = (int32_T)measure_B.Switch2_j[0];
+  measure_B.SFunction2_g[1] = (int32_T)measure_B.Switch2_j[1];
+  measure_B.SFunction2_g[2] = (int32_T)measure_B.Switch2_j[2];
+  measure_B.SFunction2_g[3] = (int32_T)measure_B.Switch2_j[3];
+  rtb_Sum3_a[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_g[0]) *
+    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
+  rtb_Sum3_a[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_g[1]) *
+    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
+  rtb_Sum3_a[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_g[2]) *
+    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
+  rtb_Sum3_a[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_g[3]) *
+    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
+  if (rtb_ComplextoMagnitudeAngle2__e < measure_P.Constant_Value_pc) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_g;
   } else {
-    rtb_Divide_g_idx_2 = rtb_ComplextoMagnitudeAngle2__j;
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__e;
   }
 
-  measure_DWork.RateTransition_Buffer0 = rtb_FFT[1];
-  measure_DWork.RateTransition_Buffer0_m = rtb_FFT_n[1];
-  measure_DWork.RateTransition_Buffer0_p = rtb_FFT_o[1];
-  measure_DWork.RateTransition_Buffer0_f = rtb_ComplextoMagnitudeAngle2_o1;
-  measure_DWork.RateTransition_Buffer0_n = rtb_ComplextoMagnitudeAngle2__e;
-  measure_DWork.RateTransition_Buffer0_c = rtb_ComplextoMagnitudeAngle2__j;
-  measure_DWork.RateTransition_Buffer0_nm[0] = rtb_Product1_mc[0];
-  measure_DWork.RateTransition_Buffer0_nm[1] = rtb_Product1_mc[1];
-  measure_DWork.RateTransition_Buffer0_nm[2] = rtb_Product1_mc[2];
-  measure_DWork.RateTransition_Buffer0_nm[3] = rtb_Product1_mc[3];
-  measure_DWork.RateTransition_Buffer0_d[0] = rtb_Product1_j[0];
-  measure_DWork.RateTransition_Buffer0_d[1] = rtb_Product1_j[1];
-  measure_DWork.RateTransition_Buffer0_d[2] = rtb_Product1_j[2];
-  measure_DWork.RateTransition_Buffer0_d[3] = rtb_Product1_j[3];
-  measure_DWork.RateTransition_Buffer0_j[0] = (1.0 / rtb_Divide_g_idx_2) * hypot
-    (rtb_FFT_o[2].re, rtb_FFT_o[2].im);
-  measure_DWork.RateTransition_Buffer0_j[1] = (1.0 / rtb_Divide_g_idx_2) * hypot
-    (rtb_FFT_o[3].re, rtb_FFT_o[3].im);
-  measure_DWork.RateTransition_Buffer0_j[2] = (1.0 / rtb_Divide_g_idx_2) * hypot
-    (rtb_FFT_o[4].re, rtb_FFT_o[4].im);
-  measure_DWork.RateTransition_Buffer0_j[3] = (1.0 / rtb_Divide_g_idx_2) * hypot
-    (rtb_FFT_o[5].re, rtb_FFT_o[5].im);
-  measure_DWork.RateTransition_Buffer0_h = rtb_ComplextoMagnitudeAngle2_o2;
-  measure_DWork.RateTransition_Buffer0_po = rtb_ComplextoMagnitudeAngle2_ek;
-  measure_DWork.RateTransition_Buffer0_e = rtb_ComplextoMagnitudeAngle2_jw;
+  rtb_Product1_d2[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
+    .im);
+  rtb_Product1_d2[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
+    .im);
+  rtb_Product1_d2[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
+    .im);
+  rtb_Product1_d2[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
+    .im);
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_hc[0], &rtb_FFT[0U], 1,
+    64);
+  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
+                       FALSE);
+  MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
+  rtb_ComplextoMagnitudeAngle2_mf = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
+  rtb_ComplextoMagnitudeAngle2_e3 = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_e[0] *
+    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[0])) +
+    measure_P.Constant1_Value_el;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_e[1] *
+    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[1])) +
+    measure_P.Constant1_Value_el;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_e[2] *
+    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[2])) +
+    measure_P.Constant1_Value_el;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_e[3] *
+                       rtb_ComplextoMagnitudeAngle2_e3) +
+                      measure_P.Bias1_Bias_p[3])) + measure_P.Constant1_Value_el;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_ly;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_ly;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_ly;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_ly;
+  if (measure_P.Constant6_Value_fu) {
+    measure_B.Switch2_e[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_j;
+    measure_B.Switch2_e[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_j;
+    measure_B.Switch2_e[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_j;
+    measure_B.Switch2_e[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_j;
+  } else {
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_n4s) {
+      measure_B.Switch2_e[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_f;
+    } else {
+      measure_B.Switch2_e[0] = rtb_Divide_g_idx_2;
+    }
+
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_n4s) {
+      measure_B.Switch2_e[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_f;
+    } else {
+      measure_B.Switch2_e[1] = rtb_Divide_g_idx_1;
+    }
+
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_n4s) {
+      measure_B.Switch2_e[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_f;
+    } else {
+      measure_B.Switch2_e[2] = rtb_Divide_g_idx_0;
+    }
+
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_n4s) {
+      measure_B.Switch2_e[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_f;
+    } else {
+      measure_B.Switch2_e[3] = rtb_Divide_g_idx;
+    }
+  }
+
+  measure_B.SFunction2_f[0] = (int32_T)measure_B.Switch2_e[0];
+  measure_B.SFunction2_f[1] = (int32_T)measure_B.Switch2_e[1];
+  measure_B.SFunction2_f[2] = (int32_T)measure_B.Switch2_e[2];
+  measure_B.SFunction2_f[3] = (int32_T)measure_B.Switch2_e[3];
+  rtb_Sum3_o[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_f[0]) *
+    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
+  rtb_Sum3_o[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_f[1]) *
+    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
+  rtb_Sum3_o[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_f[2]) *
+    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
+  rtb_Sum3_o[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_f[3]) *
+    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
+  if (rtb_ComplextoMagnitudeAngle2_mf < measure_P.Constant_Value_mz) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_ao;
+  } else {
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2_mf;
+  }
+
+  rtb_Product1_at[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
+    .im);
+  rtb_Product1_at[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
+    .im);
+  rtb_Product1_at[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
+    .im);
+  rtb_Product1_at[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
+    .im);
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_cy[0], &rtb_FFT[0U], 1,
+    64);
+  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
+                       FALSE);
+  MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
+  rtb_ComplextoMagnitudeAngle2__k = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
+  rtb_ComplextoMagnitudeAngle2__g = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_k[0] *
+    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[0])) +
+    measure_P.Constant1_Value_jx;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_k[1] *
+    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[1])) +
+    measure_P.Constant1_Value_jx;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_k[2] *
+    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[2])) +
+    measure_P.Constant1_Value_jx;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_k[3] *
+                       rtb_ComplextoMagnitudeAngle2__g) +
+                      measure_P.Bias1_Bias_mn[3])) +
+    measure_P.Constant1_Value_jx;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_mi;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_mi;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_mi;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_mi;
+  if (measure_P.Constant6_Value_fd) {
+    measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_k;
+    measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_k;
+    measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_k;
+    measure_B.Switch2_cw[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_k;
+  } else {
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_fj) {
+      measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_al;
+    } else {
+      measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2;
+    }
+
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_fj) {
+      measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_al;
+    } else {
+      measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1;
+    }
+
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_fj) {
+      measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_al;
+    } else {
+      measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0;
+    }
+
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_fj) {
+      measure_B.Switch2_cw[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_al;
+    } else {
+      measure_B.Switch2_cw[3] = rtb_Divide_g_idx;
+    }
+  }
+
+  measure_B.SFunction2_m[0] = (int32_T)measure_B.Switch2_cw[0];
+  measure_B.SFunction2_m[1] = (int32_T)measure_B.Switch2_cw[1];
+  measure_B.SFunction2_m[2] = (int32_T)measure_B.Switch2_cw[2];
+  measure_B.SFunction2_m[3] = (int32_T)measure_B.Switch2_cw[3];
+  rtb_Sum3_i[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_m[0]) *
+    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
+  rtb_Sum3_i[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_m[1]) *
+    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
+  rtb_Sum3_i[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_m[2]) *
+    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
+  rtb_Sum3_i[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_m[3]) *
+    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
+  if (rtb_ComplextoMagnitudeAngle2__k < measure_P.Constant_Value_c1) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_gb;
+  } else {
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__k;
+  }
+
+  rtb_Product1_ii[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
+    .im);
+  rtb_Product1_ii[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
+    .im);
+  rtb_Product1_ii[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
+    .im);
+  rtb_Product1_ii[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
+    .im);
+  MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_fo[0], &rtb_FFT[0U], 1,
+    64);
+  MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
+                       FALSE);
+  MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
+  rtb_ComplextoMagnitudeAngle2__c = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
+  rtb_ComplextoMagnitudeAngle2__a = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
+  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
+                       ((measure_P.Gain3_Gain_p[0] *
+    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[0])) +
+    measure_P.Constant1_Value_n;
+  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
+                       ((measure_P.Gain3_Gain_p[1] *
+    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[1])) +
+    measure_P.Constant1_Value_n;
+  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
+                       ((measure_P.Gain3_Gain_p[2] *
+    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[2])) +
+    measure_P.Constant1_Value_n;
+  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
+                     ((measure_P.Gain3_Gain_p[3] *
+                       rtb_ComplextoMagnitudeAngle2__a) +
+                      measure_P.Bias1_Bias_ob[3])) + measure_P.Constant1_Value_n;
+  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_n;
+  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_n;
+  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_n;
+  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_n;
+  if (measure_P.Constant6_Value_l5) {
+    measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_ix;
+    measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_ix;
+    measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_ix;
+    measure_B.Switch2_g5[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_ix;
+  } else {
+    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_f2) {
+      measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_g;
+    } else {
+      measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2;
+    }
+
+    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_f2) {
+      measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_g;
+    } else {
+      measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1;
+    }
+
+    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_f2) {
+      measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_g;
+    } else {
+      measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0;
+    }
+
+    if (rtb_Divide_g_idx < measure_P.Constant_Value_f2) {
+      measure_B.Switch2_g5[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_g;
+    } else {
+      measure_B.Switch2_g5[3] = rtb_Divide_g_idx;
+    }
+  }
+
+  measure_B.SFunction2_o[0] = (int32_T)measure_B.Switch2_g5[0];
+  measure_B.SFunction2_o[1] = (int32_T)measure_B.Switch2_g5[1];
+  measure_B.SFunction2_o[2] = (int32_T)measure_B.Switch2_g5[2];
+  measure_B.SFunction2_o[3] = (int32_T)measure_B.Switch2_g5[3];
+  rtb_Sum2_op_idx_2 = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_o[0]) *
+    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
+  rtb_Sum2_op_idx_1 = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_o[1]) *
+    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
+  rtb_Sum2_op_idx_0 = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_o[2]) *
+    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
+  rtb_Divide_g_idx_2 = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_o[3]) *
+    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
+  if (rtb_ComplextoMagnitudeAngle2__c < measure_P.Constant_Value_bp) {
+    rtb_Sum2_op_idx = measure_P.Constant_Value_gy;
+  } else {
+    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__c;
+  }
+
+  measure_DWork.RateTransition_Buffer0 = rtb_ComplextoMagnitudeAngle2_mf;
+  measure_DWork.RateTransition_Buffer0_l = rtb_ComplextoMagnitudeAngle2__k;
+  measure_DWork.RateTransition_Buffer0_b = rtb_ComplextoMagnitudeAngle2__c;
+  measure_DWork.RateTransition_Buffer0_a[0] = rtb_Product1_at[0];
+  measure_DWork.RateTransition_Buffer0_a[1] = rtb_Product1_at[1];
+  measure_DWork.RateTransition_Buffer0_a[2] = rtb_Product1_at[2];
+  measure_DWork.RateTransition_Buffer0_a[3] = rtb_Product1_at[3];
+  measure_DWork.RateTransition_Buffer0_j[0] = rtb_Product1_ii[0];
+  measure_DWork.RateTransition_Buffer0_j[1] = rtb_Product1_ii[1];
+  measure_DWork.RateTransition_Buffer0_j[2] = rtb_Product1_ii[2];
+  measure_DWork.RateTransition_Buffer0_j[3] = rtb_Product1_ii[3];
+  measure_DWork.RateTransition_Buffer0_ak[0] = (1.0 / rtb_Sum2_op_idx) * hypot
+    (rtb_FFT[2].re, rtb_FFT[2].im);
+  measure_DWork.RateTransition_Buffer0_ak[1] = (1.0 / rtb_Sum2_op_idx) * hypot
+    (rtb_FFT[3].re, rtb_FFT[3].im);
+  measure_DWork.RateTransition_Buffer0_ak[2] = (1.0 / rtb_Sum2_op_idx) * hypot
+    (rtb_FFT[4].re, rtb_FFT[4].im);
+  measure_DWork.RateTransition_Buffer0_ak[3] = (1.0 / rtb_Sum2_op_idx) * hypot
+    (rtb_FFT[5].re, rtb_FFT[5].im);
+  measure_DWork.RateTransition_Buffer0_h[0] = rtb_Sum3_o[0];
+  measure_DWork.RateTransition_Buffer0_h[1] = rtb_Sum3_o[1];
+  measure_DWork.RateTransition_Buffer0_h[2] = rtb_Sum3_o[2];
+  measure_DWork.RateTransition_Buffer0_h[3] = rtb_Sum3_o[3];
+  measure_DWork.RateTransition_Buffer0_g[0] = rtb_Sum3_i[0];
+  measure_DWork.RateTransition_Buffer0_g[1] = rtb_Sum3_i[1];
+  measure_DWork.RateTransition_Buffer0_g[2] = rtb_Sum3_i[2];
+  measure_DWork.RateTransition_Buffer0_g[3] = rtb_Sum3_i[3];
+  measure_DWork.RateTransition_Buffer0_hn[0] = rtb_Sum2_op_idx_2;
+  measure_DWork.RateTransition_Buffer0_hn[1] = rtb_Sum2_op_idx_1;
+  measure_DWork.RateTransition_Buffer0_hn[2] = rtb_Sum2_op_idx_0;
+  measure_DWork.RateTransition_Buffer0_hn[3] = rtb_Divide_g_idx_2;
+  measure_DWork.RateTransition_Buffer0_e[0] = measure_P.Constant4_Value_m[0];
+  measure_DWork.RateTransition_Buffer0_e[1] = measure_P.Constant4_Value_m[1];
+  measure_DWork.RateTransition_Buffer0_e[2] = measure_P.Constant4_Value_m[2];
+  measure_DWork.RateTransition_Buffer0_e[3] = measure_P.Constant4_Value_m[3];
+  measure_DWork.RateTransition_Buffer0_lm[0] = measure_P.Constant4_Value_p[0];
+  measure_DWork.RateTransition_Buffer0_lm[1] = measure_P.Constant4_Value_p[1];
+  measure_DWork.RateTransition_Buffer0_lm[2] = measure_P.Constant4_Value_p[2];
+  measure_DWork.RateTransition_Buffer0_lm[3] = measure_P.Constant4_Value_p[3];
+  measure_DWork.RateTransition_Buffer0_az[0] = measure_P.Constant4_Value_ph[0];
+  measure_DWork.RateTransition_Buffer0_az[1] = measure_P.Constant4_Value_ph[1];
+  measure_DWork.RateTransition_Buffer0_az[2] = measure_P.Constant4_Value_ph[2];
+  measure_DWork.RateTransition_Buffer0_az[3] = measure_P.Constant4_Value_ph[3];
+  measure_DWork.RateTransition_Buffer0_m = rtb_ComplextoMagnitudeAngle2_o1;
+  measure_DWork.RateTransition_Buffer0_bh = rtb_ComplextoMagnitudeAngle2__j;
+  measure_DWork.RateTransition_Buffer0_o = rtb_ComplextoMagnitudeAngle2__e;
+  measure_DWork.RateTransition_Buffer0_aq[0] = rtb_Product1_a0[0];
+  measure_DWork.RateTransition_Buffer0_aq[1] = rtb_Product1_a0[1];
+  measure_DWork.RateTransition_Buffer0_aq[2] = rtb_Product1_a0[2];
+  measure_DWork.RateTransition_Buffer0_aq[3] = rtb_Product1_a0[3];
+  measure_DWork.RateTransition_Buffer0_oh[0] = rtb_Product1_ag[0];
+  measure_DWork.RateTransition_Buffer0_oh[1] = rtb_Product1_ag[1];
+  measure_DWork.RateTransition_Buffer0_oh[2] = rtb_Product1_ag[2];
+  measure_DWork.RateTransition_Buffer0_oh[3] = rtb_Product1_ag[3];
+  measure_DWork.RateTransition_Buffer0_lg[0] = rtb_Product1_d2[0];
+  measure_DWork.RateTransition_Buffer0_lg[1] = rtb_Product1_d2[1];
+  measure_DWork.RateTransition_Buffer0_lg[2] = rtb_Product1_d2[2];
+  measure_DWork.RateTransition_Buffer0_lg[3] = rtb_Product1_d2[3];
+  measure_DWork.RateTransition_Buffer0_n[0] = rtb_Sum3[0];
+  measure_DWork.RateTransition_Buffer0_n[1] = rtb_Sum3[1];
+  measure_DWork.RateTransition_Buffer0_n[2] = rtb_Sum3[2];
+  measure_DWork.RateTransition_Buffer0_n[3] = rtb_Sum3[3];
+  measure_DWork.RateTransition_Buffer0_c[0] = rtb_Sum3_n[0];
+  measure_DWork.RateTransition_Buffer0_c[1] = rtb_Sum3_n[1];
+  measure_DWork.RateTransition_Buffer0_c[2] = rtb_Sum3_n[2];
+  measure_DWork.RateTransition_Buffer0_c[3] = rtb_Sum3_n[3];
+  measure_DWork.RateTransition_Buffer0_cq[0] = rtb_Sum3_a[0];
+  measure_DWork.RateTransition_Buffer0_cq[1] = rtb_Sum3_a[1];
+  measure_DWork.RateTransition_Buffer0_cq[2] = rtb_Sum3_a[2];
+  measure_DWork.RateTransition_Buffer0_cq[3] = rtb_Sum3_a[3];
+  measure_DWork.RateTransition_Buffer0_mb[0] = measure_P.Constant4_Value_f[0];
+  measure_DWork.RateTransition_Buffer0_mb[1] = measure_P.Constant4_Value_f[1];
+  measure_DWork.RateTransition_Buffer0_mb[2] = measure_P.Constant4_Value_f[2];
+  measure_DWork.RateTransition_Buffer0_mb[3] = measure_P.Constant4_Value_f[3];
+  measure_DWork.RateTransition_Buffer0_of[0] = measure_P.Constant4_Value_n[0];
+  measure_DWork.RateTransition_Buffer0_of[1] = measure_P.Constant4_Value_n[1];
+  measure_DWork.RateTransition_Buffer0_of[2] = measure_P.Constant4_Value_n[2];
+  measure_DWork.RateTransition_Buffer0_of[3] = measure_P.Constant4_Value_n[3];
+  measure_DWork.RateTransition_Buffer0_jc[0] = measure_P.Constant4_Value_j[0];
+  measure_DWork.RateTransition_Buffer0_jc[1] = measure_P.Constant4_Value_j[1];
+  measure_DWork.RateTransition_Buffer0_jc[2] = measure_P.Constant4_Value_j[2];
+  measure_DWork.RateTransition_Buffer0_jc[3] = measure_P.Constant4_Value_j[3];
+  measure_DWork.RateTransition_Buffer0_k = rtb_ComplextoMagnitudeAngle2_o2;
+  measure_DWork.RateTransition_Buffer0_ki = rtb_ComplextoMagnitudeAngle2__i;
+  measure_DWork.RateTransition_Buffer0_jr = rtb_ComplextoMagnitudeAngle2__m;
+  measure_DWork.RateTransition_Buffer0_kg = rtb_ComplextoMagnitudeAngle2_e3;
+  measure_DWork.RateTransition_Buffer0_hw = rtb_ComplextoMagnitudeAngle2__g;
+  measure_DWork.RateTransition_Buffer0_kc = rtb_ComplextoMagnitudeAngle2__a;
 }
 
 void measureModelClass::initialize()
@@ -9168,27 +9905,114 @@ void measureModelClass::initialize()
     measure_DWork.VariableDiscreteDelaywithTw_as5 = 0;
   }
 
-  measure_B.RateTransition.re = measure_P.RateTransition_X0;
-  measure_B.RateTransition.im = 0.0;
-  measure_B.RateTransition_f.re = measure_P.RateTransition_X0_h;
-  measure_B.RateTransition_f.im = 0.0;
-  measure_B.RateTransition_b.re = measure_P.RateTransition_X0_m;
-  measure_B.RateTransition_b.im = 0.0;
-  measure_B.RateTransition_c = measure_P.RateTransition_X0_d;
-  measure_B.RateTransition_m = measure_P.RateTransition_X0_mf;
-  measure_B.RateTransition_g = measure_P.RateTransition_X0_mn;
-  measure_B.RateTransition_j[0] = measure_P.RateTransition_X0_mk;
-  measure_B.RateTransition_j[1] = measure_P.RateTransition_X0_mk;
-  measure_B.RateTransition_j[2] = measure_P.RateTransition_X0_mk;
-  measure_B.RateTransition_j[3] = measure_P.RateTransition_X0_mk;
-  measure_B.RateTransition_p[0] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_p[1] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_p[2] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_p[3] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_e[0] = measure_P.RateTransition_X0_n;
-  measure_B.RateTransition_e[1] = measure_P.RateTransition_X0_n;
-  measure_B.RateTransition_e[2] = measure_P.RateTransition_X0_n;
-  measure_B.RateTransition_e[3] = measure_P.RateTransition_X0_n;
+  measure_B.RateTransition = measure_P.RateTransition_X0;
+  measure_B.RateTransition_o = measure_P.RateTransition_X0_p;
+  measure_B.RateTransition_g = measure_P.RateTransition_X0_k;
+  measure_B.RateTransition_gf[0] = measure_P.RateTransition_X0_e;
+  measure_B.RateTransition_gf[1] = measure_P.RateTransition_X0_e;
+  measure_B.RateTransition_gf[2] = measure_P.RateTransition_X0_e;
+  measure_B.RateTransition_gf[3] = measure_P.RateTransition_X0_e;
+  measure_B.RateTransition_gw[0] = measure_P.RateTransition_X0_l;
+  measure_B.RateTransition_gw[1] = measure_P.RateTransition_X0_l;
+  measure_B.RateTransition_gw[2] = measure_P.RateTransition_X0_l;
+  measure_B.RateTransition_gw[3] = measure_P.RateTransition_X0_l;
+  measure_B.RateTransition_n[0] = measure_P.RateTransition_X0_j;
+  measure_B.RateTransition_n[1] = measure_P.RateTransition_X0_j;
+  measure_B.RateTransition_n[2] = measure_P.RateTransition_X0_j;
+  measure_B.RateTransition_n[3] = measure_P.RateTransition_X0_j;
+  measure_B.RateTransition_h[0] = measure_P.RateTransition_X0_c;
+  measure_B.RateTransition_h[1] = measure_P.RateTransition_X0_c;
+  measure_B.RateTransition_h[2] = measure_P.RateTransition_X0_c;
+  measure_B.RateTransition_h[3] = measure_P.RateTransition_X0_c;
+  measure_B.RateTransition_k[0] = measure_P.RateTransition_X0_f;
+  measure_B.RateTransition_k[1] = measure_P.RateTransition_X0_f;
+  measure_B.RateTransition_k[2] = measure_P.RateTransition_X0_f;
+  measure_B.RateTransition_k[3] = measure_P.RateTransition_X0_f;
+  measure_B.RateTransition_b[0] = measure_P.RateTransition_X0_pv;
+  measure_B.RateTransition_b[1] = measure_P.RateTransition_X0_pv;
+  measure_B.RateTransition_b[2] = measure_P.RateTransition_X0_pv;
+  measure_B.RateTransition_b[3] = measure_P.RateTransition_X0_pv;
+  measure_B.RateTransition_a[0] = measure_P.RateTransition_X0_jr;
+  measure_B.RateTransition_a[1] = measure_P.RateTransition_X0_jr;
+  measure_B.RateTransition_a[2] = measure_P.RateTransition_X0_jr;
+  measure_B.RateTransition_a[3] = measure_P.RateTransition_X0_jr;
+  measure_B.RateTransition_gy[0] = measure_P.RateTransition_X0_lt;
+  measure_B.RateTransition_gy[1] = measure_P.RateTransition_X0_lt;
+  measure_B.RateTransition_gy[2] = measure_P.RateTransition_X0_lt;
+  measure_B.RateTransition_gy[3] = measure_P.RateTransition_X0_lt;
+  measure_B.RateTransition_m[0] = measure_P.RateTransition_X0_b;
+  measure_B.RateTransition_m[1] = measure_P.RateTransition_X0_b;
+  measure_B.RateTransition_m[2] = measure_P.RateTransition_X0_b;
+  measure_B.RateTransition_m[3] = measure_P.RateTransition_X0_b;
+  measure_B.RateTransition_l = measure_P.RateTransition_X0_fm;
+  measure_B.RateTransition_gq = measure_P.RateTransition_X0_n;
+  measure_B.RateTransition_a0 = measure_P.RateTransition_X0_pq;
+  measure_B.RateTransition_j[0] = measure_P.RateTransition_X0_bd;
+  measure_B.RateTransition_j[1] = measure_P.RateTransition_X0_bd;
+  measure_B.RateTransition_j[2] = measure_P.RateTransition_X0_bd;
+  measure_B.RateTransition_j[3] = measure_P.RateTransition_X0_bd;
+  measure_B.RateTransition_c[0] = measure_P.RateTransition_X0_m;
+  measure_B.RateTransition_c[1] = measure_P.RateTransition_X0_m;
+  measure_B.RateTransition_c[2] = measure_P.RateTransition_X0_m;
+  measure_B.RateTransition_c[3] = measure_P.RateTransition_X0_m;
+  measure_B.RateTransition_ax[0] = measure_P.RateTransition_X0_jt;
+  measure_B.RateTransition_ax[1] = measure_P.RateTransition_X0_jt;
+  measure_B.RateTransition_ax[2] = measure_P.RateTransition_X0_jt;
+  measure_B.RateTransition_ax[3] = measure_P.RateTransition_X0_jt;
+  measure_B.RateTransition_jz[0] = measure_P.RateTransition_X0_d;
+  measure_B.RateTransition_jz[1] = measure_P.RateTransition_X0_d;
+  measure_B.RateTransition_jz[2] = measure_P.RateTransition_X0_d;
+  measure_B.RateTransition_jz[3] = measure_P.RateTransition_X0_d;
+  measure_B.RateTransition_h2[0] = measure_P.RateTransition_X0_fr;
+  measure_B.RateTransition_h2[1] = measure_P.RateTransition_X0_fr;
+  measure_B.RateTransition_h2[2] = measure_P.RateTransition_X0_fr;
+  measure_B.RateTransition_h2[3] = measure_P.RateTransition_X0_fr;
+  measure_B.RateTransition_cc[0] = measure_P.RateTransition_X0_bf;
+  measure_B.RateTransition_cc[1] = measure_P.RateTransition_X0_bf;
+  measure_B.RateTransition_cc[2] = measure_P.RateTransition_X0_bf;
+  measure_B.RateTransition_cc[3] = measure_P.RateTransition_X0_bf;
+  measure_B.RateTransition_mz[0] = measure_P.RateTransition_X0_ny;
+  measure_B.RateTransition_mz[1] = measure_P.RateTransition_X0_ny;
+  measure_B.RateTransition_mz[2] = measure_P.RateTransition_X0_ny;
+  measure_B.RateTransition_mz[3] = measure_P.RateTransition_X0_ny;
+  measure_B.RateTransition_jt[0] = measure_P.RateTransition_X0_jq;
+  measure_B.RateTransition_jt[1] = measure_P.RateTransition_X0_jq;
+  measure_B.RateTransition_jt[2] = measure_P.RateTransition_X0_jq;
+  measure_B.RateTransition_jt[3] = measure_P.RateTransition_X0_jq;
+  measure_B.RateTransition_f[0] = measure_P.RateTransition_X0_g;
+  measure_B.RateTransition_f[1] = measure_P.RateTransition_X0_g;
+  measure_B.RateTransition_f[2] = measure_P.RateTransition_X0_g;
+  measure_B.RateTransition_f[3] = measure_P.RateTransition_X0_g;
+
+  {
+    measure_DWork.SFunction_RWORK[0] = 0.0;
+    measure_DWork.SFunction_RWORK[1] = 0.0;
+    measure_DWork.SFunction_RWORK[2] = 0.0;
+    measure_DWork.SFunction_RWORK[3] = 0.0;
+    measure_DWork.SFunction_IWORK = -1;
+  }
+
+  measure_B.RateTransition_cq = measure_P.RateTransition_X0_le;
+
+  {
+    measure_DWork.SFunction_RWORK_i[0] = 0.0;
+    measure_DWork.SFunction_RWORK_i[1] = 0.0;
+    measure_DWork.SFunction_RWORK_i[2] = 0.0;
+    measure_DWork.SFunction_RWORK_i[3] = 0.0;
+    measure_DWork.SFunction_IWORK_m = -1;
+  }
+
+  measure_B.RateTransition_lr = measure_P.RateTransition_X0_e5;
+
+  {
+    measure_DWork.SFunction_RWORK_c[0] = 0.0;
+    measure_DWork.SFunction_RWORK_c[1] = 0.0;
+    measure_DWork.SFunction_RWORK_c[2] = 0.0;
+    measure_DWork.SFunction_RWORK_c[3] = 0.0;
+    measure_DWork.SFunction_IWORK_l = -1;
+  }
+
+  measure_B.RateTransition_aj = measure_P.RateTransition_X0_lea;
 
   {
     real_T *VDD_buffer = (real_T*)
@@ -9241,34 +10065,34 @@ void measureModelClass::initialize()
   }
 
   {
-    measure_DWork.SFunction_RWORK[0] = 0.0;
-    measure_DWork.SFunction_RWORK[1] = 0.0;
-    measure_DWork.SFunction_RWORK[2] = 0.0;
-    measure_DWork.SFunction_RWORK[3] = 0.0;
-    measure_DWork.SFunction_IWORK = -1;
-  }
-
-  measure_B.RateTransition_l = measure_P.RateTransition_X0_la;
-
-  {
-    measure_DWork.SFunction_RWORK_m[0] = 0.0;
-    measure_DWork.SFunction_RWORK_m[1] = 0.0;
-    measure_DWork.SFunction_RWORK_m[2] = 0.0;
-    measure_DWork.SFunction_RWORK_m[3] = 0.0;
-    measure_DWork.SFunction_IWORK_d = -1;
-  }
-
-  measure_B.RateTransition_k = measure_P.RateTransition_X0_i;
-
-  {
     measure_DWork.SFunction_RWORK_o[0] = 0.0;
     measure_DWork.SFunction_RWORK_o[1] = 0.0;
     measure_DWork.SFunction_RWORK_o[2] = 0.0;
     measure_DWork.SFunction_RWORK_o[3] = 0.0;
-    measure_DWork.SFunction_IWORK_a = -1;
+    measure_DWork.SFunction_IWORK_g = -1;
   }
 
-  measure_B.RateTransition_j2 = measure_P.RateTransition_X0_d5;
+  measure_B.RateTransition_d = measure_P.RateTransition_X0_ns;
+
+  {
+    measure_DWork.SFunction_RWORK_j[0] = 0.0;
+    measure_DWork.SFunction_RWORK_j[1] = 0.0;
+    measure_DWork.SFunction_RWORK_j[2] = 0.0;
+    measure_DWork.SFunction_RWORK_j[3] = 0.0;
+    measure_DWork.SFunction_IWORK_p = -1;
+  }
+
+  measure_B.RateTransition_l2 = measure_P.RateTransition_X0_o;
+
+  {
+    measure_DWork.SFunction_RWORK_g[0] = 0.0;
+    measure_DWork.SFunction_RWORK_g[1] = 0.0;
+    measure_DWork.SFunction_RWORK_g[2] = 0.0;
+    measure_DWork.SFunction_RWORK_g[3] = 0.0;
+    measure_DWork.SFunction_IWORK_k = -1;
+  }
+
+  measure_B.RateTransition_p = measure_P.RateTransition_X0_k5;
   measure_DWork.UnitDelay4_DSTATE_ir = measure_P.UnitDelay4_X0_he;
   measure_DWork.delay_DSTATE = measure_P.delay_X0;
   measure_DWork.UnitDelay_DSTATE = measure_P.UnitDelay_X0;
@@ -9561,27 +10385,87 @@ void measureModelClass::initialize()
   measure_DWork.UnitDelay2_DSTATE_l = measure_P.UnitDelay2_X0_il;
   measure_DWork.UnitDelay4_DSTATE_j5 = measure_P.UnitDelay4_X0_b1;
   measure_DWork.UnitDelay2_DSTATE_cm = measure_P.UnitDelay2_X0_h0;
-  measure_DWork.RateTransition_Buffer0.re = measure_P.RateTransition_X0;
-  measure_DWork.RateTransition_Buffer0.im = 0.0;
-  measure_DWork.RateTransition_Buffer0_m.re = measure_P.RateTransition_X0_h;
-  measure_DWork.RateTransition_Buffer0_m.im = 0.0;
-  measure_DWork.RateTransition_Buffer0_p.re = measure_P.RateTransition_X0_m;
-  measure_DWork.RateTransition_Buffer0_p.im = 0.0;
-  measure_DWork.RateTransition_Buffer0_f = measure_P.RateTransition_X0_d;
-  measure_DWork.RateTransition_Buffer0_n = measure_P.RateTransition_X0_mf;
-  measure_DWork.RateTransition_Buffer0_c = measure_P.RateTransition_X0_mn;
-  measure_DWork.RateTransition_Buffer0_nm[0] = measure_P.RateTransition_X0_mk;
-  measure_DWork.RateTransition_Buffer0_nm[1] = measure_P.RateTransition_X0_mk;
-  measure_DWork.RateTransition_Buffer0_nm[2] = measure_P.RateTransition_X0_mk;
-  measure_DWork.RateTransition_Buffer0_nm[3] = measure_P.RateTransition_X0_mk;
-  measure_DWork.RateTransition_Buffer0_d[0] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_d[1] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_d[2] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_d[3] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_j[0] = measure_P.RateTransition_X0_n;
-  measure_DWork.RateTransition_Buffer0_j[1] = measure_P.RateTransition_X0_n;
-  measure_DWork.RateTransition_Buffer0_j[2] = measure_P.RateTransition_X0_n;
-  measure_DWork.RateTransition_Buffer0_j[3] = measure_P.RateTransition_X0_n;
+  measure_DWork.RateTransition_Buffer0 = measure_P.RateTransition_X0;
+  measure_DWork.RateTransition_Buffer0_l = measure_P.RateTransition_X0_p;
+  measure_DWork.RateTransition_Buffer0_b = measure_P.RateTransition_X0_k;
+  measure_DWork.RateTransition_Buffer0_a[0] = measure_P.RateTransition_X0_e;
+  measure_DWork.RateTransition_Buffer0_a[1] = measure_P.RateTransition_X0_e;
+  measure_DWork.RateTransition_Buffer0_a[2] = measure_P.RateTransition_X0_e;
+  measure_DWork.RateTransition_Buffer0_a[3] = measure_P.RateTransition_X0_e;
+  measure_DWork.RateTransition_Buffer0_j[0] = measure_P.RateTransition_X0_l;
+  measure_DWork.RateTransition_Buffer0_j[1] = measure_P.RateTransition_X0_l;
+  measure_DWork.RateTransition_Buffer0_j[2] = measure_P.RateTransition_X0_l;
+  measure_DWork.RateTransition_Buffer0_j[3] = measure_P.RateTransition_X0_l;
+  measure_DWork.RateTransition_Buffer0_ak[0] = measure_P.RateTransition_X0_j;
+  measure_DWork.RateTransition_Buffer0_ak[1] = measure_P.RateTransition_X0_j;
+  measure_DWork.RateTransition_Buffer0_ak[2] = measure_P.RateTransition_X0_j;
+  measure_DWork.RateTransition_Buffer0_ak[3] = measure_P.RateTransition_X0_j;
+  measure_DWork.RateTransition_Buffer0_h[0] = measure_P.RateTransition_X0_c;
+  measure_DWork.RateTransition_Buffer0_h[1] = measure_P.RateTransition_X0_c;
+  measure_DWork.RateTransition_Buffer0_h[2] = measure_P.RateTransition_X0_c;
+  measure_DWork.RateTransition_Buffer0_h[3] = measure_P.RateTransition_X0_c;
+  measure_DWork.RateTransition_Buffer0_g[0] = measure_P.RateTransition_X0_f;
+  measure_DWork.RateTransition_Buffer0_g[1] = measure_P.RateTransition_X0_f;
+  measure_DWork.RateTransition_Buffer0_g[2] = measure_P.RateTransition_X0_f;
+  measure_DWork.RateTransition_Buffer0_g[3] = measure_P.RateTransition_X0_f;
+  measure_DWork.RateTransition_Buffer0_hn[0] = measure_P.RateTransition_X0_pv;
+  measure_DWork.RateTransition_Buffer0_hn[1] = measure_P.RateTransition_X0_pv;
+  measure_DWork.RateTransition_Buffer0_hn[2] = measure_P.RateTransition_X0_pv;
+  measure_DWork.RateTransition_Buffer0_hn[3] = measure_P.RateTransition_X0_pv;
+  measure_DWork.RateTransition_Buffer0_e[0] = measure_P.RateTransition_X0_jr;
+  measure_DWork.RateTransition_Buffer0_e[1] = measure_P.RateTransition_X0_jr;
+  measure_DWork.RateTransition_Buffer0_e[2] = measure_P.RateTransition_X0_jr;
+  measure_DWork.RateTransition_Buffer0_e[3] = measure_P.RateTransition_X0_jr;
+  measure_DWork.RateTransition_Buffer0_lm[0] = measure_P.RateTransition_X0_lt;
+  measure_DWork.RateTransition_Buffer0_lm[1] = measure_P.RateTransition_X0_lt;
+  measure_DWork.RateTransition_Buffer0_lm[2] = measure_P.RateTransition_X0_lt;
+  measure_DWork.RateTransition_Buffer0_lm[3] = measure_P.RateTransition_X0_lt;
+  measure_DWork.RateTransition_Buffer0_az[0] = measure_P.RateTransition_X0_b;
+  measure_DWork.RateTransition_Buffer0_az[1] = measure_P.RateTransition_X0_b;
+  measure_DWork.RateTransition_Buffer0_az[2] = measure_P.RateTransition_X0_b;
+  measure_DWork.RateTransition_Buffer0_az[3] = measure_P.RateTransition_X0_b;
+  measure_DWork.RateTransition_Buffer0_m = measure_P.RateTransition_X0_fm;
+  measure_DWork.RateTransition_Buffer0_bh = measure_P.RateTransition_X0_n;
+  measure_DWork.RateTransition_Buffer0_o = measure_P.RateTransition_X0_pq;
+  measure_DWork.RateTransition_Buffer0_aq[0] = measure_P.RateTransition_X0_bd;
+  measure_DWork.RateTransition_Buffer0_aq[1] = measure_P.RateTransition_X0_bd;
+  measure_DWork.RateTransition_Buffer0_aq[2] = measure_P.RateTransition_X0_bd;
+  measure_DWork.RateTransition_Buffer0_aq[3] = measure_P.RateTransition_X0_bd;
+  measure_DWork.RateTransition_Buffer0_oh[0] = measure_P.RateTransition_X0_m;
+  measure_DWork.RateTransition_Buffer0_oh[1] = measure_P.RateTransition_X0_m;
+  measure_DWork.RateTransition_Buffer0_oh[2] = measure_P.RateTransition_X0_m;
+  measure_DWork.RateTransition_Buffer0_oh[3] = measure_P.RateTransition_X0_m;
+  measure_DWork.RateTransition_Buffer0_lg[0] = measure_P.RateTransition_X0_jt;
+  measure_DWork.RateTransition_Buffer0_lg[1] = measure_P.RateTransition_X0_jt;
+  measure_DWork.RateTransition_Buffer0_lg[2] = measure_P.RateTransition_X0_jt;
+  measure_DWork.RateTransition_Buffer0_lg[3] = measure_P.RateTransition_X0_jt;
+  measure_DWork.RateTransition_Buffer0_n[0] = measure_P.RateTransition_X0_d;
+  measure_DWork.RateTransition_Buffer0_n[1] = measure_P.RateTransition_X0_d;
+  measure_DWork.RateTransition_Buffer0_n[2] = measure_P.RateTransition_X0_d;
+  measure_DWork.RateTransition_Buffer0_n[3] = measure_P.RateTransition_X0_d;
+  measure_DWork.RateTransition_Buffer0_c[0] = measure_P.RateTransition_X0_fr;
+  measure_DWork.RateTransition_Buffer0_c[1] = measure_P.RateTransition_X0_fr;
+  measure_DWork.RateTransition_Buffer0_c[2] = measure_P.RateTransition_X0_fr;
+  measure_DWork.RateTransition_Buffer0_c[3] = measure_P.RateTransition_X0_fr;
+  measure_DWork.RateTransition_Buffer0_cq[0] = measure_P.RateTransition_X0_bf;
+  measure_DWork.RateTransition_Buffer0_cq[1] = measure_P.RateTransition_X0_bf;
+  measure_DWork.RateTransition_Buffer0_cq[2] = measure_P.RateTransition_X0_bf;
+  measure_DWork.RateTransition_Buffer0_cq[3] = measure_P.RateTransition_X0_bf;
+  measure_DWork.RateTransition_Buffer0_mb[0] = measure_P.RateTransition_X0_ny;
+  measure_DWork.RateTransition_Buffer0_mb[1] = measure_P.RateTransition_X0_ny;
+  measure_DWork.RateTransition_Buffer0_mb[2] = measure_P.RateTransition_X0_ny;
+  measure_DWork.RateTransition_Buffer0_mb[3] = measure_P.RateTransition_X0_ny;
+  measure_DWork.RateTransition_Buffer0_of[0] = measure_P.RateTransition_X0_jq;
+  measure_DWork.RateTransition_Buffer0_of[1] = measure_P.RateTransition_X0_jq;
+  measure_DWork.RateTransition_Buffer0_of[2] = measure_P.RateTransition_X0_jq;
+  measure_DWork.RateTransition_Buffer0_of[3] = measure_P.RateTransition_X0_jq;
+  measure_DWork.RateTransition_Buffer0_jc[0] = measure_P.RateTransition_X0_g;
+  measure_DWork.RateTransition_Buffer0_jc[1] = measure_P.RateTransition_X0_g;
+  measure_DWork.RateTransition_Buffer0_jc[2] = measure_P.RateTransition_X0_g;
+  measure_DWork.RateTransition_Buffer0_jc[3] = measure_P.RateTransition_X0_g;
+  measure_DWork.RateTransition_Buffer0_k = measure_P.RateTransition_X0_le;
+  measure_DWork.RateTransition_Buffer0_ki = measure_P.RateTransition_X0_e5;
+  measure_DWork.RateTransition_Buffer0_jr = measure_P.RateTransition_X0_lea;
   measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhw =
     measure_P.UnitDelay1_X0_jcfawyw2o0;
   measure_DWork.delay_DSTATE_i2wj4 = measure_P.delay_X0_jcfaw;
@@ -9645,14 +10529,32 @@ void measureModelClass::initialize()
   measure_DWork.UnitDelay1_DSTATE_dgzmvr = measure_P.UnitDelay1_X0_mqco2g;
   measure_DWork.UnitDelay1_DSTATE_dgzmvrp = measure_P.UnitDelay1_X0_mqco2gb;
   measure_DWork.UnitDelay_DSTATE_otrx = measure_P.UnitDelay_X0_mqco;
-  measure_DWork.RateTransition_Buffer0_h = measure_P.RateTransition_X0_la;
-  measure_DWork.RateTransition_Buffer0_po = measure_P.RateTransition_X0_i;
-  measure_DWork.RateTransition_Buffer0_e = measure_P.RateTransition_X0_d5;
+  measure_DWork.RateTransition_Buffer0_kg = measure_P.RateTransition_X0_ns;
+  measure_DWork.RateTransition_Buffer0_hw = measure_P.RateTransition_X0_o;
+  measure_DWork.RateTransition_Buffer0_kc = measure_P.RateTransition_X0_k5;
 }
 
 measureModelClass::measureModelClass()
 {
   Parameters_measure measure_P_temp = {
+    -0.999999,
+    -0.499999,
+    1.0E-9,
+    -0.999999,
+    -0.499999,
+    1.0E-9,
+    -0.999999,
+    -0.499999,
+    1.0E-9,
+    -0.999999,
+    -0.499999,
+    1.0E-9,
+    -0.999999,
+    -0.499999,
+    1.0E-9,
+    -0.999999,
+    -0.499999,
+    1.0E-9,
     1.0E-9,
     1.0,
     1.0,
@@ -10400,12 +11302,90 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
     0.14,
     0.2,
 
     { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
       16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
       28.0, 29.0, 30.0, 31.0, 32.0 },
+    3.1415926535897931,
+    6.2831853071795862,
+    0.03125,
+    64.0,
+    1.0E-9,
+    4000.0,
+    6.2831853071795862,
+    -1.5707963267948966,
+    0.0,
+    0.0,
+    3.1415926535897931,
+    6.2831853071795862,
+
+    { 2.0, 3.0, 4.0, 5.0 },
+
+    { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
+      6.2831853071795862 },
+    0.0,
+    1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
+    3.1415926535897931,
+    6.2831853071795862,
+    0.03125,
+    64.0,
+    1.0E-9,
+    4000.0,
+    6.2831853071795862,
+    -1.5707963267948966,
+    0.0,
+    0.0,
+    3.1415926535897931,
+    6.2831853071795862,
+
+    { 2.0, 3.0, 4.0, 5.0 },
+
+    { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
+      6.2831853071795862 },
+    0.0,
+    1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
+    3.1415926535897931,
+    6.2831853071795862,
+    0.03125,
+    64.0,
+    1.0E-9,
+    4000.0,
+    6.2831853071795862,
+    -1.5707963267948966,
+    0.0,
+    0.0,
+    3.1415926535897931,
+    6.2831853071795862,
+
+    { 2.0, 3.0, 4.0, 5.0 },
+
+    { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
+      6.2831853071795862 },
+    0.0,
+    1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
     4000.0,
     4000.0,
     0.0,
@@ -10515,6 +11495,8 @@ measureModelClass::measureModelClass()
       6.2831853071795862 },
     0.0,
     1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -10534,6 +11516,8 @@ measureModelClass::measureModelClass()
       6.2831853071795862 },
     0.0,
     1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -10553,6 +11537,8 @@ measureModelClass::measureModelClass()
       6.2831853071795862 },
     0.0,
     1.0E-9,
+
+    { 2.0, 3.0, 4.0, 5.0 },
 
     { { 1.0, 0.0 }, { -0.49999999999999978, -0.86602540378443871 }, { -
         0.49999999999999978, 0.86602540378443871 } },
@@ -10746,6 +11732,9 @@ measureModelClass::measureModelClass()
     55,
     55,
     55,
+    32,
+    32,
+    32,
     321,
     321,
     321,
@@ -10957,6 +11946,12 @@ measureModelClass::measureModelClass()
     0,
     0,
     1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     0,
     0,
     0,

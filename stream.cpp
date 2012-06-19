@@ -2,8 +2,6 @@
 #include <QDebug>
 #include <QApplication>
 
-#include "ffft/FFTReal.h"
-
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
@@ -287,8 +285,8 @@ void Stream::timeout()
 void Stream::analyse()
 {
     //qDebug() << "in analysis";
-    //QElapsedTimer timer;
-    //timer.start();
+    QElapsedTimer timer;
+    timer.start();
 
     setAnalysed(false);
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
@@ -344,49 +342,19 @@ void Stream::analyse()
 
     for (int signal = 0; signal < 3; signal++) {
         // add fundamental
-        // TODO: use phase frequency?
-        row->appendFreqPoint(signal, analysisInstance.measure_Y.Frequency, -analysisInstance.measure_Y.Fundamentalamplitudevefreq[signal] / maxInstantaneousVoltage);
+        row->appendFreqPoint(signal, analysisInstance.measure_Y.PhaseFrequency[signal], -analysisInstance.measure_Y.VoltageFundamentalAmplitudePosF[signal] / maxInstantaneousVoltage);
 
         // add harmonics
         for (int n = 0; n < 4; n++) {
             int arrayIndex = (signal * 4) + n;
             //qDebug() << signal << n << arrayIndex << analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex];
-            row->appendFreqPoint(signal, ((n + 1) * analysisInstance.measure_Y.Frequency), -(analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex]));  // negate the y-coordinate, in preparation for plotting
+            row->appendFreqPoint(signal, ((n + 1) * analysisInstance.measure_Y.Frequency), -(analysisInstance.measure_Y.VoltageAmplitudesRelativeToFund[arrayIndex]));  // negate the y-coordinate, in preparation for plotting
         }
     }
 
-//    quint32 len = this->sampleRate.getLargestPowerOfTwo();
-//    qreal inputFrequency = this->sampleRate.getSamplesPerSecond();
-//    ffft::FFTReal <qreal> fft_object(len);
-//    qreal x[8][len];
-//    qreal f[8][len];
-
-//    for (int signal = 0; signal < 8; signal++) {
-//        for (quint32 t = 0; t < len; ++t) {
-//            x[signal][t] = samples[t].getSampleValue(signal) / maxInstantaneousVoltage;     // TODO: set proper scale
-//            x[signal][t] = x[signal][t] * 0.5 * (1 - qCos((2 * M_PI * t) / (len - 1)));     // apply Hann Window to sample
-//        }
-
-//        fft_object.do_fft(f[signal], x[signal]);
-
-//        for (quint32 i = 2; i <= len / 2; ++i) {
-//            qreal frequency = qreal(i * inputFrequency) / (len);
-//            const qreal real = f[signal][i];
-//            qreal imaginary = 0.0;
-//            qreal mag = 0.0;
-
-//            if (i > 0 && i < len / 2) {
-//                imaginary = f[signal][len / 2 + i];
-//            }
-
-//            mag = qSqrt(real*real + imaginary*imaginary);
-
-//            // TODO: define this cut-off in View, because there will be a grid line here anyway?
-//            //if (mag >= 0.01) {
-//                row->appendFreqPoint(signal, log10(frequency), -log10(mag));  // negate the y-coordinate, in preparation for plotting
-//            //}
-//        }
-//    }
+    for (int n = 0; n < 12; n++) {
+        qDebug() << n << analysisInstance.measure_Y.VoltageHarmonicsAnalysed[n];
+    }
 
     setAnalysed(true);
 
@@ -395,5 +363,5 @@ void Stream::analyse()
     row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
     //emit setStreamTableRow(row);
 
-    //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
+    qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }
