@@ -20,7 +20,7 @@ extern "C" {
 
 
 #define RECALCULATE_ANALYSIS_TIME   3000    // milliseconds
-#define NUMBER_OF_CYCLES_TO_ANALYSE 20      // must be at least 2 cycles
+#define NUMBER_OF_CYCLES_TO_ANALYSE 8      // must be at least 2 cycles
 #define SIGNIFICANT_DIGITS_DIPLAYED 3
 
 class Stream : public QObject

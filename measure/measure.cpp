@@ -343,7 +343,7 @@ void measureModelClass::step0()
   real_T rtb_Divide_nqz;
   real_T rtb_Divide_nqzy;
   real_T rtb_TrigonometricFunction_ixv;
-  int32_T i;
+  boolean_T rtb_Compare_o;
   real_T rtb_MathFunction_pl;
   real_T rtb_IpktoIrmsconversion;
   uint32_T rtb_Switch_lli5ykm;
@@ -406,6 +406,7 @@ void measureModelClass::step0()
   real_T rtb_Switch_jka;
   real_T rtb_Switch_j;
   real_T rtb_Switch4;
+  int32_T i;
   real_T tmp[6];
   boolean_T rtb_Switch6_idx;
   real_T rtb_Add1_fs_idx;
@@ -413,7 +414,7 @@ void measureModelClass::step0()
   real_T rtb_Add1_fs_idx_1;
   real_T rtb_VpuIpktoVrmsIrms_im;
   (measure_M->Timing.RateInteraction.TID0_1)++;
-  if ((measure_M->Timing.RateInteraction.TID0_1) > 399) {
+  if ((measure_M->Timing.RateInteraction.TID0_1) > 199) {
     measure_M->Timing.RateInteraction.TID0_1 = 0;
   }
 
@@ -3005,8 +3006,8 @@ void measureModelClass::step0()
     measure_DWork.clockTickCounter_h = measure_DWork.clockTickCounter_h + 1;
   }
 
-  rtb_Switch6_idx = (rtb_Switch_j > measure_P.Constant_Value_goh);
-  rtb_LogicalOperator1_pvh3 = ((!rtb_Switch6_idx) &&
+  rtb_Compare_o = (rtb_Switch_j > measure_P.Constant_Value_goh);
+  rtb_LogicalOperator1_pvh3 = ((!rtb_Compare_o) &&
     (measure_DWork.delay1_DSTATE_k));
   if (rtb_LogicalOperator1_pvh3) {
     measure_B.Switch_ll = measure_P.double_Value_mq;
@@ -3062,7 +3063,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_LogicalOperator_eg0 = (rtb_Switch6_idx && (measure_DWork.delay_DSTATE_j));
+  rtb_LogicalOperator_eg0 = (rtb_Compare_o && (measure_DWork.delay_DSTATE_j));
   if (rtb_LogicalOperator_eg0) {
     measure_B.Switch_lli = measure_P.double_Value_mqc;
   } else {
@@ -3087,7 +3088,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  if (rtb_Switch6_idx) {
+  if (rtb_Compare_o) {
     rtb_Switch_jka = measure_B.Switch_ll - measure_B.VariableDiscret_e;
   } else {
     rtb_Switch_jka = measure_B.Switch_lli - measure_B.VariableDiscret_hh;
@@ -3187,12 +3188,15 @@ void measureModelClass::step0()
     rtb_LogicalOperator1 = measure_P.Constant5_Value_i;
   }
 
-  if ((rtb_LogicalOperator12 || rtb_UnitDelay4_dq) || rtb_LogicalOperator1) {
+  rtb_Switch6_idx = ((rtb_LogicalOperator12 || rtb_UnitDelay4_dq) ||
+                     rtb_LogicalOperator1);
+  if (rtb_Switch6_idx) {
     measure_Y.Frequency = rtb_Switch_k;
   } else {
     measure_Y.Frequency = measure_P.Constant1_Value_b;
   }
 
+  measure_Y.FrequencyValid = rtb_Switch6_idx;
   rtb_IpktoIrmsconversion = measure_P.Gain3_Gain * measure_P.Constant1_Value_m2;
   rtb_Switch_jka = (rtb_Divide_hh * rtb_Divide_hh) + (rtb_Divide_hh0 *
     rtb_Divide_hh0);
@@ -5496,22 +5500,21 @@ void measureModelClass::step0()
     rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e1;
   }
 
-  rtb_Add1_fs_idx_0 = ((((measure_P.Gain5_Gain_h1[0].re * rtb_Switch1_l) -
-    (measure_P.Gain5_Gain_h1[0].im * rtb_UnaryMinus_g)) +
-                        ((measure_P.Gain5_Gain_h1[1].re * rtb_Switch) -
-    (measure_P.Gain5_Gain_h1[1].im * rtb_MathFunction1))) +
-                       ((measure_P.Gain5_Gain_h1[2].re * rtb_Divide_nfu) -
-                        (measure_P.Gain5_Gain_h1[2].im * rtb_UnaryMinus_o))) *
+  rtb_Add1_fs_idx = ((((measure_P.Gain5_Gain_h1[0].re * rtb_Switch1_l) -
+                       (measure_P.Gain5_Gain_h1[0].im * rtb_UnaryMinus_g)) +
+                      ((measure_P.Gain5_Gain_h1[1].re * rtb_Switch) -
+                       (measure_P.Gain5_Gain_h1[1].im * rtb_MathFunction1))) +
+                     ((measure_P.Gain5_Gain_h1[2].re * rtb_Divide_nfu) -
+                      (measure_P.Gain5_Gain_h1[2].im * rtb_UnaryMinus_o))) *
     measure_P.Gain6_Gain_h;
-  rtb_Add1_fs_idx = ((((measure_P.Gain5_Gain_h1[0].re * rtb_UnaryMinus_g) +
-                       (measure_P.Gain5_Gain_h1[0].im * rtb_Switch1_l)) +
-                      ((measure_P.Gain5_Gain_h1[1].re * rtb_MathFunction1) +
-                       (measure_P.Gain5_Gain_h1[1].im * rtb_Switch))) +
-                     ((measure_P.Gain5_Gain_h1[2].re * rtb_UnaryMinus_o) +
-                      (measure_P.Gain5_Gain_h1[2].im * rtb_Divide_nfu))) *
-    measure_P.Gain6_Gain_h;
-  rtb_Add1_fs_idx_1 = (rtb_Add1_fs_idx_0 * rtb_Add1_fs_idx_0) + (rtb_Add1_fs_idx
-    * rtb_Add1_fs_idx);
+  rtb_Add1_fs_idx_0 = ((((measure_P.Gain5_Gain_h1[0].re * rtb_UnaryMinus_g) +
+    (measure_P.Gain5_Gain_h1[0].im * rtb_Switch1_l)) +
+                        ((measure_P.Gain5_Gain_h1[1].re * rtb_MathFunction1) +
+    (measure_P.Gain5_Gain_h1[1].im * rtb_Switch))) + ((measure_P.Gain5_Gain_h1[2]
+    .re * rtb_UnaryMinus_o) + (measure_P.Gain5_Gain_h1[2].im * rtb_Divide_nfu)))
+    * measure_P.Gain6_Gain_h;
+  rtb_Add1_fs_idx_1 = (rtb_Add1_fs_idx * rtb_Add1_fs_idx) + (rtb_Add1_fs_idx_0 *
+    rtb_Add1_fs_idx_0);
   rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1r[0].re * rtb_Switch1_l) -
                    (measure_P.Gain2_Gain_h1r[0].im * rtb_UnaryMinus_g)) +
                   ((measure_P.Gain2_Gain_h1r[1].re * rtb_Switch) -
@@ -6193,11 +6196,11 @@ void measureModelClass::step0()
     rtb_Switch1_a = measure_P.const_Value_jcfa;
   }
 
-  rtb_LogicalOperator_nx = (rtb_Switch1_a == measure_P.Constant_Value_h1f);
-  rtb_Compare_ks = (rtb_LogicalOperator_nx && ((rtb_Compare_k || rtb_Compare_k3)
-    || rtb_Compare_k3k));
+  rtb_Switch6_idx = (rtb_Switch1_a == measure_P.Constant_Value_h1f);
+  rtb_Compare_ks = (rtb_Switch6_idx && ((rtb_Compare_k || rtb_Compare_k3) ||
+    rtb_Compare_k3k));
   rtb_LogicalOperator1 = (rtb_Compare_ks && (measure_DWork.delay_DSTATE_i2wj4));
-  rtb_Compare_h4 = !rtb_Compare_ks;
+  rtb_LogicalOperator_nx = !rtb_Compare_ks;
   rtb_Gain_pj = measure_P.Gain_Gain_jcfawyw2o0 * measure_P.Constant4_Value_g;
   if (measure_P.Constant6_Value_j) {
     measure_B.Switch2_h1wibj = rtb_Gain_pj + measure_P.Bias1_Bias;
@@ -6523,7 +6526,7 @@ void measureModelClass::step0()
     rtb_Switch_nulzsg5ykq = measure_P.Constant_Value_bm;
   }
 
-  if (rtb_LogicalOperator_nx) {
+  if (rtb_Switch6_idx) {
     rtb_Switch1_a = measure_P.int2_Value_jcfa;
   }
 
@@ -6534,8 +6537,8 @@ void measureModelClass::step0()
     rtb_Switch1_a = measure_P.const_Value_n;
   }
 
-  rtb_LogicalOperator_nx = (rtb_Switch1_a == measure_P.Constant_Value_b4);
-  rtb_LogicalOperator12 = (rtb_LogicalOperator_nx && rtb_Disturbance_All_Phases);
+  rtb_Switch6_idx = (rtb_Switch1_a == measure_P.Constant_Value_b4);
+  rtb_LogicalOperator12 = (rtb_Switch6_idx && rtb_Disturbance_All_Phases);
   rtb_LogicalOperator1 = (rtb_LogicalOperator12 && (measure_DWork.delay_DSTATE_h));
   rtb_Any_Phases_Not_Disturbed = !rtb_LogicalOperator12;
   rtb_Gain_pj = measure_P.Gain_Gain_he * measure_P.Constant4_Value_g;
@@ -6808,7 +6811,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  if (rtb_Switch6_idx) {
+  if (rtb_Compare_o) {
     rtb_Add1_fs_idx_0 = measure_B.Switch_lli5 - measure_B.VariableDiscret_g0z;
   } else {
     rtb_Add1_fs_idx_0 = measure_B.Switch_lli5y - measure_B.VariableDiscret_ay;
@@ -7008,7 +7011,7 @@ void measureModelClass::step0()
     rtb_UnitDelay1_b = rtb_UnitDelay1_lccp;
   }
 
-  if (rtb_LogicalOperator_nx) {
+  if (rtb_Switch6_idx) {
     rtb_Switch1_a = measure_P.int2_Value_a;
   }
 
@@ -7062,35 +7065,30 @@ void measureModelClass::step0()
     measure_B.RateTransition_l = measure_DWork.RateTransition_Buffer0_h;
   }
 
-  rtb_Add1_fs_idx_0 = (((((measure_P.Gain2_Gain_mf * measure_P.Constant9_Value[0])
-    * rtb_Gain_pj) + measure_P.udegcompensationsinceusingvefre) +
+  for (i = 0; i < 11; i++) {
+    rtb_Add1_fs_idx = (((((measure_P.Gain2_Gain_mf * measure_P.Constant9_Value
+      [(i)]) * rtb_Gain_pj) + measure_P.udegcompensationsinceusingvefre) +
                         measure_B.RateTransition_l) +
                        measure_P.Constant1_Value_b4) /
-    measure_P.Constant2_Value_g;
-  rtb_Add1_fs_idx = (((((measure_P.Gain2_Gain_mf * measure_P.Constant9_Value[1])
-                        * rtb_Gain_pj) +
-                       measure_P.udegcompensationsinceusingvefre) +
-                      measure_B.RateTransition_l) + measure_P.Constant1_Value_b4)
-    / measure_P.Constant2_Value_g;
-  if (measure_P.Constant6_Value_g) {
-    measure_B.Switch2_e[0] = rtb_Add1_fs_idx_0 + measure_P.Bias2_Bias;
-    measure_B.Switch2_e[1] = rtb_Add1_fs_idx + measure_P.Bias2_Bias;
-  } else {
-    if (rtb_Add1_fs_idx_0 < measure_P.Constant_Value_ga) {
-      measure_B.Switch2_e[0] = rtb_Add1_fs_idx_0 + measure_P.Bias_Bias_g;
+      measure_P.Constant2_Value_g;
+    if (measure_P.Constant6_Value_g) {
+      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias;
+    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_ga) {
+      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_g;
     } else {
-      measure_B.Switch2_e[0] = rtb_Add1_fs_idx_0;
-    }
-
-    if (rtb_Add1_fs_idx < measure_P.Constant_Value_ga) {
-      measure_B.Switch2_e[1] = rtb_Add1_fs_idx + measure_P.Bias_Bias_g;
-    } else {
-      measure_B.Switch2_e[1] = rtb_Add1_fs_idx;
+      measure_B.Switch2_e[(i)] = rtb_Add1_fs_idx;
     }
   }
 
-  measure_B.SFunction2[0] = (int32_T)measure_B.Switch2_e[0];
-  measure_B.SFunction2[1] = (int32_T)measure_B.Switch2_e[1];
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_e;
+    int32_T *y0 = measure_B.SFunction2;
+    for (i1=0; i1 < 11; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     memcpy((void *)(&measure_B.RateTransition_a[0]), (void *)
            (&measure_B.SFunction_o1[0]), (sizeof(real_T)) << 6U);
@@ -7139,24 +7137,37 @@ void measureModelClass::step0()
     measure_DWork.SFunction_RWORK_m[3] = measure_B.SFunction_o2_l;
   }
 
+  rtb_Gain_pj = ((real_T)(measure_B.SFunction_o3_n - measure_P.Constant2_Value_p))
+    * rtb_Ts_FFT;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     measure_B.RateTransition_k = measure_DWork.RateTransition_Buffer0_po;
   }
 
-  rtb_Gain_pj = (((((((real_T)(measure_B.SFunction_o3_n -
-    measure_P.Constant2_Value_p)) * rtb_Ts_FFT) * (measure_P.Gain2_Gain_h *
-    measure_P.Constant9_Value[2])) + measure_P.udegcompensationsinceusingvef_i)
-                  + measure_B.RateTransition_k) + measure_P.Constant1_Value_p) /
-    measure_P.Constant2_Value_ht;
-  if (measure_P.Constant6_Value_o) {
-    measure_B.Switch2_df = rtb_Gain_pj + measure_P.Bias2_Bias_o;
-  } else if (rtb_Gain_pj < measure_P.Constant_Value_oe) {
-    measure_B.Switch2_df = rtb_Gain_pj + measure_P.Bias_Bias_oe;
-  } else {
-    measure_B.Switch2_df = rtb_Gain_pj;
+  for (i = 0; i < 10; i++) {
+    rtb_Add1_fs_idx = (((((measure_P.Constant9_Value[i + 11] *
+      measure_P.Gain2_Gain_h) * rtb_Gain_pj) +
+                         measure_P.udegcompensationsinceusingvef_i) +
+                        measure_B.RateTransition_k) +
+                       measure_P.Constant1_Value_p) /
+      measure_P.Constant2_Value_ht;
+    if (measure_P.Constant6_Value_o) {
+      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias_o;
+    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_oe) {
+      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_oe;
+    } else {
+      measure_B.Switch2_df[(i)] = rtb_Add1_fs_idx;
+    }
   }
 
-  measure_B.SFunction2_i = (int32_T)measure_B.Switch2_df;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_df;
+    int32_T *y0 = measure_B.SFunction2_i;
+    for (i1=0; i1 < 10; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     memcpy((void *)(&measure_B.RateTransition_g5[0]), (void *)
            (&measure_B.SFunction_o1_f[0]), (sizeof(real_T)) << 6U);
@@ -7205,24 +7216,37 @@ void measureModelClass::step0()
     measure_DWork.SFunction_RWORK_o[3] = measure_B.SFunction_o2_h;
   }
 
+  rtb_Gain_pj *= (real_T)(measure_B.SFunction_o3_n1 -
+    measure_P.Constant2_Value_kj);
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     measure_B.RateTransition_j2 = measure_DWork.RateTransition_Buffer0_e;
   }
 
-  rtb_Gain_pj = (((((((real_T)(measure_B.SFunction_o3_n1 -
-    measure_P.Constant2_Value_kj)) * rtb_Gain_pj) * (measure_P.Gain2_Gain_o *
-    measure_P.Constant9_Value[3])) + measure_P.udegcompensationsinceusingvef_f)
-                  + measure_B.RateTransition_j2) + measure_P.Constant1_Value_l) /
-    measure_P.Constant2_Value_k;
-  if (measure_P.Constant6_Value_fe) {
-    measure_B.Switch2_b = rtb_Gain_pj + measure_P.Bias2_Bias_f;
-  } else if (rtb_Gain_pj < measure_P.Constant_Value_feg) {
-    measure_B.Switch2_b = rtb_Gain_pj + measure_P.Bias_Bias_f;
-  } else {
-    measure_B.Switch2_b = rtb_Gain_pj;
+  for (i = 0; i < 10; i++) {
+    rtb_Add1_fs_idx = (((((measure_P.Constant9_Value[i + 21] *
+      measure_P.Gain2_Gain_o) * rtb_Gain_pj) +
+                         measure_P.udegcompensationsinceusingvef_f) +
+                        measure_B.RateTransition_j2) +
+                       measure_P.Constant1_Value_l) /
+      measure_P.Constant2_Value_k;
+    if (measure_P.Constant6_Value_fe) {
+      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx + measure_P.Bias2_Bias_f;
+    } else if (rtb_Add1_fs_idx < measure_P.Constant_Value_feg) {
+      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx + measure_P.Bias_Bias_f;
+    } else {
+      measure_B.Switch2_b[(i)] = rtb_Add1_fs_idx;
+    }
   }
 
-  measure_B.SFunction2_kp = (int32_T)measure_B.Switch2_b;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_b;
+    int32_T *y0 = measure_B.SFunction2_kp;
+    for (i1=0; i1 < 10; i1++) {
+      y0[i1] = (int32_T)u0[i1];
+    }
+  }
+
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     memcpy((void *)(&measure_B.RateTransition_gx[0]), (void *)
            (&measure_B.SFunction_o1_k[0]), (sizeof(real_T)) << 6U);
@@ -7381,11 +7405,11 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay2_DSTA_p = measure_B.Switch_ngeqq2oshh;
   measure_DWork.UnitDelay4_DSTA_h = measure_B.Switch6_m;
   measure_DWork.UnitDelay2_DSTA_bf = measure_B.Switch_ngeqq2oshhr;
-  measure_DWork.delay1_DSTATE_k = rtb_Switch6_idx;
+  measure_DWork.delay1_DSTATE_k = rtb_Compare_o;
   measure_DWork.UnitDelay4_DSTATE_e = measure_B.Switch_j;
   measure_DWork.UnitDelay2_DSTATE_e5 = measure_B.Switch_ll;
   measure_DWork.UnitDelay2_DSTATE_e5y = rtb_MathFunction1;
-  measure_DWork.delay_DSTATE_j = !rtb_Switch6_idx;
+  measure_DWork.delay_DSTATE_j = !rtb_Compare_o;
   measure_DWork.UnitDelay4_DSTATE_ed = measure_B.Switch_j;
   measure_DWork.UnitDelay2_DSTATE_e5yc = measure_B.Switch_lli;
   measure_DWork.UnitDelay_DSTATE_ot = rtb_Switch1_pwrmjy;
@@ -7521,7 +7545,7 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay4_DSTATE_j5 = measure_B.Divide_l;
   measure_DWork.UnitDelay2_DSTATE_cm = measure_B.Switch_oh;
   measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhw = rtb_FixPtSum1_cotnt;
-  measure_DWork.delay_DSTATE_i2wj4 = rtb_Compare_h4;
+  measure_DWork.delay_DSTATE_i2wj4 = rtb_LogicalOperator_nx;
   measure_DWork.UnitDelay_DSTATE_lmdwo = rtb_Switch1_hb;
   measure_DWork.UnitDelay_DSTATE_lmdwo300 = rtb_LogicalOperator1_fmgwx;
   measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwr = rtb_FixPtSum1_cotn;
@@ -9693,12 +9717,12 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     50.0,
-    3600.0,
+    1800.0,
     0.999999,
     0.499999,
     0.999999,
     0.499999,
-    6.25E-5,
+    0.000125,
     2.0,
     50.0,
     -6.2831853071795862,
@@ -9717,17 +9741,17 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
-    6.25E-5,
-    6.25E-5,
-    -6.25E-5,
-    0.0625,
-    0.0625,
-    -0.0625,
+    0.000125,
+    0.000125,
+    -0.000125,
+    0.125,
+    0.125,
+    -0.125,
     100.0,
     100.0,
     12.5,
     0.5,
-    -0.0625,
+    -0.125,
     12.5,
     100.0,
     0.499999,
@@ -9735,7 +9759,7 @@ measureModelClass::measureModelClass()
     1.0,
     0.08,
     0.08,
-    0.00025,
+    0.0005,
     0.999999,
     0.499999,
     0.999999,
@@ -9744,18 +9768,18 @@ measureModelClass::measureModelClass()
     4.0E+9,
     0.0,
     0.0,
-    0.000125,
-    1.0E-9,
-    1.0E-9,
-    -0.000125,
-    0.025,
-    0.025,
     0.00025,
+    1.0E-9,
+    1.0E-9,
+    -0.00025,
+    0.025,
+    0.025,
+    0.0005,
     0.999999,
     0.499999,
     0.05,
     0.05,
-    0.00025,
+    0.0005,
     0.999999,
     0.499999,
     50.0,
@@ -9763,7 +9787,7 @@ measureModelClass::measureModelClass()
     1.0E-9,
     100.0,
     100.0,
-    25.0,
+    37.5,
     1.0E-9,
     1.0E+9,
     1.0E+9,
@@ -9787,20 +9811,20 @@ measureModelClass::measureModelClass()
     0.999999,
     0.499999,
     -6.2831853071795862,
-    25.0,
-    0.04,
-    0.04,
-    0.00025,
+    37.5,
+    0.026666666666666668,
+    0.026666666666666668,
+    0.0005,
     0.999999,
     0.499999,
-    0.02,
-    0.02,
-    0.00025,
+    0.013333333333333334,
+    0.013333333333333334,
+    0.0005,
     0.999999,
     0.499999,
-    0.14,
-    0.14,
-    0.00025,
+    0.093333333333333338,
+    0.093333333333333338,
+    0.0005,
     0.999999,
     0.499999,
     -6.2831853071795862,
@@ -9810,7 +9834,7 @@ measureModelClass::measureModelClass()
     100.0,
     1.0E-9,
     -3.1415926535897931,
-    1273.2395447351626,
+    636.61977236758128,
     1.0E-9,
     -6.2831853071795862,
     3.1415926535897931,
@@ -9839,7 +9863,7 @@ measureModelClass::measureModelClass()
     100.0,
     1.0E-9,
     -3.1415926535897931,
-    1273.2395447351626,
+    636.61977236758128,
     1.0E-9,
     -6.2831853071795862,
     3.1415926535897931,
@@ -9868,7 +9892,7 @@ measureModelClass::measureModelClass()
     100.0,
     1.0E-9,
     -3.1415926535897931,
-    1273.2395447351626,
+    636.61977236758128,
     1.0E-9,
     -6.2831853071795862,
     3.1415926535897931,
@@ -9892,39 +9916,39 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
-    0.0,
-    0.0,
-    6.25E-5,
-    6.25E-5,
-    -6.25E-5,
-    0.0625,
-    0.0625,
-    -0.0625,
-    100.0,
-    100.0,
-    12.5,
-    0.5,
-    -0.0625,
-    12.5,
-    100.0,
-    0.499999,
-    -0.499999,
-    1.0,
-    0.08,
-    0.08,
-    0.00025,
-    0.999999,
-    0.499999,
-    0.999999,
-    0.499999,
-    4.0E+9,
-    4.0E+9,
     0.0,
     0.0,
     0.000125,
-    1.0E-9,
-    1.0E-9,
+    0.000125,
     -0.000125,
+    0.125,
+    0.125,
+    -0.125,
+    100.0,
+    100.0,
+    12.5,
+    0.5,
+    -0.125,
+    12.5,
+    100.0,
+    0.499999,
+    -0.499999,
+    1.0,
+    0.08,
+    0.08,
+    0.0005,
+    0.999999,
+    0.499999,
+    0.999999,
+    0.499999,
+    4.0E+9,
+    4.0E+9,
+    0.0,
+    0.0,
+    0.00025,
+    1.0E-9,
+    1.0E-9,
+    -0.00025,
     -0.999999,
     -0.499999,
     1.0E-9,
@@ -9948,16 +9972,16 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     50.0,
-    1.0,
-    820.0,
-    410.0,
-    0.0,
-    0.5,
     1.0,
     420.0,
     210.0,
     0.0,
     0.5,
+    1.0,
+    220.0,
+    110.0,
+    0.0,
+    0.5,
     0.0,
     0.0,
     0.0,
@@ -9966,92 +9990,92 @@ measureModelClass::measureModelClass()
     { 0.0, 0.0, 0.0 },
 
     { 0.0, 0.0, 0.0 },
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     0.0,
     0.0,
     0.5,
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     0.57735026918962584,
     0.0,
     0.0,
     0.5,
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     2.0,
     0.33333333333333331,
     -3.1415926535897931,
-    1273.2395447351626,
+    636.61977236758128,
     0.0,
     0.0,
-    0.00025,
-    8000.0,
-    0.0,
-    0.0,
-    0.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
-    2.0,
-    0.00025,
-    8000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.0005,
+    4000.0,
+    0.0,
+    0.0,
+    0.0,
+    2.0,
+    0.000125,
     0.0,
     0.0,
     0.0,
     0.0,
     0.02,
-    25464.790894703252,
+    12732.395447351626,
     180.0,
-    3600.0,
+    1800.0,
     1.0,
-    1300.0,
-    650.0,
+    660.0,
+    330.0,
     0.0,
     0.5,
     0.0,
     0.0,
     0.0,
-    0.00025,
-    8000.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.000125,
     0.0,
     5.0,
     0.04,
     1.0E-9,
     50.0,
     1.0,
-    660.0,
-    330.0,
+    234.0,
+    117.0,
     0.0,
     0.5,
-    0.00078539816339744833,
+    0.0015707963267948967,
     0.0,
     3.1415926535897931,
-    25.0,
-    0.04,
+    37.5,
+    0.026666666666666668,
     2.0,
     0.0,
     0.0,
-    0.00025,
-    8000.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.000125,
     0.0,
     0.0,
     0.0,
@@ -10073,26 +10097,26 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     1.0,
-    2260.0,
-    1130.0,
+    767.0,
+    384.0,
     0.0,
     0.5,
     0.0,
     1.0,
-    340.0,
-    170.0,
+    127.0,
+    64.0,
     0.0,
     0.5,
     0.0,
     0.0,
     0.5,
-    0.00025,
-    8000.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.000125,
     0.0,
     0.0,
     0.0,
@@ -10100,30 +10124,30 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     3.5,
-    0.00025,
-    8000.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.000125,
     0.0,
     0.0,
     6.0,
     0.0,
     0.5,
     0.0,
-    8000.0,
+    4000.0,
     0.02,
     0.0,
     0.3,
     0.0,
-    8000.0,
+    4000.0,
     0.02,
     0.0,
     0.3,
     0.0,
-    8000.0,
+    4000.0,
     0.02,
     0.0,
     0.3,
@@ -10160,26 +10184,26 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     1.0E-9,
-    25.0,
+    37.5,
     1.0,
-    1300.0,
-    650.0,
+    660.0,
+    330.0,
     0.0,
     0.5,
     0.0,
     0.0,
     0.0,
-    0.00025,
-    8000.0,
+    0.0005,
+    4000.0,
     0.0,
     0.0,
     0.0,
     2.0,
-    6.25E-5,
+    0.000125,
     0.0,
     0.04,
     1.0,
-    28.0,
+    40.5,
     1.2247448713915889,
     0.57735026918962584,
     1.4142135623730951,
@@ -10228,7 +10252,7 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.5,
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     0.0,
@@ -10251,7 +10275,7 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.5,
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     0.0,
@@ -10274,7 +10298,7 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.5,
-    -8000.0,
+    -4000.0,
     1.0,
     0.5,
     0.0,
@@ -10379,9 +10403,11 @@ measureModelClass::measureModelClass()
     0.14,
     0.2,
 
-    { 2.0, 3.0, 4.0, 5.0 },
-    8000.0,
-    8000.0,
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
+    4000.0,
+    4000.0,
     0.0,
     0.0,
     0.0,
@@ -10389,49 +10415,49 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
-    0.000125,
+    0.00025,
     0.0,
     0.0,
     0.0,
     0.0,
     1.0E+9,
-    0.000125,
+    0.00025,
     0.5,
     0.0,
     0.08,
     0.0,
     1.0,
     0.08,
-    -6.25E-5,
+    -0.000125,
     0.5,
-    -0.00078539816339744833,
+    -0.0015707963267948967,
     1.0,
     0.4,
-    -0.00025,
+    -0.0005,
     0.0,
-    8000.0,
+    4000.0,
     1.0,
     0.0,
-    8000.0,
-    8000.0,
+    4000.0,
+    4000.0,
     0.0,
     -3.1415926535897931,
-    8000.0,
+    4000.0,
     0.0,
-    0.03076676552365587,
-    0.96923323447634413,
-    0.0,
-    -3.1415926535897931,
-    8000.0,
-    0.0,
-    0.03076676552365587,
-    0.96923323447634413,
+    0.060586937186524192,
+    0.93941306281347581,
     0.0,
     -3.1415926535897931,
-    8000.0,
+    4000.0,
     0.0,
-    0.03076676552365587,
-    0.96923323447634413,
+    0.060586937186524192,
+    0.93941306281347581,
+    0.0,
+    -3.1415926535897931,
+    4000.0,
+    0.0,
+    0.060586937186524192,
+    0.93941306281347581,
     1.2,
     55.000000000000007,
     40.0,
@@ -10447,27 +10473,27 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
-    0.000125,
+    0.00025,
     0.0,
     0.0,
     0.0,
     0.0,
     1.0E+9,
-    0.000125,
+    0.00025,
     0.5,
     0.0,
     0.08,
     0.0,
     1.0,
     0.08,
-    -6.25E-5,
+    -0.000125,
     0.5,
-    -0.00078539816339744833,
+    -0.0015707963267948967,
     1.0,
     0.4,
-    -0.00025,
+    -0.0005,
     0.0,
-    8000.0,
+    4000.0,
     1.0,
     0.0,
     3.1415926535897931,
@@ -10475,7 +10501,7 @@ measureModelClass::measureModelClass()
     0.03125,
     64.0,
     1.0E-9,
-    8000.0,
+    4000.0,
     6.2831853071795862,
     -1.5707963267948966,
     0.0,
@@ -10494,7 +10520,7 @@ measureModelClass::measureModelClass()
     0.03125,
     64.0,
     1.0E-9,
-    8000.0,
+    4000.0,
     6.2831853071795862,
     -1.5707963267948966,
     0.0,
@@ -10513,7 +10539,7 @@ measureModelClass::measureModelClass()
     0.03125,
     64.0,
     1.0E-9,
-    8000.0,
+    4000.0,
     6.2831853071795862,
     -1.5707963267948966,
     0.0,
@@ -10539,290 +10565,290 @@ measureModelClass::measureModelClass()
 
     { { 1.0, 0.0 }, { -0.49999999999999978, 0.86602540378443871 }, { -
         0.49999999999999978, -0.86602540378443871 } },
-    641,
-    641,
+    321,
+    321,
+    2,
+    101,
+    101,
     2,
     201,
     201,
     2,
-    401,
-    401,
+    108,
+    108,
+    2,
+    55,
+    55,
+    2,
+    375,
+    375,
     2,
     321,
     321,
     2,
-    161,
-    161,
-    2,
-    1121,
-    1121,
-    2,
-    641,
-    641,
-    2,
-    160,
-    160,
-    2,
-    201,
-    201,
-    201,
-    2,
-    401,
-    401,
-    401,
-    401,
-    401,
-    401,
-    2,
-    641,
-    641,
-    641,
-    2,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    321,
-    2,
-    161,
-    161,
-    161,
-    161,
-    161,
-    161,
-    2,
-    1121,
-    1121,
-    1121,
     80,
-    161,
-    161,
-    161,
-    161,
-    161,
-    161,
-    1121,
-    1121,
-    1121,
-    161,
-    161,
-    161,
-    161,
-    161,
-    161,
-    1121,
-    1121,
-    1121,
+    80,
     2,
-    641,
-    641,
-    641,
+    101,
+    101,
+    101,
+    2,
+    201,
+    201,
+    201,
+    201,
+    201,
+    201,
+    2,
     321,
     321,
     321,
-    161,
-    161,
-    161,
+    2,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    108,
+    2,
+    55,
+    55,
+    55,
+    55,
+    55,
+    55,
+    2,
+    375,
+    375,
+    375,
+    40,
+    55,
+    55,
+    55,
+    55,
+    55,
+    55,
+    375,
+    375,
+    375,
+    55,
+    55,
+    55,
+    55,
+    55,
+    55,
+    375,
+    375,
+    375,
+    2,
     321,
     321,
     321,
-    161,
-    161,
-    161,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
+    108,
+    108,
+    108,
+    55,
+    55,
+    55,
     321,
     321,
     321,
-    161,
-    161,
-    161,
     321,
     321,
     321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    321,
-    321,
-    321,
-    161,
-    161,
-    161,
-    641,
-    641,
-    641,
-    641,
-    641,
-    641,
     32,
     32,
     32,
     1U,
-    241U,
+    121U,
     1U,
-    801U,
+    401U,
     1U,
-    1281U,
-    1U,
-    1U,
-    1U,
-    1U,
-    281U,
+    641U,
     1U,
     1U,
     1U,
     1U,
-    640U,
+    141U,
+    1U,
+    1U,
+    1U,
+    1U,
+    320U,
     1U,
     1U,
     0U,
+    1U,
+    81U,
+    1U,
+    1U,
+    1U,
+    1U,
+    181U,
+    1U,
+    1U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    161U,
+    1U,
+    401U,
+    1U,
+    1U,
+    180U,
+    1U,
+    1U,
+    180U,
+    1U,
+    1U,
+    180U,
+    1U,
+    1U,
+    320U,
     1U,
     161U,
     1U,
     1U,
-    1U,
-    1U,
-    361U,
-    1U,
-    1U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    321U,
-    1U,
-    801U,
-    1U,
-    1U,
-    360U,
-    1U,
-    1U,
-    360U,
-    1U,
-    1U,
-    360U,
-    1U,
-    1U,
-    640U,
-    1U,
-    321U,
-    1U,
-    1U,
-    640U,
+    320U,
     1U,
     1U,
     0U,
     1U,
+    81U,
+    641U,
+    0U,
+    401U,
+    0U,
+    1U,
+    0U,
+    121U,
+    0U,
     161U,
-    1281U,
+    161U,
     0U,
-    801U,
+    161U,
     0U,
-    1U,
+    161U,
     0U,
-    241U,
+    401U,
     0U,
-    321U,
-    321U,
+    401U,
     0U,
-    321U,
-    0U,
-    321U,
-    0U,
-    801U,
-    0U,
-    801U,
-    0U,
-    321U,
+    161U,
     0U,
     1U,
     0U,
@@ -10830,33 +10856,33 @@ measureModelClass::measureModelClass()
     0U,
     1U,
     0U,
-    801U,
+    401U,
     0U,
-    801U,
+    401U,
     0U,
-    321U,
+    161U,
     0U,
-    801U,
+    401U,
     0U,
-    801U,
+    401U,
     0U,
-    321U,
-    0U,
-    1U,
-    0U,
-    0U,
-    1U,
-    0U,
-    1U,
-    1U,
-    1U,
     161U,
     0U,
     1U,
     0U,
     0U,
+    1U,
     0U,
-    281U,
+    1U,
+    1U,
+    1U,
+    81U,
+    0U,
+    1U,
+    0U,
+    0U,
+    0U,
+    141U,
     0U,
     1U,
     1U,
@@ -10866,13 +10892,13 @@ measureModelClass::measureModelClass()
     1U,
     0U,
     1U,
-    161U,
+    81U,
     0U,
     1U,
     0U,
     0U,
     0U,
-    361U,
+    181U,
     0U,
     1U,
     1U,

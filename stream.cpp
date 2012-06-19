@@ -287,10 +287,8 @@ void Stream::timeout()
 void Stream::analyse()
 {
     //qDebug() << "in analysis";
-    QElapsedTimer timer;
-    timer.start();
-
-    // TODO: must not overwrite samples arrays during this
+    //QElapsedTimer timer;
+    //timer.start();
 
     setAnalysed(false);
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
@@ -302,7 +300,6 @@ void Stream::analyse()
     maxInstantaneousVoltage = 0.0;
     maxInstantaneousCurrent = 0.0;
 
-//    boolean_T OverrunFlags[2] = { 0, 0 };
     boolean_T eventFlags[2] = { 0, 0 };
     int_T taskCounter[2] = { 0, 0 };
 
@@ -324,16 +321,8 @@ void Stream::analyse()
             maxInstantaneousCurrent = timestepMaxCurrent;
         }
 
-//        if (OverrunFlags[0]) {
-//            rtmSetErrorStatus(measure_Object.getRTM(), "Overrun");
-//            return;
-//        }
-
-//        OverrunFlags[0] = TRUE;
         if ((taskCounter[1] == 0)) {
             if (eventFlags[1]) {
-//                OverrunFlags[0] = FALSE;
-//                OverrunFlags[1] = TRUE;
                 return;
             }
 
@@ -342,33 +331,26 @@ void Stream::analyse()
 
         taskCounter[1]++;
         if (taskCounter[1] == 400) {
-            taskCounter[1]= 0;
+            taskCounter[1] = 0;
         }
 
         analysisInstance.step0();
-//        OverrunFlags[0] = FALSE;
-//        if (OverrunFlags[1]) {
-//            return;
-//        }
 
         if (eventFlags[1]) {
-//            OverrunFlags[1] = TRUE;
             analysisInstance.step1();
-//            OverrunFlags[1] = FALSE;
             eventFlags[1] = FALSE;
         }
     }
-
-    // TODO: why 100 Hz, for 50 Hz signal?
-    qDebug() << analysisInstance.measure_Y.Frequency;
 
     for (int signal = 0; signal < 3; signal++) {
         // add fundamental
         // TODO: use phase frequency?
         row->appendFreqPoint(signal, analysisInstance.measure_Y.Frequency, -analysisInstance.measure_Y.Fundamentalamplitudevefreq[signal] / maxInstantaneousVoltage);
+
+        // add harmonics
         for (int n = 0; n < 4; n++) {
             int arrayIndex = (signal * 4) + n;
-            qDebug() << signal << n << arrayIndex << analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex];
+            //qDebug() << signal << n << arrayIndex << analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex];
             row->appendFreqPoint(signal, ((n + 1) * analysisInstance.measure_Y.Frequency), -(analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex]));  // negate the y-coordinate, in preparation for plotting
         }
     }
@@ -413,5 +395,5 @@ void Stream::analyse()
     row->moveToThread(this->thread());  // TODO: just move to UI thread here, rather than later?
     //emit setStreamTableRow(row);
 
-    qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
+    //qDebug() << "The analysis took" << timer.elapsed() << "milliseconds";
 }
