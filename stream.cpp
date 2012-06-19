@@ -345,15 +345,11 @@ void Stream::analyse()
         row->appendFreqPoint(signal, analysisInstance.measure_Y.PhaseFrequency[signal], -analysisInstance.measure_Y.VoltageFundamentalAmplitudePosF[signal] / maxInstantaneousVoltage);
 
         // add harmonics
-        for (int n = 0; n < 4; n++) {
-            int arrayIndex = (signal * 4) + n;
+        for (int n = 0; n < 31; n++) {
+            int arrayIndex = (signal * 3) + n;
             //qDebug() << signal << n << arrayIndex << analysisInstance.measure_Y.Amplitudesrelativetofundamental[arrayIndex];
             row->appendFreqPoint(signal, ((n + 1) * analysisInstance.measure_Y.Frequency), -(analysisInstance.measure_Y.VoltageAmplitudesRelativeToFund[arrayIndex]));  // negate the y-coordinate, in preparation for plotting
         }
-    }
-
-    for (int n = 0; n < 12; n++) {
-        qDebug() << n << analysisInstance.measure_Y.VoltageHarmonicsAnalysed[n];
     }
 
     setAnalysed(true);

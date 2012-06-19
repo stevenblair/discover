@@ -6145,86 +6145,56 @@ void measureModelClass::step0()
   measure_Y.VoltageFundamentalAmplitudePosF[1] = measure_B.RateTransition_o;
   measure_Y.VoltageFundamentalAmplitudePosF[2] = measure_B.RateTransition_g;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_gf[0] = measure_DWork.RateTransition_Buffer0_a[0];
-    measure_B.RateTransition_gf[1] = measure_DWork.RateTransition_Buffer0_a[1];
-    measure_B.RateTransition_gf[2] = measure_DWork.RateTransition_Buffer0_a[2];
-    measure_B.RateTransition_gf[3] = measure_DWork.RateTransition_Buffer0_a[3];
-    measure_B.RateTransition_gw[0] = measure_DWork.RateTransition_Buffer0_j[0];
-    measure_B.RateTransition_gw[1] = measure_DWork.RateTransition_Buffer0_j[1];
-    measure_B.RateTransition_gw[2] = measure_DWork.RateTransition_Buffer0_j[2];
-    measure_B.RateTransition_gw[3] = measure_DWork.RateTransition_Buffer0_j[3];
-    measure_B.RateTransition_n[0] = measure_DWork.RateTransition_Buffer0_ak[0];
-    measure_B.RateTransition_n[1] = measure_DWork.RateTransition_Buffer0_ak[1];
-    measure_B.RateTransition_n[2] = measure_DWork.RateTransition_Buffer0_ak[2];
-    measure_B.RateTransition_n[3] = measure_DWork.RateTransition_Buffer0_ak[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_gf[(i)] = measure_DWork.RateTransition_Buffer0_a
+        [(i)];
+      measure_B.RateTransition_gw[(i)] = measure_DWork.RateTransition_Buffer0_j
+        [(i)];
+      measure_B.RateTransition_n[(i)] = measure_DWork.RateTransition_Buffer0_ak
+        [(i)];
+    }
   }
 
-  measure_Y.VoltageAmplitudesRelativeToFund[0] = measure_B.RateTransition_gf[0];
-  measure_Y.VoltageAmplitudesRelativeToFund[1] = measure_B.RateTransition_gf[1];
-  measure_Y.VoltageAmplitudesRelativeToFund[2] = measure_B.RateTransition_gf[2];
-  measure_Y.VoltageAmplitudesRelativeToFund[3] = measure_B.RateTransition_gf[3];
-  measure_Y.VoltageAmplitudesRelativeToFund[4] = measure_B.RateTransition_gw[0];
-  measure_Y.VoltageAmplitudesRelativeToFund[5] = measure_B.RateTransition_gw[1];
-  measure_Y.VoltageAmplitudesRelativeToFund[6] = measure_B.RateTransition_gw[2];
-  measure_Y.VoltageAmplitudesRelativeToFund[7] = measure_B.RateTransition_gw[3];
-  measure_Y.VoltageAmplitudesRelativeToFund[8] = measure_B.RateTransition_n[0];
-  measure_Y.VoltageAmplitudesRelativeToFund[9] = measure_B.RateTransition_n[1];
-  measure_Y.VoltageAmplitudesRelativeToFund[10] = measure_B.RateTransition_n[2];
-  measure_Y.VoltageAmplitudesRelativeToFund[11] = measure_B.RateTransition_n[3];
+  memcpy((void *)(&measure_Y.VoltageAmplitudesRelativeToFund[0]), (void *)
+         (&measure_B.RateTransition_gf[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltageAmplitudesRelativeToFund[31]), (void *)
+         (&measure_B.RateTransition_gw[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltageAmplitudesRelativeToFund[62]), (void *)
+         (&measure_B.RateTransition_n[0]), 31U * (sizeof(real_T)));
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_h[0] = measure_DWork.RateTransition_Buffer0_h[0];
-    measure_B.RateTransition_h[1] = measure_DWork.RateTransition_Buffer0_h[1];
-    measure_B.RateTransition_h[2] = measure_DWork.RateTransition_Buffer0_h[2];
-    measure_B.RateTransition_h[3] = measure_DWork.RateTransition_Buffer0_h[3];
-    measure_B.RateTransition_k[0] = measure_DWork.RateTransition_Buffer0_g[0];
-    measure_B.RateTransition_k[1] = measure_DWork.RateTransition_Buffer0_g[1];
-    measure_B.RateTransition_k[2] = measure_DWork.RateTransition_Buffer0_g[2];
-    measure_B.RateTransition_k[3] = measure_DWork.RateTransition_Buffer0_g[3];
-    measure_B.RateTransition_b[0] = measure_DWork.RateTransition_Buffer0_hn[0];
-    measure_B.RateTransition_b[1] = measure_DWork.RateTransition_Buffer0_hn[1];
-    measure_B.RateTransition_b[2] = measure_DWork.RateTransition_Buffer0_hn[2];
-    measure_B.RateTransition_b[3] = measure_DWork.RateTransition_Buffer0_hn[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_h[(i)] = measure_DWork.RateTransition_Buffer0_h
+        [(i)];
+      measure_B.RateTransition_k[(i)] = measure_DWork.RateTransition_Buffer0_g
+        [(i)];
+      measure_B.RateTransition_b[(i)] = measure_DWork.RateTransition_Buffer0_hn
+        [(i)];
+    }
   }
 
-  measure_Y.VoltagePhasesRelativeToFundamen[0] = measure_B.RateTransition_h[0];
-  measure_Y.VoltagePhasesRelativeToFundamen[1] = measure_B.RateTransition_h[1];
-  measure_Y.VoltagePhasesRelativeToFundamen[2] = measure_B.RateTransition_h[2];
-  measure_Y.VoltagePhasesRelativeToFundamen[3] = measure_B.RateTransition_h[3];
-  measure_Y.VoltagePhasesRelativeToFundamen[4] = measure_B.RateTransition_k[0];
-  measure_Y.VoltagePhasesRelativeToFundamen[5] = measure_B.RateTransition_k[1];
-  measure_Y.VoltagePhasesRelativeToFundamen[6] = measure_B.RateTransition_k[2];
-  measure_Y.VoltagePhasesRelativeToFundamen[7] = measure_B.RateTransition_k[3];
-  measure_Y.VoltagePhasesRelativeToFundamen[8] = measure_B.RateTransition_b[0];
-  measure_Y.VoltagePhasesRelativeToFundamen[9] = measure_B.RateTransition_b[1];
-  measure_Y.VoltagePhasesRelativeToFundamen[10] = measure_B.RateTransition_b[2];
-  measure_Y.VoltagePhasesRelativeToFundamen[11] = measure_B.RateTransition_b[3];
+  memcpy((void *)(&measure_Y.VoltagePhasesRelativeToFundamen[0]), (void *)
+         (&measure_B.RateTransition_h[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltagePhasesRelativeToFundamen[31]), (void *)
+         (&measure_B.RateTransition_k[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltagePhasesRelativeToFundamen[62]), (void *)
+         (&measure_B.RateTransition_b[0]), 31U * (sizeof(real_T)));
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_a[0] = measure_DWork.RateTransition_Buffer0_e[0];
-    measure_B.RateTransition_a[1] = measure_DWork.RateTransition_Buffer0_e[1];
-    measure_B.RateTransition_a[2] = measure_DWork.RateTransition_Buffer0_e[2];
-    measure_B.RateTransition_a[3] = measure_DWork.RateTransition_Buffer0_e[3];
-    measure_B.RateTransition_gy[0] = measure_DWork.RateTransition_Buffer0_lm[0];
-    measure_B.RateTransition_gy[1] = measure_DWork.RateTransition_Buffer0_lm[1];
-    measure_B.RateTransition_gy[2] = measure_DWork.RateTransition_Buffer0_lm[2];
-    measure_B.RateTransition_gy[3] = measure_DWork.RateTransition_Buffer0_lm[3];
-    measure_B.RateTransition_m[0] = measure_DWork.RateTransition_Buffer0_az[0];
-    measure_B.RateTransition_m[1] = measure_DWork.RateTransition_Buffer0_az[1];
-    measure_B.RateTransition_m[2] = measure_DWork.RateTransition_Buffer0_az[2];
-    measure_B.RateTransition_m[3] = measure_DWork.RateTransition_Buffer0_az[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_a[(i)] = measure_DWork.RateTransition_Buffer0_e
+        [(i)];
+      measure_B.RateTransition_gy[(i)] =
+        measure_DWork.RateTransition_Buffer0_lm[(i)];
+      measure_B.RateTransition_m[(i)] = measure_DWork.RateTransition_Buffer0_az
+        [(i)];
+    }
   }
 
-  measure_Y.VoltageHarmonicsAnalysed[0] = measure_B.RateTransition_a[0];
-  measure_Y.VoltageHarmonicsAnalysed[1] = measure_B.RateTransition_a[1];
-  measure_Y.VoltageHarmonicsAnalysed[2] = measure_B.RateTransition_a[2];
-  measure_Y.VoltageHarmonicsAnalysed[3] = measure_B.RateTransition_a[3];
-  measure_Y.VoltageHarmonicsAnalysed[4] = measure_B.RateTransition_gy[0];
-  measure_Y.VoltageHarmonicsAnalysed[5] = measure_B.RateTransition_gy[1];
-  measure_Y.VoltageHarmonicsAnalysed[6] = measure_B.RateTransition_gy[2];
-  measure_Y.VoltageHarmonicsAnalysed[7] = measure_B.RateTransition_gy[3];
-  measure_Y.VoltageHarmonicsAnalysed[8] = measure_B.RateTransition_m[0];
-  measure_Y.VoltageHarmonicsAnalysed[9] = measure_B.RateTransition_m[1];
-  measure_Y.VoltageHarmonicsAnalysed[10] = measure_B.RateTransition_m[2];
-  measure_Y.VoltageHarmonicsAnalysed[11] = measure_B.RateTransition_m[3];
+  memcpy((void *)(&measure_Y.VoltageHarmonicsAnalysed[0]), (void *)
+         (&measure_B.RateTransition_a[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltageHarmonicsAnalysed[31]), (void *)
+         (&measure_B.RateTransition_gy[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.VoltageHarmonicsAnalysed[62]), (void *)
+         (&measure_B.RateTransition_m[0]), 31U * (sizeof(real_T)));
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
     measure_B.RateTransition_l = measure_DWork.RateTransition_Buffer0_m;
     measure_B.RateTransition_gq = measure_DWork.RateTransition_Buffer0_bh;
@@ -6235,86 +6205,56 @@ void measureModelClass::step0()
   measure_Y.CurrentFundamentalAmplitudePosF[1] = measure_B.RateTransition_gq;
   measure_Y.CurrentFundamentalAmplitudePosF[2] = measure_B.RateTransition_a0;
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_j[0] = measure_DWork.RateTransition_Buffer0_aq[0];
-    measure_B.RateTransition_j[1] = measure_DWork.RateTransition_Buffer0_aq[1];
-    measure_B.RateTransition_j[2] = measure_DWork.RateTransition_Buffer0_aq[2];
-    measure_B.RateTransition_j[3] = measure_DWork.RateTransition_Buffer0_aq[3];
-    measure_B.RateTransition_c[0] = measure_DWork.RateTransition_Buffer0_oh[0];
-    measure_B.RateTransition_c[1] = measure_DWork.RateTransition_Buffer0_oh[1];
-    measure_B.RateTransition_c[2] = measure_DWork.RateTransition_Buffer0_oh[2];
-    measure_B.RateTransition_c[3] = measure_DWork.RateTransition_Buffer0_oh[3];
-    measure_B.RateTransition_ax[0] = measure_DWork.RateTransition_Buffer0_lg[0];
-    measure_B.RateTransition_ax[1] = measure_DWork.RateTransition_Buffer0_lg[1];
-    measure_B.RateTransition_ax[2] = measure_DWork.RateTransition_Buffer0_lg[2];
-    measure_B.RateTransition_ax[3] = measure_DWork.RateTransition_Buffer0_lg[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_j[(i)] = measure_DWork.RateTransition_Buffer0_aq
+        [(i)];
+      measure_B.RateTransition_c[(i)] = measure_DWork.RateTransition_Buffer0_oh
+        [(i)];
+      measure_B.RateTransition_ax[(i)] =
+        measure_DWork.RateTransition_Buffer0_lg[(i)];
+    }
   }
 
-  measure_Y.CurrentAmplitudesRelativeToFund[0] = measure_B.RateTransition_j[0];
-  measure_Y.CurrentAmplitudesRelativeToFund[1] = measure_B.RateTransition_j[1];
-  measure_Y.CurrentAmplitudesRelativeToFund[2] = measure_B.RateTransition_j[2];
-  measure_Y.CurrentAmplitudesRelativeToFund[3] = measure_B.RateTransition_j[3];
-  measure_Y.CurrentAmplitudesRelativeToFund[4] = measure_B.RateTransition_c[0];
-  measure_Y.CurrentAmplitudesRelativeToFund[5] = measure_B.RateTransition_c[1];
-  measure_Y.CurrentAmplitudesRelativeToFund[6] = measure_B.RateTransition_c[2];
-  measure_Y.CurrentAmplitudesRelativeToFund[7] = measure_B.RateTransition_c[3];
-  measure_Y.CurrentAmplitudesRelativeToFund[8] = measure_B.RateTransition_ax[0];
-  measure_Y.CurrentAmplitudesRelativeToFund[9] = measure_B.RateTransition_ax[1];
-  measure_Y.CurrentAmplitudesRelativeToFund[10] = measure_B.RateTransition_ax[2];
-  measure_Y.CurrentAmplitudesRelativeToFund[11] = measure_B.RateTransition_ax[3];
+  memcpy((void *)(&measure_Y.CurrentAmplitudesRelativeToFund[0]), (void *)
+         (&measure_B.RateTransition_j[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentAmplitudesRelativeToFund[31]), (void *)
+         (&measure_B.RateTransition_c[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentAmplitudesRelativeToFund[62]), (void *)
+         (&measure_B.RateTransition_ax[0]), 31U * (sizeof(real_T)));
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_jz[0] = measure_DWork.RateTransition_Buffer0_n[0];
-    measure_B.RateTransition_jz[1] = measure_DWork.RateTransition_Buffer0_n[1];
-    measure_B.RateTransition_jz[2] = measure_DWork.RateTransition_Buffer0_n[2];
-    measure_B.RateTransition_jz[3] = measure_DWork.RateTransition_Buffer0_n[3];
-    measure_B.RateTransition_h2[0] = measure_DWork.RateTransition_Buffer0_c[0];
-    measure_B.RateTransition_h2[1] = measure_DWork.RateTransition_Buffer0_c[1];
-    measure_B.RateTransition_h2[2] = measure_DWork.RateTransition_Buffer0_c[2];
-    measure_B.RateTransition_h2[3] = measure_DWork.RateTransition_Buffer0_c[3];
-    measure_B.RateTransition_cc[0] = measure_DWork.RateTransition_Buffer0_cq[0];
-    measure_B.RateTransition_cc[1] = measure_DWork.RateTransition_Buffer0_cq[1];
-    measure_B.RateTransition_cc[2] = measure_DWork.RateTransition_Buffer0_cq[2];
-    measure_B.RateTransition_cc[3] = measure_DWork.RateTransition_Buffer0_cq[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_jz[(i)] = measure_DWork.RateTransition_Buffer0_n
+        [(i)];
+      measure_B.RateTransition_h2[(i)] = measure_DWork.RateTransition_Buffer0_c
+        [(i)];
+      measure_B.RateTransition_cc[(i)] =
+        measure_DWork.RateTransition_Buffer0_cq[(i)];
+    }
   }
 
-  measure_Y.CurrentPhasesRelativeToFundamen[0] = measure_B.RateTransition_jz[0];
-  measure_Y.CurrentPhasesRelativeToFundamen[1] = measure_B.RateTransition_jz[1];
-  measure_Y.CurrentPhasesRelativeToFundamen[2] = measure_B.RateTransition_jz[2];
-  measure_Y.CurrentPhasesRelativeToFundamen[3] = measure_B.RateTransition_jz[3];
-  measure_Y.CurrentPhasesRelativeToFundamen[4] = measure_B.RateTransition_h2[0];
-  measure_Y.CurrentPhasesRelativeToFundamen[5] = measure_B.RateTransition_h2[1];
-  measure_Y.CurrentPhasesRelativeToFundamen[6] = measure_B.RateTransition_h2[2];
-  measure_Y.CurrentPhasesRelativeToFundamen[7] = measure_B.RateTransition_h2[3];
-  measure_Y.CurrentPhasesRelativeToFundamen[8] = measure_B.RateTransition_cc[0];
-  measure_Y.CurrentPhasesRelativeToFundamen[9] = measure_B.RateTransition_cc[1];
-  measure_Y.CurrentPhasesRelativeToFundamen[10] = measure_B.RateTransition_cc[2];
-  measure_Y.CurrentPhasesRelativeToFundamen[11] = measure_B.RateTransition_cc[3];
+  memcpy((void *)(&measure_Y.CurrentPhasesRelativeToFundamen[0]), (void *)
+         (&measure_B.RateTransition_jz[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentPhasesRelativeToFundamen[31]), (void *)
+         (&measure_B.RateTransition_h2[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentPhasesRelativeToFundamen[62]), (void *)
+         (&measure_B.RateTransition_cc[0]), 31U * (sizeof(real_T)));
   if ((measure_M->Timing.RateInteraction.TID0_1 == 1)) {
-    measure_B.RateTransition_mz[0] = measure_DWork.RateTransition_Buffer0_mb[0];
-    measure_B.RateTransition_mz[1] = measure_DWork.RateTransition_Buffer0_mb[1];
-    measure_B.RateTransition_mz[2] = measure_DWork.RateTransition_Buffer0_mb[2];
-    measure_B.RateTransition_mz[3] = measure_DWork.RateTransition_Buffer0_mb[3];
-    measure_B.RateTransition_jt[0] = measure_DWork.RateTransition_Buffer0_of[0];
-    measure_B.RateTransition_jt[1] = measure_DWork.RateTransition_Buffer0_of[1];
-    measure_B.RateTransition_jt[2] = measure_DWork.RateTransition_Buffer0_of[2];
-    measure_B.RateTransition_jt[3] = measure_DWork.RateTransition_Buffer0_of[3];
-    measure_B.RateTransition_f[0] = measure_DWork.RateTransition_Buffer0_jc[0];
-    measure_B.RateTransition_f[1] = measure_DWork.RateTransition_Buffer0_jc[1];
-    measure_B.RateTransition_f[2] = measure_DWork.RateTransition_Buffer0_jc[2];
-    measure_B.RateTransition_f[3] = measure_DWork.RateTransition_Buffer0_jc[3];
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_mz[(i)] =
+        measure_DWork.RateTransition_Buffer0_mb[(i)];
+      measure_B.RateTransition_jt[(i)] =
+        measure_DWork.RateTransition_Buffer0_of[(i)];
+      measure_B.RateTransition_f[(i)] = measure_DWork.RateTransition_Buffer0_jc
+        [(i)];
+    }
   }
 
-  measure_Y.CurrentHarmonicsAnalysed[0] = measure_B.RateTransition_mz[0];
-  measure_Y.CurrentHarmonicsAnalysed[1] = measure_B.RateTransition_mz[1];
-  measure_Y.CurrentHarmonicsAnalysed[2] = measure_B.RateTransition_mz[2];
-  measure_Y.CurrentHarmonicsAnalysed[3] = measure_B.RateTransition_mz[3];
-  measure_Y.CurrentHarmonicsAnalysed[4] = measure_B.RateTransition_jt[0];
-  measure_Y.CurrentHarmonicsAnalysed[5] = measure_B.RateTransition_jt[1];
-  measure_Y.CurrentHarmonicsAnalysed[6] = measure_B.RateTransition_jt[2];
-  measure_Y.CurrentHarmonicsAnalysed[7] = measure_B.RateTransition_jt[3];
-  measure_Y.CurrentHarmonicsAnalysed[8] = measure_B.RateTransition_f[0];
-  measure_Y.CurrentHarmonicsAnalysed[9] = measure_B.RateTransition_f[1];
-  measure_Y.CurrentHarmonicsAnalysed[10] = measure_B.RateTransition_f[2];
-  measure_Y.CurrentHarmonicsAnalysed[11] = measure_B.RateTransition_f[3];
+  memcpy((void *)(&measure_Y.CurrentHarmonicsAnalysed[0]), (void *)
+         (&measure_B.RateTransition_mz[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentHarmonicsAnalysed[31]), (void *)
+         (&measure_B.RateTransition_jt[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)(&measure_Y.CurrentHarmonicsAnalysed[62]), (void *)
+         (&measure_B.RateTransition_f[0]), 31U * (sizeof(real_T)));
   measure_B.Gain1 = measure_P.Gain1_Gain_j0 * measure_U.IabcAmps[0];
   rtb_Add1_f_idx_0 = measure_P.Gain5_Gain * rtb_Ts_FFT_k;
   if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_hc) {
@@ -7978,36 +7918,33 @@ void measureModelClass::step0()
 void measureModelClass::step1()
 {
   real_T rtb_ComplextoMagnitudeAngle2_o2;
+  real_T rtb_Sum2_op[31];
+  real_T rtb_Divide_g[31];
   real_T rtb_ComplextoMagnitudeAngle2_o1;
-  real_T rtb_Product1_a0[4];
+  real_T rtb_Switch_gp;
+  real_T rtb_Product1_a0[31];
   real_T rtb_ComplextoMagnitudeAngle2__i;
   real_T rtb_ComplextoMagnitudeAngle2__j;
-  real_T rtb_Product1_ag[4];
+  real_T rtb_Product1_ag[31];
   real_T rtb_ComplextoMagnitudeAngle2__m;
   real_T rtb_ComplextoMagnitudeAngle2__e;
-  real_T rtb_Product1_d2[4];
+  real_T rtb_Product1_d2[31];
   real_T rtb_ComplextoMagnitudeAngle2_e3;
   real_T rtb_ComplextoMagnitudeAngle2_mf;
-  real_T rtb_Product1_at[4];
+  real_T rtb_Product1_at[31];
   real_T rtb_ComplextoMagnitudeAngle2__g;
   real_T rtb_ComplextoMagnitudeAngle2__k;
-  real_T rtb_Product1_ii[4];
+  real_T rtb_Product1_ii[31];
   real_T rtb_ComplextoMagnitudeAngle2__a;
   real_T rtb_ComplextoMagnitudeAngle2__c;
   creal_T rtb_FFT[64];
-  real_T rtb_Sum3[4];
-  real_T rtb_Sum3_n[4];
-  real_T rtb_Sum3_a[4];
-  real_T rtb_Sum3_o[4];
-  real_T rtb_Sum3_i[4];
-  real_T rtb_Sum2_op_idx;
-  real_T rtb_Sum2_op_idx_0;
-  real_T rtb_Sum2_op_idx_1;
-  real_T rtb_Sum2_op_idx_2;
-  real_T rtb_Divide_g_idx;
-  real_T rtb_Divide_g_idx_0;
-  real_T rtb_Divide_g_idx_1;
-  real_T rtb_Divide_g_idx_2;
+  real_T rtb_Sum3[31];
+  real_T rtb_Sum3_n[31];
+  real_T rtb_Sum3_a[31];
+  real_T rtb_Sum3_o[31];
+  real_T rtb_Sum3_i[31];
+  int32_T i;
+  real_T rtb_Divide_g_0;
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_hd[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8015,83 +7952,46 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2_o1 = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2_o2 = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_l[0] *
-    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[0])) +
-    measure_P.Constant1_Value_g;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_l[1] *
-    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[1])) +
-    measure_P.Constant1_Value_g;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_l[2] *
-    rtb_ComplextoMagnitudeAngle2_o2) + measure_P.Bias1_Bias_d[2])) +
-    measure_P.Constant1_Value_g;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_l[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_l[(i)] *
                        rtb_ComplextoMagnitudeAngle2_o2) +
-                      measure_P.Bias1_Bias_d[3])) + measure_P.Constant1_Value_g;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_l;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_l;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_l;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_l;
-  if (measure_P.Constant6_Value_d) {
-    measure_B.Switch2_p[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_p[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_p[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_e;
-    measure_B.Switch2_p[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_e;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_db) {
-      measure_B.Switch2_p[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_a;
+                      measure_P.Bias1_Bias_d[(i)])) +
+      measure_P.Constant1_Value_g;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_l;
+    if (measure_P.Constant6_Value_d) {
+      measure_B.Switch2_p[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_e;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_db) {
+      measure_B.Switch2_p[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_a;
     } else {
-      measure_B.Switch2_p[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_p[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_db) {
-      measure_B.Switch2_p[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_a;
-    } else {
-      measure_B.Switch2_p[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_db) {
-      measure_B.Switch2_p[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_a;
-    } else {
-      measure_B.Switch2_p[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_db) {
-      measure_B.Switch2_p[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_a;
-    } else {
-      measure_B.Switch2_p[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_p;
+    int32_T *y0 = measure_B.SFunction2_b;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_b[0] = (int32_T)measure_B.Switch2_p[0];
-  measure_B.SFunction2_b[1] = (int32_T)measure_B.Switch2_p[1];
-  measure_B.SFunction2_b[2] = (int32_T)measure_B.Switch2_p[2];
-  measure_B.SFunction2_b[3] = (int32_T)measure_B.Switch2_p[3];
-  rtb_Sum3[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_b[0]) *
-    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
-  rtb_Sum3[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_b[1]) *
-    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
-  rtb_Sum3[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_b[2]) *
-    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
-  rtb_Sum3[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_b[3]) *
-    measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
   if (rtb_ComplextoMagnitudeAngle2_o1 < measure_P.Constant_Value_er) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_p;
+    rtb_Switch_gp = measure_P.Constant_Value_p;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2_o1;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2_o1;
   }
 
-  rtb_Product1_a0[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
-    .im);
-  rtb_Product1_a0[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
-    .im);
-  rtb_Product1_a0[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
-    .im);
-  rtb_Product1_a0[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
-    .im);
+  for (i = 0; i < 31; i++) {
+    rtb_Sum3[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_b[(i)]) *
+      measure_P.Constant2_Value_l)) - measure_P.Constant1_Value_g;
+    rtb_Product1_a0[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re,
+      rtb_FFT[i + 2].im);
+  }
+
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_la[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8099,83 +7999,46 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2__j = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2__i = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_f[0] *
-    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[0])) +
-    measure_P.Constant1_Value_d;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_f[1] *
-    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[1])) +
-    measure_P.Constant1_Value_d;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_f[2] *
-    rtb_ComplextoMagnitudeAngle2__i) + measure_P.Bias1_Bias_a0[2])) +
-    measure_P.Constant1_Value_d;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_f[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_f[(i)] *
                        rtb_ComplextoMagnitudeAngle2__i) +
-                      measure_P.Bias1_Bias_a0[3])) + measure_P.Constant1_Value_d;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_d;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_d;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_d;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_d;
-  if (measure_P.Constant6_Value_h) {
-    measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_d;
-    measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_d;
-    measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_d;
-    measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_d;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_px) {
-      measure_B.Switch2_g[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_ek;
+                      measure_P.Bias1_Bias_a0[(i)])) +
+      measure_P.Constant1_Value_d;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_d;
+    if (measure_P.Constant6_Value_h) {
+      measure_B.Switch2_g[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_d;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_px) {
+      measure_B.Switch2_g[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_ek;
     } else {
-      measure_B.Switch2_g[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_g[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_px) {
-      measure_B.Switch2_g[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_ek;
-    } else {
-      measure_B.Switch2_g[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_px) {
-      measure_B.Switch2_g[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_ek;
-    } else {
-      measure_B.Switch2_g[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_px) {
-      measure_B.Switch2_g[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_ek;
-    } else {
-      measure_B.Switch2_g[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_g;
+    int32_T *y0 = measure_B.SFunction2_j;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_j[0] = (int32_T)measure_B.Switch2_g[0];
-  measure_B.SFunction2_j[1] = (int32_T)measure_B.Switch2_g[1];
-  measure_B.SFunction2_j[2] = (int32_T)measure_B.Switch2_g[2];
-  measure_B.SFunction2_j[3] = (int32_T)measure_B.Switch2_g[3];
-  rtb_Sum3_n[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_j[0]) *
-    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
-  rtb_Sum3_n[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_j[1]) *
-    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
-  rtb_Sum3_n[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_j[2]) *
-    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
-  rtb_Sum3_n[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_j[3]) *
-    measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
   if (rtb_ComplextoMagnitudeAngle2__j < measure_P.Constant_Value_kb) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_e;
+    rtb_Switch_gp = measure_P.Constant_Value_e;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__j;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2__j;
   }
 
-  rtb_Product1_ag[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
-    .im);
-  rtb_Product1_ag[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
-    .im);
-  rtb_Product1_ag[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
-    .im);
-  rtb_Product1_ag[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
-    .im);
+  for (i = 0; i < 31; i++) {
+    rtb_Sum3_n[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_j[(i)]) *
+      measure_P.Constant2_Value_d)) - measure_P.Constant1_Value_d;
+    rtb_Product1_ag[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re,
+      rtb_FFT[i + 2].im);
+  }
+
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_mm[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8183,84 +8046,46 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2__e = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2__m = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_o[0] *
-    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[0])) +
-    measure_P.Constant1_Value_bk;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_o[1] *
-    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[1])) +
-    measure_P.Constant1_Value_bk;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_o[2] *
-    rtb_ComplextoMagnitudeAngle2__m) + measure_P.Bias1_Bias_o3[2])) +
-    measure_P.Constant1_Value_bk;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_o[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_o[(i)] *
                        rtb_ComplextoMagnitudeAngle2__m) +
-                      measure_P.Bias1_Bias_o3[3])) +
-    measure_P.Constant1_Value_bk;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_cs;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_cs;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_cs;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_cs;
-  if (measure_P.Constant6_Value_o) {
-    measure_B.Switch2_j[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_j[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_j[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_g;
-    measure_B.Switch2_j[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_g;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_abn) {
-      measure_B.Switch2_j[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_d;
+                      measure_P.Bias1_Bias_o3[(i)])) +
+      measure_P.Constant1_Value_bk;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_cs;
+    if (measure_P.Constant6_Value_o) {
+      measure_B.Switch2_j[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_g;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_abn) {
+      measure_B.Switch2_j[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_d;
     } else {
-      measure_B.Switch2_j[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_j[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_abn) {
-      measure_B.Switch2_j[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_d;
-    } else {
-      measure_B.Switch2_j[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_abn) {
-      measure_B.Switch2_j[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_d;
-    } else {
-      measure_B.Switch2_j[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_abn) {
-      measure_B.Switch2_j[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_d;
-    } else {
-      measure_B.Switch2_j[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_j;
+    int32_T *y0 = measure_B.SFunction2_g;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_g[0] = (int32_T)measure_B.Switch2_j[0];
-  measure_B.SFunction2_g[1] = (int32_T)measure_B.Switch2_j[1];
-  measure_B.SFunction2_g[2] = (int32_T)measure_B.Switch2_j[2];
-  measure_B.SFunction2_g[3] = (int32_T)measure_B.Switch2_j[3];
-  rtb_Sum3_a[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_g[0]) *
-    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
-  rtb_Sum3_a[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_g[1]) *
-    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
-  rtb_Sum3_a[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_g[2]) *
-    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
-  rtb_Sum3_a[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_g[3]) *
-    measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
   if (rtb_ComplextoMagnitudeAngle2__e < measure_P.Constant_Value_pc) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_g;
+    rtb_Switch_gp = measure_P.Constant_Value_g;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__e;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2__e;
   }
 
-  rtb_Product1_d2[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
-    .im);
-  rtb_Product1_d2[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
-    .im);
-  rtb_Product1_d2[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
-    .im);
-  rtb_Product1_d2[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
-    .im);
+  for (i = 0; i < 31; i++) {
+    rtb_Sum3_a[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_g[(i)]) *
+      measure_P.Constant2_Value_cs)) - measure_P.Constant1_Value_bk;
+    rtb_Product1_d2[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re,
+      rtb_FFT[i + 2].im);
+  }
+
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_hc[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8268,83 +8093,46 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2_mf = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2_e3 = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_e[0] *
-    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[0])) +
-    measure_P.Constant1_Value_el;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_e[1] *
-    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[1])) +
-    measure_P.Constant1_Value_el;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_e[2] *
-    rtb_ComplextoMagnitudeAngle2_e3) + measure_P.Bias1_Bias_p[2])) +
-    measure_P.Constant1_Value_el;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_e[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_e[(i)] *
                        rtb_ComplextoMagnitudeAngle2_e3) +
-                      measure_P.Bias1_Bias_p[3])) + measure_P.Constant1_Value_el;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_ly;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_ly;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_ly;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_ly;
-  if (measure_P.Constant6_Value_fu) {
-    measure_B.Switch2_e[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_j;
-    measure_B.Switch2_e[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_j;
-    measure_B.Switch2_e[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_j;
-    measure_B.Switch2_e[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_j;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_n4s) {
-      measure_B.Switch2_e[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_f;
+                      measure_P.Bias1_Bias_p[(i)])) +
+      measure_P.Constant1_Value_el;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_ly;
+    if (measure_P.Constant6_Value_fu) {
+      measure_B.Switch2_e[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_j;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_n4s) {
+      measure_B.Switch2_e[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_f;
     } else {
-      measure_B.Switch2_e[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_e[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_n4s) {
-      measure_B.Switch2_e[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_f;
-    } else {
-      measure_B.Switch2_e[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_n4s) {
-      measure_B.Switch2_e[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_f;
-    } else {
-      measure_B.Switch2_e[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_n4s) {
-      measure_B.Switch2_e[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_f;
-    } else {
-      measure_B.Switch2_e[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_e;
+    int32_T *y0 = measure_B.SFunction2_f;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_f[0] = (int32_T)measure_B.Switch2_e[0];
-  measure_B.SFunction2_f[1] = (int32_T)measure_B.Switch2_e[1];
-  measure_B.SFunction2_f[2] = (int32_T)measure_B.Switch2_e[2];
-  measure_B.SFunction2_f[3] = (int32_T)measure_B.Switch2_e[3];
-  rtb_Sum3_o[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_f[0]) *
-    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
-  rtb_Sum3_o[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_f[1]) *
-    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
-  rtb_Sum3_o[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_f[2]) *
-    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
-  rtb_Sum3_o[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_f[3]) *
-    measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
   if (rtb_ComplextoMagnitudeAngle2_mf < measure_P.Constant_Value_mz) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_ao;
+    rtb_Switch_gp = measure_P.Constant_Value_ao;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2_mf;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2_mf;
   }
 
-  rtb_Product1_at[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
-    .im);
-  rtb_Product1_at[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
-    .im);
-  rtb_Product1_at[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
-    .im);
-  rtb_Product1_at[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
-    .im);
+  for (i = 0; i < 31; i++) {
+    rtb_Sum3_o[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_f[(i)]) *
+      measure_P.Constant2_Value_ly)) - measure_P.Constant1_Value_el;
+    rtb_Product1_at[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re,
+      rtb_FFT[i + 2].im);
+  }
+
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_cy[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8352,84 +8140,46 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2__k = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2__g = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_k[0] *
-    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[0])) +
-    measure_P.Constant1_Value_jx;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_k[1] *
-    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[1])) +
-    measure_P.Constant1_Value_jx;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_k[2] *
-    rtb_ComplextoMagnitudeAngle2__g) + measure_P.Bias1_Bias_mn[2])) +
-    measure_P.Constant1_Value_jx;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_k[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_k[(i)] *
                        rtb_ComplextoMagnitudeAngle2__g) +
-                      measure_P.Bias1_Bias_mn[3])) +
-    measure_P.Constant1_Value_jx;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_mi;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_mi;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_mi;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_mi;
-  if (measure_P.Constant6_Value_fd) {
-    measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_k;
-    measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_k;
-    measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_k;
-    measure_B.Switch2_cw[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_k;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_fj) {
-      measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_al;
+                      measure_P.Bias1_Bias_mn[(i)])) +
+      measure_P.Constant1_Value_jx;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_mi;
+    if (measure_P.Constant6_Value_fd) {
+      measure_B.Switch2_cw[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_k;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_fj) {
+      measure_B.Switch2_cw[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_al;
     } else {
-      measure_B.Switch2_cw[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_cw[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_fj) {
-      measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_al;
-    } else {
-      measure_B.Switch2_cw[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_fj) {
-      measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_al;
-    } else {
-      measure_B.Switch2_cw[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_fj) {
-      measure_B.Switch2_cw[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_al;
-    } else {
-      measure_B.Switch2_cw[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_cw;
+    int32_T *y0 = measure_B.SFunction2_m;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_m[0] = (int32_T)measure_B.Switch2_cw[0];
-  measure_B.SFunction2_m[1] = (int32_T)measure_B.Switch2_cw[1];
-  measure_B.SFunction2_m[2] = (int32_T)measure_B.Switch2_cw[2];
-  measure_B.SFunction2_m[3] = (int32_T)measure_B.Switch2_cw[3];
-  rtb_Sum3_i[0] = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_m[0]) *
-    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
-  rtb_Sum3_i[1] = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_m[1]) *
-    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
-  rtb_Sum3_i[2] = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_m[2]) *
-    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
-  rtb_Sum3_i[3] = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_m[3]) *
-    measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
   if (rtb_ComplextoMagnitudeAngle2__k < measure_P.Constant_Value_c1) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_gb;
+    rtb_Switch_gp = measure_P.Constant_Value_gb;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__k;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2__k;
   }
 
-  rtb_Product1_ii[0] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[2].re, rtb_FFT[2]
-    .im);
-  rtb_Product1_ii[1] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[3].re, rtb_FFT[3]
-    .im);
-  rtb_Product1_ii[2] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[4].re, rtb_FFT[4]
-    .im);
-  rtb_Product1_ii[3] = (1.0 / rtb_Sum2_op_idx) * hypot(rtb_FFT[5].re, rtb_FFT[5]
-    .im);
+  for (i = 0; i < 31; i++) {
+    rtb_Sum3_i[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_m[(i)]) *
+      measure_P.Constant2_Value_mi)) - measure_P.Constant1_Value_jx;
+    rtb_Product1_ii[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re,
+      rtb_FFT[i + 2].im);
+  }
+
   MWDSPCG_FFT_Interleave_R2BR_D(&measure_B.RateTransition_fo[0], &rtb_FFT[0U], 1,
     64);
   MWDSPCG_R2DIT_TBLS_Z(&rtb_FFT[0U], 1, 64, 32, 0, measure_ConstP.pooled1, 2,
@@ -8437,157 +8187,88 @@ void measureModelClass::step1()
   MWDSPCG_FFT_DblLen_Z(&rtb_FFT[0U], 1, 64, measure_ConstP.pooled1, 1);
   rtb_ComplextoMagnitudeAngle2__c = hypot(rtb_FFT[1].re, rtb_FFT[1].im);
   rtb_ComplextoMagnitudeAngle2__a = rt_atan2d_snf(rtb_FFT[1].im, rtb_FFT[1].re);
-  rtb_Sum2_op_idx_2 = (rt_atan2d_snf(rtb_FFT[2].im, rtb_FFT[2].re) -
-                       ((measure_P.Gain3_Gain_p[0] *
-    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[0])) +
-    measure_P.Constant1_Value_n;
-  rtb_Sum2_op_idx_1 = (rt_atan2d_snf(rtb_FFT[3].im, rtb_FFT[3].re) -
-                       ((measure_P.Gain3_Gain_p[1] *
-    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[1])) +
-    measure_P.Constant1_Value_n;
-  rtb_Sum2_op_idx_0 = (rt_atan2d_snf(rtb_FFT[4].im, rtb_FFT[4].re) -
-                       ((measure_P.Gain3_Gain_p[2] *
-    rtb_ComplextoMagnitudeAngle2__a) + measure_P.Bias1_Bias_ob[2])) +
-    measure_P.Constant1_Value_n;
-  rtb_Sum2_op_idx = (rt_atan2d_snf(rtb_FFT[5].im, rtb_FFT[5].re) -
-                     ((measure_P.Gain3_Gain_p[3] *
+  for (i = 0; i < 31; i++) {
+    rtb_Switch_gp = (rt_atan2d_snf(rtb_FFT[i + 2].im, rtb_FFT[i + 2].re) -
+                     ((measure_P.Gain3_Gain_p[(i)] *
                        rtb_ComplextoMagnitudeAngle2__a) +
-                      measure_P.Bias1_Bias_ob[3])) + measure_P.Constant1_Value_n;
-  rtb_Divide_g_idx_2 = rtb_Sum2_op_idx_2 / measure_P.Constant2_Value_n;
-  rtb_Divide_g_idx_1 = rtb_Sum2_op_idx_1 / measure_P.Constant2_Value_n;
-  rtb_Divide_g_idx_0 = rtb_Sum2_op_idx_0 / measure_P.Constant2_Value_n;
-  rtb_Divide_g_idx = rtb_Sum2_op_idx / measure_P.Constant2_Value_n;
-  if (measure_P.Constant6_Value_l5) {
-    measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2 + measure_P.Bias2_Bias_ix;
-    measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1 + measure_P.Bias2_Bias_ix;
-    measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0 + measure_P.Bias2_Bias_ix;
-    measure_B.Switch2_g5[3] = rtb_Divide_g_idx + measure_P.Bias2_Bias_ix;
-  } else {
-    if (rtb_Divide_g_idx_2 < measure_P.Constant_Value_f2) {
-      measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2 + measure_P.Bias_Bias_g;
+                      measure_P.Bias1_Bias_ob[(i)])) +
+      measure_P.Constant1_Value_n;
+    rtb_Divide_g_0 = rtb_Switch_gp / measure_P.Constant2_Value_n;
+    if (measure_P.Constant6_Value_l5) {
+      measure_B.Switch2_g5[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_ix;
+    } else if (rtb_Divide_g_0 < measure_P.Constant_Value_f2) {
+      measure_B.Switch2_g5[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_g;
     } else {
-      measure_B.Switch2_g5[0] = rtb_Divide_g_idx_2;
+      measure_B.Switch2_g5[(i)] = rtb_Divide_g_0;
     }
 
-    if (rtb_Divide_g_idx_1 < measure_P.Constant_Value_f2) {
-      measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1 + measure_P.Bias_Bias_g;
-    } else {
-      measure_B.Switch2_g5[1] = rtb_Divide_g_idx_1;
-    }
+    rtb_Sum2_op[i] = rtb_Switch_gp;
+  }
 
-    if (rtb_Divide_g_idx_0 < measure_P.Constant_Value_f2) {
-      measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0 + measure_P.Bias_Bias_g;
-    } else {
-      measure_B.Switch2_g5[2] = rtb_Divide_g_idx_0;
-    }
-
-    if (rtb_Divide_g_idx < measure_P.Constant_Value_f2) {
-      measure_B.Switch2_g5[3] = rtb_Divide_g_idx + measure_P.Bias_Bias_g;
-    } else {
-      measure_B.Switch2_g5[3] = rtb_Divide_g_idx;
+  {
+    int_T i1;
+    const real_T *u0 = measure_B.Switch2_g5;
+    int32_T *y0 = measure_B.SFunction2_o;
+    for (i1=0; i1 < 31; i1++) {
+      y0[i1] = (int32_T)u0[i1];
     }
   }
 
-  measure_B.SFunction2_o[0] = (int32_T)measure_B.Switch2_g5[0];
-  measure_B.SFunction2_o[1] = (int32_T)measure_B.Switch2_g5[1];
-  measure_B.SFunction2_o[2] = (int32_T)measure_B.Switch2_g5[2];
-  measure_B.SFunction2_o[3] = (int32_T)measure_B.Switch2_g5[3];
-  rtb_Sum2_op_idx_2 = (rtb_Sum2_op_idx_2 - (((real_T)measure_B.SFunction2_o[0]) *
-    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
-  rtb_Sum2_op_idx_1 = (rtb_Sum2_op_idx_1 - (((real_T)measure_B.SFunction2_o[1]) *
-    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
-  rtb_Sum2_op_idx_0 = (rtb_Sum2_op_idx_0 - (((real_T)measure_B.SFunction2_o[2]) *
-    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
-  rtb_Divide_g_idx_2 = (rtb_Sum2_op_idx - (((real_T)measure_B.SFunction2_o[3]) *
-    measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
   if (rtb_ComplextoMagnitudeAngle2__c < measure_P.Constant_Value_bp) {
-    rtb_Sum2_op_idx = measure_P.Constant_Value_gy;
+    rtb_Switch_gp = measure_P.Constant_Value_gy;
   } else {
-    rtb_Sum2_op_idx = rtb_ComplextoMagnitudeAngle2__c;
+    rtb_Switch_gp = rtb_ComplextoMagnitudeAngle2__c;
+  }
+
+  for (i = 0; i < 31; i++) {
+    rtb_Divide_g[i] = (1.0 / rtb_Switch_gp) * hypot(rtb_FFT[i + 2].re, rtb_FFT[i
+      + 2].im);
+    rtb_Sum2_op[i] = (rtb_Sum2_op[i] - (((real_T)measure_B.SFunction2_o[(i)]) *
+      measure_P.Constant2_Value_n)) - measure_P.Constant1_Value_n;
   }
 
   measure_DWork.RateTransition_Buffer0 = rtb_ComplextoMagnitudeAngle2_mf;
   measure_DWork.RateTransition_Buffer0_l = rtb_ComplextoMagnitudeAngle2__k;
   measure_DWork.RateTransition_Buffer0_b = rtb_ComplextoMagnitudeAngle2__c;
-  measure_DWork.RateTransition_Buffer0_a[0] = rtb_Product1_at[0];
-  measure_DWork.RateTransition_Buffer0_a[1] = rtb_Product1_at[1];
-  measure_DWork.RateTransition_Buffer0_a[2] = rtb_Product1_at[2];
-  measure_DWork.RateTransition_Buffer0_a[3] = rtb_Product1_at[3];
-  measure_DWork.RateTransition_Buffer0_j[0] = rtb_Product1_ii[0];
-  measure_DWork.RateTransition_Buffer0_j[1] = rtb_Product1_ii[1];
-  measure_DWork.RateTransition_Buffer0_j[2] = rtb_Product1_ii[2];
-  measure_DWork.RateTransition_Buffer0_j[3] = rtb_Product1_ii[3];
-  measure_DWork.RateTransition_Buffer0_ak[0] = (1.0 / rtb_Sum2_op_idx) * hypot
-    (rtb_FFT[2].re, rtb_FFT[2].im);
-  measure_DWork.RateTransition_Buffer0_ak[1] = (1.0 / rtb_Sum2_op_idx) * hypot
-    (rtb_FFT[3].re, rtb_FFT[3].im);
-  measure_DWork.RateTransition_Buffer0_ak[2] = (1.0 / rtb_Sum2_op_idx) * hypot
-    (rtb_FFT[4].re, rtb_FFT[4].im);
-  measure_DWork.RateTransition_Buffer0_ak[3] = (1.0 / rtb_Sum2_op_idx) * hypot
-    (rtb_FFT[5].re, rtb_FFT[5].im);
-  measure_DWork.RateTransition_Buffer0_h[0] = rtb_Sum3_o[0];
-  measure_DWork.RateTransition_Buffer0_h[1] = rtb_Sum3_o[1];
-  measure_DWork.RateTransition_Buffer0_h[2] = rtb_Sum3_o[2];
-  measure_DWork.RateTransition_Buffer0_h[3] = rtb_Sum3_o[3];
-  measure_DWork.RateTransition_Buffer0_g[0] = rtb_Sum3_i[0];
-  measure_DWork.RateTransition_Buffer0_g[1] = rtb_Sum3_i[1];
-  measure_DWork.RateTransition_Buffer0_g[2] = rtb_Sum3_i[2];
-  measure_DWork.RateTransition_Buffer0_g[3] = rtb_Sum3_i[3];
-  measure_DWork.RateTransition_Buffer0_hn[0] = rtb_Sum2_op_idx_2;
-  measure_DWork.RateTransition_Buffer0_hn[1] = rtb_Sum2_op_idx_1;
-  measure_DWork.RateTransition_Buffer0_hn[2] = rtb_Sum2_op_idx_0;
-  measure_DWork.RateTransition_Buffer0_hn[3] = rtb_Divide_g_idx_2;
-  measure_DWork.RateTransition_Buffer0_e[0] = measure_P.Constant4_Value_m[0];
-  measure_DWork.RateTransition_Buffer0_e[1] = measure_P.Constant4_Value_m[1];
-  measure_DWork.RateTransition_Buffer0_e[2] = measure_P.Constant4_Value_m[2];
-  measure_DWork.RateTransition_Buffer0_e[3] = measure_P.Constant4_Value_m[3];
-  measure_DWork.RateTransition_Buffer0_lm[0] = measure_P.Constant4_Value_p[0];
-  measure_DWork.RateTransition_Buffer0_lm[1] = measure_P.Constant4_Value_p[1];
-  measure_DWork.RateTransition_Buffer0_lm[2] = measure_P.Constant4_Value_p[2];
-  measure_DWork.RateTransition_Buffer0_lm[3] = measure_P.Constant4_Value_p[3];
-  measure_DWork.RateTransition_Buffer0_az[0] = measure_P.Constant4_Value_ph[0];
-  measure_DWork.RateTransition_Buffer0_az[1] = measure_P.Constant4_Value_ph[1];
-  measure_DWork.RateTransition_Buffer0_az[2] = measure_P.Constant4_Value_ph[2];
-  measure_DWork.RateTransition_Buffer0_az[3] = measure_P.Constant4_Value_ph[3];
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_a, (void *)
+         (&rtb_Product1_at[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_j, (void *)
+         (&rtb_Product1_ii[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_ak, (void *)
+         (&rtb_Divide_g[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_h, (void *)(&rtb_Sum3_o[0]),
+         31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_g, (void *)(&rtb_Sum3_i[0]),
+         31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_hn, (void *)(&rtb_Sum2_op
+          [0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_e, (void *)
+         measure_P.Constant4_Value_m, 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_lm, (void *)
+         measure_P.Constant4_Value_p, 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_az, (void *)
+         measure_P.Constant4_Value_ph, 31U * (sizeof(real_T)));
   measure_DWork.RateTransition_Buffer0_m = rtb_ComplextoMagnitudeAngle2_o1;
   measure_DWork.RateTransition_Buffer0_bh = rtb_ComplextoMagnitudeAngle2__j;
   measure_DWork.RateTransition_Buffer0_o = rtb_ComplextoMagnitudeAngle2__e;
-  measure_DWork.RateTransition_Buffer0_aq[0] = rtb_Product1_a0[0];
-  measure_DWork.RateTransition_Buffer0_aq[1] = rtb_Product1_a0[1];
-  measure_DWork.RateTransition_Buffer0_aq[2] = rtb_Product1_a0[2];
-  measure_DWork.RateTransition_Buffer0_aq[3] = rtb_Product1_a0[3];
-  measure_DWork.RateTransition_Buffer0_oh[0] = rtb_Product1_ag[0];
-  measure_DWork.RateTransition_Buffer0_oh[1] = rtb_Product1_ag[1];
-  measure_DWork.RateTransition_Buffer0_oh[2] = rtb_Product1_ag[2];
-  measure_DWork.RateTransition_Buffer0_oh[3] = rtb_Product1_ag[3];
-  measure_DWork.RateTransition_Buffer0_lg[0] = rtb_Product1_d2[0];
-  measure_DWork.RateTransition_Buffer0_lg[1] = rtb_Product1_d2[1];
-  measure_DWork.RateTransition_Buffer0_lg[2] = rtb_Product1_d2[2];
-  measure_DWork.RateTransition_Buffer0_lg[3] = rtb_Product1_d2[3];
-  measure_DWork.RateTransition_Buffer0_n[0] = rtb_Sum3[0];
-  measure_DWork.RateTransition_Buffer0_n[1] = rtb_Sum3[1];
-  measure_DWork.RateTransition_Buffer0_n[2] = rtb_Sum3[2];
-  measure_DWork.RateTransition_Buffer0_n[3] = rtb_Sum3[3];
-  measure_DWork.RateTransition_Buffer0_c[0] = rtb_Sum3_n[0];
-  measure_DWork.RateTransition_Buffer0_c[1] = rtb_Sum3_n[1];
-  measure_DWork.RateTransition_Buffer0_c[2] = rtb_Sum3_n[2];
-  measure_DWork.RateTransition_Buffer0_c[3] = rtb_Sum3_n[3];
-  measure_DWork.RateTransition_Buffer0_cq[0] = rtb_Sum3_a[0];
-  measure_DWork.RateTransition_Buffer0_cq[1] = rtb_Sum3_a[1];
-  measure_DWork.RateTransition_Buffer0_cq[2] = rtb_Sum3_a[2];
-  measure_DWork.RateTransition_Buffer0_cq[3] = rtb_Sum3_a[3];
-  measure_DWork.RateTransition_Buffer0_mb[0] = measure_P.Constant4_Value_f[0];
-  measure_DWork.RateTransition_Buffer0_mb[1] = measure_P.Constant4_Value_f[1];
-  measure_DWork.RateTransition_Buffer0_mb[2] = measure_P.Constant4_Value_f[2];
-  measure_DWork.RateTransition_Buffer0_mb[3] = measure_P.Constant4_Value_f[3];
-  measure_DWork.RateTransition_Buffer0_of[0] = measure_P.Constant4_Value_n[0];
-  measure_DWork.RateTransition_Buffer0_of[1] = measure_P.Constant4_Value_n[1];
-  measure_DWork.RateTransition_Buffer0_of[2] = measure_P.Constant4_Value_n[2];
-  measure_DWork.RateTransition_Buffer0_of[3] = measure_P.Constant4_Value_n[3];
-  measure_DWork.RateTransition_Buffer0_jc[0] = measure_P.Constant4_Value_j[0];
-  measure_DWork.RateTransition_Buffer0_jc[1] = measure_P.Constant4_Value_j[1];
-  measure_DWork.RateTransition_Buffer0_jc[2] = measure_P.Constant4_Value_j[2];
-  measure_DWork.RateTransition_Buffer0_jc[3] = measure_P.Constant4_Value_j[3];
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_aq, (void *)
+         (&rtb_Product1_a0[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_oh, (void *)
+         (&rtb_Product1_ag[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_lg, (void *)
+         (&rtb_Product1_d2[0]), 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_n, (void *)(&rtb_Sum3[0]),
+         31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_c, (void *)(&rtb_Sum3_n[0]),
+         31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_cq, (void *)(&rtb_Sum3_a[0]),
+         31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_mb, (void *)
+         measure_P.Constant4_Value_f, 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_of, (void *)
+         measure_P.Constant4_Value_n, 31U * (sizeof(real_T)));
+  memcpy((void *)measure_DWork.RateTransition_Buffer0_jc, (void *)
+         measure_P.Constant4_Value_j, 31U * (sizeof(real_T)));
   measure_DWork.RateTransition_Buffer0_k = rtb_ComplextoMagnitudeAngle2_o2;
   measure_DWork.RateTransition_Buffer0_ki = rtb_ComplextoMagnitudeAngle2__i;
   measure_DWork.RateTransition_Buffer0_jr = rtb_ComplextoMagnitudeAngle2__m;
@@ -8611,1927 +8292,1911 @@ void measureModelClass::initialize()
                 sizeof(ExternalOutputs_measure));
 
   {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.SF_FixedDiscreteDelaySfunctio_j[0];
-    int_T i;
-    for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfunctio_n; i++)
-      *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunction_;
-    measure_DWork.SF_FixedDiscreteDelaySfunction_ =
-      measure_P.SF_FixedDiscreteDelaySfunction_;
-    measure_DWork.SF_FixedDiscreteDelaySfuncti_n5 = 0;
+    int32_T i;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.SF_FixedDiscreteDelaySfunctio_j[0];
+      int_T i;
+      for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfunctio_n; i++)
+        *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunction_;
+      measure_DWork.SF_FixedDiscreteDelaySfunction_ =
+        measure_P.SF_FixedDiscreteDelaySfunction_;
+      measure_DWork.SF_FixedDiscreteDelaySfuncti_n5 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.SF_FixedDiscreteDelaySfuncti_bt[0];
+      int_T i;
+      for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfuncti_jc; i++)
+        *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunctio_j;
+      measure_DWork.SF_FixedDiscreteDelaySfunctio_b =
+        measure_P.SF_FixedDiscreteDelaySfunctio_j;
+      measure_DWork.SF_FixedDiscreteDelaySfunctio_c = 0;
+    }
+
+    measure_DWork.clockTickCounter = 0;
+    measure_DWork.clockTickCounter_g = 0;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneTap[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneTap+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOneT_h = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneT_b[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_j+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_h3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoTap[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoTap+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwoT_j = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_b4[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_jc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_h3s = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_b4n[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_jcf+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithO_h3se = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_m[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_j+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwo_jn = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithO_b4np[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_jcfa+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_h3see = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywith_b4npp[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_jcfaw+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywit_h3seeh = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_mf[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_jc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTw_jng = 0;
+    }
+
+    measure_DWork.clockTickCounter_ge = 0;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywit_b4npph[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywit_jcfawy+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywi_h3seeh3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywi_b4npphe[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywi_jcfawyw+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelayw_h3seeh3o = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_mf5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_jcf+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithT_jngr = 0;
+    }
+
+    measure_DWork.clockTickCounter_i = 0;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneT_j[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_d+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOneT_o = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_je[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ds+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_ob = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_p[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_d+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwoT_a = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_jel[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_dsc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_obu = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithO_jelr[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_dsc5+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithO_obui = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_p3[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_ds+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwo_as = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywith_jelr5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_d1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_obui2 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywit_jelr5a[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_d1m+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywit_obui2s = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_p3o[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_d1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTw_asr = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywi_jelr5az[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_d1m1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywi_obui2sv = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelayw_jelr5azs[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_d1m1h+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelayw_obui2svt = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_p3ok[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_d1m+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithT_asrw = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelay_jelr5azsa[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_m+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelay_obui2svtg = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDela_jelr5azsa0[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_m0+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDela_obui2svtgp = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywith_p3ok0[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_m+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_asrwd = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDel_jelr5azsa0t[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_m04+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDel_obui2svtgpu = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDe_jelr5azsa0te[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_m041+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDe_obui2svtgpup = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywit_p3ok0i[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_m0+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywit_asrwdn = 0;
+    }
+
+    measure_DWork.clockTickCounter_io = 0;
+    measure_DWork.clockTickCounter_iom = 0;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteD_jelr5azsa0tej[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_dsc5t+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteD_obui2svtgpupg = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscrete_jelr5azsa0tejd[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywit_dsc5tt+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscrete_obui2svtgpupg2 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywi_p3ok0il[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_dsc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywi_asrwdnf = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscret_jelr5azsa0tejde[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywi_dsc5ttd+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_obui2svtgpupg2k = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_p[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelayw_dsc5ttdh+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_fy = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelayw_p3ok0ilk[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_dsc5+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelayw_asrwdnf2 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_mz+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ja = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_e[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_mzl+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_fd = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelay_p3ok0ilkv[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mz+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelay_asrwdnf25 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.SF_FixedDiscreteDelaySfuncti_j0[0];
+      int_T i;
+      for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfuncti_fc; i++)
+        *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunctio_f;
+      measure_DWork.SF_FixedDiscreteDelaySfunctio_n =
+        measure_P.SF_FixedDiscreteDelaySfunctio_f;
+      measure_DWork.SF_FixedDiscreteDelaySfunct_n5w = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_c[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywit_d1m1hi+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ng = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_k[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywi_d1m1hiq+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_gm = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDela_p3ok0ilkvg[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_d1m1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDela_asrwdnf25g = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelayw_d1m1hiqr+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_lb = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_p0[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelay_d1m1hiqru+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_jso = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDel_p3ok0ilkvgc[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDela_d1m1hiqruq+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDel_asrwdnf25g3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_a[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_o+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_fl = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_m[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_on+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ney = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDe_p3ok0ilkvgcl[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_o+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDe_asrwdnf25g35 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ci[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_m0413+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_hc = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_f[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywit_m0413r+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_gn = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteD_p3ok0ilkvgclo[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_m04+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteD_asrwdnf25g35f = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_g[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywi_m0413rf+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ne3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l2[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelayw_m0413rfk+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_it = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscrete_p3ok0ilkvgclom[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_m041+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscrete_asrwdnf25g35fl = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ii[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_a+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_jh = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_id[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ao+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_bv = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_p3ok0ilkvgclom3[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_a+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_asrwdnf25g35flg = 0;
+    }
+
+    measure_DWork.clockTickCounter_h = 0;
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_px[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_mq+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_iq = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_b[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_mqc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ec = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_a3[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mq+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_fz = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_h[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelay_dsc5ttdhq+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_kd = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_bo[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDela_dsc5ttdhqk+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ky = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_o[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDel_dsc5ttdhqkx+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_cc = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_im[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDe_dsc5ttdhqkxi+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_fn = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hs[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteD_dsc5ttdhqkxiz+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_cn = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_pe[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscrete_dsc5ttdhqkxizv+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_k3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_n[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDel_d1m1hiqruqx+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_h1 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_d[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDe_d1m1hiqruqxi+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_iw = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_j[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteD_d1m1hiqruqxix+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_am = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_em[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscrete_d1m1hiqruqxix0+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_jq = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_iz[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_d1m1hiqruqxix0v+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_aa = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_js[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_o+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_kz = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ih[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelay_m0413rfkr+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_db = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ej[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDela_m0413rfkrd+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_py = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_li[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDel_m0413rfkrd2+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_et = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_gs[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDe_m0413rfkrd2o+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_lbx = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ne[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteD_m0413rfkrd2oa+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_b1 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_pg[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscrete_m0413rfkrd2oak+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_bu = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneT_f[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_e+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOneT_l = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_fx[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_e1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_ln = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_c[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_e+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwo_mt = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_fxf[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_e1r+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_lnk = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithO_fxfz[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_e1ro+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithO_lnk1 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_cb[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_e1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTw_mt3 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywith_fxfzv[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_e1ror+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_lnk1v = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywit_fxfzvg[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywit_e1rorg+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywit_lnk1vh = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_cb3[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_e1r+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithT_mt3m = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywi_fxfzvgo[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywi_e1rorg3+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywi_lnk1vhz = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelayw_fxfzvgoh[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelayw_e1rorg3e+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelayw_lnk1vhza = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_cb3y[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_e1ro+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_mt3my = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelay_fxfzvgohd[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelay_e1rorg3e1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelay_lnk1vhzad = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDela_fxfzvgohdy[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDela_e1rorg3e1h+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDela_lnk1vhzad0 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywith_cb3yn[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDel_e1rorg3e1hu+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywit_mt3myh = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDel_fxfzvgohdyf[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDe_e1rorg3e1hup+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDel_lnk1vhzad0h = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDe_fxfzvgohdyfs[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteD_e1rorg3e1hupm+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDe_lnk1vhzad0hw = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywit_cb3ynu[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscrete_e1rorg3e1hupmn+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywi_mt3myh1 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteD_fxfzvgohdyfso[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_e1rorg3e1hupmn0+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteD_lnk1vhzad0hw1 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscrete_fxfzvgohdyfsol[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_c+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscrete_lnk1vhzad0hw1b = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywi_cb3ynuk[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_h+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelayw_mt3myh1u = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscret_fxfzvgohdyfsolg[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_hm+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_lnk1vhzad0hw1bl = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ab[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_om+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ed = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelayw_cb3ynukf[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_omi+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelay_mt3myh1uz = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_je[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_k+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_de = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_no[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_b+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_cw = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelay_cb3ynukfc[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_kz+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDela_mt3myh1uz5 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ni[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_cj+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ln = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_b3[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_d+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ch = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDela_cb3ynukfcn[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_bx+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDel_mt3myh1uz53 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i0[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_l+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_eh = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_d5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_ly+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_hw = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDel_cb3ynukfcns[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_cjg+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDe_mt3myh1uz53e = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_nk[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_f+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_k3l = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_le[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_hs+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_kx = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDe_cb3ynukfcns4[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_di+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteD_mt3myh1uz53er = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_pl[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_m+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_pgc = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_e5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_c1+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_aa5 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteD_cb3ynukfcns4k[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_li+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscrete_mt3myh1uz53erg = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_dx[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_a+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_hy = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_kt[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_p+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_pt = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscrete_cb3ynukfcns4km[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_lyi+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_mt3myh1uz53ergf = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_hu+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_pf = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_bz[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_bg+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_bm = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_cb3ynukfcns4kmg[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_fu+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_dxq = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ac[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_ob+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_mb = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hz[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_g+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_b5 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_a1[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_hsu+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_k5 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i1[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_n+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_nj = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_on[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_e+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_cg = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_gx[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_ma+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_pfv = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_kw[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_ks+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_abz = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_gc[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_pd+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_ar = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_ig[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscret_c1z+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_boa = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneT_e[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ae+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOneT_k = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_ec[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_c+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_kj = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_pp[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_l+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwo_ah = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_fi[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_i+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_op = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_fie[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_l+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_opo = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_k[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_k+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwo_ju = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_ep[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_l4+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_obd = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_epo[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_n+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithO_obdq = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_mfe[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mv+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwoT_f = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_bb[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_p+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_of = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_bbn[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_di+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_of2 = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_o[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_jx+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwoT_g = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_bm[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_c3+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_jp = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOn_bmy[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_h+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_jpu = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_mw[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_c+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTwoT_h = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOneT_g[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_nc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOne_fn = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelaywithOne_g5[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_o0+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithOn_fny = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_of[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_d5+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywithTw_as5 = 0;
+    }
+
+    measure_B.RateTransition = measure_P.RateTransition_X0;
+    measure_B.RateTransition_o = measure_P.RateTransition_X0_p;
+    measure_B.RateTransition_g = measure_P.RateTransition_X0_k;
+    measure_B.RateTransition_l = measure_P.RateTransition_X0_fm;
+    measure_B.RateTransition_gq = measure_P.RateTransition_X0_n;
+    measure_B.RateTransition_a0 = measure_P.RateTransition_X0_pq;
+    for (i = 0; i < 31; i++) {
+      measure_B.RateTransition_gf[(i)] = measure_P.RateTransition_X0_e;
+      measure_B.RateTransition_gw[(i)] = measure_P.RateTransition_X0_l;
+      measure_B.RateTransition_n[(i)] = measure_P.RateTransition_X0_j;
+      measure_B.RateTransition_h[(i)] = measure_P.RateTransition_X0_c;
+      measure_B.RateTransition_k[(i)] = measure_P.RateTransition_X0_f;
+      measure_B.RateTransition_b[(i)] = measure_P.RateTransition_X0_pv;
+      measure_B.RateTransition_a[(i)] = measure_P.RateTransition_X0_jr;
+      measure_B.RateTransition_gy[(i)] = measure_P.RateTransition_X0_lt;
+      measure_B.RateTransition_m[(i)] = measure_P.RateTransition_X0_b;
+      measure_B.RateTransition_j[(i)] = measure_P.RateTransition_X0_bd;
+      measure_B.RateTransition_c[(i)] = measure_P.RateTransition_X0_m;
+      measure_B.RateTransition_ax[(i)] = measure_P.RateTransition_X0_jt;
+      measure_B.RateTransition_jz[(i)] = measure_P.RateTransition_X0_d;
+      measure_B.RateTransition_h2[(i)] = measure_P.RateTransition_X0_fr;
+      measure_B.RateTransition_cc[(i)] = measure_P.RateTransition_X0_bf;
+      measure_B.RateTransition_mz[(i)] = measure_P.RateTransition_X0_ny;
+      measure_B.RateTransition_jt[(i)] = measure_P.RateTransition_X0_jq;
+      measure_B.RateTransition_f[(i)] = measure_P.RateTransition_X0_g;
+    }
+
+    {
+      measure_DWork.SFunction_RWORK[0] = 0.0;
+      measure_DWork.SFunction_RWORK[1] = 0.0;
+      measure_DWork.SFunction_RWORK[2] = 0.0;
+      measure_DWork.SFunction_RWORK[3] = 0.0;
+      measure_DWork.SFunction_IWORK = -1;
+    }
+
+    measure_B.RateTransition_cq = measure_P.RateTransition_X0_le;
+
+    {
+      measure_DWork.SFunction_RWORK_i[0] = 0.0;
+      measure_DWork.SFunction_RWORK_i[1] = 0.0;
+      measure_DWork.SFunction_RWORK_i[2] = 0.0;
+      measure_DWork.SFunction_RWORK_i[3] = 0.0;
+      measure_DWork.SFunction_IWORK_m = -1;
+    }
+
+    measure_B.RateTransition_lr = measure_P.RateTransition_X0_e5;
+
+    {
+      measure_DWork.SFunction_RWORK_c[0] = 0.0;
+      measure_DWork.SFunction_RWORK_c[1] = 0.0;
+      measure_DWork.SFunction_RWORK_c[2] = 0.0;
+      measure_DWork.SFunction_RWORK_c[3] = 0.0;
+      measure_DWork.SFunction_IWORK_l = -1;
+    }
+
+    measure_B.RateTransition_aj = measure_P.RateTransition_X0_lea;
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelayw_b4npphe4[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelayw_jcfawyw2+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelay_h3seeh3od = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)
+        &measure_DWork.VariableDiscreteDelay_b4npphe4j[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelay_jcfawyw2o+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDela_h3seeh3odr = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_mf50[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_jcfa+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscreteDelaywith_jngrs = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_jp[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_mqco+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_jb = 0;
+    }
+
+    {
+      real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hh[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywith_mqco2+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_hm = 0;
+    }
+
+    {
+      real_T *VDD_buffer = &measure_DWork.VariableDiscret_mj[0];
+      int_T i;
+      for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_mqc+1); i++)
+        *(VDD_buffer++) = 0.0;
+      measure_DWork.VariableDiscret_gnb = 0;
+    }
+
+    {
+      measure_DWork.SFunction_RWORK_o[0] = 0.0;
+      measure_DWork.SFunction_RWORK_o[1] = 0.0;
+      measure_DWork.SFunction_RWORK_o[2] = 0.0;
+      measure_DWork.SFunction_RWORK_o[3] = 0.0;
+      measure_DWork.SFunction_IWORK_g = -1;
+    }
+
+    measure_B.RateTransition_d = measure_P.RateTransition_X0_ns;
+
+    {
+      measure_DWork.SFunction_RWORK_j[0] = 0.0;
+      measure_DWork.SFunction_RWORK_j[1] = 0.0;
+      measure_DWork.SFunction_RWORK_j[2] = 0.0;
+      measure_DWork.SFunction_RWORK_j[3] = 0.0;
+      measure_DWork.SFunction_IWORK_p = -1;
+    }
+
+    measure_B.RateTransition_l2 = measure_P.RateTransition_X0_o;
+
+    {
+      measure_DWork.SFunction_RWORK_g[0] = 0.0;
+      measure_DWork.SFunction_RWORK_g[1] = 0.0;
+      measure_DWork.SFunction_RWORK_g[2] = 0.0;
+      measure_DWork.SFunction_RWORK_g[3] = 0.0;
+      measure_DWork.SFunction_IWORK_k = -1;
+    }
+
+    measure_B.RateTransition_p = measure_P.RateTransition_X0_k5;
+  }
+
+  {
+    int32_T i;
+    measure_DWork.UnitDelay4_DSTATE_ir = measure_P.UnitDelay4_X0_he;
+    measure_DWork.delay_DSTATE = measure_P.delay_X0;
+    measure_DWork.UnitDelay_DSTATE = measure_P.UnitDelay_X0;
+    measure_DWork.UnitDelay4_DSTATE_czl44j1ipa1 =
+      measure_P.UnitDelay4_X0_jcfawyw2o0o;
+    measure_DWork.delay_DSTATE_i = measure_P.delay_X0_j;
+    measure_DWork.UnitDelay_DSTATE_l = measure_P.UnitDelay_X0_j;
+    measure_DWork.UnitDelay_DSTATE_lm = measure_P.UnitDelay_X0_jc;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j45 =
+      measure_P.UnitDelay2_X0_jcfawyw2o0osk;
+    measure_DWork.delay1_DSTATE = measure_P.delay1_X0;
+    measure_DWork.delay1_DSTATE_c = measure_P.delay1_X0_j;
+    measure_DWork.UnitDelay3_DSTATE = measure_P.UnitDelay3_X0;
+    measure_DWork.UnitDelay1_DSTATE = measure_P.UnitDelay1_X0;
+    measure_DWork.UnitDelay2_DSTATE = measure_P.UnitDelay2_X0;
+    measure_DWork.UnitDelay1_DSTATE_o = measure_P.UnitDelay1_X0_a;
+    measure_DWork.UnitDelay2_DSTATE_k = measure_P.UnitDelay2_X0_c;
+    measure_DWork.UnitDelay1_DSTATE_g = measure_P.UnitDelay1_X0_m;
+    measure_DWork.UnitDelay2_DSTATE_e = measure_P.UnitDelay2_X0_e;
+    measure_DWork.UnitDelay4_DSTATE = measure_P.UnitDelay4_X0;
+    measure_DWork.UnitDelay2_DSTATE_h = measure_P.UnitDelay2_X0_j;
+    measure_DWork.delay_DSTATE_i2 = measure_P.delay_X0_jc;
+    measure_DWork.UnitDelay4_DSTATE_c = measure_P.UnitDelay4_X0_j;
+    measure_DWork.UnitDelay2_DSTATE_h5 = measure_P.UnitDelay2_X0_jc;
+    measure_DWork.UnitDelay4_DSTATE_cz = measure_P.UnitDelay4_X0_jc;
+    measure_DWork.UnitDelay2_DSTATE_h5b = measure_P.UnitDelay2_X0_jcf;
+    measure_DWork.delay_DSTATE_i2w = measure_P.delay_X0_jcf;
+    measure_DWork.UnitDelay4_DSTATE_czl = measure_P.UnitDelay4_X0_jcf;
+    measure_DWork.UnitDelay2_DSTATE_h5br = measure_P.UnitDelay2_X0_jcfa;
+    measure_DWork.UnitDelay4_DSTATE_czl4 = measure_P.UnitDelay4_X0_jcfa;
+    measure_DWork.UnitDelay2_DSTATE_h5brd = measure_P.UnitDelay2_X0_jcfaw;
+    measure_DWork.UnitDelay4_DSTATE_czl44 = measure_P.UnitDelay4_X0_jcfaw;
+    measure_DWork.UnitDelay2_DSTATE_h5brdq = measure_P.UnitDelay2_X0_jcfawy;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jx = measure_P.UnitDelay1_X0_jcfawyw;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jxq = measure_P.UnitDelay1_X0_jcfawyw2;
+    measure_DWork.delay1_DSTATE_ce = measure_P.delay1_X0_jc;
+    measure_DWork.UnitDelay4_DSTATE_czl44j = measure_P.UnitDelay4_X0_jcfawy;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqc = measure_P.UnitDelay2_X0_jcfawyw;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqci = measure_P.UnitDelay2_X0_jcfawyw2;
+    measure_DWork.delay_DSTATE_i2wj = measure_P.delay_X0_jcfa;
+    measure_DWork.UnitDelay4_DSTATE_czl44j1 = measure_P.UnitDelay4_X0_jcfawyw;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqciz =
+      measure_P.UnitDelay2_X0_jcfawyw2o;
+    measure_DWork.UnitDelay_DSTATE_lmdw = measure_P.UnitDelay_X0_jcfa;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jxqh =
+      measure_P.UnitDelay1_X0_jcfawyw2o;
+    measure_DWork.UnitDelay1_DSTATE_k = measure_P.UnitDelay1_X0_h;
+    measure_DWork.UnitDelay2_DSTATE_kg = measure_P.UnitDelay2_X0_m;
+    measure_DWork.UnitDelay4_DSTATE_h = measure_P.UnitDelay4_X0_ll;
+    measure_DWork.UnitDelay1_DSTATE_aqjz = measure_P.UnitDelay1_X0_o;
+    measure_DWork.delay1_DSTATE_d = measure_P.delay1_X0_e;
+    measure_DWork.UnitDelay_DSTATE_p = measure_P.UnitDelay_X0_e;
+    measure_DWork.UnitDelay4_DSTATE_j = measure_P.UnitDelay4_X0_d;
+    measure_DWork.UnitDelay2_DSTATE_g = measure_P.UnitDelay2_X0_d;
+    measure_DWork.delay_DSTATE_iz = measure_P.delay_X0_e;
+    measure_DWork.UnitDelay4_DSTATE_jb = measure_P.UnitDelay4_X0_ds;
+    measure_DWork.UnitDelay2_DSTATE_gb = measure_P.UnitDelay2_X0_ds;
+    measure_DWork.UnitDelay4_DSTATE_jbk = measure_P.UnitDelay4_X0_dsc;
+    measure_DWork.UnitDelay2_DSTATE_gbj = measure_P.UnitDelay2_X0_dsc;
+    measure_DWork.UnitDelay4_DSTATE_jbkw = measure_P.UnitDelay4_X0_dsc5;
+    measure_DWork.UnitDelay2_DSTATE_gbjg = measure_P.UnitDelay2_X0_dsc5;
+    measure_DWork.UnitDelay1_DSTATE_aqjzx = measure_P.UnitDelay1_X0_k;
+    measure_DWork.UnitDelay4_DSTATE_jbkwm = measure_P.UnitDelay4_X0_d1;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk = measure_P.UnitDelay2_X0_d1;
+    measure_DWork.UnitDelay4_DSTATE_jbkwms = measure_P.UnitDelay4_X0_d1m;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5 = measure_P.UnitDelay2_X0_d1m;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq = measure_P.UnitDelay4_X0_d1m1;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5q = measure_P.UnitDelay2_X0_d1m1;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2 = measure_P.UnitDelay4_X0_d1m1h;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qb = measure_P.UnitDelay2_X0_d1m1h;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxp = measure_P.UnitDelay1_X0_ok;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2k = measure_P.UnitDelay4_X0_m;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx = measure_P.UnitDelay2_X0_m0;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv = measure_P.UnitDelay4_X0_m0;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx3 = measure_P.UnitDelay2_X0_m04;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2 = measure_P.UnitDelay4_X0_m04;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35 = measure_P.UnitDelay2_X0_m041;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2s = measure_P.UnitDelay4_X0_m041;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35b = measure_P.UnitDelay2_X0_m0413;
+    measure_DWork.delay1_DSTATE_dt = measure_P.delay1_X0_ep;
+    measure_DWork.UnitDelay3_DSTATE_i = measure_P.UnitDelay3_X0_a;
+    measure_DWork.delay1_DSTATE_dtd = measure_P.delay1_X0_ep3;
+    measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2s4 =
+      measure_P.UnitDelay4_X0_dsc5t;
+    measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35bv =
+      measure_P.UnitDelay2_X0_dsc5t;
+    measure_DWork.delay_DSTATE_izx = measure_P.delay_X0_ep;
+    measure_DWork.UnitDelay4_DSTAT_jbkwmsq2kv2s4v =
+      measure_P.UnitDelay4_X0_dsc5tt;
+    measure_DWork.UnitDelay2_DSTAT_gbjgk5qbx35bvz =
+      measure_P.UnitDelay2_X0_dsc5tt;
+    measure_DWork.UnitDelay4_DSTA_jbkwmsq2kv2s4vv =
+      measure_P.UnitDelay4_X0_dsc5ttd;
+    measure_DWork.UnitDelay2_DSTA_gbjgk5qbx35bvzo =
+      measure_P.UnitDelay2_X0_dsc5ttd;
+    measure_DWork.UnitDelay4_DSTA_g = measure_P.UnitDelay4_X0_dsc5ttdh;
+    measure_DWork.UnitDelay2_DSTA_i = measure_P.UnitDelay2_X0_dsc5ttdh;
+    measure_DWork.UnitDelay4_DSTA_n = measure_P.UnitDelay4_X0_mz;
+    measure_DWork.UnitDelay2_DSTA_a = measure_P.UnitDelay2_X0_mz;
+    measure_DWork.delay_DSTATE_izxx = measure_P.delay_X0_ep3;
+    measure_DWork.UnitDelay4_DSTA_d = measure_P.UnitDelay4_X0_mzl;
+    measure_DWork.UnitDelay2_DSTA_ai = measure_P.UnitDelay2_X0_mzl;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpn = measure_P.UnitDelay1_X0_od;
+    measure_DWork.UnitDelay_DSTATE_mj2f = measure_P.UnitDelay_X0_k;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnn = measure_P.UnitDelay1_X0_ki;
+    measure_DWork.UnitDelay_DSTATE_m = measure_P.UnitDelay_X0_p;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnno = measure_P.UnitDelay1_X0_kix;
+    measure_DWork.UnitDelay1_DSTATE_a = measure_P.UnitDelay1_X0_d;
+    measure_DWork.UnitDelay_DSTATE_i = measure_P.UnitDelay_X0_f;
+    measure_DWork.UnitDelay1_DSTATE_aq = measure_P.UnitDelay1_X0_d1;
+    measure_DWork.UnitDelay_DSTATE_ia = measure_P.UnitDelay_X0_fc;
+    measure_DWork.UnitDelay1_DSTATE_aqj = measure_P.UnitDelay1_X0_m0;
+    measure_DWork.UnitDelay_DSTATE_iah = measure_P.UnitDelay_X0_fcb;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4 = measure_P.UnitDelay1_X0_kc;
+    measure_DWork.UnitDelay_DSTATE_mj2fm = measure_P.UnitDelay_X0_ma;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4m = measure_P.UnitDelay1_X0_ma;
+    measure_DWork.UnitDelay_DSTATE_mj = measure_P.UnitDelay_X0_o;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml = measure_P.UnitDelay1_X0_maw;
+    measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml3 = measure_P.UnitDelay1_X0_okw;
+    measure_DWork.UnitDelay_DSTATE_mj2fmb = measure_P.UnitDelay_X0_my;
+    measure_DWork.UnitDelay1_DSTAT_aqjzxpnno4ml3e = measure_P.UnitDelay1_X0_my;
+    measure_DWork.UnitDelay_DSTATE_mj2 = measure_P.UnitDelay_X0_jn;
+    measure_DWork.UnitDelay1_DSTA_aqjzxpnno4ml3e2 = measure_P.UnitDelay1_X0_my5;
+    measure_DWork.UnitDelay3_DSTATE_i5 = measure_P.UnitDelay3_X0_i;
+    measure_DWork.UnitDelay4_DSTA_i = measure_P.UnitDelay4_X0_d1m1hi;
+    measure_DWork.UnitDelay2_DSTA_m = measure_P.UnitDelay2_X0_d1m1hi;
+    measure_DWork.UnitDelay4_DSTA_n3 = measure_P.UnitDelay4_X0_d1m1hiq;
+    measure_DWork.UnitDelay2_DSTA_il = measure_P.UnitDelay2_X0_d1m1hiq;
+    measure_DWork.UnitDelay4_DSTA_a = measure_P.UnitDelay4_X0_d1m1hiqr;
+    measure_DWork.UnitDelay2_DSTA_b = measure_P.UnitDelay2_X0_d1m1hiqr;
+    measure_DWork.UnitDelay4_DSTA_j = measure_P.UnitDelay4_X0_d1m1hiqru;
+    measure_DWork.UnitDelay2_DSTA_h = measure_P.UnitDelay2_X0_d1m1hiqru;
+    measure_DWork.UnitDelay4_DSTA_p = measure_P.UnitDelay4_X0_o;
+    measure_DWork.UnitDelay2_DSTA_o = measure_P.UnitDelay2_X0_o;
+    measure_DWork.UnitDelay4_DSTA_jg = measure_P.UnitDelay4_X0_on;
+    measure_DWork.UnitDelay2_DSTA_f = measure_P.UnitDelay2_X0_on;
+    measure_DWork.UnitDelay3_DSTATE_i5z = measure_P.UnitDelay3_X0_o;
+    measure_DWork.UnitDelay4_DSTA_ih = measure_P.UnitDelay4_X0_m0413;
+    measure_DWork.UnitDelay2_DSTA_j = measure_P.UnitDelay2_X0_m0413r;
+    measure_DWork.UnitDelay4_DSTA_m = measure_P.UnitDelay4_X0_m0413r;
+    measure_DWork.UnitDelay2_DSTA_jm = measure_P.UnitDelay2_X0_m0413rf;
+    measure_DWork.UnitDelay4_DSTA_j5 = measure_P.UnitDelay4_X0_m0413rf;
+    measure_DWork.UnitDelay2_DSTA_c = measure_P.UnitDelay2_X0_m0413rfk;
+    measure_DWork.UnitDelay4_DSTA_dj = measure_P.UnitDelay4_X0_m0413rfk;
+    measure_DWork.UnitDelay2_DSTA_cm = measure_P.UnitDelay2_X0_m0413rfkr;
+    measure_DWork.UnitDelay4_DSTA_l = measure_P.UnitDelay4_X0_a;
+    measure_DWork.UnitDelay2_DSTA_p = measure_P.UnitDelay2_X0_a;
+    measure_DWork.UnitDelay4_DSTA_h = measure_P.UnitDelay4_X0_ao;
+    measure_DWork.UnitDelay2_DSTA_bf = measure_P.UnitDelay2_X0_ao;
+    measure_DWork.delay1_DSTATE_k = measure_P.delay1_X0_m;
+    measure_DWork.UnitDelay4_DSTATE_e = measure_P.UnitDelay4_X0_mq;
+    measure_DWork.UnitDelay2_DSTATE_e5 = measure_P.UnitDelay2_X0_mq;
+    measure_DWork.UnitDelay2_DSTATE_e5y = measure_P.UnitDelay2_X0_mqc;
+    measure_DWork.delay_DSTATE_j = measure_P.delay_X0_m;
+    measure_DWork.UnitDelay4_DSTATE_ed = measure_P.UnitDelay4_X0_mqc;
+    measure_DWork.UnitDelay2_DSTATE_e5yc = measure_P.UnitDelay2_X0_mqco;
+    measure_DWork.UnitDelay_DSTATE_ot = measure_P.UnitDelay_X0_mq;
+    measure_DWork.UnitDelay_DSTATE_k = measure_P.UnitDelay_X0_h;
+    measure_DWork.delay1_DSTATE_b = measure_P.delay1_X0_h;
+    measure_DWork.UnitDelay1_DSTATE_k2 = measure_P.UnitDelay1_X0_hu;
+    measure_DWork.UnitDelay4_DSTA_mm = measure_P.UnitDelay4_X0_dsc5ttdhq;
+    measure_DWork.UnitDelay2_DSTA_hi = measure_P.UnitDelay2_X0_dsc5ttdhq;
+    measure_DWork.UnitDelay4_DSTA_pb = measure_P.UnitDelay4_X0_dsc5ttdhqk;
+    measure_DWork.UnitDelay2_DSTA_iy = measure_P.UnitDelay2_X0_dsc5ttdhqk;
+    measure_DWork.UnitDelay4_DSTA_md = measure_P.UnitDelay4_X0_dsc5ttdhqkx;
+    measure_DWork.UnitDelay2_DSTA_c0 = measure_P.UnitDelay2_X0_dsc5ttdhqkx;
+    measure_DWork.UnitDelay4_DSTA_f = measure_P.UnitDelay4_X0_dsc5ttdhqkxi;
+    measure_DWork.UnitDelay2_DSTA_cq = measure_P.UnitDelay2_X0_dsc5ttdhqkxi;
+    measure_DWork.UnitDelay4_DSTA_ps = measure_P.UnitDelay4_X0_d1m1hiqruq;
+    measure_DWork.UnitDelay2_DSTA_d = measure_P.UnitDelay2_X0_d1m1hiqruq;
+    measure_DWork.UnitDelay4_DSTA_k = measure_P.UnitDelay4_X0_d1m1hiqruqx;
+    measure_DWork.UnitDelay2_DSTA_o3 = measure_P.UnitDelay2_X0_d1m1hiqruqx;
+    measure_DWork.UnitDelay4_DSTA_mw = measure_P.UnitDelay4_X0_d1m1hiqruqxi;
+    measure_DWork.UnitDelay2_DSTA_d1 = measure_P.UnitDelay2_X0_d1m1hiqruqxi;
+    measure_DWork.UnitDelay4_DSTA_jz = measure_P.UnitDelay4_X0_d1m1hiqruqxix;
+    measure_DWork.UnitDelay2_DSTA_l = measure_P.UnitDelay2_X0_d1m1hiqruqxix;
+    measure_DWork.UnitDelay4_DSTA_hx = measure_P.UnitDelay4_X0_m0413rfkr;
+    measure_DWork.UnitDelay2_DSTA_k = measure_P.UnitDelay2_X0_m0413rfkrd;
+    measure_DWork.UnitDelay4_DSTA_p4 = measure_P.UnitDelay4_X0_m0413rfkrd;
+    measure_DWork.UnitDelay2_DSTA_lz = measure_P.UnitDelay2_X0_m0413rfkrd2;
+    measure_DWork.UnitDelay4_DSTA_b = measure_P.UnitDelay4_X0_m0413rfkrd2;
+    measure_DWork.UnitDelay2_DSTA_ls = measure_P.UnitDelay2_X0_m0413rfkrd2o;
+    measure_DWork.UnitDelay4_DSTA_ay = measure_P.UnitDelay4_X0_m0413rfkrd2o;
+    measure_DWork.UnitDelay2_DSTA_a3 = measure_P.UnitDelay2_X0_m0413rfkrd2oa;
+    measure_DWork.UnitDelay1_DSTATE_f = measure_P.UnitDelay1_X0_f;
+    measure_DWork.UnitDelay2_DSTATE_m = measure_P.UnitDelay2_X0_mu;
+    measure_DWork.UnitDelay4_DSTATE_d = measure_P.UnitDelay4_X0_e;
+    measure_DWork.UnitDelay2_DSTATE_kx = measure_P.UnitDelay2_X0_e1;
+    measure_DWork.UnitDelay4_DSTATE_do = measure_P.UnitDelay4_X0_e1;
+    measure_DWork.UnitDelay2_DSTATE_kxh = measure_P.UnitDelay2_X0_e1r;
+    measure_DWork.UnitDelay4_DSTATE_dot = measure_P.UnitDelay4_X0_e1r;
+    measure_DWork.UnitDelay2_DSTATE_kxh1 = measure_P.UnitDelay2_X0_e1ro;
+    measure_DWork.UnitDelay4_DSTATE_dotl = measure_P.UnitDelay4_X0_e1ro;
+    measure_DWork.UnitDelay2_DSTATE_kxh1d = measure_P.UnitDelay2_X0_e1ror;
+    measure_DWork.UnitDelay4_DSTATE_dotln = measure_P.UnitDelay4_X0_e1ror;
+    measure_DWork.UnitDelay2_DSTATE_kxh1dd = measure_P.UnitDelay2_X0_e1rorg;
+    measure_DWork.UnitDelay4_DSTATE_dotlnl = measure_P.UnitDelay4_X0_e1rorg;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb = measure_P.UnitDelay2_X0_e1rorg3;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp = measure_P.UnitDelay4_X0_e1rorg3;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb3 = measure_P.UnitDelay2_X0_e1rorg3e;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0 = measure_P.UnitDelay4_X0_e1rorg3e;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb33 =
+      measure_P.UnitDelay2_X0_e1rorg3e1;
+    measure_DWork.UnitDelay1_DSTATE_d = measure_P.UnitDelay1_X0_az;
+    measure_DWork.UnitDelay2_DSTATE_d = measure_P.UnitDelay2_X0_n;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0w =
+      measure_P.UnitDelay4_X0_e1rorg3e1;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb33g =
+      measure_P.UnitDelay2_X0_e1rorg3e1h;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0wv =
+      measure_P.UnitDelay4_X0_e1rorg3e1h;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gq =
+      measure_P.UnitDelay2_X0_e1rorg3e1hu;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvp =
+      measure_P.UnitDelay4_X0_e1rorg3e1hu;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gqp =
+      measure_P.UnitDelay2_X0_e1rorg3e1hup;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvpy =
+      measure_P.UnitDelay4_X0_e1rorg3e1hup;
+    measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gqpf =
+      measure_P.UnitDelay2_X0_e1rorg3e1hupm;
+    measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvpya =
+      measure_P.UnitDelay4_X0_e1rorg3e1hupm;
+    measure_DWork.UnitDelay2_DSTAT_kxh1ddb33gqpfj =
+      measure_P.UnitDelay2_X0_e1rorg3e1hupmn;
+    measure_DWork.UnitDelay4_DSTAT_dotlnlp0wvpyar =
+      measure_P.UnitDelay4_X0_e1rorg3e1hupmn;
+    measure_DWork.UnitDelay2_DSTA_kxh1ddb33gqpfjt =
+      measure_P.UnitDelay2_X0_e1rorg3e1hupmn0;
+    measure_DWork.UnitDelay4_DSTA_dotlnlp0wvpyari =
+      measure_P.UnitDelay4_X0_e1rorg3e1hupmn0;
+    measure_DWork.UnitDelay2_DSTA_n = measure_P.UnitDelay2_X0_cb;
+    measure_DWork.UnitDelay4_DSTA_ls = measure_P.UnitDelay4_X0_c;
+    measure_DWork.UnitDelay2_DSTA_oz = measure_P.UnitDelay2_X0_h;
+    measure_DWork.UnitDelay1_DSTATE_b = measure_P.UnitDelay1_X0_mx;
+    measure_DWork.UnitDelay2_DSTATE_kb = measure_P.UnitDelay2_X0_ne;
+    measure_DWork.UnitDelay4_DSTA_gs = measure_P.UnitDelay4_X0_h;
+    measure_DWork.UnitDelay2_DSTA_e = measure_P.UnitDelay2_X0_om;
+    measure_DWork.UnitDelay4_DSTA_hxo = measure_P.UnitDelay4_X0_om;
+    measure_DWork.UnitDelay2_DSTA_pl = measure_P.UnitDelay2_X0_k;
+    measure_DWork.UnitDelay4_DSTA_gn = measure_P.UnitDelay4_X0_k;
+    measure_DWork.UnitDelay2_DSTA_ck = measure_P.UnitDelay2_X0_b;
+    measure_DWork.UnitDelay4_DSTA_pz = measure_P.UnitDelay4_X0_b;
+    measure_DWork.UnitDelay2_DSTA_cs = measure_P.UnitDelay2_X0_cj;
+    measure_DWork.UnitDelay4_DSTA_d2 = measure_P.UnitDelay4_X0_cj;
+    measure_DWork.UnitDelay2_DSTA_fe = measure_P.UnitDelay2_X0_di;
+    measure_DWork.UnitDelay4_DSTA_mz = measure_P.UnitDelay4_X0_di;
+    measure_DWork.UnitDelay2_DSTA_cx = measure_P.UnitDelay2_X0_l;
+    measure_DWork.UnitDelay4_DSTA_am = measure_P.UnitDelay4_X0_l;
+    measure_DWork.UnitDelay2_DSTA_n1 = measure_P.UnitDelay2_X0_ly;
+    measure_DWork.UnitDelay4_DSTA_nh = measure_P.UnitDelay4_X0_ly;
+    measure_DWork.UnitDelay2_DSTA_ko = measure_P.UnitDelay2_X0_f;
+    measure_DWork.UnitDelay4_DSTA_fu = measure_P.UnitDelay4_X0_f;
+    measure_DWork.UnitDelay2_DSTA_ef = measure_P.UnitDelay2_X0_hs;
+    measure_DWork.UnitDelay4_DSTA_m5 = measure_P.UnitDelay4_X0_hs;
+    measure_DWork.UnitDelay2_DSTA_mh = measure_P.UnitDelay2_X0_ma;
+    measure_DWork.UnitDelay4_DSTA_e = measure_P.UnitDelay4_X0_ma;
+    measure_DWork.UnitDelay2_DSTA_or = measure_P.UnitDelay2_X0_c1;
+    measure_DWork.UnitDelay4_DSTA_ju = measure_P.UnitDelay4_X0_c1;
+    measure_DWork.UnitDelay2_DSTA_lt = measure_P.UnitDelay2_X0_ai;
+    measure_DWork.UnitDelay4_DSTA_hz = measure_P.UnitDelay4_X0_ai;
+    measure_DWork.UnitDelay2_DSTA_fq = measure_P.UnitDelay2_X0_p;
+    measure_DWork.UnitDelay4_DSTA_mb = measure_P.UnitDelay4_X0_p;
+    measure_DWork.UnitDelay2_DSTA_d0 = measure_P.UnitDelay2_X0_hu;
+    measure_DWork.UnitDelay4_DSTA_fp = measure_P.UnitDelay4_X0_hu;
+    measure_DWork.UnitDelay2_DSTA_mf = measure_P.UnitDelay2_X0_bg;
+    measure_DWork.UnitDelay4_DSTA_pm = measure_P.UnitDelay4_X0_bg;
+    measure_DWork.UnitDelay2_DSTA_pz = measure_P.UnitDelay2_X0_ob;
+    measure_DWork.UnitDelay4_DSTA_gf = measure_P.UnitDelay4_X0_ob;
+    measure_DWork.UnitDelay2_DSTA_g = measure_P.UnitDelay2_X0_g;
+    measure_DWork.UnitDelay4_DSTA_hc = measure_P.UnitDelay4_X0_g;
+    measure_DWork.UnitDelay2_DSTA_hh = measure_P.UnitDelay2_X0_nx;
+    measure_DWork.UnitDelay4_DSTA_gv = measure_P.UnitDelay4_X0_n;
+    measure_DWork.UnitDelay2_DSTA_cs5 = measure_P.UnitDelay2_X0_ec;
+    measure_DWork.UnitDelay4_DSTA_g0 = measure_P.UnitDelay4_X0_ec;
+    measure_DWork.UnitDelay2_DSTA_fb = measure_P.UnitDelay2_X0_ks;
+    measure_DWork.UnitDelay4_DSTATE_o = measure_P.UnitDelay4_X0_ph;
+    measure_DWork.UnitDelay2_DSTATE_n = measure_P.UnitDelay2_X0_db;
+    measure_DWork.UnitDelay4_DSTATE_eq = measure_P.UnitDelay4_X0_gm;
+    measure_DWork.UnitDelay2_DSTATE_a = measure_P.UnitDelay2_X0_lt;
+    measure_DWork.UnitDelay4_DSTATE_g = measure_P.UnitDelay4_X0_lh;
+    measure_DWork.UnitDelay2_DSTATE_dq = measure_P.UnitDelay2_X0_gs;
+    measure_DWork.UnitDelay4_DSTATE_je = measure_P.UnitDelay4_X0_hh;
+    measure_DWork.UnitDelay2_DSTATE_o = measure_P.UnitDelay2_X0_pu;
+    measure_DWork.UnitDelay4_DSTATE_e1 = measure_P.UnitDelay4_X0_hp;
+    measure_DWork.UnitDelay2_DSTATE_c = measure_P.UnitDelay2_X0_d2;
+    measure_DWork.UnitDelay4_DSTATE_i = measure_P.UnitDelay4_X0_jg;
+    measure_DWork.UnitDelay2_DSTATE_f = measure_P.UnitDelay2_X0_oe;
+    measure_DWork.UnitDelay4_DSTATE_m = measure_P.UnitDelay4_X0_n1;
+    measure_DWork.UnitDelay2_DSTATE_gs = measure_P.UnitDelay2_X0_i;
+    measure_DWork.UnitDelay4_DSTATE_n = measure_P.UnitDelay4_X0_i;
+    measure_DWork.UnitDelay2_DSTATE_p = measure_P.UnitDelay2_X0_gr;
+    measure_DWork.UnitDelay4_DSTATE_jf = measure_P.UnitDelay4_X0_at;
+    measure_DWork.UnitDelay2_DSTATE_h2 = measure_P.UnitDelay2_X0_j3;
+    measure_DWork.UnitDelay4_DSTATE_l = measure_P.UnitDelay4_X0_ce;
+    measure_DWork.UnitDelay2_DSTATE_ai = measure_P.UnitDelay2_X0_kr;
+    measure_DWork.UnitDelay4_DSTATE_co = measure_P.UnitDelay4_X0_ga;
+    measure_DWork.UnitDelay2_DSTATE_l = measure_P.UnitDelay2_X0_il;
+    measure_DWork.UnitDelay4_DSTATE_j5 = measure_P.UnitDelay4_X0_b1;
+    measure_DWork.UnitDelay2_DSTATE_cm = measure_P.UnitDelay2_X0_h0;
+    measure_DWork.RateTransition_Buffer0 = measure_P.RateTransition_X0;
+    measure_DWork.RateTransition_Buffer0_l = measure_P.RateTransition_X0_p;
+    measure_DWork.RateTransition_Buffer0_b = measure_P.RateTransition_X0_k;
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_a[(i)] =
+        measure_P.RateTransition_X0_e;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_j[(i)] =
+        measure_P.RateTransition_X0_l;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_ak[(i)] =
+        measure_P.RateTransition_X0_j;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_h[(i)] =
+        measure_P.RateTransition_X0_c;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_g[(i)] =
+        measure_P.RateTransition_X0_f;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_hn[(i)] =
+        measure_P.RateTransition_X0_pv;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_e[(i)] =
+        measure_P.RateTransition_X0_jr;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_lm[(i)] =
+        measure_P.RateTransition_X0_lt;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_az[(i)] =
+        measure_P.RateTransition_X0_b;
+    }
+
+    measure_DWork.RateTransition_Buffer0_m = measure_P.RateTransition_X0_fm;
+    measure_DWork.RateTransition_Buffer0_bh = measure_P.RateTransition_X0_n;
+    measure_DWork.RateTransition_Buffer0_o = measure_P.RateTransition_X0_pq;
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_aq[(i)] =
+        measure_P.RateTransition_X0_bd;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_oh[(i)] =
+        measure_P.RateTransition_X0_m;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_lg[(i)] =
+        measure_P.RateTransition_X0_jt;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_n[(i)] =
+        measure_P.RateTransition_X0_d;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_c[(i)] =
+        measure_P.RateTransition_X0_fr;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_cq[(i)] =
+        measure_P.RateTransition_X0_bf;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_mb[(i)] =
+        measure_P.RateTransition_X0_ny;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_of[(i)] =
+        measure_P.RateTransition_X0_jq;
+    }
+
+    for (i = 0; i < 31; i++) {
+      measure_DWork.RateTransition_Buffer0_jc[(i)] =
+        measure_P.RateTransition_X0_g;
+    }
+
+    measure_DWork.RateTransition_Buffer0_k = measure_P.RateTransition_X0_le;
+    measure_DWork.RateTransition_Buffer0_ki = measure_P.RateTransition_X0_e5;
+    measure_DWork.RateTransition_Buffer0_jr = measure_P.RateTransition_X0_lea;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhw =
+      measure_P.UnitDelay1_X0_jcfawyw2o0;
+    measure_DWork.delay_DSTATE_i2wj4 = measure_P.delay_X0_jcfaw;
+    measure_DWork.UnitDelay_DSTATE_lmdwo = measure_P.UnitDelay_X0_jcfaw;
+    measure_DWork.UnitDelay_DSTATE_lmdwo300 = measure_P.UnitDelay_X0_jcfawyw2;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwr =
+      measure_P.UnitDelay1_X0_jcfawyw2o0o;
+    measure_DWork.UnitDelay_DSTATE_lmdwo300i = measure_P.UnitDelay_X0_jcfawyw2o;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwrm =
+      measure_P.UnitDelay1_X0_jcfawyw2o0os;
+    measure_DWork.UnitDelay4_DSTATE_czl44j1i = measure_P.UnitDelay4_X0_jcfawyw2;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqciz0 =
+      measure_P.UnitDelay2_X0_jcfawyw2o0;
+    measure_DWork.UnitDelay4_DSTATE_czl44j1ip =
+      measure_P.UnitDelay4_X0_jcfawyw2o;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j =
+      measure_P.UnitDelay2_X0_jcfawyw2o0o;
+    measure_DWork.UnitDelay1_DSTATE_c = measure_P.UnitDelay1_X0_j;
+    measure_DWork.UnitDelay_DSTATE_lmdwo3 = measure_P.UnitDelay_X0_jcfawy;
+    measure_DWork.UnitDelay2_DSTAT_h5brdqciz0j45w =
+      measure_P.UnitDelay2_X0_jcfawyw2o0osk2;
+    measure_DWork.UnitDelay_DSTATE_lmd = measure_P.UnitDelay_X0_jcf;
+    measure_DWork.delay_DSTATE_i2wj4d = measure_P.delay_X0_jcfawy;
+    measure_DWork.delay1_DSTATE_ces = measure_P.delay1_X0_jcf;
+    measure_DWork.UnitDelay_DSTATE_lmdwo300ig =
+      measure_P.UnitDelay_X0_jcfawyw2o0;
+    measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j4 =
+      measure_P.UnitDelay2_X0_jcfawyw2o0os;
+    measure_DWork.UnitDelay1_DSTATE_cm = measure_P.UnitDelay1_X0_jc;
+    measure_DWork.UnitDelay1_DSTATE_cmn = measure_P.UnitDelay1_X0_jcf;
+    measure_DWork.UnitDelay4_DSTATE_czl44j1ipa =
+      measure_P.UnitDelay4_X0_jcfawyw2o0;
+    measure_DWork.UnitDelay1_DSTATE_cmnb = measure_P.UnitDelay1_X0_jcfa;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3 = measure_P.UnitDelay1_X0_jcfaw;
+    measure_DWork.UnitDelay1_DSTATE_cmnb3j = measure_P.UnitDelay1_X0_jcfawy;
+    measure_DWork.UnitDelay_DSTATE_lmdwo30 = measure_P.UnitDelay_X0_jcfawyw;
+    measure_DWork.UnitDelay1_DSTATE_j = measure_P.UnitDelay1_X0_b;
+    measure_DWork.delay_DSTATE_h = measure_P.delay_X0_h;
+    measure_DWork.UnitDelay_DSTATE_pd = measure_P.UnitDelay_X0_he;
+    measure_DWork.UnitDelay_DSTATE_pdo = measure_P.UnitDelay_X0_heb;
+    measure_DWork.UnitDelay1_DSTATE_ac = measure_P.UnitDelay1_X0_he;
+    measure_DWork.UnitDelay_DSTATE_pdoi = measure_P.UnitDelay_X0_hebr;
+    measure_DWork.UnitDelay1_DSTATE_ac4 = measure_P.UnitDelay1_X0_heb;
+    measure_DWork.UnitDelay3_DSTATE_i5z5 = measure_P.UnitDelay3_X0_ap;
+    measure_DWork.UnitDelay3_DSTATE_i5z5o = measure_P.UnitDelay3_X0_i2;
+    measure_DWork.UnitDelay3_DSTATE_i5z5oq = measure_P.UnitDelay3_X0_or;
+    measure_DWork.UnitDelay4_DSTATE_edu = measure_P.UnitDelay4_X0_mqco;
+    measure_DWork.UnitDelay2_DSTATE_e5yc1 = measure_P.UnitDelay2_X0_mqco2;
+    measure_DWork.UnitDelay4_DSTATE_edua = measure_P.UnitDelay4_X0_mqco2;
+    measure_DWork.UnitDelay2_DSTATE_e5yc1i = measure_P.UnitDelay2_X0_mqco2g;
+    measure_DWork.UnitDelay1_DSTATE_dg = measure_P.UnitDelay1_X0_mq;
+    measure_DWork.UnitDelay_DSTATE_otr = measure_P.UnitDelay_X0_mqc;
+    measure_DWork.UnitDelay2_DSTATE_e5yc1iho = measure_P.UnitDelay2_X0_mqco2gbu;
+    measure_DWork.UnitDelay_DSTATE_o = measure_P.UnitDelay_X0_m;
+    measure_DWork.delay_DSTATE_j0 = measure_P.delay_X0_mq;
+    measure_DWork.delay1_DSTATE_kz = measure_P.delay1_X0_mq;
+    measure_DWork.UnitDelay_DSTATE_otrxo = measure_P.UnitDelay_X0_mqco2;
+    measure_DWork.UnitDelay2_DSTATE_e5yc1ih = measure_P.UnitDelay2_X0_mqco2gb;
+    measure_DWork.UnitDelay1_DSTATE_dgz = measure_P.UnitDelay1_X0_mqc;
+    measure_DWork.UnitDelay1_DSTATE_dgzm = measure_P.UnitDelay1_X0_mqco;
+    measure_DWork.UnitDelay4_DSTATE_eduao = measure_P.UnitDelay4_X0_mqco2g;
+    measure_DWork.UnitDelay1_DSTATE_dgzmv = measure_P.UnitDelay1_X0_mqco2;
+    measure_DWork.UnitDelay1_DSTATE_dgzmvr = measure_P.UnitDelay1_X0_mqco2g;
+    measure_DWork.UnitDelay1_DSTATE_dgzmvrp = measure_P.UnitDelay1_X0_mqco2gb;
+    measure_DWork.UnitDelay_DSTATE_otrx = measure_P.UnitDelay_X0_mqco;
+    measure_DWork.RateTransition_Buffer0_kg = measure_P.RateTransition_X0_ns;
+    measure_DWork.RateTransition_Buffer0_hw = measure_P.RateTransition_X0_o;
+    measure_DWork.RateTransition_Buffer0_kc = measure_P.RateTransition_X0_k5;
   }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.SF_FixedDiscreteDelaySfuncti_bt[0];
-    int_T i;
-    for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfuncti_jc; i++)
-      *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunctio_j;
-    measure_DWork.SF_FixedDiscreteDelaySfunctio_b =
-      measure_P.SF_FixedDiscreteDelaySfunctio_j;
-    measure_DWork.SF_FixedDiscreteDelaySfunctio_c = 0;
-  }
-
-  measure_DWork.clockTickCounter = 0;
-  measure_DWork.clockTickCounter_g = 0;
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneTap[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneTap+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOneT_h = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneT_b[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_j+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_h3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoTap[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoTap+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwoT_j = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_b4[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_jc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_h3s = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_b4n[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_jcf+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithO_h3se = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_m[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_j+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwo_jn = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithO_b4np[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_jcfa+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_h3see = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywith_b4npp[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_jcfaw+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywit_h3seeh = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_mf[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_jc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTw_jng = 0;
-  }
-
-  measure_DWork.clockTickCounter_ge = 0;
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywit_b4npph[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywit_jcfawy+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywi_h3seeh3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywi_b4npphe[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywi_jcfawyw+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelayw_h3seeh3o = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_mf5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_jcf+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithT_jngr = 0;
-  }
-
-  measure_DWork.clockTickCounter_i = 0;
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneT_j[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_d+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOneT_o = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_je[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ds+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_ob = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_p[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_d+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwoT_a = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_jel[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_dsc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_obu = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithO_jelr[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_dsc5+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithO_obui = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_p3[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_ds+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwo_as = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywith_jelr5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_d1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_obui2 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywit_jelr5a[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_d1m+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywit_obui2s = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_p3o[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_d1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTw_asr = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywi_jelr5az[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_d1m1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywi_obui2sv = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelayw_jelr5azs[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_d1m1h+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelayw_obui2svt = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_p3ok[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_d1m+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithT_asrw = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelay_jelr5azsa[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_m+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelay_obui2svtg = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDela_jelr5azsa0[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_m0+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDela_obui2svtgp = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywith_p3ok0[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_m+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_asrwd = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDel_jelr5azsa0t[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_m04+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDel_obui2svtgpu = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDe_jelr5azsa0te[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_m041+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDe_obui2svtgpup = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywit_p3ok0i[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_m0+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywit_asrwdn = 0;
-  }
-
-  measure_DWork.clockTickCounter_io = 0;
-  measure_DWork.clockTickCounter_iom = 0;
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteD_jelr5azsa0tej[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_dsc5t+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteD_obui2svtgpupg = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscrete_jelr5azsa0tejd[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywit_dsc5tt+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscrete_obui2svtgpupg2 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywi_p3ok0il[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_dsc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywi_asrwdnf = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscret_jelr5azsa0tejde[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywi_dsc5ttd+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_obui2svtgpupg2k = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_p[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelayw_dsc5ttdh+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_fy = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelayw_p3ok0ilk[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_dsc5+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelayw_asrwdnf2 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_mz+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ja = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_e[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_mzl+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_fd = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelay_p3ok0ilkv[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mz+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelay_asrwdnf25 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.SF_FixedDiscreteDelaySfuncti_j0[0];
-    int_T i;
-    for (i = 0; i < measure_P.SF_FixedDiscreteDelaySfuncti_fc; i++)
-      *(VDD_buffer++) = measure_P.SF_FixedDiscreteDelaySfunctio_f;
-    measure_DWork.SF_FixedDiscreteDelaySfunctio_n =
-      measure_P.SF_FixedDiscreteDelaySfunctio_f;
-    measure_DWork.SF_FixedDiscreteDelaySfunct_n5w = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_c[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywit_d1m1hi+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ng = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_k[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywi_d1m1hiq+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_gm = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDela_p3ok0ilkvg[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_d1m1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDela_asrwdnf25g = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelayw_d1m1hiqr+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_lb = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_p0[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelay_d1m1hiqru+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_jso = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDel_p3ok0ilkvgc[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDela_d1m1hiqruq+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDel_asrwdnf25g3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_a[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_o+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_fl = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_m[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_on+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ney = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDe_p3ok0ilkvgcl[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_o+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDe_asrwdnf25g35 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ci[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_m0413+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_hc = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_f[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywit_m0413r+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_gn = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteD_p3ok0ilkvgclo[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_m04+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteD_asrwdnf25g35f = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_g[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywi_m0413rf+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ne3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l2[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelayw_m0413rfk+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_it = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscrete_p3ok0ilkvgclom[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_m041+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscrete_asrwdnf25g35fl = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ii[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_a+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_jh = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_id[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ao+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_bv = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_p3ok0ilkvgclom3[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_a+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_asrwdnf25g35flg = 0;
-  }
-
-  measure_DWork.clockTickCounter_h = 0;
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_px[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_mq+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_iq = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_b[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_mqc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ec = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_a3[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mq+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_fz = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_h[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelay_dsc5ttdhq+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_kd = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_bo[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDela_dsc5ttdhqk+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ky = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_o[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDel_dsc5ttdhqkx+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_cc = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_im[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDe_dsc5ttdhqkxi+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_fn = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hs[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteD_dsc5ttdhqkxiz+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_cn = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_pe[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscrete_dsc5ttdhqkxizv+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_k3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_n[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDel_d1m1hiqruqx+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_h1 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_d[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDe_d1m1hiqruqxi+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_iw = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_j[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteD_d1m1hiqruqxix+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_am = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_em[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscrete_d1m1hiqruqxix0+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_jq = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_iz[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_d1m1hiqruqxix0v+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_aa = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_js[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_o+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_kz = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ih[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelay_m0413rfkr+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_db = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ej[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDela_m0413rfkrd+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_py = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_li[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDel_m0413rfkrd2+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_et = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_gs[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDe_m0413rfkrd2o+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_lbx = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ne[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteD_m0413rfkrd2oa+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_b1 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_pg[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscrete_m0413rfkrd2oak+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_bu = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneT_f[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_e+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOneT_l = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_fx[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_e1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_ln = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_c[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_e+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwo_mt = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_fxf[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOn_e1r+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_lnk = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithO_fxfz[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_e1ro+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithO_lnk1 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_cb[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_e1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTw_mt3 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywith_fxfzv[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_e1ror+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_lnk1v = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywit_fxfzvg[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywit_e1rorg+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywit_lnk1vh = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_cb3[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_e1r+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithT_mt3m = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywi_fxfzvgo[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywi_e1rorg3+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywi_lnk1vhz = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelayw_fxfzvgoh[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelayw_e1rorg3e+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelayw_lnk1vhza = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_cb3y[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_e1ro+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_mt3my = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelay_fxfzvgohd[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelay_e1rorg3e1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelay_lnk1vhzad = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDela_fxfzvgohdy[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDela_e1rorg3e1h+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDela_lnk1vhzad0 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywith_cb3yn[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDel_e1rorg3e1hu+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywit_mt3myh = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDel_fxfzvgohdyf[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDe_e1rorg3e1hup+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDel_lnk1vhzad0h = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDe_fxfzvgohdyfs[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteD_e1rorg3e1hupm+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDe_lnk1vhzad0hw = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywit_cb3ynu[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscrete_e1rorg3e1hupmn+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywi_mt3myh1 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteD_fxfzvgohdyfso[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_e1rorg3e1hupmn0+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteD_lnk1vhzad0hw1 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscrete_fxfzvgohdyfsol[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_c+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscrete_lnk1vhzad0hw1b = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywi_cb3ynuk[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_h+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelayw_mt3myh1u = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscret_fxfzvgohdyfsolg[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_hm+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_lnk1vhzad0hw1bl = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ab[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_om+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ed = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelayw_cb3ynukf[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_omi+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelay_mt3myh1uz = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_je[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_k+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_de = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_no[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_b+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_cw = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelay_cb3ynukfc[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_kz+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDela_mt3myh1uz5 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ni[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_cj+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ln = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_b3[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_d+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ch = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDela_cb3ynukfcn[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_bx+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDel_mt3myh1uz53 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i0[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_l+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_eh = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_d5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_ly+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_hw = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDel_cb3ynukfcns[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_cjg+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDe_mt3myh1uz53e = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_nk[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_f+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_k3l = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_le[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_hs+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_kx = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDe_cb3ynukfcns4[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_di+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteD_mt3myh1uz53er = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_pl[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_m+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_pgc = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_e5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_c1+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_aa5 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteD_cb3ynukfcns4k[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_li+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscrete_mt3myh1uz53erg = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_dx[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_a+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_hy = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_kt[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_p+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_pt = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscrete_cb3ynukfcns4km[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_lyi+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_mt3myh1uz53ergf = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_l5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_hu+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_pf = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_bz[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_bg+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_bm = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_cb3ynukfcns4kmg[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_fu+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_dxq = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_ac[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_ob+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_mb = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hz[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_g+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_b5 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_a1[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_hsu+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_k5 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_i1[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_n+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_nj = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_on[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_e+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_cg = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_gx[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_ma+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_pfv = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_kw[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_ks+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_abz = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_gc[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_pd+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_ar = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_ig[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscret_c1z+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_boa = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneT_e[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_ae+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOneT_k = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_ec[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_c+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_kj = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_pp[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_l+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwo_ah = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_fi[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_i+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_op = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_fie[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_l+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_opo = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_k[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_k+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwo_ju = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_ep[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_l4+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_obd = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_epo[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_n+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithO_obdq = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTw_mfe[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_mv+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwoT_f = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_bb[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_p+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_of = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_bbn[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_di+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_of2 = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwoT_o[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_jx+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwoT_g = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_bm[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_c3+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_jp = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOn_bmy[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOneT_h+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_jpu = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_mw[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwoT_c+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTwoT_h = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOneT_g[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_nc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOne_fn = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelaywithOne_g5[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithOne_o0+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithOn_fny = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithTwo_of[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTwo_d5+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywithTw_as5 = 0;
-  }
-
-  measure_B.RateTransition = measure_P.RateTransition_X0;
-  measure_B.RateTransition_o = measure_P.RateTransition_X0_p;
-  measure_B.RateTransition_g = measure_P.RateTransition_X0_k;
-  measure_B.RateTransition_gf[0] = measure_P.RateTransition_X0_e;
-  measure_B.RateTransition_gf[1] = measure_P.RateTransition_X0_e;
-  measure_B.RateTransition_gf[2] = measure_P.RateTransition_X0_e;
-  measure_B.RateTransition_gf[3] = measure_P.RateTransition_X0_e;
-  measure_B.RateTransition_gw[0] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_gw[1] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_gw[2] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_gw[3] = measure_P.RateTransition_X0_l;
-  measure_B.RateTransition_n[0] = measure_P.RateTransition_X0_j;
-  measure_B.RateTransition_n[1] = measure_P.RateTransition_X0_j;
-  measure_B.RateTransition_n[2] = measure_P.RateTransition_X0_j;
-  measure_B.RateTransition_n[3] = measure_P.RateTransition_X0_j;
-  measure_B.RateTransition_h[0] = measure_P.RateTransition_X0_c;
-  measure_B.RateTransition_h[1] = measure_P.RateTransition_X0_c;
-  measure_B.RateTransition_h[2] = measure_P.RateTransition_X0_c;
-  measure_B.RateTransition_h[3] = measure_P.RateTransition_X0_c;
-  measure_B.RateTransition_k[0] = measure_P.RateTransition_X0_f;
-  measure_B.RateTransition_k[1] = measure_P.RateTransition_X0_f;
-  measure_B.RateTransition_k[2] = measure_P.RateTransition_X0_f;
-  measure_B.RateTransition_k[3] = measure_P.RateTransition_X0_f;
-  measure_B.RateTransition_b[0] = measure_P.RateTransition_X0_pv;
-  measure_B.RateTransition_b[1] = measure_P.RateTransition_X0_pv;
-  measure_B.RateTransition_b[2] = measure_P.RateTransition_X0_pv;
-  measure_B.RateTransition_b[3] = measure_P.RateTransition_X0_pv;
-  measure_B.RateTransition_a[0] = measure_P.RateTransition_X0_jr;
-  measure_B.RateTransition_a[1] = measure_P.RateTransition_X0_jr;
-  measure_B.RateTransition_a[2] = measure_P.RateTransition_X0_jr;
-  measure_B.RateTransition_a[3] = measure_P.RateTransition_X0_jr;
-  measure_B.RateTransition_gy[0] = measure_P.RateTransition_X0_lt;
-  measure_B.RateTransition_gy[1] = measure_P.RateTransition_X0_lt;
-  measure_B.RateTransition_gy[2] = measure_P.RateTransition_X0_lt;
-  measure_B.RateTransition_gy[3] = measure_P.RateTransition_X0_lt;
-  measure_B.RateTransition_m[0] = measure_P.RateTransition_X0_b;
-  measure_B.RateTransition_m[1] = measure_P.RateTransition_X0_b;
-  measure_B.RateTransition_m[2] = measure_P.RateTransition_X0_b;
-  measure_B.RateTransition_m[3] = measure_P.RateTransition_X0_b;
-  measure_B.RateTransition_l = measure_P.RateTransition_X0_fm;
-  measure_B.RateTransition_gq = measure_P.RateTransition_X0_n;
-  measure_B.RateTransition_a0 = measure_P.RateTransition_X0_pq;
-  measure_B.RateTransition_j[0] = measure_P.RateTransition_X0_bd;
-  measure_B.RateTransition_j[1] = measure_P.RateTransition_X0_bd;
-  measure_B.RateTransition_j[2] = measure_P.RateTransition_X0_bd;
-  measure_B.RateTransition_j[3] = measure_P.RateTransition_X0_bd;
-  measure_B.RateTransition_c[0] = measure_P.RateTransition_X0_m;
-  measure_B.RateTransition_c[1] = measure_P.RateTransition_X0_m;
-  measure_B.RateTransition_c[2] = measure_P.RateTransition_X0_m;
-  measure_B.RateTransition_c[3] = measure_P.RateTransition_X0_m;
-  measure_B.RateTransition_ax[0] = measure_P.RateTransition_X0_jt;
-  measure_B.RateTransition_ax[1] = measure_P.RateTransition_X0_jt;
-  measure_B.RateTransition_ax[2] = measure_P.RateTransition_X0_jt;
-  measure_B.RateTransition_ax[3] = measure_P.RateTransition_X0_jt;
-  measure_B.RateTransition_jz[0] = measure_P.RateTransition_X0_d;
-  measure_B.RateTransition_jz[1] = measure_P.RateTransition_X0_d;
-  measure_B.RateTransition_jz[2] = measure_P.RateTransition_X0_d;
-  measure_B.RateTransition_jz[3] = measure_P.RateTransition_X0_d;
-  measure_B.RateTransition_h2[0] = measure_P.RateTransition_X0_fr;
-  measure_B.RateTransition_h2[1] = measure_P.RateTransition_X0_fr;
-  measure_B.RateTransition_h2[2] = measure_P.RateTransition_X0_fr;
-  measure_B.RateTransition_h2[3] = measure_P.RateTransition_X0_fr;
-  measure_B.RateTransition_cc[0] = measure_P.RateTransition_X0_bf;
-  measure_B.RateTransition_cc[1] = measure_P.RateTransition_X0_bf;
-  measure_B.RateTransition_cc[2] = measure_P.RateTransition_X0_bf;
-  measure_B.RateTransition_cc[3] = measure_P.RateTransition_X0_bf;
-  measure_B.RateTransition_mz[0] = measure_P.RateTransition_X0_ny;
-  measure_B.RateTransition_mz[1] = measure_P.RateTransition_X0_ny;
-  measure_B.RateTransition_mz[2] = measure_P.RateTransition_X0_ny;
-  measure_B.RateTransition_mz[3] = measure_P.RateTransition_X0_ny;
-  measure_B.RateTransition_jt[0] = measure_P.RateTransition_X0_jq;
-  measure_B.RateTransition_jt[1] = measure_P.RateTransition_X0_jq;
-  measure_B.RateTransition_jt[2] = measure_P.RateTransition_X0_jq;
-  measure_B.RateTransition_jt[3] = measure_P.RateTransition_X0_jq;
-  measure_B.RateTransition_f[0] = measure_P.RateTransition_X0_g;
-  measure_B.RateTransition_f[1] = measure_P.RateTransition_X0_g;
-  measure_B.RateTransition_f[2] = measure_P.RateTransition_X0_g;
-  measure_B.RateTransition_f[3] = measure_P.RateTransition_X0_g;
-
-  {
-    measure_DWork.SFunction_RWORK[0] = 0.0;
-    measure_DWork.SFunction_RWORK[1] = 0.0;
-    measure_DWork.SFunction_RWORK[2] = 0.0;
-    measure_DWork.SFunction_RWORK[3] = 0.0;
-    measure_DWork.SFunction_IWORK = -1;
-  }
-
-  measure_B.RateTransition_cq = measure_P.RateTransition_X0_le;
-
-  {
-    measure_DWork.SFunction_RWORK_i[0] = 0.0;
-    measure_DWork.SFunction_RWORK_i[1] = 0.0;
-    measure_DWork.SFunction_RWORK_i[2] = 0.0;
-    measure_DWork.SFunction_RWORK_i[3] = 0.0;
-    measure_DWork.SFunction_IWORK_m = -1;
-  }
-
-  measure_B.RateTransition_lr = measure_P.RateTransition_X0_e5;
-
-  {
-    measure_DWork.SFunction_RWORK_c[0] = 0.0;
-    measure_DWork.SFunction_RWORK_c[1] = 0.0;
-    measure_DWork.SFunction_RWORK_c[2] = 0.0;
-    measure_DWork.SFunction_RWORK_c[3] = 0.0;
-    measure_DWork.SFunction_IWORK_l = -1;
-  }
-
-  measure_B.RateTransition_aj = measure_P.RateTransition_X0_lea;
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelayw_b4npphe4[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelayw_jcfawyw2+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelay_h3seeh3od = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)
-      &measure_DWork.VariableDiscreteDelay_b4npphe4j[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelay_jcfawyw2o+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDela_h3seeh3odr = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscreteDelaywithT_mf50[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithT_jcfa+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscreteDelaywith_jngrs = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_jp[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithO_mqco+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_jb = 0;
-  }
-
-  {
-    real_T *VDD_buffer = (real_T*)&measure_DWork.VariableDiscret_hh[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywith_mqco2+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_hm = 0;
-  }
-
-  {
-    real_T *VDD_buffer = &measure_DWork.VariableDiscret_mj[0];
-    int_T i;
-    for (i = 0; i < (measure_P.VariableDiscreteDelaywithTw_mqc+1); i++)
-      *(VDD_buffer++) = 0.0;
-    measure_DWork.VariableDiscret_gnb = 0;
-  }
-
-  {
-    measure_DWork.SFunction_RWORK_o[0] = 0.0;
-    measure_DWork.SFunction_RWORK_o[1] = 0.0;
-    measure_DWork.SFunction_RWORK_o[2] = 0.0;
-    measure_DWork.SFunction_RWORK_o[3] = 0.0;
-    measure_DWork.SFunction_IWORK_g = -1;
-  }
-
-  measure_B.RateTransition_d = measure_P.RateTransition_X0_ns;
-
-  {
-    measure_DWork.SFunction_RWORK_j[0] = 0.0;
-    measure_DWork.SFunction_RWORK_j[1] = 0.0;
-    measure_DWork.SFunction_RWORK_j[2] = 0.0;
-    measure_DWork.SFunction_RWORK_j[3] = 0.0;
-    measure_DWork.SFunction_IWORK_p = -1;
-  }
-
-  measure_B.RateTransition_l2 = measure_P.RateTransition_X0_o;
-
-  {
-    measure_DWork.SFunction_RWORK_g[0] = 0.0;
-    measure_DWork.SFunction_RWORK_g[1] = 0.0;
-    measure_DWork.SFunction_RWORK_g[2] = 0.0;
-    measure_DWork.SFunction_RWORK_g[3] = 0.0;
-    measure_DWork.SFunction_IWORK_k = -1;
-  }
-
-  measure_B.RateTransition_p = measure_P.RateTransition_X0_k5;
-  measure_DWork.UnitDelay4_DSTATE_ir = measure_P.UnitDelay4_X0_he;
-  measure_DWork.delay_DSTATE = measure_P.delay_X0;
-  measure_DWork.UnitDelay_DSTATE = measure_P.UnitDelay_X0;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1ipa1 =
-    measure_P.UnitDelay4_X0_jcfawyw2o0o;
-  measure_DWork.delay_DSTATE_i = measure_P.delay_X0_j;
-  measure_DWork.UnitDelay_DSTATE_l = measure_P.UnitDelay_X0_j;
-  measure_DWork.UnitDelay_DSTATE_lm = measure_P.UnitDelay_X0_jc;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j45 =
-    measure_P.UnitDelay2_X0_jcfawyw2o0osk;
-  measure_DWork.delay1_DSTATE = measure_P.delay1_X0;
-  measure_DWork.delay1_DSTATE_c = measure_P.delay1_X0_j;
-  measure_DWork.UnitDelay3_DSTATE = measure_P.UnitDelay3_X0;
-  measure_DWork.UnitDelay1_DSTATE = measure_P.UnitDelay1_X0;
-  measure_DWork.UnitDelay2_DSTATE = measure_P.UnitDelay2_X0;
-  measure_DWork.UnitDelay1_DSTATE_o = measure_P.UnitDelay1_X0_a;
-  measure_DWork.UnitDelay2_DSTATE_k = measure_P.UnitDelay2_X0_c;
-  measure_DWork.UnitDelay1_DSTATE_g = measure_P.UnitDelay1_X0_m;
-  measure_DWork.UnitDelay2_DSTATE_e = measure_P.UnitDelay2_X0_e;
-  measure_DWork.UnitDelay4_DSTATE = measure_P.UnitDelay4_X0;
-  measure_DWork.UnitDelay2_DSTATE_h = measure_P.UnitDelay2_X0_j;
-  measure_DWork.delay_DSTATE_i2 = measure_P.delay_X0_jc;
-  measure_DWork.UnitDelay4_DSTATE_c = measure_P.UnitDelay4_X0_j;
-  measure_DWork.UnitDelay2_DSTATE_h5 = measure_P.UnitDelay2_X0_jc;
-  measure_DWork.UnitDelay4_DSTATE_cz = measure_P.UnitDelay4_X0_jc;
-  measure_DWork.UnitDelay2_DSTATE_h5b = measure_P.UnitDelay2_X0_jcf;
-  measure_DWork.delay_DSTATE_i2w = measure_P.delay_X0_jcf;
-  measure_DWork.UnitDelay4_DSTATE_czl = measure_P.UnitDelay4_X0_jcf;
-  measure_DWork.UnitDelay2_DSTATE_h5br = measure_P.UnitDelay2_X0_jcfa;
-  measure_DWork.UnitDelay4_DSTATE_czl4 = measure_P.UnitDelay4_X0_jcfa;
-  measure_DWork.UnitDelay2_DSTATE_h5brd = measure_P.UnitDelay2_X0_jcfaw;
-  measure_DWork.UnitDelay4_DSTATE_czl44 = measure_P.UnitDelay4_X0_jcfaw;
-  measure_DWork.UnitDelay2_DSTATE_h5brdq = measure_P.UnitDelay2_X0_jcfawy;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jx = measure_P.UnitDelay1_X0_jcfawyw;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jxq = measure_P.UnitDelay1_X0_jcfawyw2;
-  measure_DWork.delay1_DSTATE_ce = measure_P.delay1_X0_jc;
-  measure_DWork.UnitDelay4_DSTATE_czl44j = measure_P.UnitDelay4_X0_jcfawy;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqc = measure_P.UnitDelay2_X0_jcfawyw;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqci = measure_P.UnitDelay2_X0_jcfawyw2;
-  measure_DWork.delay_DSTATE_i2wj = measure_P.delay_X0_jcfa;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1 = measure_P.UnitDelay4_X0_jcfawyw;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqciz = measure_P.UnitDelay2_X0_jcfawyw2o;
-  measure_DWork.UnitDelay_DSTATE_lmdw = measure_P.UnitDelay_X0_jcfa;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jxqh = measure_P.UnitDelay1_X0_jcfawyw2o;
-  measure_DWork.UnitDelay1_DSTATE_k = measure_P.UnitDelay1_X0_h;
-  measure_DWork.UnitDelay2_DSTATE_kg = measure_P.UnitDelay2_X0_m;
-  measure_DWork.UnitDelay4_DSTATE_h = measure_P.UnitDelay4_X0_ll;
-  measure_DWork.UnitDelay1_DSTATE_aqjz = measure_P.UnitDelay1_X0_o;
-  measure_DWork.delay1_DSTATE_d = measure_P.delay1_X0_e;
-  measure_DWork.UnitDelay_DSTATE_p = measure_P.UnitDelay_X0_e;
-  measure_DWork.UnitDelay4_DSTATE_j = measure_P.UnitDelay4_X0_d;
-  measure_DWork.UnitDelay2_DSTATE_g = measure_P.UnitDelay2_X0_d;
-  measure_DWork.delay_DSTATE_iz = measure_P.delay_X0_e;
-  measure_DWork.UnitDelay4_DSTATE_jb = measure_P.UnitDelay4_X0_ds;
-  measure_DWork.UnitDelay2_DSTATE_gb = measure_P.UnitDelay2_X0_ds;
-  measure_DWork.UnitDelay4_DSTATE_jbk = measure_P.UnitDelay4_X0_dsc;
-  measure_DWork.UnitDelay2_DSTATE_gbj = measure_P.UnitDelay2_X0_dsc;
-  measure_DWork.UnitDelay4_DSTATE_jbkw = measure_P.UnitDelay4_X0_dsc5;
-  measure_DWork.UnitDelay2_DSTATE_gbjg = measure_P.UnitDelay2_X0_dsc5;
-  measure_DWork.UnitDelay1_DSTATE_aqjzx = measure_P.UnitDelay1_X0_k;
-  measure_DWork.UnitDelay4_DSTATE_jbkwm = measure_P.UnitDelay4_X0_d1;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk = measure_P.UnitDelay2_X0_d1;
-  measure_DWork.UnitDelay4_DSTATE_jbkwms = measure_P.UnitDelay4_X0_d1m;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5 = measure_P.UnitDelay2_X0_d1m;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq = measure_P.UnitDelay4_X0_d1m1;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5q = measure_P.UnitDelay2_X0_d1m1;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2 = measure_P.UnitDelay4_X0_d1m1h;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qb = measure_P.UnitDelay2_X0_d1m1h;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxp = measure_P.UnitDelay1_X0_ok;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2k = measure_P.UnitDelay4_X0_m;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx = measure_P.UnitDelay2_X0_m0;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv = measure_P.UnitDelay4_X0_m0;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx3 = measure_P.UnitDelay2_X0_m04;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2 = measure_P.UnitDelay4_X0_m04;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35 = measure_P.UnitDelay2_X0_m041;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2s = measure_P.UnitDelay4_X0_m041;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35b = measure_P.UnitDelay2_X0_m0413;
-  measure_DWork.delay1_DSTATE_dt = measure_P.delay1_X0_ep;
-  measure_DWork.UnitDelay3_DSTATE_i = measure_P.UnitDelay3_X0_a;
-  measure_DWork.delay1_DSTATE_dtd = measure_P.delay1_X0_ep3;
-  measure_DWork.UnitDelay4_DSTATE_jbkwmsq2kv2s4 = measure_P.UnitDelay4_X0_dsc5t;
-  measure_DWork.UnitDelay2_DSTATE_gbjgk5qbx35bv = measure_P.UnitDelay2_X0_dsc5t;
-  measure_DWork.delay_DSTATE_izx = measure_P.delay_X0_ep;
-  measure_DWork.UnitDelay4_DSTAT_jbkwmsq2kv2s4v = measure_P.UnitDelay4_X0_dsc5tt;
-  measure_DWork.UnitDelay2_DSTAT_gbjgk5qbx35bvz = measure_P.UnitDelay2_X0_dsc5tt;
-  measure_DWork.UnitDelay4_DSTA_jbkwmsq2kv2s4vv =
-    measure_P.UnitDelay4_X0_dsc5ttd;
-  measure_DWork.UnitDelay2_DSTA_gbjgk5qbx35bvzo =
-    measure_P.UnitDelay2_X0_dsc5ttd;
-  measure_DWork.UnitDelay4_DSTA_g = measure_P.UnitDelay4_X0_dsc5ttdh;
-  measure_DWork.UnitDelay2_DSTA_i = measure_P.UnitDelay2_X0_dsc5ttdh;
-  measure_DWork.UnitDelay4_DSTA_n = measure_P.UnitDelay4_X0_mz;
-  measure_DWork.UnitDelay2_DSTA_a = measure_P.UnitDelay2_X0_mz;
-  measure_DWork.delay_DSTATE_izxx = measure_P.delay_X0_ep3;
-  measure_DWork.UnitDelay4_DSTA_d = measure_P.UnitDelay4_X0_mzl;
-  measure_DWork.UnitDelay2_DSTA_ai = measure_P.UnitDelay2_X0_mzl;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpn = measure_P.UnitDelay1_X0_od;
-  measure_DWork.UnitDelay_DSTATE_mj2f = measure_P.UnitDelay_X0_k;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnn = measure_P.UnitDelay1_X0_ki;
-  measure_DWork.UnitDelay_DSTATE_m = measure_P.UnitDelay_X0_p;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnno = measure_P.UnitDelay1_X0_kix;
-  measure_DWork.UnitDelay1_DSTATE_a = measure_P.UnitDelay1_X0_d;
-  measure_DWork.UnitDelay_DSTATE_i = measure_P.UnitDelay_X0_f;
-  measure_DWork.UnitDelay1_DSTATE_aq = measure_P.UnitDelay1_X0_d1;
-  measure_DWork.UnitDelay_DSTATE_ia = measure_P.UnitDelay_X0_fc;
-  measure_DWork.UnitDelay1_DSTATE_aqj = measure_P.UnitDelay1_X0_m0;
-  measure_DWork.UnitDelay_DSTATE_iah = measure_P.UnitDelay_X0_fcb;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4 = measure_P.UnitDelay1_X0_kc;
-  measure_DWork.UnitDelay_DSTATE_mj2fm = measure_P.UnitDelay_X0_ma;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4m = measure_P.UnitDelay1_X0_ma;
-  measure_DWork.UnitDelay_DSTATE_mj = measure_P.UnitDelay_X0_o;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml = measure_P.UnitDelay1_X0_maw;
-  measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml3 = measure_P.UnitDelay1_X0_okw;
-  measure_DWork.UnitDelay_DSTATE_mj2fmb = measure_P.UnitDelay_X0_my;
-  measure_DWork.UnitDelay1_DSTAT_aqjzxpnno4ml3e = measure_P.UnitDelay1_X0_my;
-  measure_DWork.UnitDelay_DSTATE_mj2 = measure_P.UnitDelay_X0_jn;
-  measure_DWork.UnitDelay1_DSTA_aqjzxpnno4ml3e2 = measure_P.UnitDelay1_X0_my5;
-  measure_DWork.UnitDelay3_DSTATE_i5 = measure_P.UnitDelay3_X0_i;
-  measure_DWork.UnitDelay4_DSTA_i = measure_P.UnitDelay4_X0_d1m1hi;
-  measure_DWork.UnitDelay2_DSTA_m = measure_P.UnitDelay2_X0_d1m1hi;
-  measure_DWork.UnitDelay4_DSTA_n3 = measure_P.UnitDelay4_X0_d1m1hiq;
-  measure_DWork.UnitDelay2_DSTA_il = measure_P.UnitDelay2_X0_d1m1hiq;
-  measure_DWork.UnitDelay4_DSTA_a = measure_P.UnitDelay4_X0_d1m1hiqr;
-  measure_DWork.UnitDelay2_DSTA_b = measure_P.UnitDelay2_X0_d1m1hiqr;
-  measure_DWork.UnitDelay4_DSTA_j = measure_P.UnitDelay4_X0_d1m1hiqru;
-  measure_DWork.UnitDelay2_DSTA_h = measure_P.UnitDelay2_X0_d1m1hiqru;
-  measure_DWork.UnitDelay4_DSTA_p = measure_P.UnitDelay4_X0_o;
-  measure_DWork.UnitDelay2_DSTA_o = measure_P.UnitDelay2_X0_o;
-  measure_DWork.UnitDelay4_DSTA_jg = measure_P.UnitDelay4_X0_on;
-  measure_DWork.UnitDelay2_DSTA_f = measure_P.UnitDelay2_X0_on;
-  measure_DWork.UnitDelay3_DSTATE_i5z = measure_P.UnitDelay3_X0_o;
-  measure_DWork.UnitDelay4_DSTA_ih = measure_P.UnitDelay4_X0_m0413;
-  measure_DWork.UnitDelay2_DSTA_j = measure_P.UnitDelay2_X0_m0413r;
-  measure_DWork.UnitDelay4_DSTA_m = measure_P.UnitDelay4_X0_m0413r;
-  measure_DWork.UnitDelay2_DSTA_jm = measure_P.UnitDelay2_X0_m0413rf;
-  measure_DWork.UnitDelay4_DSTA_j5 = measure_P.UnitDelay4_X0_m0413rf;
-  measure_DWork.UnitDelay2_DSTA_c = measure_P.UnitDelay2_X0_m0413rfk;
-  measure_DWork.UnitDelay4_DSTA_dj = measure_P.UnitDelay4_X0_m0413rfk;
-  measure_DWork.UnitDelay2_DSTA_cm = measure_P.UnitDelay2_X0_m0413rfkr;
-  measure_DWork.UnitDelay4_DSTA_l = measure_P.UnitDelay4_X0_a;
-  measure_DWork.UnitDelay2_DSTA_p = measure_P.UnitDelay2_X0_a;
-  measure_DWork.UnitDelay4_DSTA_h = measure_P.UnitDelay4_X0_ao;
-  measure_DWork.UnitDelay2_DSTA_bf = measure_P.UnitDelay2_X0_ao;
-  measure_DWork.delay1_DSTATE_k = measure_P.delay1_X0_m;
-  measure_DWork.UnitDelay4_DSTATE_e = measure_P.UnitDelay4_X0_mq;
-  measure_DWork.UnitDelay2_DSTATE_e5 = measure_P.UnitDelay2_X0_mq;
-  measure_DWork.UnitDelay2_DSTATE_e5y = measure_P.UnitDelay2_X0_mqc;
-  measure_DWork.delay_DSTATE_j = measure_P.delay_X0_m;
-  measure_DWork.UnitDelay4_DSTATE_ed = measure_P.UnitDelay4_X0_mqc;
-  measure_DWork.UnitDelay2_DSTATE_e5yc = measure_P.UnitDelay2_X0_mqco;
-  measure_DWork.UnitDelay_DSTATE_ot = measure_P.UnitDelay_X0_mq;
-  measure_DWork.UnitDelay_DSTATE_k = measure_P.UnitDelay_X0_h;
-  measure_DWork.delay1_DSTATE_b = measure_P.delay1_X0_h;
-  measure_DWork.UnitDelay1_DSTATE_k2 = measure_P.UnitDelay1_X0_hu;
-  measure_DWork.UnitDelay4_DSTA_mm = measure_P.UnitDelay4_X0_dsc5ttdhq;
-  measure_DWork.UnitDelay2_DSTA_hi = measure_P.UnitDelay2_X0_dsc5ttdhq;
-  measure_DWork.UnitDelay4_DSTA_pb = measure_P.UnitDelay4_X0_dsc5ttdhqk;
-  measure_DWork.UnitDelay2_DSTA_iy = measure_P.UnitDelay2_X0_dsc5ttdhqk;
-  measure_DWork.UnitDelay4_DSTA_md = measure_P.UnitDelay4_X0_dsc5ttdhqkx;
-  measure_DWork.UnitDelay2_DSTA_c0 = measure_P.UnitDelay2_X0_dsc5ttdhqkx;
-  measure_DWork.UnitDelay4_DSTA_f = measure_P.UnitDelay4_X0_dsc5ttdhqkxi;
-  measure_DWork.UnitDelay2_DSTA_cq = measure_P.UnitDelay2_X0_dsc5ttdhqkxi;
-  measure_DWork.UnitDelay4_DSTA_ps = measure_P.UnitDelay4_X0_d1m1hiqruq;
-  measure_DWork.UnitDelay2_DSTA_d = measure_P.UnitDelay2_X0_d1m1hiqruq;
-  measure_DWork.UnitDelay4_DSTA_k = measure_P.UnitDelay4_X0_d1m1hiqruqx;
-  measure_DWork.UnitDelay2_DSTA_o3 = measure_P.UnitDelay2_X0_d1m1hiqruqx;
-  measure_DWork.UnitDelay4_DSTA_mw = measure_P.UnitDelay4_X0_d1m1hiqruqxi;
-  measure_DWork.UnitDelay2_DSTA_d1 = measure_P.UnitDelay2_X0_d1m1hiqruqxi;
-  measure_DWork.UnitDelay4_DSTA_jz = measure_P.UnitDelay4_X0_d1m1hiqruqxix;
-  measure_DWork.UnitDelay2_DSTA_l = measure_P.UnitDelay2_X0_d1m1hiqruqxix;
-  measure_DWork.UnitDelay4_DSTA_hx = measure_P.UnitDelay4_X0_m0413rfkr;
-  measure_DWork.UnitDelay2_DSTA_k = measure_P.UnitDelay2_X0_m0413rfkrd;
-  measure_DWork.UnitDelay4_DSTA_p4 = measure_P.UnitDelay4_X0_m0413rfkrd;
-  measure_DWork.UnitDelay2_DSTA_lz = measure_P.UnitDelay2_X0_m0413rfkrd2;
-  measure_DWork.UnitDelay4_DSTA_b = measure_P.UnitDelay4_X0_m0413rfkrd2;
-  measure_DWork.UnitDelay2_DSTA_ls = measure_P.UnitDelay2_X0_m0413rfkrd2o;
-  measure_DWork.UnitDelay4_DSTA_ay = measure_P.UnitDelay4_X0_m0413rfkrd2o;
-  measure_DWork.UnitDelay2_DSTA_a3 = measure_P.UnitDelay2_X0_m0413rfkrd2oa;
-  measure_DWork.UnitDelay1_DSTATE_f = measure_P.UnitDelay1_X0_f;
-  measure_DWork.UnitDelay2_DSTATE_m = measure_P.UnitDelay2_X0_mu;
-  measure_DWork.UnitDelay4_DSTATE_d = measure_P.UnitDelay4_X0_e;
-  measure_DWork.UnitDelay2_DSTATE_kx = measure_P.UnitDelay2_X0_e1;
-  measure_DWork.UnitDelay4_DSTATE_do = measure_P.UnitDelay4_X0_e1;
-  measure_DWork.UnitDelay2_DSTATE_kxh = measure_P.UnitDelay2_X0_e1r;
-  measure_DWork.UnitDelay4_DSTATE_dot = measure_P.UnitDelay4_X0_e1r;
-  measure_DWork.UnitDelay2_DSTATE_kxh1 = measure_P.UnitDelay2_X0_e1ro;
-  measure_DWork.UnitDelay4_DSTATE_dotl = measure_P.UnitDelay4_X0_e1ro;
-  measure_DWork.UnitDelay2_DSTATE_kxh1d = measure_P.UnitDelay2_X0_e1ror;
-  measure_DWork.UnitDelay4_DSTATE_dotln = measure_P.UnitDelay4_X0_e1ror;
-  measure_DWork.UnitDelay2_DSTATE_kxh1dd = measure_P.UnitDelay2_X0_e1rorg;
-  measure_DWork.UnitDelay4_DSTATE_dotlnl = measure_P.UnitDelay4_X0_e1rorg;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb = measure_P.UnitDelay2_X0_e1rorg3;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp = measure_P.UnitDelay4_X0_e1rorg3;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb3 = measure_P.UnitDelay2_X0_e1rorg3e;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0 = measure_P.UnitDelay4_X0_e1rorg3e;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb33 = measure_P.UnitDelay2_X0_e1rorg3e1;
-  measure_DWork.UnitDelay1_DSTATE_d = measure_P.UnitDelay1_X0_az;
-  measure_DWork.UnitDelay2_DSTATE_d = measure_P.UnitDelay2_X0_n;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0w = measure_P.UnitDelay4_X0_e1rorg3e1;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb33g =
-    measure_P.UnitDelay2_X0_e1rorg3e1h;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0wv =
-    measure_P.UnitDelay4_X0_e1rorg3e1h;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gq =
-    measure_P.UnitDelay2_X0_e1rorg3e1hu;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvp =
-    measure_P.UnitDelay4_X0_e1rorg3e1hu;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gqp =
-    measure_P.UnitDelay2_X0_e1rorg3e1hup;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvpy =
-    measure_P.UnitDelay4_X0_e1rorg3e1hup;
-  measure_DWork.UnitDelay2_DSTATE_kxh1ddb33gqpf =
-    measure_P.UnitDelay2_X0_e1rorg3e1hupm;
-  measure_DWork.UnitDelay4_DSTATE_dotlnlp0wvpya =
-    measure_P.UnitDelay4_X0_e1rorg3e1hupm;
-  measure_DWork.UnitDelay2_DSTAT_kxh1ddb33gqpfj =
-    measure_P.UnitDelay2_X0_e1rorg3e1hupmn;
-  measure_DWork.UnitDelay4_DSTAT_dotlnlp0wvpyar =
-    measure_P.UnitDelay4_X0_e1rorg3e1hupmn;
-  measure_DWork.UnitDelay2_DSTA_kxh1ddb33gqpfjt =
-    measure_P.UnitDelay2_X0_e1rorg3e1hupmn0;
-  measure_DWork.UnitDelay4_DSTA_dotlnlp0wvpyari =
-    measure_P.UnitDelay4_X0_e1rorg3e1hupmn0;
-  measure_DWork.UnitDelay2_DSTA_n = measure_P.UnitDelay2_X0_cb;
-  measure_DWork.UnitDelay4_DSTA_ls = measure_P.UnitDelay4_X0_c;
-  measure_DWork.UnitDelay2_DSTA_oz = measure_P.UnitDelay2_X0_h;
-  measure_DWork.UnitDelay1_DSTATE_b = measure_P.UnitDelay1_X0_mx;
-  measure_DWork.UnitDelay2_DSTATE_kb = measure_P.UnitDelay2_X0_ne;
-  measure_DWork.UnitDelay4_DSTA_gs = measure_P.UnitDelay4_X0_h;
-  measure_DWork.UnitDelay2_DSTA_e = measure_P.UnitDelay2_X0_om;
-  measure_DWork.UnitDelay4_DSTA_hxo = measure_P.UnitDelay4_X0_om;
-  measure_DWork.UnitDelay2_DSTA_pl = measure_P.UnitDelay2_X0_k;
-  measure_DWork.UnitDelay4_DSTA_gn = measure_P.UnitDelay4_X0_k;
-  measure_DWork.UnitDelay2_DSTA_ck = measure_P.UnitDelay2_X0_b;
-  measure_DWork.UnitDelay4_DSTA_pz = measure_P.UnitDelay4_X0_b;
-  measure_DWork.UnitDelay2_DSTA_cs = measure_P.UnitDelay2_X0_cj;
-  measure_DWork.UnitDelay4_DSTA_d2 = measure_P.UnitDelay4_X0_cj;
-  measure_DWork.UnitDelay2_DSTA_fe = measure_P.UnitDelay2_X0_di;
-  measure_DWork.UnitDelay4_DSTA_mz = measure_P.UnitDelay4_X0_di;
-  measure_DWork.UnitDelay2_DSTA_cx = measure_P.UnitDelay2_X0_l;
-  measure_DWork.UnitDelay4_DSTA_am = measure_P.UnitDelay4_X0_l;
-  measure_DWork.UnitDelay2_DSTA_n1 = measure_P.UnitDelay2_X0_ly;
-  measure_DWork.UnitDelay4_DSTA_nh = measure_P.UnitDelay4_X0_ly;
-  measure_DWork.UnitDelay2_DSTA_ko = measure_P.UnitDelay2_X0_f;
-  measure_DWork.UnitDelay4_DSTA_fu = measure_P.UnitDelay4_X0_f;
-  measure_DWork.UnitDelay2_DSTA_ef = measure_P.UnitDelay2_X0_hs;
-  measure_DWork.UnitDelay4_DSTA_m5 = measure_P.UnitDelay4_X0_hs;
-  measure_DWork.UnitDelay2_DSTA_mh = measure_P.UnitDelay2_X0_ma;
-  measure_DWork.UnitDelay4_DSTA_e = measure_P.UnitDelay4_X0_ma;
-  measure_DWork.UnitDelay2_DSTA_or = measure_P.UnitDelay2_X0_c1;
-  measure_DWork.UnitDelay4_DSTA_ju = measure_P.UnitDelay4_X0_c1;
-  measure_DWork.UnitDelay2_DSTA_lt = measure_P.UnitDelay2_X0_ai;
-  measure_DWork.UnitDelay4_DSTA_hz = measure_P.UnitDelay4_X0_ai;
-  measure_DWork.UnitDelay2_DSTA_fq = measure_P.UnitDelay2_X0_p;
-  measure_DWork.UnitDelay4_DSTA_mb = measure_P.UnitDelay4_X0_p;
-  measure_DWork.UnitDelay2_DSTA_d0 = measure_P.UnitDelay2_X0_hu;
-  measure_DWork.UnitDelay4_DSTA_fp = measure_P.UnitDelay4_X0_hu;
-  measure_DWork.UnitDelay2_DSTA_mf = measure_P.UnitDelay2_X0_bg;
-  measure_DWork.UnitDelay4_DSTA_pm = measure_P.UnitDelay4_X0_bg;
-  measure_DWork.UnitDelay2_DSTA_pz = measure_P.UnitDelay2_X0_ob;
-  measure_DWork.UnitDelay4_DSTA_gf = measure_P.UnitDelay4_X0_ob;
-  measure_DWork.UnitDelay2_DSTA_g = measure_P.UnitDelay2_X0_g;
-  measure_DWork.UnitDelay4_DSTA_hc = measure_P.UnitDelay4_X0_g;
-  measure_DWork.UnitDelay2_DSTA_hh = measure_P.UnitDelay2_X0_nx;
-  measure_DWork.UnitDelay4_DSTA_gv = measure_P.UnitDelay4_X0_n;
-  measure_DWork.UnitDelay2_DSTA_cs5 = measure_P.UnitDelay2_X0_ec;
-  measure_DWork.UnitDelay4_DSTA_g0 = measure_P.UnitDelay4_X0_ec;
-  measure_DWork.UnitDelay2_DSTA_fb = measure_P.UnitDelay2_X0_ks;
-  measure_DWork.UnitDelay4_DSTATE_o = measure_P.UnitDelay4_X0_ph;
-  measure_DWork.UnitDelay2_DSTATE_n = measure_P.UnitDelay2_X0_db;
-  measure_DWork.UnitDelay4_DSTATE_eq = measure_P.UnitDelay4_X0_gm;
-  measure_DWork.UnitDelay2_DSTATE_a = measure_P.UnitDelay2_X0_lt;
-  measure_DWork.UnitDelay4_DSTATE_g = measure_P.UnitDelay4_X0_lh;
-  measure_DWork.UnitDelay2_DSTATE_dq = measure_P.UnitDelay2_X0_gs;
-  measure_DWork.UnitDelay4_DSTATE_je = measure_P.UnitDelay4_X0_hh;
-  measure_DWork.UnitDelay2_DSTATE_o = measure_P.UnitDelay2_X0_pu;
-  measure_DWork.UnitDelay4_DSTATE_e1 = measure_P.UnitDelay4_X0_hp;
-  measure_DWork.UnitDelay2_DSTATE_c = measure_P.UnitDelay2_X0_d2;
-  measure_DWork.UnitDelay4_DSTATE_i = measure_P.UnitDelay4_X0_jg;
-  measure_DWork.UnitDelay2_DSTATE_f = measure_P.UnitDelay2_X0_oe;
-  measure_DWork.UnitDelay4_DSTATE_m = measure_P.UnitDelay4_X0_n1;
-  measure_DWork.UnitDelay2_DSTATE_gs = measure_P.UnitDelay2_X0_i;
-  measure_DWork.UnitDelay4_DSTATE_n = measure_P.UnitDelay4_X0_i;
-  measure_DWork.UnitDelay2_DSTATE_p = measure_P.UnitDelay2_X0_gr;
-  measure_DWork.UnitDelay4_DSTATE_jf = measure_P.UnitDelay4_X0_at;
-  measure_DWork.UnitDelay2_DSTATE_h2 = measure_P.UnitDelay2_X0_j3;
-  measure_DWork.UnitDelay4_DSTATE_l = measure_P.UnitDelay4_X0_ce;
-  measure_DWork.UnitDelay2_DSTATE_ai = measure_P.UnitDelay2_X0_kr;
-  measure_DWork.UnitDelay4_DSTATE_co = measure_P.UnitDelay4_X0_ga;
-  measure_DWork.UnitDelay2_DSTATE_l = measure_P.UnitDelay2_X0_il;
-  measure_DWork.UnitDelay4_DSTATE_j5 = measure_P.UnitDelay4_X0_b1;
-  measure_DWork.UnitDelay2_DSTATE_cm = measure_P.UnitDelay2_X0_h0;
-  measure_DWork.RateTransition_Buffer0 = measure_P.RateTransition_X0;
-  measure_DWork.RateTransition_Buffer0_l = measure_P.RateTransition_X0_p;
-  measure_DWork.RateTransition_Buffer0_b = measure_P.RateTransition_X0_k;
-  measure_DWork.RateTransition_Buffer0_a[0] = measure_P.RateTransition_X0_e;
-  measure_DWork.RateTransition_Buffer0_a[1] = measure_P.RateTransition_X0_e;
-  measure_DWork.RateTransition_Buffer0_a[2] = measure_P.RateTransition_X0_e;
-  measure_DWork.RateTransition_Buffer0_a[3] = measure_P.RateTransition_X0_e;
-  measure_DWork.RateTransition_Buffer0_j[0] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_j[1] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_j[2] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_j[3] = measure_P.RateTransition_X0_l;
-  measure_DWork.RateTransition_Buffer0_ak[0] = measure_P.RateTransition_X0_j;
-  measure_DWork.RateTransition_Buffer0_ak[1] = measure_P.RateTransition_X0_j;
-  measure_DWork.RateTransition_Buffer0_ak[2] = measure_P.RateTransition_X0_j;
-  measure_DWork.RateTransition_Buffer0_ak[3] = measure_P.RateTransition_X0_j;
-  measure_DWork.RateTransition_Buffer0_h[0] = measure_P.RateTransition_X0_c;
-  measure_DWork.RateTransition_Buffer0_h[1] = measure_P.RateTransition_X0_c;
-  measure_DWork.RateTransition_Buffer0_h[2] = measure_P.RateTransition_X0_c;
-  measure_DWork.RateTransition_Buffer0_h[3] = measure_P.RateTransition_X0_c;
-  measure_DWork.RateTransition_Buffer0_g[0] = measure_P.RateTransition_X0_f;
-  measure_DWork.RateTransition_Buffer0_g[1] = measure_P.RateTransition_X0_f;
-  measure_DWork.RateTransition_Buffer0_g[2] = measure_P.RateTransition_X0_f;
-  measure_DWork.RateTransition_Buffer0_g[3] = measure_P.RateTransition_X0_f;
-  measure_DWork.RateTransition_Buffer0_hn[0] = measure_P.RateTransition_X0_pv;
-  measure_DWork.RateTransition_Buffer0_hn[1] = measure_P.RateTransition_X0_pv;
-  measure_DWork.RateTransition_Buffer0_hn[2] = measure_P.RateTransition_X0_pv;
-  measure_DWork.RateTransition_Buffer0_hn[3] = measure_P.RateTransition_X0_pv;
-  measure_DWork.RateTransition_Buffer0_e[0] = measure_P.RateTransition_X0_jr;
-  measure_DWork.RateTransition_Buffer0_e[1] = measure_P.RateTransition_X0_jr;
-  measure_DWork.RateTransition_Buffer0_e[2] = measure_P.RateTransition_X0_jr;
-  measure_DWork.RateTransition_Buffer0_e[3] = measure_P.RateTransition_X0_jr;
-  measure_DWork.RateTransition_Buffer0_lm[0] = measure_P.RateTransition_X0_lt;
-  measure_DWork.RateTransition_Buffer0_lm[1] = measure_P.RateTransition_X0_lt;
-  measure_DWork.RateTransition_Buffer0_lm[2] = measure_P.RateTransition_X0_lt;
-  measure_DWork.RateTransition_Buffer0_lm[3] = measure_P.RateTransition_X0_lt;
-  measure_DWork.RateTransition_Buffer0_az[0] = measure_P.RateTransition_X0_b;
-  measure_DWork.RateTransition_Buffer0_az[1] = measure_P.RateTransition_X0_b;
-  measure_DWork.RateTransition_Buffer0_az[2] = measure_P.RateTransition_X0_b;
-  measure_DWork.RateTransition_Buffer0_az[3] = measure_P.RateTransition_X0_b;
-  measure_DWork.RateTransition_Buffer0_m = measure_P.RateTransition_X0_fm;
-  measure_DWork.RateTransition_Buffer0_bh = measure_P.RateTransition_X0_n;
-  measure_DWork.RateTransition_Buffer0_o = measure_P.RateTransition_X0_pq;
-  measure_DWork.RateTransition_Buffer0_aq[0] = measure_P.RateTransition_X0_bd;
-  measure_DWork.RateTransition_Buffer0_aq[1] = measure_P.RateTransition_X0_bd;
-  measure_DWork.RateTransition_Buffer0_aq[2] = measure_P.RateTransition_X0_bd;
-  measure_DWork.RateTransition_Buffer0_aq[3] = measure_P.RateTransition_X0_bd;
-  measure_DWork.RateTransition_Buffer0_oh[0] = measure_P.RateTransition_X0_m;
-  measure_DWork.RateTransition_Buffer0_oh[1] = measure_P.RateTransition_X0_m;
-  measure_DWork.RateTransition_Buffer0_oh[2] = measure_P.RateTransition_X0_m;
-  measure_DWork.RateTransition_Buffer0_oh[3] = measure_P.RateTransition_X0_m;
-  measure_DWork.RateTransition_Buffer0_lg[0] = measure_P.RateTransition_X0_jt;
-  measure_DWork.RateTransition_Buffer0_lg[1] = measure_P.RateTransition_X0_jt;
-  measure_DWork.RateTransition_Buffer0_lg[2] = measure_P.RateTransition_X0_jt;
-  measure_DWork.RateTransition_Buffer0_lg[3] = measure_P.RateTransition_X0_jt;
-  measure_DWork.RateTransition_Buffer0_n[0] = measure_P.RateTransition_X0_d;
-  measure_DWork.RateTransition_Buffer0_n[1] = measure_P.RateTransition_X0_d;
-  measure_DWork.RateTransition_Buffer0_n[2] = measure_P.RateTransition_X0_d;
-  measure_DWork.RateTransition_Buffer0_n[3] = measure_P.RateTransition_X0_d;
-  measure_DWork.RateTransition_Buffer0_c[0] = measure_P.RateTransition_X0_fr;
-  measure_DWork.RateTransition_Buffer0_c[1] = measure_P.RateTransition_X0_fr;
-  measure_DWork.RateTransition_Buffer0_c[2] = measure_P.RateTransition_X0_fr;
-  measure_DWork.RateTransition_Buffer0_c[3] = measure_P.RateTransition_X0_fr;
-  measure_DWork.RateTransition_Buffer0_cq[0] = measure_P.RateTransition_X0_bf;
-  measure_DWork.RateTransition_Buffer0_cq[1] = measure_P.RateTransition_X0_bf;
-  measure_DWork.RateTransition_Buffer0_cq[2] = measure_P.RateTransition_X0_bf;
-  measure_DWork.RateTransition_Buffer0_cq[3] = measure_P.RateTransition_X0_bf;
-  measure_DWork.RateTransition_Buffer0_mb[0] = measure_P.RateTransition_X0_ny;
-  measure_DWork.RateTransition_Buffer0_mb[1] = measure_P.RateTransition_X0_ny;
-  measure_DWork.RateTransition_Buffer0_mb[2] = measure_P.RateTransition_X0_ny;
-  measure_DWork.RateTransition_Buffer0_mb[3] = measure_P.RateTransition_X0_ny;
-  measure_DWork.RateTransition_Buffer0_of[0] = measure_P.RateTransition_X0_jq;
-  measure_DWork.RateTransition_Buffer0_of[1] = measure_P.RateTransition_X0_jq;
-  measure_DWork.RateTransition_Buffer0_of[2] = measure_P.RateTransition_X0_jq;
-  measure_DWork.RateTransition_Buffer0_of[3] = measure_P.RateTransition_X0_jq;
-  measure_DWork.RateTransition_Buffer0_jc[0] = measure_P.RateTransition_X0_g;
-  measure_DWork.RateTransition_Buffer0_jc[1] = measure_P.RateTransition_X0_g;
-  measure_DWork.RateTransition_Buffer0_jc[2] = measure_P.RateTransition_X0_g;
-  measure_DWork.RateTransition_Buffer0_jc[3] = measure_P.RateTransition_X0_g;
-  measure_DWork.RateTransition_Buffer0_k = measure_P.RateTransition_X0_le;
-  measure_DWork.RateTransition_Buffer0_ki = measure_P.RateTransition_X0_e5;
-  measure_DWork.RateTransition_Buffer0_jr = measure_P.RateTransition_X0_lea;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhw =
-    measure_P.UnitDelay1_X0_jcfawyw2o0;
-  measure_DWork.delay_DSTATE_i2wj4 = measure_P.delay_X0_jcfaw;
-  measure_DWork.UnitDelay_DSTATE_lmdwo = measure_P.UnitDelay_X0_jcfaw;
-  measure_DWork.UnitDelay_DSTATE_lmdwo300 = measure_P.UnitDelay_X0_jcfawyw2;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwr =
-    measure_P.UnitDelay1_X0_jcfawyw2o0o;
-  measure_DWork.UnitDelay_DSTATE_lmdwo300i = measure_P.UnitDelay_X0_jcfawyw2o;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3jxqhwrm =
-    measure_P.UnitDelay1_X0_jcfawyw2o0os;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1i = measure_P.UnitDelay4_X0_jcfawyw2;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqciz0 =
-    measure_P.UnitDelay2_X0_jcfawyw2o0;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1ip = measure_P.UnitDelay4_X0_jcfawyw2o;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j =
-    measure_P.UnitDelay2_X0_jcfawyw2o0o;
-  measure_DWork.UnitDelay1_DSTATE_c = measure_P.UnitDelay1_X0_j;
-  measure_DWork.UnitDelay_DSTATE_lmdwo3 = measure_P.UnitDelay_X0_jcfawy;
-  measure_DWork.UnitDelay2_DSTAT_h5brdqciz0j45w =
-    measure_P.UnitDelay2_X0_jcfawyw2o0osk2;
-  measure_DWork.UnitDelay_DSTATE_lmd = measure_P.UnitDelay_X0_jcf;
-  measure_DWork.delay_DSTATE_i2wj4d = measure_P.delay_X0_jcfawy;
-  measure_DWork.delay1_DSTATE_ces = measure_P.delay1_X0_jcf;
-  measure_DWork.UnitDelay_DSTATE_lmdwo300ig = measure_P.UnitDelay_X0_jcfawyw2o0;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j4 =
-    measure_P.UnitDelay2_X0_jcfawyw2o0os;
-  measure_DWork.UnitDelay1_DSTATE_cm = measure_P.UnitDelay1_X0_jc;
-  measure_DWork.UnitDelay1_DSTATE_cmn = measure_P.UnitDelay1_X0_jcf;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1ipa =
-    measure_P.UnitDelay4_X0_jcfawyw2o0;
-  measure_DWork.UnitDelay1_DSTATE_cmnb = measure_P.UnitDelay1_X0_jcfa;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3 = measure_P.UnitDelay1_X0_jcfaw;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3j = measure_P.UnitDelay1_X0_jcfawy;
-  measure_DWork.UnitDelay_DSTATE_lmdwo30 = measure_P.UnitDelay_X0_jcfawyw;
-  measure_DWork.UnitDelay1_DSTATE_j = measure_P.UnitDelay1_X0_b;
-  measure_DWork.delay_DSTATE_h = measure_P.delay_X0_h;
-  measure_DWork.UnitDelay_DSTATE_pd = measure_P.UnitDelay_X0_he;
-  measure_DWork.UnitDelay_DSTATE_pdo = measure_P.UnitDelay_X0_heb;
-  measure_DWork.UnitDelay1_DSTATE_ac = measure_P.UnitDelay1_X0_he;
-  measure_DWork.UnitDelay_DSTATE_pdoi = measure_P.UnitDelay_X0_hebr;
-  measure_DWork.UnitDelay1_DSTATE_ac4 = measure_P.UnitDelay1_X0_heb;
-  measure_DWork.UnitDelay3_DSTATE_i5z5 = measure_P.UnitDelay3_X0_ap;
-  measure_DWork.UnitDelay3_DSTATE_i5z5o = measure_P.UnitDelay3_X0_i2;
-  measure_DWork.UnitDelay3_DSTATE_i5z5oq = measure_P.UnitDelay3_X0_or;
-  measure_DWork.UnitDelay4_DSTATE_edu = measure_P.UnitDelay4_X0_mqco;
-  measure_DWork.UnitDelay2_DSTATE_e5yc1 = measure_P.UnitDelay2_X0_mqco2;
-  measure_DWork.UnitDelay4_DSTATE_edua = measure_P.UnitDelay4_X0_mqco2;
-  measure_DWork.UnitDelay2_DSTATE_e5yc1i = measure_P.UnitDelay2_X0_mqco2g;
-  measure_DWork.UnitDelay1_DSTATE_dg = measure_P.UnitDelay1_X0_mq;
-  measure_DWork.UnitDelay_DSTATE_otr = measure_P.UnitDelay_X0_mqc;
-  measure_DWork.UnitDelay2_DSTATE_e5yc1iho = measure_P.UnitDelay2_X0_mqco2gbu;
-  measure_DWork.UnitDelay_DSTATE_o = measure_P.UnitDelay_X0_m;
-  measure_DWork.delay_DSTATE_j0 = measure_P.delay_X0_mq;
-  measure_DWork.delay1_DSTATE_kz = measure_P.delay1_X0_mq;
-  measure_DWork.UnitDelay_DSTATE_otrxo = measure_P.UnitDelay_X0_mqco2;
-  measure_DWork.UnitDelay2_DSTATE_e5yc1ih = measure_P.UnitDelay2_X0_mqco2gb;
-  measure_DWork.UnitDelay1_DSTATE_dgz = measure_P.UnitDelay1_X0_mqc;
-  measure_DWork.UnitDelay1_DSTATE_dgzm = measure_P.UnitDelay1_X0_mqco;
-  measure_DWork.UnitDelay4_DSTATE_eduao = measure_P.UnitDelay4_X0_mqco2g;
-  measure_DWork.UnitDelay1_DSTATE_dgzmv = measure_P.UnitDelay1_X0_mqco2;
-  measure_DWork.UnitDelay1_DSTATE_dgzmvr = measure_P.UnitDelay1_X0_mqco2g;
-  measure_DWork.UnitDelay1_DSTATE_dgzmvrp = measure_P.UnitDelay1_X0_mqco2gb;
-  measure_DWork.UnitDelay_DSTATE_otrx = measure_P.UnitDelay_X0_mqco;
-  measure_DWork.RateTransition_Buffer0_kg = measure_P.RateTransition_X0_ns;
-  measure_DWork.RateTransition_Buffer0_hw = measure_P.RateTransition_X0_o;
-  measure_DWork.RateTransition_Buffer0_kc = measure_P.RateTransition_X0_k5;
 }
 
 measureModelClass::measureModelClass()
@@ -11336,14 +11001,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -11357,14 +11035,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -11378,14 +11069,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
     4000.0,
     4000.0,
     0.0,
@@ -11489,14 +11193,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -11510,14 +11227,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
     3.1415926535897931,
     6.2831853071795862,
     0.03125,
@@ -11531,14 +11261,27 @@ measureModelClass::measureModelClass()
     3.1415926535897931,
     6.2831853071795862,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { 1.5707963267948966, 3.1415926535897931, 4.71238898038469,
-      6.2831853071795862 },
+      6.2831853071795862, 7.8539816339744828, 9.42477796076938,
+      10.995574287564276, 12.566370614359172, 14.137166941154069,
+      15.707963267948966, 17.27875959474386, 18.849555921538759,
+      20.420352248333657, 21.991148575128552, 23.561944901923447,
+      25.132741228718345, 26.703537555513243, 28.274333882308138,
+      29.845130209103033, 31.415926535897931, 32.986722862692829,
+      34.557519189487721, 36.128315516282619, 37.699111843077517,
+      39.269908169872416, 40.840704496667314, 42.411500823462205,
+      43.982297150257104, 45.553093477052, 47.123889803846893,
+      48.694686130641792 },
     0.0,
     1.0E-9,
 
-    { 2.0, 3.0, 4.0, 5.0 },
+    { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0,
+      16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0,
+      28.0, 29.0, 30.0, 31.0, 32.0 },
 
     { { 1.0, 0.0 }, { -0.49999999999999978, -0.86602540378443871 }, { -
         0.49999999999999978, 0.86602540378443871 } },
