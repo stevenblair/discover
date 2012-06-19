@@ -22,7 +22,7 @@ public:
 
     void setup(Stream *stream);
     void appendFreqPoint(quint32 i, qreal x, qreal y) {
-        if (i >= 0 && i < 8) {
+        if (i >= 0 && i < TOTAL_SIGNALS) {
             this->freq[i].append(QPointF(x, y));
         }
     }
@@ -118,10 +118,10 @@ private:
 
     bool analysed;
     ExternalOutputs_measure measure_Y;
-    QPainterPath paths[8];
+    QPainterPath paths[TOTAL_SIGNALS];
     //qreal sampledData[8][MAX_SAMPLES];
     QList<Sample> sampledData;
-    QList<QPointF> freq[8];
+    QList<QPointF> freq[TOTAL_SIGNALS];
     
 };
 

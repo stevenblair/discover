@@ -341,13 +341,14 @@ void Stream::analyse()
     }
 
     // TODO: no longer need appendFreqPoint() because we have discrete magnitudes for each harmonic
-    for (int signal = 0; signal < 3; signal++) {
+    quint32 totalHarmonics = analysisInstance.measure_Y.TotalHarmonicsIncludingFundamental - 1;
+    for (int signal = 0; signal < VOLTAGE_SIGNALS; signal++) {
         // add fundamental
         row->appendFreqPoint(signal, analysisInstance.measure_Y.PhaseFrequency[signal], -analysisInstance.measure_Y.VoltageFundamentalAmplitudePosFreq[signal] / maxInstantaneousVoltage);
 
         // add harmonics
-        for (int n = 0; n < 31; n++) {
-            int arrayIndex = (signal * 31) + n;
+        for (quint32 n = 0; n < totalHarmonics; n++) {
+            int arrayIndex = (signal * totalHarmonics) + n;
             //qDebug() << signal << n << arrayIndex << analysisInstance.measure_Y.VoltageAmplitudesRelativeToFundamental[arrayIndex];
             row->appendFreqPoint(signal, (n + 2) * analysisInstance.measure_Y.PhaseFrequency[signal], -(analysisInstance.measure_Y.VoltageAmplitudesRelativeToFundamental[arrayIndex]));  // negate the y-coordinate, in preparation for plotting
         }

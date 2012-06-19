@@ -6,6 +6,10 @@ extern "C" {
 #include "rapid61850/iec61850.h"
 }
 
+#define VOLTAGE_SIGNALS     4
+#define CURRENT_SIGNALS     4
+#define TOTAL_SIGNALS       4
+
 class Sample
 {
 public:
@@ -61,10 +65,10 @@ public:
     }
 
     qint16 smpCount;
-    qint32 voltage[4];
-    quint32 voltageQuality[4];
-    qint32 current[4];
-    quint32 currentQuality[4];
+    qint32 voltage[VOLTAGE_SIGNALS];
+    quint32 voltageQuality[VOLTAGE_SIGNALS];
+    qint32 current[CURRENT_SIGNALS];
+    quint32 currentQuality[CURRENT_SIGNALS];
 };
 
 #endif // SAMPLE_H
