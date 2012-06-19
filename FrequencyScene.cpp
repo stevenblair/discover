@@ -2,7 +2,7 @@
 
 #define VOLTAGE_LINE_ALPHA  255
 #define CURRENT_LINE_ALPHA  180
-#define MIN_Y_VALUE         1       // -log10(0.1)
+#define MIN_Y_VALUE         0.0//1       // -log10(0.1)
 
 const QColor FrequencyScene::waveformColors[8] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
                                                   QColor(240, 181, 0, VOLTAGE_LINE_ALPHA),
@@ -26,10 +26,12 @@ FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 //        }
 
         pen[i] = QPen(waveformColors[i]);
-        path[i] = QPainterPath();
-        pathItem[i] = QGraphicsScene::addPath(path[i], pen[i]);
-        pathItem[i]->hide();
+        //path[i] = QPainterPath();
+        //pathItem[i] = QGraphicsScene::addPath(path[i], pen[i]);
+        //pathItem[i]->hide();
     }
+
+
 
     QColor plotLineColor = QColor(180, 180, 180);
 
@@ -81,47 +83,102 @@ void FrequencyScene::draw() {
         return;
     }
 
-    for (int i = 0; i < 8; i++) {
-        if (this->getWaveformState(i) == true) {
+    const quint32 totalHarmonics = stream->getData()->TotalHarmonicsIncludingFundamental;
 
-            bool pathEmpty = path[i].isEmpty();
+    //TODO: only delete existing lines if index has changed
+    for (int i = 0; i < TOTAL_SIGNALS; i++) {
 
-            for (quint32 p = 0; p < stream->getNumberOfFreqPoints(i); p++) {
-                qreal x = (stream->getFreqPoint(i, p).x());
-                qreal y = (stream->getFreqPoint(i, p).y());
+        if (!harmonicLine[i].isEmpty()) {
 
-                if (y > MIN_Y_VALUE) {
-                    y = MIN_Y_VALUE;
-                }
+            QListIterator<QGraphicsLineItem *> lines (harmonicLine[i]);
+            while (lines.hasNext()) {
+                QGraphicsLineItem *line = lines.next();
 
-                if (pathEmpty) {
-                    if (p == 0) {
-                        path[i].moveTo(x, y);
+                line->hide();
+                //line->
+                // TODO: iterate to deallocate all lines from list
+            }
+            harmonicLine[i].clear();
+        }
+
+        for (quint32 p = 0; p < totalHarmonics; p++) {
+            QGraphicsLineItem *line = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, pen[i]);
+            line->hide();
+            harmonicLine[i].append(line);
+        }
+    }
+
+    for (int signal = 0; signal < 3; signal++) {
+        if (this->getWaveformState(signal) == true) {
+            for (quint32 n = 0; n < totalHarmonics; n++) {
+                QGraphicsLineItem *line = harmonicLine[signal].at(n);
+
+                if (line != NULL) {
+                    qreal x;
+                    qreal y;
+
+                    if (n == 0) {
+                        x = 1.0;
+                        y = stream->getData()->VoltageFundMagVoltsRMS3[signal] / 305.673758865; // TODO: get max magnitude from model
                     }
                     else {
-                        path[i].lineTo(x, y);
+                        int harmonicIndex = (signal * (totalHarmonics - 1)) + n;
+                        x = stream->getData()->VoltageHarmonicsAnalysed[harmonicIndex];
+                        y = stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
                     }
-                }
-                else {
-                    path[i].setElementPositionAt(p, x, y);
+
+                    qDebug() << signal << n << x << y;
+
+                    line->setLine(x, 0.0, x, -y);
+                    line->show();
                 }
             }
 
-            pathItem[i]->setPath(path[i]);
+            //bool pathEmpty = path[i].isEmpty();
 
-            if (!pathItem[i]->isVisible()) {
-                pathItem[i]->show();
-            }
+//            for (quint32 p = 0; p < stream->getNumberOfFreqPoints(i); p++) {
+//                qreal x = (stream->getFreqPoint(i, p).x());
+//                qreal y = (stream->getFreqPoint(i, p).y());
+
+//                if (y > MIN_Y_VALUE) {
+//                    y = MIN_Y_VALUE;
+//                }
+
+//                if (pathEmpty) {
+//                    if (p == 0) {
+//                        path[i].moveTo(x, y);
+//                    }
+//                    else {
+//                        path[i].lineTo(x, y);
+//                    }
+//                }
+//                else {
+//                    path[i].setElementPositionAt(p, x, y);
+//                }
+//            }
+//
+//            pathItem[i]->setPath(path[i]);
+
+//            if (!pathItem[i]->isVisible()) {
+//                pathItem[i]->show();
+//            }
         }
         else {
-            pathItem[i]->hide();
+            for (quint32 n = 0; n < totalHarmonics; n++) {
+                QGraphicsLineItem *line = harmonicLine[signal].at(n);
+
+                if (line != NULL) {
+                    line->hide();
+                    //qDebug() << "hiding" << i << p;
+                }
+            }
         }
     }
 
     //qDebug() << stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x();
 
-    qreal maxFreqValue = (stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
-    qreal maxMagnitudeValue = -(3.0/*stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).y()*/);
+    qreal maxFreqValue = stream->getData()->VoltageHarmonicsAnalysed[totalHarmonics];//(stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
+    qreal maxMagnitudeValue = -(1.0/*stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).y()*/);
 
     horizontalPlotLine->setLine(0, MIN_Y_VALUE, maxFreqValue, MIN_Y_VALUE);
     verticalPlotLine->setLine(0, MIN_Y_VALUE, 0, maxMagnitudeValue);

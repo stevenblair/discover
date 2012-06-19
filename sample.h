@@ -8,7 +8,7 @@ extern "C" {
 
 #define VOLTAGE_SIGNALS     4
 #define CURRENT_SIGNALS     4
-#define TOTAL_SIGNALS       4
+#define TOTAL_SIGNALS       8
 
 class Sample
 {
