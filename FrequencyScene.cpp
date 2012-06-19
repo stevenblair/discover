@@ -56,7 +56,9 @@ void FrequencyScene::streamTableModelSelectionChanged(StreamTableModel *streamTa
 
 void FrequencyScene::streamRemoved()
 {
-    // TODO
+    for (int i = 0; i < 8; i++) {
+        pathItem[i]->hide();
+    }
 }
 
 void FrequencyScene::redrawFrequencyScene()

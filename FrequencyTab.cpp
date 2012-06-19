@@ -49,6 +49,7 @@ void FrequencyTab::update()
 
 void FrequencyTab::removeView()
 {
+    frequencyScene->streamRemoved();
 }
 
 void FrequencyTab::setActiveWavefrom(int id)

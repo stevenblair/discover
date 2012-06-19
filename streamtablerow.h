@@ -50,7 +50,7 @@ public:
     QString getVoltage()
     {
         if (analysed) {
-            return QString("%1 kV").arg(sqrt(3) * (measure_Y.Voltage[0] + measure_Y.Voltage[1] + measure_Y.Voltage[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 kV").arg(sqrt(3) * (measure_Y.VoltageFundMagVoltsRMS3[0] + measure_Y.VoltageFundMagVoltsRMS3[1] + measure_Y.VoltageFundMagVoltsRMS3[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
         }
         else {
             return QString("--");

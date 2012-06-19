@@ -295,7 +295,7 @@ VoltagePhasorScene::VoltagePhasorScene(QObject *parent) : PhasorScene(parent)
 qreal VoltagePhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getData()->Voltage[phase];
+        return stream->getData()->VoltageFundMagVoltsRMS3[phase];
     }
     else {
         return PhasorScene::getPhasorMag(stream, phase);
@@ -305,7 +305,7 @@ qreal VoltagePhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 qreal VoltagePhasorScene::getPhasorAngle(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getData()->Voltage[phase + 3];
+        return stream->getData()->VoltageFundPhaseRelPhiCorr3[phase];
     }
     else {
         return PhasorScene::getPhasorAngle(stream, phase);
