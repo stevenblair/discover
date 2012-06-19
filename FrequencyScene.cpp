@@ -87,16 +87,12 @@ void FrequencyScene::draw() {
 
     //TODO: only delete existing lines if index has changed
     for (int i = 0; i < TOTAL_SIGNALS; i++) {
-
         if (!harmonicLine[i].isEmpty()) {
-
             QListIterator<QGraphicsLineItem *> lines (harmonicLine[i]);
             while (lines.hasNext()) {
                 QGraphicsLineItem *line = lines.next();
-
-                line->hide();
-                //line->
-                // TODO: iterate to deallocate all lines from list
+                this->removeItem(line);
+                delete line;
             }
             harmonicLine[i].clear();
         }
@@ -127,41 +123,11 @@ void FrequencyScene::draw() {
                         y = stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
                     }
 
-                    qDebug() << signal << n << x << y;
-
+                    //qDebug() << signal << n << x << y;
                     line->setLine(x, 0.0, x, -y);
                     line->show();
                 }
             }
-
-            //bool pathEmpty = path[i].isEmpty();
-
-//            for (quint32 p = 0; p < stream->getNumberOfFreqPoints(i); p++) {
-//                qreal x = (stream->getFreqPoint(i, p).x());
-//                qreal y = (stream->getFreqPoint(i, p).y());
-
-//                if (y > MIN_Y_VALUE) {
-//                    y = MIN_Y_VALUE;
-//                }
-
-//                if (pathEmpty) {
-//                    if (p == 0) {
-//                        path[i].moveTo(x, y);
-//                    }
-//                    else {
-//                        path[i].lineTo(x, y);
-//                    }
-//                }
-//                else {
-//                    path[i].setElementPositionAt(p, x, y);
-//                }
-//            }
-//
-//            pathItem[i]->setPath(path[i]);
-
-//            if (!pathItem[i]->isVisible()) {
-//                pathItem[i]->show();
-//            }
         }
         else {
             for (quint32 n = 0; n < totalHarmonics; n++) {
