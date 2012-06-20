@@ -6,6 +6,9 @@
 #include <QGraphicsPathItem>
 #include "streamtablemodel.h"
 
+#define ONE_PU_HEIGHT               200.0
+#define DISPLAY_HARMONIC_CUTOFF     (1.0e-4)
+
 class FrequencyScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -42,12 +45,11 @@ protected:
 private:
     void draw();
 
-    QPainterPath path[TOTAL_SIGNALS];
     QPen pen[TOTAL_SIGNALS];
-    QGraphicsPathItem *pathItem[TOTAL_SIGNALS];
     QGraphicsLineItem *horizontalPlotLine;
     QGraphicsLineItem *verticalPlotLine;
     QList<QGraphicsLineItem *> harmonicLine[TOTAL_SIGNALS];
+    QList<QGraphicsTextItem *> xLabels;
     
 };
 
