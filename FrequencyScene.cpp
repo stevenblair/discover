@@ -181,7 +181,7 @@ void FrequencyScene::draw() {
                     if (n == 0) {
                         // fundamental, or 1st harmonic
                         x = 1.0 * stream->getData()->PhaseFrequency[signal];
-                        y = stream->getData()->VoltageFundMagVoltsRMS3[signal] / 305.673758865; // TODO: get max magnitude from model
+                        y = stream->getData()->VoltageFundMagVoltsRMS3[signal] * qSqrt(2.0) / stream->getMaxInstantaneous(Stream::Voltage); // TODO: get max magnitude from model
                     }
                     else {
                         // all other harmonics
