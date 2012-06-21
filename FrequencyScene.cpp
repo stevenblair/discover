@@ -115,7 +115,7 @@ void FrequencyScene::draw() {
 
             if (n == 0) {
                 // fundamental, or 1st harmonic
-                x = 1.0 * stream->getData()->PhaseFrequency[signal];
+                x = 1.0 * stream->getData()->Frequency;
             }
             else {
                 // all other harmonics

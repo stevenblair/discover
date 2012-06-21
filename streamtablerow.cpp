@@ -47,5 +47,43 @@ void StreamTableRow::setup(Stream *stream)
             Sample sample = *stream->getSampleAt(i);
             sampledData.append(sample);
         }
+
+        this->maxInstantaneousCurrent = stream->getMaxInstantaneous(Stream::Current);
+        this->maxInstantaneousVoltage = stream->getMaxInstantaneous(Stream::Voltage);
     }
+}
+
+QPainterPath *StreamTableRow::getPainterPath(QPainterPath *path, int powerSystemQuantity, int phase)
+{
+    quint32 iterations = sampledData.size();//sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
+    qreal Ts = sampleRate.getTimestep();
+
+    for (quint32 t = 0; t < iterations; t++) {
+        qreal tMilliseconds = (qreal) t * Ts * 1000.0;
+
+        if (powerSystemQuantity == Stream::Current) {
+            if (t == 0) {
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 * sampledData[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+                //path->moveTo(tMilliseconds, (qreal) -1.0 * sampledData[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+            }
+            else {
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 * sampledData[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+                //path->lineTo(tMilliseconds, (qreal) -1.0 * sampledData[t].current[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETCTR_1.Amp.sVC.scaleFactor);
+            }
+        }
+        else if (powerSystemQuantity == Stream::Voltage) {
+            if (t == 0) {
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 * sampledData[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+                //path->moveTo(tMilliseconds, (qreal) -1.0 * sampledData[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+            }
+            else {
+                path->setElementPositionAt(t, tMilliseconds, (qreal) -1.0 * sampledData[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+                //path->lineTo(tMilliseconds, (qreal) -1.0 * sampledData[t].voltage[phase] * LE_IED.S1.MUnn.IEC_61850_9_2LETVTR_1.Vol.sVC.scaleFactor);
+            }
+        }
+
+        //qDebug() << (qreal) t * Ts << (qreal) samples[t].current[phase] * 0.01;
+    }
+
+    return path;
 }

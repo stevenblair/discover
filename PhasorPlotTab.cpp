@@ -19,6 +19,8 @@ void PhasorPlotTab::removeView()
 {
     voltagePhasorScene->streamRemoved();
     currentPhasorScene->streamRemoved();
+    voltagePlotScene->streamRemoved();
+    currentPlotScene->streamRemoved();
 }
 
 PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)

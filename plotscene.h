@@ -5,7 +5,7 @@
 #include "stream.h"
 #include "streamtablemodel.h"
 
-#define X_AXIS_OVERSHOOT    0.1
+#define X_AXIS_OVERSHOOT    0.06
 #define Y_AXIS_OVERSHOOT    0.2
 
 class PlotScene : public QGraphicsScene
@@ -17,11 +17,12 @@ public:
     QRectF sceneRect() const;
 
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
+    void streamRemoved();
 signals:
 
 public slots:
-    void streamSelectionChanged(Stream *stream);
-    void streamChanged();
+    //void streamSelectionChanged(Stream *stream);
+    //void streamChanged();
 
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
@@ -38,7 +39,7 @@ protected:
     //QRectF itemsBoundingRect() const;
 
 private:
-    Stream *stream;
+    //Stream *stream;
 
     QPen pen[3];
     QPen plotLinePen;

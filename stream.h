@@ -28,7 +28,7 @@ class Stream : public QObject
     Q_OBJECT
 
 public:
-    enum PowerSystemQuantity {Voltage, Current};
+    enum PowerSystemQuantity {Voltage = 0, Current = 1};
 
     explicit Stream(QString svID, QString sourceMAC = 0, QObject *parent = 0);
     ~Stream();

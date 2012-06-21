@@ -105,6 +105,36 @@ public:
     ExternalOutputs_measure *getData() {
         return &measure_Y;
     }
+
+//    qreal getMaxInstantaneous(Stream::PowerSystemQuantity powerSystemQuantity) {
+//        if (powerSystemQuantity == Stream::Voltage) {
+//            return maxInstantaneousVoltage;
+//        }
+//        else if (powerSystemQuantity == Stream::Current) {
+//            return maxInstantaneousCurrent;
+//        }
+//        return 0.0;
+//    }
+
+    qreal getMaxInstantaneous(int powerSystemQuantity) {
+        if (powerSystemQuantity == 0) {
+            return maxInstantaneousVoltage;
+        }
+        else if (powerSystemQuantity == 1) {
+            return maxInstantaneousCurrent;
+        }
+        return 0.0;
+    }
+
+    SampleRate* getSampleRate() {
+        return &this->sampleRate;
+    }
+
+    QList<Sample>* getSampledData() {
+        return &this->sampledData;
+    }
+
+    QPainterPath *getPainterPath(QPainterPath *path, int powerSystemQuantity, int phase);
 signals:
     
 public slots:
@@ -122,6 +152,8 @@ private:
     //qreal sampledData[8][MAX_SAMPLES];
     QList<Sample> sampledData;
     QList<QPointF> freq[TOTAL_SIGNALS];
+    qreal maxInstantaneousVoltage;
+    qreal maxInstantaneousCurrent;
     
 };
 
