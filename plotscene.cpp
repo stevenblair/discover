@@ -101,7 +101,9 @@ void PlotScene::streamTableModelSelectionChanged(StreamTableModel *streamTableMo
 
 void PlotScene::streamRemoved()
 {
-    // TODO
+    for (int i = 0; i < 3; i++) {
+        plot[i]->hide();
+    }
 }
 
 
