@@ -341,7 +341,7 @@ void Stream::analyse()
     }
 
     // TODO: no longer need appendFreqPoint() because we have discrete magnitudes for each harmonic
-    quint32 totalHarmonics = analysisInstance.measure_Y.TotalHarmonicsIncludingFundamental - 1;
+    quint32 totalHarmonics = analysisInstance.measure_Y.TotalHarmonicsAnalysedIncludingFundamental - 1;
     for (int signal = 0; signal < 3; signal++) {
         // add fundamental
         row->appendFreqPoint(signal, analysisInstance.measure_Y.PhaseFrequency[signal], -analysisInstance.measure_Y.VoltageFundamentalAmplitudePosFreq[signal] / maxInstantaneousVoltage);

@@ -60,7 +60,7 @@ public:
     QString getPower()
     {
         if (analysed) {
-            qreal power = measure_Y.PowerFundamental[0];
+            qreal power = measure_Y.WattsFundamental3[0];
             QString units;
             if (power > 1000.0 && power < 1000000.0) {
                 power = power / 1000.0;
@@ -71,7 +71,7 @@ public:
                 units = QString("MVA");
             }
 
-            return QString("%1 %2, p.f. %3").arg(power, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(units).arg(measure_Y.PowerFundamental[3], 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 %2, p.f. %3").arg(power, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED).arg(units).arg(measure_Y.PowerFactor, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
         }
         else {
             return QString("--");

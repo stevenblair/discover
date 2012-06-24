@@ -354,16 +354,19 @@ void measureModelClass::step0()
   boolean_T rtb_LogicalOperator2_f3;
   boolean_T rtb_LogicalOperator2_f3l;
   real_T rtb_Sum1_dat;
-  real_T rtb_SumofElements;
-  real_T rtb_AbsVI;
-  real_T rtb_Switch_jpt;
-  real_T rtb_AbsVI_k;
-  real_T rtb_UnaryMinus_g;
-  real_T rtb_Divide_nfun;
-  real_T rtb_Sum1_gh;
+  real_T rtb_Divide_la;
+  real_T rtb_Divide_i;
+  real_T rtb_Divide_o1;
+  real_T rtb_SumofElements1;
+  real_T rtb_ComplextoRealImag_o2_l;
+  real_T rtb_OutputWatts;
   real_T rtb_UnitDelay1_o;
   real_T rtb_UnitDelay1_f;
   real_T rtb_UnitDelay1_pu;
+  real_T rtb_Divide_cv;
+  real_T rtb_TrigonometricFunction_hr;
+  real_T rtb_TrigonometricFunction_hrx;
+  real_T rtb_Sum1_kv;
   uint32_T rtb_UnitDelay1_pu5rdhlnellvz;
   uint32_T rtb_Switch2_h;
   uint32_T rtb_UnitDelay1_c;
@@ -400,7 +403,6 @@ void measureModelClass::step0()
   uint32_T rtb_FixPtSum1_ecsnsvo;
   uint32_T rtb_FixPtSum1_ecsnsvom;
   uint32_T rtb_FixPtSum1_ecsnsvomv;
-  real_T rtb_Switch1_l;
   boolean_T rtb_Any_Phases_Not_Disturbed;
   real_T rtb_Switch_jkaja;
   real_T rtb_Switch_jka;
@@ -413,6 +415,7 @@ void measureModelClass::step0()
   real_T rtb_Add1_f_idx_0;
   real_T rtb_Add1_f_idx_1;
   real_T rtb_VpuIpktoVrmsIrms_re;
+  real_T rtb_VpuIpktoVrmsIrms_im;
   real_T rtb_Gain6_re;
   (measure_M->Timing.RateInteraction.TID0_1)++;
   if ((measure_M->Timing.RateInteraction.TID0_1) > 199) {
@@ -499,7 +502,7 @@ void measureModelClass::step0()
 
   rtb_Compare_h = (rtb_UnaryMinus_l > measure_P.Constant_Value_fg);
   rtb_UnitDelay1 = measure_DWork.UnitDelay1_DSTATE;
-  rtb_UnaryMinus_l = measure_P.Constant7_Value[0];
+  rtb_Divide_cv = measure_P.Constant7_Value[0];
   for (i = 0; i < 5; i++) {
     tmp[0] = measure_P.Constant7_Value[0];
     tmp[1] = measure_P.Constant7_Value[1];
@@ -507,13 +510,13 @@ void measureModelClass::step0()
     tmp[3] = measure_P.Constant8_Value[0];
     tmp[4] = measure_P.Constant8_Value[1];
     tmp[5] = measure_P.Constant8_Value[2];
-    rtb_UnaryMinus_l = fmax(rtb_UnaryMinus_l, tmp[i + 1]);
+    rtb_Divide_cv = fmax(rtb_Divide_cv, tmp[i + 1]);
   }
 
-  rtb_Add1_f_idx = rtb_UnaryMinus_l - measure_P.Constant8_Value[0];
-  rtb_Add1_f_idx_0 = rtb_UnaryMinus_l - measure_P.Constant8_Value[1];
-  rtb_Add1_f_idx_1 = rtb_UnaryMinus_l - measure_P.Constant8_Value[2];
-  rtb_Sum1_p5 = ((rtb_UnaryMinus_l - measure_P.Constant7_Value[1]) *
+  rtb_Add1_f_idx = rtb_Divide_cv - measure_P.Constant8_Value[0];
+  rtb_Add1_f_idx_0 = rtb_Divide_cv - measure_P.Constant8_Value[1];
+  rtb_Add1_f_idx_1 = rtb_Divide_cv - measure_P.Constant8_Value[2];
+  rtb_Sum1_p5 = ((rtb_Divide_cv - measure_P.Constant7_Value[1]) *
                  measure_P.Gain_Gain_n) + measure_P.Bias_Bias_hz;
   rtb_Sum1_p5 = ((((measure_U.Vabcpu[1] - measure_DWork.UnitDelay2_DSTATE) *
                    measure_P.Gain_Gain_l) * rtb_Sum1_p5) +
@@ -522,7 +525,7 @@ void measureModelClass::step0()
        measure_P.Gain1_Gain_l) - measure_DWork.UnitDelay1_DSTATE) * (rtb_Sum1_p5
       * rtb_Sum1_p5));
   rtb_UnitDelay1_p = measure_DWork.UnitDelay1_DSTATE_o;
-  rtb_Sum1_pz = ((rtb_UnaryMinus_l - measure_P.Constant7_Value[2]) *
+  rtb_Sum1_pz = ((rtb_Divide_cv - measure_P.Constant7_Value[2]) *
                  measure_P.Gain_Gain_ig) + measure_P.Bias_Bias_is;
   rtb_Sum1_pz = ((((measure_U.Vabcpu[2] - measure_DWork.UnitDelay2_DSTATE_k) *
                    measure_P.Gain_Gain_f) * rtb_Sum1_pz) +
@@ -531,7 +534,7 @@ void measureModelClass::step0()
        measure_P.Gain1_Gain_f) - measure_DWork.UnitDelay1_DSTATE_o) *
      (rtb_Sum1_pz * rtb_Sum1_pz));
   rtb_UnitDelay1_n = measure_DWork.UnitDelay1_DSTATE_g;
-  rtb_Sum1_lle = ((rtb_UnaryMinus_l - measure_P.Constant7_Value[0]) *
+  rtb_Sum1_lle = ((rtb_Divide_cv - measure_P.Constant7_Value[0]) *
                   measure_P.Gain_Gain_h) + measure_P.Bias_Bias_e4;
   rtb_Sum1_lle = ((((measure_U.Vabcpu[0] - measure_DWork.UnitDelay2_DSTATE_e) *
                     measure_P.Gain_Gain_m4) * rtb_Sum1_lle) +
@@ -666,20 +669,20 @@ void measureModelClass::step0()
     measure_B.Switch2_h = rtb_Switch1_ie;
   } else {
     rtb_Gain_pj = ((real_T)measure_B.Switch2_h1wibj25mp) - rtb_Gain_pj;
-    rtb_Switch1_l = rtb_Gain_pj * rtb_Gain_pj;
-    rtb_Gain_pj = (((measure_P.Gain1_Gain * rtb_Gain_pj) - rtb_Switch1_l) *
+    rtb_UnaryMinus_l = rtb_Gain_pj * rtb_Gain_pj;
+    rtb_Gain_pj = (((measure_P.Gain1_Gain * rtb_Gain_pj) - rtb_UnaryMinus_l) *
                    measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1) +
-      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2 * rtb_Switch1_l);
+      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2 * rtb_UnaryMinus_l);
     if (rtb_Compare_h) {
-      rtb_Switch1_l = measure_B.Switch -
+      rtb_UnaryMinus_l = measure_B.Switch -
         measure_B.VariableDiscreteDelaywithOneTapSfunction;
     } else {
-      rtb_Switch1_l = measure_B.Switch_n -
+      rtb_UnaryMinus_l = measure_B.Switch_n -
         measure_B.VariableDiscreteDelaywithOneTapSfunction_c;
     }
 
-    rtb_Gain_pj = ((1.0 / rtb_Switch) * measure_P.Gain_Gain) * (rtb_Switch1_l -
-      rtb_Gain_pj);
+    rtb_Gain_pj = ((1.0 / rtb_Switch) * measure_P.Gain_Gain) * (rtb_UnaryMinus_l
+      - rtb_Gain_pj);
     if (rtb_Gain_pj < measure_P.Constant_Value_dsl) {
       measure_B.Switch2_h = -rtb_Gain_pj;
     } else {
@@ -800,8 +803,8 @@ void measureModelClass::step0()
   }
 
   rtb_Tps2dt_cr = ((real_T)measure_B.Switch2_h1wibj25mpu) - rtb_Gain_pj;
-  rtb_Switch1_l = rtb_Tps2dt_cr * rtb_Tps2dt_cr;
-  rtb_Switch = (measure_P.Gain1_Gain_jc * rtb_Tps2dt_cr) - rtb_Switch1_l;
+  rtb_UnaryMinus_l = rtb_Tps2dt_cr * rtb_Tps2dt_cr;
+  rtb_Switch = (measure_P.Gain1_Gain_jc * rtb_Tps2dt_cr) - rtb_UnaryMinus_l;
   rtb_MathFunction1 = (1.0 / rtb_Sum2_i) * measure_P.Gain_Gain_jcfawyw;
   if (rtb_LogicalOperator1) {
     measure_B.Switch4 = rtb_Switch1_ie;
@@ -817,7 +820,7 @@ void measureModelClass::step0()
     measure_B.Switch4 = (rtb_Gain_pj -
                          ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_j
       * rtb_Switch) + (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_f *
-                       rtb_Switch1_l))) * rtb_MathFunction1;
+                       rtb_UnaryMinus_l))) * rtb_MathFunction1;
   }
 
   if (rtb_Compare_h4) {
@@ -940,7 +943,7 @@ void measureModelClass::step0()
                           ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_jw
                             * rtb_Switch) +
                            (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_f1
-                            * rtb_Switch1_l))) * rtb_MathFunction1;
+                            * rtb_UnaryMinus_l))) * rtb_MathFunction1;
       }
     } else {
       rtb_Switch1_ie = measure_B.Switch4;
@@ -1114,7 +1117,7 @@ void measureModelClass::step0()
       measure_P.FixPtConstant_Value_jcf;
   }
 
-  rtb_Compare_jm = (rtb_UnitDelay1_c > measure_P.Constant_Value_oc);
+  rtb_Compare_jm = (rtb_UnitDelay1_c > measure_P.Constant_Value_ocr);
   if (rtb_Compare_jm) {
     measure_B.Switch2_h1wib = measure_B.Switch2_h1w;
   } else {
@@ -1883,7 +1886,7 @@ void measureModelClass::step0()
 
   rtb_Compare_ddcrdc = (rtb_Divide_hh > measure_P.Constant_Value_ep34emcngnxmtm);
   rtb_Compare_ky = ((!rtb_Compare_ddcrdc) && (measure_DWork.delay1_DSTATE_dt));
-  rtb_Switch1_l = measure_DWork.UnitDelay3_DSTATE_i;
+  rtb_UnaryMinus_l = measure_DWork.UnitDelay3_DSTATE_i;
   rtb_Divide_hh = ((((real_T)measure_DWork.clockTickCounter_iom) <
                     measure_P.PulseGenerator1_Duty_ep3) &&
                    (measure_DWork.clockTickCounter_iom >= 0)) ?
@@ -2137,11 +2140,11 @@ void measureModelClass::step0()
   if (rtb_Compare_j1k4d50fkuukjsr) {
     measure_B.Switch6 = rtb_Switch4;
   } else {
-    rtb_Gain_pj = rtb_Add_p - rtb_Switch1_l;
-    if (rtb_Gain_pj < measure_P.Constant_Value_ap) {
+    rtb_Gain_pj = rtb_Add_p - rtb_UnaryMinus_l;
+    if (rtb_Gain_pj < measure_P.Constant_Value_apb) {
       rtb_Gain_pj += measure_P.Bias1_Bias_ap;
     } else {
-      if (rtb_Gain_pj > measure_P.Constant_Value_a) {
+      if (rtb_Gain_pj > measure_P.Constant_Value_ap) {
         rtb_Gain_pj += measure_P.Bias_Bias_ap;
       }
     }
@@ -2271,8 +2274,8 @@ void measureModelClass::step0()
   }
 
   rtb_Ts_FFT_k = ((real_T)measure_B.Switch2_f0yhyr) - rtb_Gain_pj;
-  rtb_Switch1_l = rtb_Ts_FFT_k * rtb_Ts_FFT_k;
-  rtb_Switch = (measure_P.Gain1_Gain_ep3 * rtb_Ts_FFT_k) - rtb_Switch1_l;
+  rtb_UnaryMinus_l = rtb_Ts_FFT_k * rtb_Ts_FFT_k;
+  rtb_Switch = (measure_P.Gain1_Gain_ep3 * rtb_Ts_FFT_k) - rtb_UnaryMinus_l;
   rtb_MathFunction1 = (1.0 / rtb_Switch_jkaja) * measure_P.Gain_Gain_ep34emc;
   if (rtb_Compare_j1k4d50fkuukjsr) {
     rtb_Ts_FFT_k = rtb_Switch4;
@@ -2289,7 +2292,7 @@ void measureModelClass::step0()
                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_m0kftposv
                       * rtb_Switch) +
                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_gpkwvfajc
-                      * rtb_Switch1_l))) * rtb_MathFunction1;
+                      * rtb_UnaryMinus_l))) * rtb_MathFunction1;
   }
 
   rtb_Bias = rtb_MathFunction2 + measure_P.Bias_Bias_o4;
@@ -2685,7 +2688,7 @@ void measureModelClass::step0()
   } else {
     rtb_Gain_pj = rtb_Add_n - rtb_Gain_pj;
     if (rtb_Gain_pj < measure_P.Constant_Value_i2j) {
-      rtb_Gain_pj += measure_P.Bias1_Bias_i;
+      rtb_Gain_pj += measure_P.Bias1_Bias_i2;
     } else {
       if (rtb_Gain_pj > measure_P.Constant_Value_i2) {
         rtb_Gain_pj += measure_P.Bias_Bias_i2;
@@ -2801,7 +2804,7 @@ void measureModelClass::step0()
                   ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_m0kftposvcp0
                     * rtb_Switch) +
                    (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_gpkwvfajco2k
-                    * rtb_Switch1_l))) * rtb_MathFunction1;
+                    * rtb_UnaryMinus_l))) * rtb_MathFunction1;
   }
 
   rtb_Bias1 = rtb_MathFunction2_d + measure_P.Bias1_Bias_o4;
@@ -3025,10 +3028,10 @@ void measureModelClass::step0()
     measure_B.Switch6_m = rtb_Switch4;
   } else {
     rtb_Gain_pj = rtb_Add_gl - rtb_Gain_pj;
-    if (rtb_Gain_pj < measure_P.Constant_Value_or) {
+    if (rtb_Gain_pj < measure_P.Constant_Value_org) {
       rtb_Gain_pj += measure_P.Bias1_Bias_o;
     } else {
-      if (rtb_Gain_pj > measure_P.Constant_Value_o) {
+      if (rtb_Gain_pj > measure_P.Constant_Value_or) {
         rtb_Gain_pj += measure_P.Bias_Bias_o;
       }
     }
@@ -3140,7 +3143,7 @@ void measureModelClass::step0()
                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_m0kftposvcp0f2x
                      * rtb_Switch) +
                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_gpkwvfajco2krnd
-                     * rtb_Switch1_l))) * rtb_MathFunction1;
+                     * rtb_UnaryMinus_l))) * rtb_MathFunction1;
   }
 
   rtb_Bias2 = rtb_MathFunction2_d0 + measure_P.Bias2_Bias_o;
@@ -3393,25 +3396,25 @@ void measureModelClass::step0()
   rtb_Sum1_dat = (rtb_Divide_h * rtb_Divide_h) + (rtb_Divide_hh * rtb_Divide_hh);
   rtb_Sum1_dat = (rtb_Sum1_dat < 0.0) ? (-std::sqrt(std::abs(rtb_Sum1_dat))) :
     std::sqrt(rtb_Sum1_dat);
-  rtb_SumofElements = rtb_Switch_jka * rtb_Sum1_dat;
-  rtb_Switch1_ie = (rtb_Divide_b4ha * rtb_Divide_b4ha) + (rtb_Divide_b4h *
+  rtb_Divide_la = rtb_Switch_jka * rtb_Sum1_dat;
+  rtb_Switch = (rtb_Divide_b4ha * rtb_Divide_b4ha) + (rtb_Divide_b4h *
     rtb_Divide_b4h);
-  rtb_Switch1_ie = (rtb_Switch1_ie < 0.0) ? (-std::sqrt(std::abs(rtb_Switch1_ie)))
-    : std::sqrt(rtb_Switch1_ie);
-  rtb_AbsVI = rtb_Switch_jka * rtb_Switch1_ie;
-  rtb_Switch_jpt = (rtb_Divide_nqzy * rtb_Divide_nqzy) + (rtb_Divide_nqz *
+  rtb_Switch = (rtb_Switch < 0.0) ? (-std::sqrt(std::abs(rtb_Switch))) : std::
+    sqrt(rtb_Switch);
+  rtb_Divide_i = rtb_Switch_jka * rtb_Switch;
+  rtb_MathFunction1 = (rtb_Divide_nqzy * rtb_Divide_nqzy) + (rtb_Divide_nqz *
     rtb_Divide_nqz);
-  rtb_Switch_jpt = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jpt)))
-    : std::sqrt(rtb_Switch_jpt);
-  rtb_AbsVI_k = rtb_Switch_jka * rtb_Switch_jpt;
-  measure_Y.VoltageFundMagVoltsRMS3[0] = rtb_SumofElements;
-  measure_Y.VoltageFundMagVoltsRMS3[1] = rtb_AbsVI;
-  measure_Y.VoltageFundMagVoltsRMS3[2] = rtb_AbsVI_k;
+  rtb_MathFunction1 = (rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1);
+  rtb_Divide_o1 = rtb_Switch_jka * rtb_MathFunction1;
+  measure_Y.VoltageFundMagVoltsRMS3[0] = rtb_Divide_la;
+  measure_Y.VoltageFundMagVoltsRMS3[1] = rtb_Divide_i;
+  measure_Y.VoltageFundMagVoltsRMS3[2] = rtb_Divide_o1;
   measure_Y.VoltageFundPhaseRelPhiCorr3[0] = rtb_TrigonometricFunction_i;
   measure_Y.VoltageFundPhaseRelPhiCorr3[1] = rtb_TrigonometricFunction_ix;
   measure_Y.VoltageFundPhaseRelPhiCorr3[2] = rtb_TrigonometricFunction_ixv;
-  rtb_UnaryMinus_g = measure_P.ScaleRMSoutputsto1pu_Gain * rtb_Sum1_lle;
-  measure_B.MathFunction = rtb_UnaryMinus_g * rtb_UnaryMinus_g;
+  rtb_SumofElements1 = measure_P.ScaleRMSoutputsto1pu_Gain * rtb_Sum1_lle;
+  measure_B.MathFunction = rtb_SumofElements1 * rtb_SumofElements1;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_lv2aps4ne = measure_P.double_Value_dsc5ttdhqkxi;
   } else {
@@ -3468,10 +3471,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_UnaryMinus_g = measure_B.Switch_lv2aps4ne -
+    rtb_SumofElements1 = measure_B.Switch_lv2aps4ne -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_m;
   } else {
-    rtb_UnaryMinus_g = measure_B.Switch_lv2aps4ney -
+    rtb_SumofElements1 = measure_B.Switch_lv2aps4ney -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_of;
   }
 
@@ -3503,13 +3506,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_UnaryMinus_g = (rtb_UnaryMinus_g -
-                      ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d
-                        * rtb_Subtract3_lr) +
-                       (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_d
-                        * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1 = (rtb_UnaryMinus_g < 0.0) ? (-std::sqrt(std::abs
-    (rtb_UnaryMinus_g))) : std::sqrt(rtb_UnaryMinus_g);
+  rtb_SumofElements1 = (rtb_SumofElements1 -
+                        ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d
+    * rtb_Subtract3_lr) +
+    (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_d *
+     rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1 = (rtb_SumofElements1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_SumofElements1))) : std::sqrt(rtb_SumofElements1);
   if (rtb_Compare_enj) {
     measure_B.Switch_lv2aps4neyb = measure_P.double_Value_ds;
   } else {
@@ -3567,10 +3570,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_UnaryMinus_g = measure_B.Switch_lv2aps4neyb -
+    rtb_SumofElements1 = measure_B.Switch_lv2aps4neyb -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_bb;
   } else {
-    rtb_UnaryMinus_g = measure_B.Switch_lv2aps4neybf -
+    rtb_SumofElements1 = measure_B.Switch_lv2aps4neybf -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_jo;
   }
 
@@ -3602,13 +3605,15 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_UnaryMinus_g = (rtb_UnaryMinus_g -
-                      ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_n
-                        * rtb_Subtract3_lri) +
-                       (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_c
-                        * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Divide_nfun = measure_P.ScaleRMSoutputsto1pu_Gain_d * rtb_Sum1_p5;
-  measure_B.MathFunction_j = rtb_Divide_nfun * rtb_Divide_nfun;
+  rtb_SumofElements1 = (rtb_SumofElements1 -
+                        ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_n
+    * rtb_Subtract3_lri) +
+    (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_c *
+     rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_ComplextoRealImag_o2_l = measure_P.ScaleRMSoutputsto1pu_Gain_d *
+    rtb_Sum1_p5;
+  measure_B.MathFunction_j = rtb_ComplextoRealImag_o2_l *
+    rtb_ComplextoRealImag_o2_l;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_f0o4owldoyu = measure_P.double_Value_d1m1hiqruqxi;
   } else {
@@ -3666,10 +3671,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Divide_nfun = measure_B.Switch_f0o4owldoyu -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_f0o4owldoyu -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ch;
   } else {
-    rtb_Divide_nfun = measure_B.Switch_f0o4owldoyup -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_f0o4owldoyup -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_jo4;
   }
 
@@ -3701,13 +3706,14 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_nfun = (rtb_Divide_nfun -
-                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_i *
-                       rtb_Subtract3_lr) +
-                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_e *
-                       rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1_b = (rtb_Divide_nfun < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Divide_nfun))) : std::sqrt(rtb_Divide_nfun);
+  rtb_ComplextoRealImag_o2_l = (rtb_ComplextoRealImag_o2_l -
+    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_i *
+      rtb_Subtract3_lr) +
+     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_e *
+      rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1_b = (rtb_ComplextoRealImag_o2_l < 0.0) ? (-std::sqrt
+    (std::abs(rtb_ComplextoRealImag_o2_l))) : std::sqrt
+    (rtb_ComplextoRealImag_o2_l);
   if (rtb_Compare_enj) {
     measure_B.Switch_f0o4owldoyupv = measure_P.double_Value_d1;
   } else {
@@ -3765,10 +3771,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Divide_nfun = measure_B.Switch_f0o4owldoyupv -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_f0o4owldoyupv -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_gl;
   } else {
-    rtb_Divide_nfun = measure_B.Switch_f0o4owldoyupv1 -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_f0o4owldoyupv1 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_gj;
   }
 
@@ -3801,13 +3807,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_nfun = (rtb_Divide_nfun -
-                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_l *
-                       rtb_Subtract3_lri) +
-                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_k *
-                       rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Sum1_gh = measure_P.ScaleRMSoutputsto1pu_Gain_m * rtb_Sum1_pz;
-  measure_B.MathFunction_jy = rtb_Sum1_gh * rtb_Sum1_gh;
+  rtb_ComplextoRealImag_o2_l = (rtb_ComplextoRealImag_o2_l -
+    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_l *
+      rtb_Subtract3_lri) +
+     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_k *
+      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_OutputWatts = measure_P.ScaleRMSoutputsto1pu_Gain_m * rtb_Sum1_pz;
+  measure_B.MathFunction_jy = rtb_OutputWatts * rtb_OutputWatts;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ngeqq2oshhr5 = measure_P.double_Value_m0413rfkrd2o;
   } else {
@@ -3864,10 +3870,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Sum1_gh = measure_B.Switch_ngeqq2oshhr5 -
+    rtb_OutputWatts = measure_B.Switch_ngeqq2oshhr5 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hl;
   } else {
-    rtb_Sum1_gh = measure_B.Switch_ngeqq2oshhr5r -
+    rtb_OutputWatts = measure_B.Switch_ngeqq2oshhr5r -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_a4;
   }
 
@@ -3899,13 +3905,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Sum1_gh = (rtb_Sum1_gh -
-                 ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d4 *
-                   rtb_Subtract3_lr) +
-                  (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_dh *
-                   rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1_bx = (rtb_Sum1_gh < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Sum1_gh))) : std::sqrt(rtb_Sum1_gh);
+  rtb_OutputWatts = (rtb_OutputWatts -
+                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d4
+                       * rtb_Subtract3_lr) +
+                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_dh
+                       * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1_bx = (rtb_OutputWatts < 0.0) ? (-std::sqrt(std::abs
+    (rtb_OutputWatts))) : std::sqrt(rtb_OutputWatts);
   if (rtb_Compare_enj) {
     measure_B.Switch_ngeqq2oshhr5rh = measure_P.double_Value_m0;
   } else {
@@ -3963,10 +3969,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Sum1_gh = measure_B.Switch_ngeqq2oshhr5rh -
+    rtb_OutputWatts = measure_B.Switch_ngeqq2oshhr5rh -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_k;
   } else {
-    rtb_Sum1_gh = measure_B.Switch_ngeqq2oshhr5rhh -
+    rtb_OutputWatts = measure_B.Switch_ngeqq2oshhr5rhh -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ab;
   }
 
@@ -3998,113 +4004,113 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Sum1_gh = (rtb_Sum1_gh -
-                 ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_jz *
-                   rtb_Subtract3_lri) +
-                  (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_i *
-                   rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  measure_Y.VoltageAllHarmonicMagPuRMS3[0] = rtb_UnaryMinus_g;
-  measure_Y.VoltageAllHarmonicMagPuRMS3[1] = rtb_Divide_nfun;
-  measure_Y.VoltageAllHarmonicMagPuRMS3[2] = rtb_Sum1_gh;
-  rtb_UnaryMinus_g = (rtb_UnaryMinus_g * rtb_UnaryMinus_g) - (rtb_Sum1_dat *
-    rtb_Sum1_dat);
-  if (rtb_UnaryMinus_g < measure_P.Constant_Value_dsc5ttd) {
-    rtb_UnaryMinus_g = measure_P.Constant_Value_ds;
+  rtb_OutputWatts = (rtb_OutputWatts -
+                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_jz
+                       * rtb_Subtract3_lri) +
+                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_i *
+                       rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  measure_Y.VoltageAllHarmonicMagPuRMS3[0] = rtb_SumofElements1;
+  measure_Y.VoltageAllHarmonicMagPuRMS3[1] = rtb_ComplextoRealImag_o2_l;
+  measure_Y.VoltageAllHarmonicMagPuRMS3[2] = rtb_OutputWatts;
+  rtb_SumofElements1 = (rtb_SumofElements1 * rtb_SumofElements1) - (rtb_Sum1_dat
+    * rtb_Sum1_dat);
+  if (rtb_SumofElements1 < measure_P.Constant_Value_dsc5ttd) {
+    rtb_SumofElements1 = measure_P.Constant_Value_ds;
   }
 
   if (rtb_Sum1_dat < measure_P.Constant_Value_dsc5ttdh) {
     rtb_Sum1_dat = measure_P.Constant_Value_dsc;
   }
 
-  rtb_UnaryMinus_g = (((rtb_UnaryMinus_g < 0.0) ? (-std::sqrt(std::abs
-    (rtb_UnaryMinus_g))) : std::sqrt(rtb_UnaryMinus_g)) / rtb_Sum1_dat) *
+  rtb_SumofElements1 = (((rtb_SumofElements1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_SumofElements1))) : std::sqrt(rtb_SumofElements1)) / rtb_Sum1_dat) *
     measure_P.Gain_Gain_ds;
-  if (rtb_UnaryMinus_g > measure_P.Constant_Value_dsc5ttdhq) {
-    rtb_UnaryMinus_g = measure_P.Constant_Value_dsc5;
+  if (rtb_SumofElements1 > measure_P.Constant_Value_dsc5ttdhq) {
+    rtb_SumofElements1 = measure_P.Constant_Value_dsc5;
   }
 
-  rtb_Divide_nfun = (rtb_Divide_nfun * rtb_Divide_nfun) - (rtb_Switch1_ie *
-    rtb_Switch1_ie);
-  if (rtb_Divide_nfun < measure_P.Constant_Value_d1m1hiq) {
-    rtb_Divide_nfun = measure_P.Constant_Value_d1;
+  rtb_ComplextoRealImag_o2_l = (rtb_ComplextoRealImag_o2_l *
+    rtb_ComplextoRealImag_o2_l) - (rtb_Switch * rtb_Switch);
+  if (rtb_ComplextoRealImag_o2_l < measure_P.Constant_Value_d1m1hiq) {
+    rtb_ComplextoRealImag_o2_l = measure_P.Constant_Value_d1;
   }
 
-  if (rtb_Switch1_ie < measure_P.Constant_Value_d1m1hiqr) {
-    rtb_Switch1_ie = measure_P.Constant_Value_d1m;
+  if (rtb_Switch < measure_P.Constant_Value_d1m1hiqr) {
+    rtb_Switch = measure_P.Constant_Value_d1m;
   }
 
-  rtb_Divide_nfun = (((rtb_Divide_nfun < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Divide_nfun))) : std::sqrt(rtb_Divide_nfun)) / rtb_Switch1_ie) *
-    measure_P.Gain_Gain_d1m;
-  if (rtb_Divide_nfun > measure_P.Constant_Value_d1m1hiqru) {
-    rtb_Divide_nfun = measure_P.Constant_Value_d1m1;
+  rtb_ComplextoRealImag_o2_l = (((rtb_ComplextoRealImag_o2_l < 0.0) ? (-std::
+    sqrt(std::abs(rtb_ComplextoRealImag_o2_l))) : std::sqrt
+    (rtb_ComplextoRealImag_o2_l)) / rtb_Switch) * measure_P.Gain_Gain_d1m;
+  if (rtb_ComplextoRealImag_o2_l > measure_P.Constant_Value_d1m1hiqru) {
+    rtb_ComplextoRealImag_o2_l = measure_P.Constant_Value_d1m1;
   }
 
-  rtb_Sum1_gh = (rtb_Sum1_gh * rtb_Sum1_gh) - (rtb_Switch_jpt * rtb_Switch_jpt);
-  if (rtb_Sum1_gh < measure_P.Constant_Value_m0413rf) {
-    rtb_Sum1_gh = measure_P.Constant_Value_m0;
+  rtb_OutputWatts = (rtb_OutputWatts * rtb_OutputWatts) - (rtb_MathFunction1 *
+    rtb_MathFunction1);
+  if (rtb_OutputWatts < measure_P.Constant_Value_m0413rf) {
+    rtb_OutputWatts = measure_P.Constant_Value_m0;
   }
 
-  if (rtb_Switch_jpt < measure_P.Constant_Value_m0413rfk) {
-    rtb_Switch_jpt = measure_P.Constant_Value_m04;
+  if (rtb_MathFunction1 < measure_P.Constant_Value_m0413rfk) {
+    rtb_MathFunction1 = measure_P.Constant_Value_m04;
   }
 
-  rtb_Sum1_gh = (((rtb_Sum1_gh < 0.0) ? (-std::sqrt(std::abs(rtb_Sum1_gh))) :
-                  std::sqrt(rtb_Sum1_gh)) / rtb_Switch_jpt) *
+  rtb_OutputWatts = (((rtb_OutputWatts < 0.0) ? (-std::sqrt(std::abs
+    (rtb_OutputWatts))) : std::sqrt(rtb_OutputWatts)) / rtb_MathFunction1) *
     measure_P.Gain_Gain_m04;
-  if (rtb_Sum1_gh > measure_P.Constant_Value_m0413rfkr) {
-    rtb_Sum1_gh = measure_P.Constant_Value_m041;
+  if (rtb_OutputWatts > measure_P.Constant_Value_m0413rfkr) {
+    rtb_OutputWatts = measure_P.Constant_Value_m041;
   }
 
-  measure_Y.VoltageTHDPercent3[0] = rtb_UnaryMinus_g;
-  measure_Y.VoltageTHDPercent3[1] = rtb_Divide_nfun;
-  measure_Y.VoltageTHDPercent3[2] = rtb_Sum1_gh;
+  measure_Y.VoltageTHDPercent3[0] = rtb_SumofElements1;
+  measure_Y.VoltageTHDPercent3[1] = rtb_ComplextoRealImag_o2_l;
+  measure_Y.VoltageTHDPercent3[2] = rtb_OutputWatts;
   rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_h) -
     (measure_P.Gain5_Gain_h[0].im * rtb_Divide_hh)) + ((measure_P.Gain5_Gain_h[1]
     .re * rtb_Divide_b4ha) - (measure_P.Gain5_Gain_h[1].im * rtb_Divide_b4h))) +
                              ((measure_P.Gain5_Gain_h[2].re * rtb_Divide_nqzy) -
                               (measure_P.Gain5_Gain_h[2].im * rtb_Divide_nqz))) *
     measure_P.Gain6_Gain;
-  rtb_Gain_pj = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_hh) +
-                   (measure_P.Gain5_Gain_h[0].im * rtb_Divide_h)) +
-                  ((measure_P.Gain5_Gain_h[1].re * rtb_Divide_b4h) +
-                   (measure_P.Gain5_Gain_h[1].im * rtb_Divide_b4ha))) +
-                 ((measure_P.Gain5_Gain_h[2].re * rtb_Divide_nqz) +
-                  (measure_P.Gain5_Gain_h[2].im * rtb_Divide_nqzy))) *
-    measure_P.Gain6_Gain;
-  rtb_Sum1_gh = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re) +
-    (rtb_Gain_pj * rtb_Gain_pj);
+  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain5_Gain_h[0].re * rtb_Divide_hh) +
+                               (measure_P.Gain5_Gain_h[0].im * rtb_Divide_h)) +
+                              ((measure_P.Gain5_Gain_h[1].re * rtb_Divide_b4h) +
+                               (measure_P.Gain5_Gain_h[1].im * rtb_Divide_b4ha)))
+    + ((measure_P.Gain5_Gain_h[2].re * rtb_Divide_nqz) +
+       (measure_P.Gain5_Gain_h[2].im * rtb_Divide_nqzy))) * measure_P.Gain6_Gain;
+  rtb_OutputWatts = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re) +
+    (rtb_VpuIpktoVrmsIrms_im * rtb_VpuIpktoVrmsIrms_im);
   rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_h) -
                                (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_hh))
     + ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4ha) -
        (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4h))) +
     ((measure_P.Gain2_Gain_h1[2].re * rtb_Divide_nqzy) -
      (measure_P.Gain2_Gain_h1[2].im * rtb_Divide_nqz))) * measure_P.Gain4_Gain;
-  rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_hh) +
-                   (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_h)) +
-                  ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4h) +
-                   (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4ha))) +
-                 ((measure_P.Gain2_Gain_h1[2].re * rtb_Divide_nqz) +
-                  (measure_P.Gain2_Gain_h1[2].im * rtb_Divide_nqzy))) *
-    measure_P.Gain4_Gain;
-  rtb_Switch_jpt = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re) +
-    (rtb_Gain_pj * rtb_Gain_pj);
-  rtb_Switch_jpt = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jpt)))
-    : std::sqrt(rtb_Switch_jpt);
-  if (rtb_Switch_jpt < measure_P.Constant_Value_h1r) {
+  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain2_Gain_h1[0].re * rtb_Divide_hh) +
+                               (measure_P.Gain2_Gain_h1[0].im * rtb_Divide_h)) +
+                              ((measure_P.Gain2_Gain_h1[1].re * rtb_Divide_b4h)
+    + (measure_P.Gain2_Gain_h1[1].im * rtb_Divide_b4ha))) +
+    ((measure_P.Gain2_Gain_h1[2].re * rtb_Divide_nqz) +
+     (measure_P.Gain2_Gain_h1[2].im * rtb_Divide_nqzy))) * measure_P.Gain4_Gain;
+  rtb_MathFunction1 = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re) +
+    (rtb_VpuIpktoVrmsIrms_im * rtb_VpuIpktoVrmsIrms_im);
+  rtb_MathFunction1 = (rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1);
+  if (rtb_MathFunction1 < measure_P.Constant_Value_h1r) {
     rtb_Gain6_re = measure_P.Constant_Value_h;
   } else {
-    rtb_Gain6_re = rtb_Switch_jpt;
+    rtb_Gain6_re = rtb_MathFunction1;
   }
 
-  measure_Y.VoltageUnbalancePercent = (((rtb_Sum1_gh < 0.0) ? (-std::sqrt(std::
-    abs(rtb_Sum1_gh))) : std::sqrt(rtb_Sum1_gh)) / rtb_Gain6_re) *
+  measure_Y.VoltageUnbalancePercent = (((rtb_OutputWatts < 0.0) ? (-std::sqrt
+    (std::abs(rtb_OutputWatts))) : std::sqrt(rtb_OutputWatts)) / rtb_Gain6_re) *
     measure_P.Gain3_Gain_h;
-  measure_Y.VoltagePosSeqMagPu = rtb_Switch_jpt;
-  rtb_Gain_pj = (((measure_P.Gain_Gain_p * rtb_Divide_nfu) * rtb_UnaryMinus_l) +
-                 rtb_Sum) + rt_atan2d_snf(rtb_Gain_pj, rtb_VpuIpktoVrmsIrms_re);
+  measure_Y.VoltagePosSeqMagPu = rtb_MathFunction1;
+  rtb_Gain_pj = (((measure_P.Gain_Gain_p * rtb_Divide_nfu) * rtb_Divide_cv) +
+                 rtb_Sum) + rt_atan2d_snf(rtb_VpuIpktoVrmsIrms_im,
+    rtb_VpuIpktoVrmsIrms_re);
   if (rtb_Gain_pj < measure_P.Constant_Value_by) {
-    rtb_Gain_pj += measure_P.Bias1_Bias;
+    rtb_Gain_pj += measure_P.Bias1_Bias_i;
   } else {
     if (rtb_Gain_pj > measure_P.Constant_Value_e2) {
       rtb_Gain_pj += measure_P.Bias_Bias_c;
@@ -4123,21 +4129,22 @@ void measureModelClass::step0()
     measure_P.Gain7_Gain;
   rtb_VpuIpktoVrmsIrms_re = ((rtb_Divide_hh + rtb_Divide_b4h) + rtb_Divide_nqz) *
     measure_P.Gain7_Gain;
-  rtb_Sum1_gh = (rtb_Gain6_re * rtb_Gain6_re) + (rtb_VpuIpktoVrmsIrms_re *
+  rtb_OutputWatts = (rtb_Gain6_re * rtb_Gain6_re) + (rtb_VpuIpktoVrmsIrms_re *
     rtb_VpuIpktoVrmsIrms_re);
-  measure_Y.VoltageZeroSeqMagPu = (rtb_Sum1_gh < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Sum1_gh))) : std::sqrt(rtb_Sum1_gh);
+  measure_Y.VoltageZeroSeqMagPu = (rtb_OutputWatts < 0.0) ? (-std::sqrt(std::abs
+    (rtb_OutputWatts))) : std::sqrt(rtb_OutputWatts);
   rtb_UnitDelay1_o = measure_DWork.UnitDelay1_DSTATE_f;
-  rtb_Sum1_gh = (measure_P.Gain_Gain_en * rtb_Add1_f_idx) +
+  rtb_OutputWatts = (measure_P.Gain_Gain_en * rtb_Add1_f_idx) +
     measure_P.Bias_Bias_n;
-  rtb_Sum1_gh = ((((measure_U.IabcAmps[0] - measure_DWork.UnitDelay2_DSTATE_mk) *
-                   measure_P.Gain_Gain_hf) * rtb_Sum1_gh) +
-                 measure_DWork.UnitDelay1_DSTATE_f) +
+  rtb_OutputWatts = ((((measure_U.IabcAmps[0] -
+                        measure_DWork.UnitDelay2_DSTATE_mk) *
+                       measure_P.Gain_Gain_hf) * rtb_OutputWatts) +
+                     measure_DWork.UnitDelay1_DSTATE_f) +
     ((((measure_DWork.UnitDelay2_DSTATE_mk + measure_U.IabcAmps[0]) *
        measure_P.Gain1_Gain_h) - measure_DWork.UnitDelay1_DSTATE_f) *
-     (rtb_Sum1_gh * rtb_Sum1_gh));
-  measure_B.Product_j[0] = (rtb_Sum1_gh * rtb_UnaryMinus_o) * rtb_Divide_nf;
-  measure_B.Product_j[1] = (rtb_Sum1_gh * rtb_Sum2_i) * rtb_Divide_nf;
+     (rtb_OutputWatts * rtb_OutputWatts));
+  measure_B.Product_j[0] = (rtb_OutputWatts * rtb_UnaryMinus_o) * rtb_Divide_nf;
+  measure_B.Product_j[1] = (rtb_OutputWatts * rtb_Sum2_i) * rtb_Divide_nf;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_jp = measure_P.double_Value_e1r;
   } else {
@@ -4191,10 +4198,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Divide_nfun = measure_B.Switch_jp -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_jp -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hg;
   } else {
-    rtb_Divide_nfun = measure_B.Switch_jpt -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_jpt -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgf;
   }
 
@@ -4226,7 +4233,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_nf = (rtb_Divide_nfun -
+  measure_B.Divide_nf = (rtb_ComplextoRealImag_o2_l -
     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_b *
       rtb_Subtract3_lr) +
      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_fr *
@@ -4287,10 +4294,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Divide_nfun = measure_B.Switch_jptu -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_jptu -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfm;
   } else {
-    rtb_Divide_nfun = measure_B.Switch_jptuz -
+    rtb_ComplextoRealImag_o2_l = measure_B.Switch_jptuz -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfmt;
   }
 
@@ -4322,11 +4329,11 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_nfun = (rtb_Divide_nfun -
-                     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br
-                       * rtb_Subtract3_lri) +
-                      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq
-                       * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_ComplextoRealImag_o2_l = (rtb_ComplextoRealImag_o2_l -
+    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br *
+      rtb_Subtract3_lri) +
+     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq *
+      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_jptuzr = measure_P.double_Value_e1ror;
   } else {
@@ -4384,10 +4391,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_UnaryMinus_g = measure_B.Switch_jptuzr -
+    rtb_SumofElements1 = measure_B.Switch_jptuzr -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfmtb;
   } else {
-    rtb_UnaryMinus_g = measure_B.Switch_jptuzrl -
+    rtb_SumofElements1 = measure_B.Switch_jptuzrl -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfmtba;
   }
 
@@ -4419,7 +4426,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_nfu = (rtb_UnaryMinus_g -
+  measure_B.Divide_nfu = (rtb_SumofElements1 -
     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4 *
       rtb_Subtract3_lr) +
      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2 *
@@ -4481,10 +4488,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_UnaryMinus_g = measure_B.Switch_jptuzrlj -
+    rtb_SumofElements1 = measure_B.Switch_jptuzrlj -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfmtbat;
   } else {
-    rtb_UnaryMinus_g = measure_B.Switch_jptuzrljf -
+    rtb_SumofElements1 = measure_B.Switch_jptuzrljf -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_hgfmtbat5;
   }
 
@@ -4517,16 +4524,16 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_UnaryMinus_g = (rtb_UnaryMinus_g -
-                      ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j
-                        * rtb_Subtract3_lri) +
-                       (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2e
-                        * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Switch_jpt = (rtb_Divide_nfun * rtb_Divide_nfun) + (rtb_UnaryMinus_g *
-    rtb_UnaryMinus_g);
-  rtb_Switch_jpt = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jpt)))
-    : std::sqrt(rtb_Switch_jpt);
-  rtb_Switch1_ie = measure_P.IpktoIrms_Gain * rtb_Switch_jpt;
+  rtb_SumofElements1 = (rtb_SumofElements1 -
+                        ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j
+    * rtb_Subtract3_lri) +
+    (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2e *
+     rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_MathFunction1 = (rtb_ComplextoRealImag_o2_l * rtb_ComplextoRealImag_o2_l)
+    + (rtb_SumofElements1 * rtb_SumofElements1);
+  rtb_MathFunction1 = (rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1);
+  rtb_Switch = measure_P.IpktoIrms_Gain * rtb_MathFunction1;
   rtb_UnitDelay1_f = measure_DWork.UnitDelay1_DSTATE_d;
   rtb_Sum1_dat = (measure_P.Gain_Gain_ad * rtb_Add1_f_idx_0) +
     measure_P.Bias_Bias_n2;
@@ -4949,23 +4956,22 @@ void measureModelClass::step0()
                         * rtb_Subtract3_lri) +
                        (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2ejbqm
                         * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Switch1_l = (rtb_Divide_nfu * rtb_Divide_nfu) + (rtb_UnaryMinus_l *
+  rtb_Switch1_ie = (rtb_Divide_nfu * rtb_Divide_nfu) + (rtb_UnaryMinus_l *
     rtb_UnaryMinus_l);
-  rtb_Switch1_l = (rtb_Switch1_l < 0.0) ? (-std::sqrt(std::abs(rtb_Switch1_l))) :
-    std::sqrt(rtb_Switch1_l);
-  rtb_Switch = measure_P.IpktoIrms_Gain_g * rtb_Switch1_l;
+  rtb_Switch1_ie = (rtb_Switch1_ie < 0.0) ? (-std::sqrt(std::abs(rtb_Switch1_ie)))
+    : std::sqrt(rtb_Switch1_ie);
+  rtb_Switch1_iew = measure_P.IpktoIrms_Gain_g * rtb_Switch1_ie;
   rtb_UnitDelay1_pu = measure_DWork.UnitDelay1_DSTATE_b;
-  rtb_Add1_f_idx_1 = (measure_P.Gain_Gain_eb * rtb_Add1_f_idx_1) +
+  rtb_Divide_cv = (measure_P.Gain_Gain_eb * rtb_Add1_f_idx_1) +
     measure_P.Bias_Bias_ih;
-  rtb_Add1_f_idx_1 = ((((measure_U.IabcAmps[2] -
-    measure_DWork.UnitDelay2_DSTATE_kb) * measure_P.Gain_Gain_oc) *
-                       rtb_Add1_f_idx_1) + measure_DWork.UnitDelay1_DSTATE_b) +
+  rtb_Divide_cv = ((((measure_U.IabcAmps[2] - measure_DWork.UnitDelay2_DSTATE_kb)
+                     * measure_P.Gain_Gain_oc) * rtb_Divide_cv) +
+                   measure_DWork.UnitDelay1_DSTATE_b) +
     ((((measure_DWork.UnitDelay2_DSTATE_kb + measure_U.IabcAmps[2]) *
        measure_P.Gain1_Gain_o) - measure_DWork.UnitDelay1_DSTATE_b) *
-     (rtb_Add1_f_idx_1 * rtb_Add1_f_idx_1));
-  measure_B.Product_jqy[0] = (rtb_Add1_f_idx_1 * rtb_UnaryMinus_o) *
-    rtb_Divide_nf;
-  measure_B.Product_jqy[1] = (rtb_Add1_f_idx_1 * rtb_Sum2_i) * rtb_Divide_nf;
+     (rtb_Divide_cv * rtb_Divide_cv));
+  measure_B.Product_jqy[0] = (rtb_Divide_cv * rtb_UnaryMinus_o) * rtb_Divide_nf;
+  measure_B.Product_jqy[1] = (rtb_Divide_cv * rtb_Sum2_i) * rtb_Divide_nf;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_i = measure_P.double_Value_m;
   } else {
@@ -5371,9 +5377,12 @@ void measureModelClass::step0()
     rtb_UnaryMinus_o);
   rtb_Gain_pj = (rtb_Sum2_i < 0.0) ? (-std::sqrt(std::abs(rtb_Sum2_i))) : std::
     sqrt(rtb_Sum2_i);
-  rtb_MathFunction1 = measure_P.IpktoIrms_Gain_m * rtb_Gain_pj;
-  rtb_Add1_f_idx_0 = measure_P.ScaleRMSoutputsto1pu_Gain_e * rtb_Sum1_gh;
-  measure_B.MathFunction_p = rtb_Add1_f_idx_0 * rtb_Add1_f_idx_0;
+  rtb_Add1_f_idx_1 = measure_P.IpktoIrms_Gain_m * rtb_Gain_pj;
+  rtb_Sum2_i = rt_atan2d_snf(rtb_SumofElements1, rtb_ComplextoRealImag_o2_l);
+  rtb_TrigonometricFunction_hr = rt_atan2d_snf(rtb_UnaryMinus_l, rtb_Divide_nfu);
+  rtb_TrigonometricFunction_hrx = rt_atan2d_snf(rtb_UnaryMinus_o, rtb_Divide_nf);
+  rtb_Sum1_kv = measure_P.ScaleRMSoutputsto1pu_Gain_e * rtb_OutputWatts;
+  measure_B.MathFunction_p = rtb_Sum1_kv * rtb_Sum1_kv;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_p = measure_P.double_Value_e1rorg3e1hu;
   } else {
@@ -5428,10 +5437,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Add1_f_idx_0 = measure_B.Switch_p -
+    rtb_Sum1_kv = measure_B.Switch_p -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_lk;
   } else {
-    rtb_Add1_f_idx_0 = measure_B.Switch_pi -
+    rtb_Sum1_kv = measure_B.Switch_pi -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_pp;
   }
 
@@ -5470,13 +5479,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Add1_f_idx_0 = (rtb_Add1_f_idx_0 -
-                      ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0n
-                        * rtb_Subtract3_lr) +
-                       (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2ejbqmjcpoj
-                        * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1_e = (rtb_Add1_f_idx_0 < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Add1_f_idx_0))) : std::sqrt(rtb_Add1_f_idx_0);
+  rtb_Sum1_kv = (rtb_Sum1_kv -
+                 ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0n
+                   * rtb_Subtract3_lr) +
+                  (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2ejbqmjcpoj
+                   * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1_e = (rtb_Sum1_kv < 0.0) ? (-std::sqrt(std::abs
+    (rtb_Sum1_kv))) : std::sqrt(rtb_Sum1_kv);
   if (rtb_Compare_enj) {
     measure_B.Switch_i0 = measure_P.double_Value_e;
   } else {
@@ -5530,10 +5539,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Add1_f_idx_0 = measure_B.Switch_i0 -
+    rtb_Sum1_kv = measure_B.Switch_i0 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_n;
   } else {
-    rtb_Add1_f_idx_0 = measure_B.Switch_jv -
+    rtb_Sum1_kv = measure_B.Switch_jv -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ny;
   }
 
@@ -5572,30 +5581,30 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Add1_f_idx_0 = (rtb_Add1_f_idx_0 -
-                      ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0na
-                        * rtb_Subtract3_lri) +
-                       (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2ejbqmjcpojk
-                        * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Add1_f_idx_0 = (rtb_Add1_f_idx_0 * rtb_Add1_f_idx_0) - (rtb_Switch_jpt *
-    rtb_Switch_jpt);
-  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_e1rorg3e1hu) {
-    rtb_Add1_f_idx_0 = measure_P.Constant_Value_e1;
+  rtb_Sum1_kv = (rtb_Sum1_kv -
+                 ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0na
+                   * rtb_Subtract3_lri) +
+                  (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_frq2ejbqmjcpojk
+                   * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_Sum1_kv = (rtb_Sum1_kv * rtb_Sum1_kv) - (rtb_MathFunction1 *
+    rtb_MathFunction1);
+  if (rtb_Sum1_kv < measure_P.Constant_Value_e1rorg3e1hu) {
+    rtb_Sum1_kv = measure_P.Constant_Value_e1;
   }
 
-  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hup) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1r;
+  if (rtb_MathFunction1 < measure_P.Constant_Value_e1rorg3e1hup) {
+    rtb_MathFunction1 = measure_P.Constant_Value_e1r;
   }
 
-  rtb_Add1_f_idx_0 = (((rtb_Add1_f_idx_0 < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Add1_f_idx_0))) : std::sqrt(rtb_Add1_f_idx_0)) / rtb_Switch_jpt) *
+  rtb_Sum1_kv = (((rtb_Sum1_kv < 0.0) ? (-std::sqrt(std::abs(rtb_Sum1_kv))) :
+                  std::sqrt(rtb_Sum1_kv)) / rtb_MathFunction1) *
     measure_P.Gain_Gain_e1;
-  if (rtb_Add1_f_idx_0 > measure_P.Constant_Value_e1rorg3e1hupm) {
-    rtb_Add1_f_idx_0 = measure_P.Constant_Value_e1ro;
+  if (rtb_Sum1_kv > measure_P.Constant_Value_e1rorg3e1hupm) {
+    rtb_Sum1_kv = measure_P.Constant_Value_e1ro;
   }
 
-  rtb_Switch_jpt = measure_P.ScaleRMSoutputsto1pu_Gain_e1 * rtb_Sum1_dat;
-  measure_B.MathFunction_pc = rtb_Switch_jpt * rtb_Switch_jpt;
+  rtb_MathFunction1 = measure_P.ScaleRMSoutputsto1pu_Gain_e1 * rtb_Sum1_dat;
+  measure_B.MathFunction_pc = rtb_MathFunction1 * rtb_MathFunction1;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_k = measure_P.double_Value_li;
   } else {
@@ -5650,10 +5659,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Switch_jpt = measure_B.Switch_k -
+    rtb_MathFunction1 = measure_B.Switch_k -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_lp;
   } else {
-    rtb_Switch_jpt = measure_B.Switch_eh -
+    rtb_MathFunction1 = measure_B.Switch_eh -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_cx;
   }
 
@@ -5690,13 +5699,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch_jpt = (rtb_Switch_jpt -
-                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0nah
-                      * rtb_Subtract3_lr) +
-                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_d4 *
-                      rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1_ew = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Switch_jpt))) : std::sqrt(rtb_Switch_jpt);
+  rtb_MathFunction1 = (rtb_MathFunction1 -
+                       ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_br4j50fkfbp0nah
+    * rtb_Subtract3_lr) +
+                        (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_d4
+    * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1_ew = (rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1);
   if (rtb_Compare_enj) {
     measure_B.Switch_o = measure_P.double_Value_e1rorg3e1hupm;
   } else {
@@ -5752,10 +5761,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Switch_jpt = measure_B.Switch_o -
+    rtb_MathFunction1 = measure_B.Switch_o -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ka;
   } else {
-    rtb_Switch_jpt = measure_B.Switch_d -
+    rtb_MathFunction1 = measure_B.Switch_d -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_pi;
   }
 
@@ -5787,30 +5796,30 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch_jpt = (rtb_Switch_jpt -
-                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_db *
-                      rtb_Subtract3_lri) +
-                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_i0 *
-                      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Switch_jpt = (rtb_Switch_jpt * rtb_Switch_jpt) - (rtb_Switch1_l *
-    rtb_Switch1_l);
-  if (rtb_Switch_jpt < measure_P.Constant_Value_e1rorg3e1hupmn) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1ror;
+  rtb_MathFunction1 = (rtb_MathFunction1 -
+                       ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_db
+    * rtb_Subtract3_lri) +
+                        (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_i0
+    * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_MathFunction1 = (rtb_MathFunction1 * rtb_MathFunction1) - (rtb_Switch1_ie *
+    rtb_Switch1_ie);
+  if (rtb_MathFunction1 < measure_P.Constant_Value_e1rorg3e1hupmn) {
+    rtb_MathFunction1 = measure_P.Constant_Value_e1ror;
   }
 
-  if (rtb_Switch1_l < measure_P.Constant_Value_e1rorg3e1hupmn0) {
-    rtb_Switch1_l = measure_P.Constant_Value_e1rorg;
+  if (rtb_Switch1_ie < measure_P.Constant_Value_e1rorg3e1hupmn0) {
+    rtb_Switch1_ie = measure_P.Constant_Value_e1rorg;
   }
 
-  rtb_Switch1_l = (((rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs(rtb_Switch_jpt)))
-                    : std::sqrt(rtb_Switch_jpt)) / rtb_Switch1_l) *
+  rtb_Switch1_ie = (((rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1)) / rtb_Switch1_ie) *
     measure_P.Gain_Gain_e1r;
-  if (rtb_Switch1_l > measure_P.Constant_Value_ch) {
-    rtb_Switch1_l = measure_P.Constant_Value_e1rorg3;
+  if (rtb_Switch1_ie > measure_P.Constant_Value_ch) {
+    rtb_Switch1_ie = measure_P.Constant_Value_e1rorg3;
   }
 
-  rtb_Switch_jpt = measure_P.ScaleRMSoutputsto1pu_Gain_e1r * rtb_Add1_f_idx_1;
-  measure_B.MathFunction_pcc = rtb_Switch_jpt * rtb_Switch_jpt;
+  rtb_MathFunction1 = measure_P.ScaleRMSoutputsto1pu_Gain_e1r * rtb_Divide_cv;
+  measure_B.MathFunction_pcc = rtb_MathFunction1 * rtb_MathFunction1;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ia = measure_P.double_Value_nx;
   } else {
@@ -5864,10 +5873,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Switch_jpt = measure_B.Switch_ia -
+    rtb_MathFunction1 = measure_B.Switch_ia -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_os;
   } else {
-    rtb_Switch_jpt = measure_B.Switch_cp -
+    rtb_MathFunction1 = measure_B.Switch_cp -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_g0;
   }
 
@@ -5899,13 +5908,13 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch_jpt = (rtb_Switch_jpt -
-                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_oq *
-                      rtb_Subtract3_lr) +
-                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_b *
-                      rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
-  measure_B.MathFunction1_ew0 = (rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Switch_jpt))) : std::sqrt(rtb_Switch_jpt);
+  rtb_MathFunction1 = (rtb_MathFunction1 -
+                       ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_oq
+    * rtb_Subtract3_lr) +
+                        (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_b
+    * rtb_MathFunction_gbn))) * rtb_Tps2dt_dt;
+  measure_B.MathFunction1_ew0 = (rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1);
   if (rtb_Compare_enj) {
     measure_B.Switch_cn = measure_P.double_Value_f;
   } else {
@@ -5960,10 +5969,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Switch_jpt = measure_B.Switch_cn -
+    rtb_MathFunction1 = measure_B.Switch_cn -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_p0;
   } else {
-    rtb_Switch_jpt = measure_B.Switch_g -
+    rtb_MathFunction1 = measure_B.Switch_g -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_bp;
   }
 
@@ -5995,124 +6004,121 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch_jpt = (rtb_Switch_jpt -
-                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d1 *
-                      rtb_Subtract3_lri) +
-                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_m *
-                      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
-  rtb_Switch_jpt = (rtb_Switch_jpt * rtb_Switch_jpt) - (rtb_Gain_pj *
+  rtb_MathFunction1 = (rtb_MathFunction1 -
+                       ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_d1
+    * rtb_Subtract3_lri) +
+                        (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_m
+    * rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_MathFunction1 = (rtb_MathFunction1 * rtb_MathFunction1) - (rtb_Gain_pj *
     rtb_Gain_pj);
-  if (rtb_Switch_jpt < measure_P.Constant_Value_be) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e;
+  if (rtb_MathFunction1 < measure_P.Constant_Value_be) {
+    rtb_MathFunction1 = measure_P.Constant_Value_e1rorg3e;
   }
 
   if (rtb_Gain_pj < measure_P.Constant_Value_ab) {
     rtb_Gain_pj = measure_P.Constant_Value_e1rorg3e1;
   }
 
-  rtb_Switch_jpt = (((rtb_Switch_jpt < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Switch_jpt))) : std::sqrt(rtb_Switch_jpt)) / rtb_Gain_pj) *
+  rtb_MathFunction1 = (((rtb_MathFunction1 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_MathFunction1))) : std::sqrt(rtb_MathFunction1)) / rtb_Gain_pj) *
     measure_P.Gain_Gain_e1ro;
-  if (rtb_Switch_jpt > measure_P.Constant_Value_ed) {
-    rtb_Switch_jpt = measure_P.Constant_Value_e1rorg3e1h;
+  if (rtb_MathFunction1 > measure_P.Constant_Value_ed) {
+    rtb_MathFunction1 = measure_P.Constant_Value_e1rorg3e1h;
   }
 
-  rtb_Gain6_re = ((((measure_P.Gain5_Gain_h1[0].re * rtb_Divide_nfun) -
-                    (measure_P.Gain5_Gain_h1[0].im * rtb_UnaryMinus_g)) +
+  rtb_Gain6_re = ((((measure_P.Gain5_Gain_h1[0].re * rtb_ComplextoRealImag_o2_l)
+                    - (measure_P.Gain5_Gain_h1[0].im * rtb_SumofElements1)) +
                    ((measure_P.Gain5_Gain_h1[1].re * rtb_Divide_nfu) -
                     (measure_P.Gain5_Gain_h1[1].im * rtb_UnaryMinus_l))) +
                   ((measure_P.Gain5_Gain_h1[2].re * rtb_Divide_nf) -
                    (measure_P.Gain5_Gain_h1[2].im * rtb_UnaryMinus_o))) *
     measure_P.Gain6_Gain_h;
-  rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain5_Gain_h1[0].re * rtb_UnaryMinus_g)
-    + (measure_P.Gain5_Gain_h1[0].im * rtb_Divide_nfun)) +
-    ((measure_P.Gain5_Gain_h1[1].re * rtb_UnaryMinus_l) +
-     (measure_P.Gain5_Gain_h1[1].im * rtb_Divide_nfu))) +
+  rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain5_Gain_h1[0].re *
+    rtb_SumofElements1) + (measure_P.Gain5_Gain_h1[0].im *
+    rtb_ComplextoRealImag_o2_l)) + ((measure_P.Gain5_Gain_h1[1].re *
+    rtb_UnaryMinus_l) + (measure_P.Gain5_Gain_h1[1].im * rtb_Divide_nfu))) +
     ((measure_P.Gain5_Gain_h1[2].re * rtb_UnaryMinus_o) +
      (measure_P.Gain5_Gain_h1[2].im * rtb_Divide_nf))) * measure_P.Gain6_Gain_h;
-  rtb_Add1_f_idx = (rtb_Gain6_re * rtb_Gain6_re) + (rtb_VpuIpktoVrmsIrms_re *
+  rtb_Add1_f_idx_0 = (rtb_Gain6_re * rtb_Gain6_re) + (rtb_VpuIpktoVrmsIrms_re *
     rtb_VpuIpktoVrmsIrms_re);
-  rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain2_Gain_h1r[0].re * rtb_Divide_nfun)
-    - (measure_P.Gain2_Gain_h1r[0].im * rtb_UnaryMinus_g)) +
-    ((measure_P.Gain2_Gain_h1r[1].re * rtb_Divide_nfu) -
-     (measure_P.Gain2_Gain_h1r[1].im * rtb_UnaryMinus_l))) +
-    ((measure_P.Gain2_Gain_h1r[2].re * rtb_Divide_nf) -
-     (measure_P.Gain2_Gain_h1r[2].im * rtb_UnaryMinus_o))) *
+  rtb_VpuIpktoVrmsIrms_re = ((((measure_P.Gain2_Gain_h1r[0].re *
+    rtb_ComplextoRealImag_o2_l) - (measure_P.Gain2_Gain_h1r[0].im *
+    rtb_SumofElements1)) + ((measure_P.Gain2_Gain_h1r[1].re * rtb_Divide_nfu) -
+                               (measure_P.Gain2_Gain_h1r[1].im *
+    rtb_UnaryMinus_l))) + ((measure_P.Gain2_Gain_h1r[2].re * rtb_Divide_nf) -
+    (measure_P.Gain2_Gain_h1r[2].im * rtb_UnaryMinus_o))) *
     measure_P.Gain4_Gain_h;
-  rtb_Gain_pj = ((((measure_P.Gain2_Gain_h1r[0].re * rtb_UnaryMinus_g) +
-                   (measure_P.Gain2_Gain_h1r[0].im * rtb_Divide_nfun)) +
-                  ((measure_P.Gain2_Gain_h1r[1].re * rtb_UnaryMinus_l) +
-                   (measure_P.Gain2_Gain_h1r[1].im * rtb_Divide_nfu))) +
-                 ((measure_P.Gain2_Gain_h1r[2].re * rtb_UnaryMinus_o) +
-                  (measure_P.Gain2_Gain_h1r[2].im * rtb_Divide_nf))) *
-    measure_P.Gain4_Gain_h;
-  rtb_VpuIpktoVrmsIrms_re = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re)
-    + (rtb_Gain_pj * rtb_Gain_pj);
-  rtb_Gain_pj = (rtb_VpuIpktoVrmsIrms_re < 0.0) ? (-std::sqrt(std::abs
-    (rtb_VpuIpktoVrmsIrms_re))) : std::sqrt(rtb_VpuIpktoVrmsIrms_re);
-  measure_Y.Current[0] = rtb_Switch1_ie;
-  measure_Y.Current[1] = rtb_Switch;
-  measure_Y.Current[2] = rtb_MathFunction1;
-  measure_Y.Current[3] = rt_atan2d_snf(rtb_UnaryMinus_g, rtb_Divide_nfun);
-  measure_Y.Current[4] = rt_atan2d_snf(rtb_UnaryMinus_l, rtb_Divide_nfu);
-  measure_Y.Current[5] = rt_atan2d_snf(rtb_UnaryMinus_o, rtb_Divide_nf);
-  measure_Y.Current[6] = rtb_Add1_f_idx_0;
-  measure_Y.Current[7] = rtb_Switch1_l;
-  measure_Y.Current[8] = rtb_Switch_jpt;
+  rtb_VpuIpktoVrmsIrms_im = ((((measure_P.Gain2_Gain_h1r[0].re *
+    rtb_SumofElements1) + (measure_P.Gain2_Gain_h1r[0].im *
+    rtb_ComplextoRealImag_o2_l)) + ((measure_P.Gain2_Gain_h1r[1].re *
+    rtb_UnaryMinus_l) + (measure_P.Gain2_Gain_h1r[1].im * rtb_Divide_nfu))) +
+    ((measure_P.Gain2_Gain_h1r[2].re * rtb_UnaryMinus_o) +
+     (measure_P.Gain2_Gain_h1r[2].im * rtb_Divide_nf))) * measure_P.Gain4_Gain_h;
+  rtb_Add1_f_idx = (rtb_VpuIpktoVrmsIrms_re * rtb_VpuIpktoVrmsIrms_re) +
+    (rtb_VpuIpktoVrmsIrms_im * rtb_VpuIpktoVrmsIrms_im);
+  rtb_Gain_pj = (rtb_Add1_f_idx < 0.0) ? (-std::sqrt(std::abs(rtb_Add1_f_idx))) :
+    std::sqrt(rtb_Add1_f_idx);
   if (rtb_Gain_pj < measure_P.Constant_Value_h1rl) {
     rtb_Gain_pj = measure_P.Constant_Value_h1;
   }
 
-  measure_Y.Current[9] = (((rtb_Add1_f_idx < 0.0) ? (-std::sqrt(std::abs
-    (rtb_Add1_f_idx))) : std::sqrt(rtb_Add1_f_idx)) / rtb_Gain_pj) *
+  measure_Y.Current[0] = rtb_Switch;
+  measure_Y.Current[1] = rtb_Switch1_iew;
+  measure_Y.Current[2] = rtb_Add1_f_idx_1;
+  measure_Y.Current[3] = rtb_Sum2_i;
+  measure_Y.Current[4] = rtb_TrigonometricFunction_hr;
+  measure_Y.Current[5] = rtb_TrigonometricFunction_hrx;
+  measure_Y.Current[6] = rtb_Sum1_kv;
+  measure_Y.Current[7] = rtb_Switch1_ie;
+  measure_Y.Current[8] = rtb_MathFunction1;
+  measure_Y.Current[9] = (((rtb_Add1_f_idx_0 < 0.0) ? (-std::sqrt(std::abs
+    (rtb_Add1_f_idx_0))) : std::sqrt(rtb_Add1_f_idx_0)) / rtb_Gain_pj) *
     measure_P.Gain3_Gain_h1;
-  rtb_SumofElements *= rtb_Switch1_ie;
-  rtb_AbsVI *= rtb_Switch;
-  rtb_AbsVI_k *= rtb_MathFunction1;
-  rtb_SumofElements += rtb_AbsVI;
-  rtb_SumofElements += rtb_AbsVI_k;
-  rtb_UnaryMinus_g = -rtb_UnaryMinus_g;
-  rtb_VpuIpktoVrmsIrms_re = ((rtb_Divide_h * rtb_Divide_nfun) - (rtb_Divide_hh *
-    rtb_UnaryMinus_g)) * (measure_P.IpktoIrmsconversion_Gain * rtb_Switch_jka);
-  rtb_Add1_f_idx = ((rtb_Divide_h * rtb_UnaryMinus_g) + (rtb_Divide_hh *
-    rtb_Divide_nfun)) * (measure_P.IpktoIrmsconversion_Gain * rtb_Switch_jka);
+  rtb_Divide_la *= rtb_Switch;
+  rtb_Divide_i *= rtb_Switch1_iew;
+  rtb_Divide_o1 *= rtb_Add1_f_idx_1;
+  rtb_Add1_f_idx = (rtb_Divide_la + rtb_Divide_i) + rtb_Divide_o1;
+  measure_Y.VA = rtb_Add1_f_idx;
+  rtb_SumofElements1 = -rtb_SumofElements1;
+  rtb_Add1_f_idx_0 = ((rtb_Divide_h * rtb_ComplextoRealImag_o2_l) -
+                      (rtb_Divide_hh * rtb_SumofElements1)) *
+    (measure_P.IpktoIrmsconversion_Gain * rtb_Switch_jka);
+  rtb_Sum1_kv = ((rtb_Divide_h * rtb_SumofElements1) + (rtb_Divide_hh *
+    rtb_ComplextoRealImag_o2_l)) * (measure_P.IpktoIrmsconversion_Gain *
+    rtb_Switch_jka);
   rtb_UnaryMinus_l = -rtb_UnaryMinus_l;
-  rtb_Add1_f_idx_0 = ((rtb_Divide_b4ha * rtb_Divide_nfu) - (rtb_Divide_b4h *
+  rtb_Add1_f_idx_1 = ((rtb_Divide_b4ha * rtb_Divide_nfu) - (rtb_Divide_b4h *
     rtb_UnaryMinus_l)) * (measure_P.IpktoIrmsconversion_Gain_b * rtb_Switch_jka);
-  rtb_Gain_pj = ((rtb_Divide_b4ha * rtb_UnaryMinus_l) + (rtb_Divide_b4h *
+  rtb_Switch1_iew = ((rtb_Divide_b4ha * rtb_UnaryMinus_l) + (rtb_Divide_b4h *
     rtb_Divide_nfu)) * (measure_P.IpktoIrmsconversion_Gain_b * rtb_Switch_jka);
   rtb_UnaryMinus_o = -rtb_UnaryMinus_o;
   rtb_Switch_jka *= measure_P.IpktoIrmsconversion_Gain_b4;
-  rtb_VpuIpktoVrmsIrms_re += rtb_Add1_f_idx_0;
-  rtb_VpuIpktoVrmsIrms_re += ((rtb_Divide_nqzy * rtb_Divide_nf) -
-    (rtb_Divide_nqz * rtb_UnaryMinus_o)) * rtb_Switch_jka;
-  rtb_Add1_f_idx += rtb_Gain_pj;
-  rtb_Add1_f_idx += ((rtb_Divide_nqzy * rtb_UnaryMinus_o) + (rtb_Divide_nqz *
-    rtb_Divide_nf)) * rtb_Switch_jka;
-  if (rtb_SumofElements < measure_P.Constant_Value_kjg) {
-    rtb_Gain6_re = measure_P.Constant_Value_k;
-  } else {
-    rtb_Gain6_re = rtb_SumofElements;
+  rtb_VpuIpktoVrmsIrms_re = ((rtb_Divide_nqzy * rtb_Divide_nf) - (rtb_Divide_nqz
+    * rtb_UnaryMinus_o)) * rtb_Switch_jka;
+  rtb_VpuIpktoVrmsIrms_im = ((rtb_Divide_nqzy * rtb_UnaryMinus_o) +
+    (rtb_Divide_nqz * rtb_Divide_nf)) * rtb_Switch_jka;
+  rtb_SumofElements1 = (rtb_Add1_f_idx_0 + rtb_Add1_f_idx_1) +
+    rtb_VpuIpktoVrmsIrms_re;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_kjg) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_k;
   }
 
-  rtb_Gain_pj = rtb_VpuIpktoVrmsIrms_re / rtb_Gain6_re;
+  rtb_Gain_pj = rtb_SumofElements1 / rtb_Add1_f_idx;
   if (rtb_Gain_pj < measure_P.Constant_Value_ej) {
-    rtb_Add1_f_idx_0 = measure_P.Constant_Value_d;
+    rtb_Add1_f_idx = measure_P.Constant_Value_d;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_i) {
-    rtb_Add1_f_idx_0 = measure_P.Constant1_Value;
+    rtb_Add1_f_idx = measure_P.Constant1_Value;
   } else {
-    rtb_Add1_f_idx_0 = rtb_Gain_pj;
+    rtb_Add1_f_idx = rtb_Gain_pj;
   }
 
-  measure_Y.PowerFundamental[0] = rtb_SumofElements;
-  measure_Y.PowerFundamental[1] = rtb_VpuIpktoVrmsIrms_re;
-  measure_Y.PowerFundamental[2] = rtb_Add1_f_idx;
-  measure_Y.PowerFundamental[3] = rtb_Add1_f_idx_0;
-  rtb_VpuIpktoVrmsIrms_re = measure_P.Gain1_Gain_g *
-    measure_P.Constant1_Value_m2;
-  measure_B.VI[0] = (rtb_Sum1_lle * rtb_Sum1_gh) * rtb_VpuIpktoVrmsIrms_re;
-  measure_B.VI[1] = (rtb_Sum1_p5 * rtb_Sum1_dat) * rtb_VpuIpktoVrmsIrms_re;
-  measure_B.VI[2] = (rtb_Sum1_pz * rtb_Add1_f_idx_1) * rtb_VpuIpktoVrmsIrms_re;
+  measure_Y.PowerFactor = rtb_Add1_f_idx;
+  measure_Y.WattsFundamental = rtb_SumofElements1;
+  measure_Y.Vars = (rtb_Sum1_kv + rtb_Switch1_iew) + rtb_VpuIpktoVrmsIrms_im;
+  rtb_Add1_f_idx = measure_P.Gain1_Gain_g * measure_P.Constant1_Value_m2;
+  measure_B.VI[0] = (rtb_Sum1_lle * rtb_OutputWatts) * rtb_Add1_f_idx;
+  measure_B.VI[1] = (rtb_Sum1_p5 * rtb_Sum1_dat) * rtb_Add1_f_idx;
+  measure_B.VI[2] = (rtb_Sum1_pz * rtb_Divide_cv) * rtb_Add1_f_idx;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ez = measure_P.double_Value;
   } else {
@@ -6166,10 +6172,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_ez -
+    rtb_Add1_f_idx = measure_B.Switch_ez -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_bbj;
   } else {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_h5 -
+    rtb_Add1_f_idx = measure_B.Switch_h5 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_bbje;
   }
 
@@ -6201,7 +6207,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_d = (rtb_VpuIpktoVrmsIrms_re -
+  measure_B.Divide_d = (rtb_Add1_f_idx -
                         ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_h
     * rtb_Subtract3_lr) +
     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_i0d *
@@ -6259,10 +6265,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_nh -
+    rtb_Add1_f_idx = measure_B.Switch_nh -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_dt;
   } else {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_mm -
+    rtb_Add1_f_idx = measure_B.Switch_mm -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_dt2;
   }
 
@@ -6294,11 +6300,11 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_VpuIpktoVrmsIrms_re = (rtb_VpuIpktoVrmsIrms_re -
-    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_og *
-      rtb_Subtract3_lri) +
-     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_fu *
-      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_Add1_f_idx = (rtb_Add1_f_idx -
+                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_og *
+                      rtb_Subtract3_lri) +
+                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_fu *
+                      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_gg = measure_P.double_Value_n;
   } else {
@@ -6352,10 +6358,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Add1_f_idx = measure_B.Switch_gg -
+    rtb_Divide_cv = measure_B.Switch_gg -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_dd;
   } else {
-    rtb_Add1_f_idx = measure_B.Switch_p4 -
+    rtb_Divide_cv = measure_B.Switch_p4 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_dd4;
   }
 
@@ -6387,7 +6393,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_g = (rtb_Add1_f_idx -
+  measure_B.Divide_g = (rtb_Divide_cv -
                         ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_mc
     * rtb_Subtract3_lr) +
     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_h *
@@ -6445,10 +6451,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Add1_f_idx = measure_B.Switch_ml -
+    rtb_Divide_cv = measure_B.Switch_ml -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_chw;
   } else {
-    rtb_Add1_f_idx = measure_B.Switch_b1 -
+    rtb_Divide_cv = measure_B.Switch_b1 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_chwo;
   }
 
@@ -6480,11 +6486,11 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Add1_f_idx = (rtb_Add1_f_idx -
-                    ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_c *
-                      rtb_Subtract3_lri) +
-                     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_im *
-                      rtb_MathFunction_gbn2))) * rtb_Divide_mg;
+  rtb_Divide_cv = (rtb_Divide_cv -
+                   ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_c *
+                     rtb_Subtract3_lri) +
+                    (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_im *
+                     rtb_MathFunction_gbn2))) * rtb_Divide_mg;
   if (rtb_LogicalOperator1_fmgwx) {
     measure_B.Switch_ny = measure_P.double_Value_o;
   } else {
@@ -6538,10 +6544,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_d) {
-    rtb_Add1_f_idx_0 = measure_B.Switch_ny -
+    rtb_OutputWatts = measure_B.Switch_ny -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ol;
   } else {
-    rtb_Add1_f_idx_0 = measure_B.Switch_n2 -
+    rtb_OutputWatts = measure_B.Switch_n2 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ol3;
   }
 
@@ -6573,7 +6579,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  measure_B.Divide_l = (rtb_Add1_f_idx_0 -
+  measure_B.Divide_l = (rtb_OutputWatts -
                         ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_iz
     * rtb_Subtract3_lr) +
     (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_hy *
@@ -6631,10 +6637,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_ddcrdcv) {
-    rtb_Add1_f_idx_0 = measure_B.Switch_bi -
+    rtb_OutputWatts = measure_B.Switch_bi -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_jng;
   } else {
-    rtb_Add1_f_idx_0 = measure_B.Switch_oh -
+    rtb_OutputWatts = measure_B.Switch_oh -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_jngn;
   }
 
@@ -6666,14 +6672,73 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Divide_mg *= rtb_Add1_f_idx_0 -
+  rtb_Divide_mg *= rtb_OutputWatts -
     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_f *
       rtb_Subtract3_lri) +
      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_m0 *
       rtb_MathFunction_gbn2));
-  rtb_VpuIpktoVrmsIrms_re += rtb_Add1_f_idx;
-  rtb_VpuIpktoVrmsIrms_re += rtb_Divide_mg;
-  measure_Y.PowerWithHarmonics = rtb_VpuIpktoVrmsIrms_re;
+  measure_Y.WattsWithHarmonics = (rtb_Add1_f_idx + rtb_Divide_cv) +
+    rtb_Divide_mg;
+  measure_Y.VA3[0] = rtb_Divide_la;
+  measure_Y.VA3[1] = rtb_Divide_i;
+  measure_Y.VA3[2] = rtb_Divide_o1;
+  if (rtb_Divide_la < measure_P.Constant_Value_nm) {
+    rtb_Divide_la = measure_P.Constant_Value_b;
+  }
+
+  rtb_Divide_la = rtb_Add1_f_idx_0 / rtb_Divide_la;
+  if (rtb_Divide_i < measure_P.Constant_Value_gc) {
+    rtb_Divide_i = measure_P.Constant_Value_a;
+  }
+
+  rtb_Divide_i = rtb_Add1_f_idx_1 / rtb_Divide_i;
+  if (rtb_Divide_o1 < measure_P.Constant_Value_c3) {
+    rtb_Divide_o1 = measure_P.Constant_Value_ml;
+  }
+
+  rtb_Divide_o1 = rtb_VpuIpktoVrmsIrms_re / rtb_Divide_o1;
+  measure_Y.PowerFactor3[0] = rtb_Divide_la;
+  measure_Y.PowerFactor3[1] = rtb_Divide_i;
+  measure_Y.PowerFactor3[2] = rtb_Divide_o1;
+  measure_Y.WattsFundamental3[0] = rtb_Add1_f_idx_0;
+  measure_Y.WattsFundamental3[1] = rtb_Add1_f_idx_1;
+  measure_Y.WattsFundamental3[2] = rtb_VpuIpktoVrmsIrms_re;
+  measure_Y.Vars3[0] = rtb_Sum1_kv;
+  measure_Y.Vars3[1] = rtb_Switch1_iew;
+  measure_Y.Vars3[2] = rtb_VpuIpktoVrmsIrms_im;
+  measure_Y.WattsWithHarmonics3[0] = rtb_Add1_f_idx;
+  measure_Y.WattsWithHarmonics3[1] = rtb_Divide_cv;
+  measure_Y.WattsWithHarmonics3[2] = rtb_Divide_mg;
+  rtb_Add1_f_idx = rtb_Sum2_i - rtb_TrigonometricFunction_i;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_egs) {
+    rtb_Add1_f_idx += measure_P.Bias1_Bias;
+  } else {
+    if (rtb_Add1_f_idx > measure_P.Constant_Value_eg) {
+      rtb_Add1_f_idx += measure_P.Bias_Bias_h;
+    }
+  }
+
+  rtb_Add1_f_idx_0 = rtb_TrigonometricFunction_hr - rtb_TrigonometricFunction_ix;
+  if (rtb_Add1_f_idx_0 < measure_P.Constant_Value_oc) {
+    rtb_Add1_f_idx_0 += measure_P.Bias1_Bias_f;
+  } else {
+    if (rtb_Add1_f_idx_0 > measure_P.Constant_Value_o) {
+      rtb_Add1_f_idx_0 += measure_P.Bias_Bias_f;
+    }
+  }
+
+  rtb_Sum1_kv = rtb_TrigonometricFunction_hrx - rtb_TrigonometricFunction_ixv;
+  if (rtb_Sum1_kv < measure_P.Constant_Value_bbe) {
+    rtb_Sum1_kv += measure_P.Bias1_Bias_f1;
+  } else {
+    if (rtb_Sum1_kv > measure_P.Constant_Value_bb) {
+      rtb_Sum1_kv += measure_P.Bias_Bias_f1;
+    }
+  }
+
+  measure_Y.PowerAngleRad3[0] = rtb_Add1_f_idx;
+  measure_Y.PowerAngleRad3[1] = rtb_Add1_f_idx_0;
+  measure_Y.PowerAngleRad3[2] = rtb_Sum1_kv;
   measure_Y.PhaseFrequency[0] = rtb_Ts_FFT_k;
   measure_Y.PhaseFrequency[1] = rtb_Ts_FFT;
   measure_Y.PhaseFrequency[2] = rtb_Switch4;
@@ -6798,12 +6863,12 @@ void measureModelClass::step0()
   memcpy((void *)(&measure_Y.CurrentHarmonicsAnalysed[62]), (void *)
          (&measure_B.RateTransition_f[0]), 31U * (sizeof(real_T)));
   measure_B.Gain1 = measure_P.Gain1_Gain_j0 * measure_U.IabcAmps[0];
-  rtb_VpuIpktoVrmsIrms_re = measure_P.Gain5_Gain * rtb_Ts_FFT_k;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_hc) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value;
+  rtb_Add1_f_idx = measure_P.Gain5_Gain * rtb_Ts_FFT_k;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_hc) {
+    rtb_Add1_f_idx = measure_P.Constant_Value;
   }
 
-  rtb_Gain_pj = 1.0 / rtb_VpuIpktoVrmsIrms_re;
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx;
   measure_B.Gain8 = measure_P.Gain8_Gain * rtb_Gain_pj;
 
   {
@@ -6875,12 +6940,12 @@ void measureModelClass::step0()
   }
 
   measure_B.Gain1_n = measure_P.Gain1_Gain_gd * measure_U.IabcAmps[1];
-  rtb_VpuIpktoVrmsIrms_re = measure_P.Gain5_Gain_l * rtb_Ts_FFT;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_ni) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_n;
+  rtb_Add1_f_idx = measure_P.Gain5_Gain_l * rtb_Ts_FFT;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_ni) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_n;
   }
 
-  rtb_Gain_pj = 1.0 / rtb_VpuIpktoVrmsIrms_re;
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx;
   measure_B.Gain8_l = measure_P.Gain8_Gain_h * rtb_Gain_pj;
 
   {
@@ -6952,12 +7017,12 @@ void measureModelClass::step0()
   }
 
   measure_B.Gain1_p = measure_P.Gain1_Gain_jq * measure_U.IabcAmps[2];
-  rtb_VpuIpktoVrmsIrms_re = measure_P.Gain5_Gain_b * rtb_Switch4;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_nd) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_m;
+  rtb_Add1_f_idx = measure_P.Gain5_Gain_b * rtb_Switch4;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_nd) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_m;
   }
 
-  rtb_Gain_pj = 1.0 / rtb_VpuIpktoVrmsIrms_re;
+  rtb_Gain_pj = 1.0 / rtb_Add1_f_idx;
   measure_B.Gain8_h = measure_P.Gain8_Gain_n * rtb_Gain_pj;
 
   {
@@ -7183,10 +7248,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_hpz455i02) {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_nulzsg5y -
+    rtb_Add1_f_idx = measure_B.Switch_nulzsg5y -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_co5gwoze;
   } else {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_nulzsg5yk -
+    rtb_Add1_f_idx = measure_B.Switch_nulzsg5yk -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_co5gwoze0;
   }
 
@@ -7218,7 +7283,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch = measure_B.ACripple1stestimate - ((rtb_VpuIpktoVrmsIrms_re -
+  rtb_Switch = measure_B.ACripple1stestimate - ((rtb_Add1_f_idx -
     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_jwh1 *
       rtb_Subtract3_ca) +
      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_f1uv *
@@ -7229,10 +7294,10 @@ void measureModelClass::step0()
     rtb_Switch_nulzsg5ykq = MAX_uint32_T;
   }
 
-  rtb_Divide_b4ha = measure_DWork.UnitDelay_DSTATE_lmd;
+  rtb_Divide_nqzy = measure_DWork.UnitDelay_DSTATE_lmd;
   rtb_LogicalOperator16 = (measure_DWork.UnitDelay_DSTATE_lmd >
     measure_P.Constant_Value_ot);
-  if (measure_P.Constant_Value_ml) {
+  if (measure_P.Constant_Value_ml3) {
     rtb_Compare_ks = (rtb_LogicalOperator16 &&
                       (measure_DWork.delay_DSTATE_i2wj4d));
   } else {
@@ -7252,36 +7317,34 @@ void measureModelClass::step0()
     rtb_Gain_pj = measure_DWork.UnitDelay_DSTATE_lmd -
       measure_DWork.UnitDelay1_DSTATE_cm;
     if (rtb_Gain_pj < measure_P.Constant_Value_ipk) {
-      rtb_Switch1_l = -rtb_Gain_pj;
+      rtb_UnaryMinus_l = -rtb_Gain_pj;
     } else {
-      rtb_Switch1_l = rtb_Gain_pj;
+      rtb_UnaryMinus_l = rtb_Gain_pj;
     }
 
-    if (rtb_Switch1_l < measure_P.Constant_Value_jn) {
+    if (rtb_UnaryMinus_l < measure_P.Constant_Value_jn) {
       rtb_Gain_pj = measure_P.Constant1_Value_jcfawyw2o;
     }
 
-    rtb_Divide_nqz = (measure_DWork.UnitDelay1_DSTATE_cm / rtb_Gain_pj) *
+    rtb_Divide_o1 = (measure_DWork.UnitDelay1_DSTATE_cm / rtb_Gain_pj) *
       measure_P.T2T1_Gain;
-    rtb_Divide_nqzy = rtb_Divide_nqz -
-      measure_DWork.UnitDelay4_DSTATE_czl44j1ipa;
+    rtb_Switch_jka = rtb_Divide_o1 - measure_DWork.UnitDelay4_DSTATE_czl44j1ipa;
   } else {
-    rtb_Divide_nqz = measure_DWork.UnitDelay1_DSTATE_cmn;
-    rtb_Divide_nqzy = measure_DWork.UnitDelay1_DSTATE_cmnb;
+    rtb_Divide_o1 = measure_DWork.UnitDelay1_DSTATE_cmn;
+    rtb_Switch_jka = measure_DWork.UnitDelay1_DSTATE_cmnb;
   }
 
-  rtb_VpuIpktoVrmsIrms_re = (measure_P.Gain_Gain_jcfawyw2o0os * ((real_T)
-    rtb_Switch2_h)) + rtb_Divide_nqzy;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_gp) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_p4;
+  rtb_Add1_f_idx = (measure_P.Gain_Gain_jcfawyw2o0os * ((real_T)rtb_Switch2_h))
+    + rtb_Switch_jka;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_gp) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_p4;
   }
 
-  rtb_Divide_b4h = (1.0 / rtb_VpuIpktoVrmsIrms_re) *
-    measure_P.Gain_Gain_jcfawyw2o0osk;
+  rtb_Divide_nqz = (1.0 / rtb_Add1_f_idx) * measure_P.Gain_Gain_jcfawyw2o0osk;
   if (rtb_Compare_jm) {
-    rtb_Switch_jka = measure_P.Constant_Value_jcfawyw2o0osk;
+    rtb_Divide_i = measure_P.Constant_Value_jcfawyw2o0osk;
   } else {
-    rtb_Gain_pj = ((measure_DWork.UnitDelay1_DSTATE_c + rtb_Divide_b4h) *
+    rtb_Gain_pj = ((measure_DWork.UnitDelay1_DSTATE_c + rtb_Divide_nqz) *
                    measure_P.Gain_Gain_j) -
       measure_DWork.UnitDelay1_DSTATE_cmnb3;
     if (rtb_Gain_pj < measure_P.Constant_Value_jcfawyw2o0o) {
@@ -7294,15 +7357,15 @@ void measureModelClass::step0()
 
     rtb_Gain_pj += measure_DWork.UnitDelay1_DSTATE_cmnb3;
     if (rtb_Gain_pj < measure_P.Constant_Value_jcfawyw2o0os) {
-      rtb_Switch_jka = measure_P.Constant_Value_jcfawyw2o0;
+      rtb_Divide_i = measure_P.Constant_Value_jcfawyw2o0;
     } else if (rtb_Gain_pj > measure_P.Constant_Value_jcfawyw2o) {
-      rtb_Switch_jka = measure_P.Constant1_Value_jcfawy;
+      rtb_Divide_i = measure_P.Constant1_Value_jcfawy;
     } else {
-      rtb_Switch_jka = rtb_Gain_pj;
+      rtb_Divide_i = rtb_Gain_pj;
     }
   }
 
-  rtb_Gain_pj = measure_P.Gain2_Gain_j * rtb_Switch_jka;
+  rtb_Gain_pj = measure_P.Gain2_Gain_j * rtb_Divide_i;
   if (measure_P.Constant6_Value_jcf) {
     if (rtb_Gain_pj > measure_P.Constant_Value_ehx) {
       measure_B.Switch2_h1wibj25 = rtb_Gain_pj + measure_P.Bias1_Bias_jcfa;
@@ -7323,34 +7386,35 @@ void measureModelClass::step0()
     rtb_Gain6_re = (real_T)measure_B.SFunction_ilz;
   }
 
-  rtb_Gain_pj = ((1.0 / rtb_Switch_jka) * rtb_Gain6_re) -
+  rtb_Gain_pj = ((1.0 / rtb_Divide_i) * rtb_Gain6_re) -
     measure_DWork.UnitDelay1_DSTATE_cmnb3j;
   if (rtb_Gain_pj < measure_P.Constant_Value_hb) {
-    rtb_Add1_f_idx = measure_P.Constant_Value_jcfawy;
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_jcfawy;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_jcfaw) {
-    rtb_Add1_f_idx = measure_P.Constant1_Value_jcfa;
+    rtb_Add1_f_idx_0 = measure_P.Constant1_Value_jcfa;
   } else {
-    rtb_Add1_f_idx = rtb_Gain_pj;
+    rtb_Add1_f_idx_0 = rtb_Gain_pj;
   }
 
-  rtb_Switch1_iew = rtb_Add1_f_idx + measure_DWork.UnitDelay1_DSTATE_cmnb3j;
+  rtb_Divide_la = rtb_Add1_f_idx_0 + measure_DWork.UnitDelay1_DSTATE_cmnb3j;
   if (rtb_Compare_jm) {
     rtb_Switch1_bt = rtb_UnitDelay1_c;
   } else {
     rtb_Switch1_bt = measure_P.int1_Value_jc;
   }
 
-  rtb_Add1_f_idx = std::exp((measure_P.Gain1_Gain_jcfawy * rtb_Switch_jka) *
+  rtb_Add1_f_idx_0 = std::exp((measure_P.Gain1_Gain_jcfawy * rtb_Divide_i) *
     measure_P.Gain2_Gain_jc);
-  rtb_Sum1_gh = (measure_P.double1_Value - rtb_Add1_f_idx) * rtb_Switch;
-  rtb_SumofElements = rtb_Divide_b4ha * rtb_Add1_f_idx;
-  rtb_VpuIpktoVrmsIrms_re = (measure_P.Gain1_Gain_jcfawyw *
-    rtb_VpuIpktoVrmsIrms_re) + measure_P.Bias_Bias_jcfawyw2o0;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_gw) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_pv;
+  rtb_ComplextoRealImag_o2_l = (measure_P.double1_Value - rtb_Add1_f_idx_0) *
+    rtb_Switch;
+  rtb_OutputWatts = rtb_Divide_nqzy * rtb_Add1_f_idx_0;
+  rtb_Add1_f_idx = (measure_P.Gain1_Gain_jcfawyw * rtb_Add1_f_idx) +
+    measure_P.Bias_Bias_jcfawyw2o0;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_gw) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_pv;
   }
 
-  rtb_Gain_pj = (measure_P.Gain_Gain_jcfawyw2o0osk2 * rtb_VpuIpktoVrmsIrms_re) +
+  rtb_Gain_pj = (measure_P.Gain_Gain_jcfawyw2o0osk2 * rtb_Add1_f_idx) +
     measure_P.Bias_Bias_jcfawyw2o0o;
   if (rtb_Gain_pj < measure_P.Constant_Value_ciq) {
     rtb_Gain_pj = measure_P.Constant_Value_dl;
@@ -7407,7 +7471,7 @@ void measureModelClass::step0()
   if (measure_P.Constant6_Value_he) {
     measure_B.Switch2_c = rtb_Gain_pj + measure_P.Bias1_Bias_h;
   } else {
-    measure_B.Switch2_c = rtb_Gain_pj + measure_P.Bias_Bias_h;
+    measure_B.Switch2_c = rtb_Gain_pj + measure_P.Bias_Bias_he;
   }
 
   {
@@ -7437,7 +7501,7 @@ void measureModelClass::step0()
   if (measure_P.Constant6_Value_heb) {
     measure_B.Switch2_c1 = rtb_Gain_pj + measure_P.Bias1_Bias_he;
   } else {
-    measure_B.Switch2_c1 = rtb_Gain_pj + measure_P.Bias_Bias_he;
+    measure_B.Switch2_c1 = rtb_Gain_pj + measure_P.Bias_Bias_heb;
   }
 
   {
@@ -7472,17 +7536,17 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ah = rtb_UnitDelay1_c - measure_P.FixPtConstant_Value_hebrs;
-  rtb_VpuIpktoVrmsIrms_re = rtb_TrigonometricFunction_i -
+  rtb_Add1_f_idx = rtb_TrigonometricFunction_i -
     measure_DWork.UnitDelay3_DSTATE_i5z5;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_apbn) {
-    rtb_VpuIpktoVrmsIrms_re += measure_P.Bias1_Bias_apb;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_apbnf) {
+    rtb_Add1_f_idx += measure_P.Bias1_Bias_apb;
   } else {
-    if (rtb_VpuIpktoVrmsIrms_re > measure_P.Constant_Value_apb) {
-      rtb_VpuIpktoVrmsIrms_re += measure_P.Bias_Bias_apb;
+    if (rtb_Add1_f_idx > measure_P.Constant_Value_apbn) {
+      rtb_Add1_f_idx += measure_P.Bias_Bias_apb;
     }
   }
 
-  rtb_VpuIpktoVrmsIrms_re *= measure_P.Gain_Gain_ap;
+  rtb_Add1_f_idx *= measure_P.Gain_Gain_ap;
   if (rtb_Compare_f) {
     rtb_UnitDelay1_lccp = measure_P.int1_Value_k;
   }
@@ -7493,12 +7557,12 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ec = rtb_Switch1_pwrmjy - measure_P.FixPtConstant_Value_ki;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_mv) {
-    rtb_VpuIpktoVrmsIrms_re = -rtb_VpuIpktoVrmsIrms_re;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_mv) {
+    rtb_Add1_f_idx = -rtb_Add1_f_idx;
   }
 
-  rtb_Sum1_dat = measure_P.Gain_Gain_po * rtb_VpuIpktoVrmsIrms_re;
-  rtb_AbsVI_k = measure_P.Gain1_Gain_p * rtb_UnitDelay_i;
+  rtb_SumofElements1 = measure_P.Gain_Gain_po * rtb_Add1_f_idx;
+  rtb_Divide_nfu = measure_P.Gain1_Gain_p * rtb_UnitDelay_i;
   if (rtb_Compare_j1k4d50fkuukj) {
     rtb_Switch1_pwrm = measure_P.int2_Value_o;
   }
@@ -7509,17 +7573,17 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ecsn = rtb_Switch1_pwrmj - measure_P.FixPtConstant_Value_od;
-  rtb_VpuIpktoVrmsIrms_re = rtb_TrigonometricFunction_ix -
+  rtb_Add1_f_idx = rtb_TrigonometricFunction_ix -
     measure_DWork.UnitDelay3_DSTATE_i5z5o;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_i2jfb) {
-    rtb_VpuIpktoVrmsIrms_re += measure_P.Bias1_Bias_i2;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_i2jfb) {
+    rtb_Add1_f_idx += measure_P.Bias1_Bias_i2j;
   } else {
-    if (rtb_VpuIpktoVrmsIrms_re > measure_P.Constant_Value_i2jf) {
-      rtb_VpuIpktoVrmsIrms_re += measure_P.Bias_Bias_i2j;
+    if (rtb_Add1_f_idx > measure_P.Constant_Value_i2jf) {
+      rtb_Add1_f_idx += measure_P.Bias_Bias_i2j;
     }
   }
 
-  rtb_VpuIpktoVrmsIrms_re *= measure_P.Gain_Gain_i2;
+  rtb_Add1_f_idx *= measure_P.Gain_Gain_i2;
   if (rtb_Compare_gw) {
     rtb_Switch1_dg2as0wb = measure_P.int1_Value_m;
   }
@@ -7530,12 +7594,12 @@ void measureModelClass::step0()
   }
 
   rtb_FixPtSum1_ecsnsv = rtb_Switch1_dg2as0w - measure_P.FixPtConstant_Value_maw;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_ij) {
-    rtb_VpuIpktoVrmsIrms_re = -rtb_VpuIpktoVrmsIrms_re;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_ij) {
+    rtb_Add1_f_idx = -rtb_Add1_f_idx;
   }
 
-  rtb_Add1_f_idx_1 = measure_P.Gain_Gain_oe * rtb_VpuIpktoVrmsIrms_re;
-  rtb_Divide_nfu = measure_P.Gain1_Gain_oe * rtb_UnitDelay_it;
+  rtb_Sum1_dat = measure_P.Gain_Gain_oe * rtb_Add1_f_idx;
+  rtb_TrigonometricFunction_hrx = measure_P.Gain1_Gain_oe * rtb_UnitDelay_it;
   if (rtb_Compare_g3iwu32gm4xoq) {
     rtb_Switch1_dg2as = measure_P.int2_Value_kc;
   }
@@ -7547,17 +7611,17 @@ void measureModelClass::step0()
 
   rtb_FixPtSum1_ecsnsvom = rtb_Switch1_dg2as0 -
     measure_P.FixPtConstant_Value_kcq;
-  rtb_VpuIpktoVrmsIrms_re = rtb_TrigonometricFunction_ixv -
+  rtb_Add1_f_idx = rtb_TrigonometricFunction_ixv -
     measure_DWork.UnitDelay3_DSTATE_i5z5oq;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_orgz) {
-    rtb_VpuIpktoVrmsIrms_re += measure_P.Bias1_Bias_or;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_orgz4) {
+    rtb_Add1_f_idx += measure_P.Bias1_Bias_or;
   } else {
-    if (rtb_VpuIpktoVrmsIrms_re > measure_P.Constant_Value_org) {
-      rtb_VpuIpktoVrmsIrms_re += measure_P.Bias_Bias_or;
+    if (rtb_Add1_f_idx > measure_P.Constant_Value_orgz) {
+      rtb_Add1_f_idx += measure_P.Bias_Bias_or;
     }
   }
 
-  rtb_VpuIpktoVrmsIrms_re *= measure_P.Gain_Gain_or;
+  rtb_Add1_f_idx *= measure_P.Gain_Gain_or;
   if (rtb_Compare_il) {
     rtb_Switch1_mf0c25z = measure_P.int1_Value_my;
   }
@@ -7569,12 +7633,12 @@ void measureModelClass::step0()
   }
 
   rtb_Switch1_mf0c25z = rtb_Switch1_mf0c25 - measure_P.FixPtConstant_Value_my5;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_in) {
-    rtb_VpuIpktoVrmsIrms_re = -rtb_VpuIpktoVrmsIrms_re;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_in) {
+    rtb_Add1_f_idx = -rtb_Add1_f_idx;
   }
 
-  rtb_AbsVI = measure_P.Gain_Gain_jn * rtb_VpuIpktoVrmsIrms_re;
-  rtb_Add1_f_idx_0 = measure_P.Gain1_Gain_jn * rtb_UnitDelay_itx;
+  rtb_Sum1_kv = measure_P.Gain_Gain_jn * rtb_Add1_f_idx;
+  rtb_TrigonometricFunction_hr = measure_P.Gain1_Gain_jn * rtb_UnitDelay_itx;
   if (rtb_Compare_dtgasgy1ciwmtj) {
     rtb_Switch1_mf0c = measure_P.int2_Value_ok;
   }
@@ -7678,10 +7742,10 @@ void measureModelClass::step0()
   }
 
   if (rtb_Compare_o) {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_lli5 -
+    rtb_Add1_f_idx = measure_B.Switch_lli5 -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_ay;
   } else {
-    rtb_VpuIpktoVrmsIrms_re = measure_B.Switch_lli5y -
+    rtb_Add1_f_idx = measure_B.Switch_lli5y -
       measure_B.VariableDiscreteDelaywithOneTapSfunction_h4;
   }
 
@@ -7713,7 +7777,7 @@ void measureModelClass::step0()
       *VDD_in = 0;
   }
 
-  rtb_Switch = measure_B.ACripple1stestimate_n - ((rtb_VpuIpktoVrmsIrms_re -
+  rtb_Switch = measure_B.ACripple1stestimate_n - ((rtb_Add1_f_idx -
     ((measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o1_ml *
       rtb_Switch_jkaja) +
      (measure_B.VariableDiscreteDelaywithTwoTapsSfunction_o2_b2 *
@@ -7724,7 +7788,7 @@ void measureModelClass::step0()
     rtb_UnitDelay1_lccp = MAX_uint32_T;
   }
 
-  rtb_Divide_nfun = measure_DWork.UnitDelay_DSTATE_o;
+  rtb_Sum2_i = measure_DWork.UnitDelay_DSTATE_o;
   rtb_LogicalOperator2_npqx = (measure_DWork.UnitDelay_DSTATE_o >
     measure_P.Constant_Value_c5);
   if (measure_P.Constant_Value_k4) {
@@ -7747,34 +7811,34 @@ void measureModelClass::step0()
     rtb_Gain_pj = measure_DWork.UnitDelay_DSTATE_o -
       measure_DWork.UnitDelay1_DSTATE_dgz;
     if (rtb_Gain_pj < measure_P.Constant_Value_ipg) {
-      rtb_Switch1_l = -rtb_Gain_pj;
+      rtb_UnaryMinus_l = -rtb_Gain_pj;
     } else {
-      rtb_Switch1_l = rtb_Gain_pj;
+      rtb_UnaryMinus_l = rtb_Gain_pj;
     }
 
-    if (rtb_Switch1_l < measure_P.Constant_Value_hh) {
+    if (rtb_UnaryMinus_l < measure_P.Constant_Value_hh) {
       rtb_Gain_pj = measure_P.Constant1_Value_mqco2g;
     }
 
-    rtb_UnaryMinus_l = (measure_DWork.UnitDelay1_DSTATE_dgz / rtb_Gain_pj) *
+    rtb_Switch1_iew = (measure_DWork.UnitDelay1_DSTATE_dgz / rtb_Gain_pj) *
       measure_P.T2T1_Gain_m;
-    rtb_Switch_jpt = rtb_UnaryMinus_l - measure_DWork.UnitDelay4_DSTATE_eduao;
+    rtb_Divide_cv = rtb_Switch1_iew - measure_DWork.UnitDelay4_DSTATE_eduao;
   } else {
-    rtb_UnaryMinus_l = measure_DWork.UnitDelay1_DSTATE_dgzm;
-    rtb_Switch_jpt = measure_DWork.UnitDelay1_DSTATE_dgzmv;
+    rtb_Switch1_iew = measure_DWork.UnitDelay1_DSTATE_dgzm;
+    rtb_Divide_cv = measure_DWork.UnitDelay1_DSTATE_dgzmv;
   }
 
-  rtb_VpuIpktoVrmsIrms_re = (measure_P.Gain_Gain_mqco * ((real_T)
-    rtb_Switch1_pwrm)) + rtb_Switch_jpt;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_m2) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_cq;
+  rtb_Add1_f_idx = (measure_P.Gain_Gain_mqco * ((real_T)rtb_Switch1_pwrm)) +
+    rtb_Divide_cv;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_m2) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_cq;
   }
 
-  rtb_UnaryMinus_g = (1.0 / rtb_VpuIpktoVrmsIrms_re) * measure_P.Gain_Gain_mqco2;
+  rtb_Add1_f_idx_1 = (1.0 / rtb_Add1_f_idx) * measure_P.Gain_Gain_mqco2;
   if (rtb_Compare_ky) {
     rtb_Switch1_ie = measure_P.Constant_Value_mqco2gbune;
   } else {
-    rtb_Gain_pj = ((measure_DWork.UnitDelay1_DSTATE_dg + rtb_UnaryMinus_g) *
+    rtb_Gain_pj = ((measure_DWork.UnitDelay1_DSTATE_dg + rtb_Add1_f_idx_1) *
                    measure_P.Gain_Gain_m) -
       measure_DWork.UnitDelay1_DSTATE_dgzmvr;
     if (rtb_Gain_pj < measure_P.Constant_Value_mqco2gbu) {
@@ -7819,30 +7883,30 @@ void measureModelClass::step0()
   rtb_Gain_pj = ((1.0 / rtb_Switch1_ie) * rtb_Gain6_re) -
     measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
   if (rtb_Gain_pj < measure_P.Constant_Value_lg) {
-    rtb_Add1_f_idx = measure_P.Constant_Value_mqc;
+    rtb_Add1_f_idx_0 = measure_P.Constant_Value_mqc;
   } else if (rtb_Gain_pj > measure_P.Constant_Value_mq) {
-    rtb_Add1_f_idx = measure_P.Constant1_Value_m;
+    rtb_Add1_f_idx_0 = measure_P.Constant1_Value_m;
   } else {
-    rtb_Add1_f_idx = rtb_Gain_pj;
+    rtb_Add1_f_idx_0 = rtb_Gain_pj;
   }
 
-  rtb_MathFunction1 = rtb_Add1_f_idx + measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
+  rtb_MathFunction1 = rtb_Add1_f_idx_0 + measure_DWork.UnitDelay1_DSTATE_dgzmvrp;
   if (rtb_Compare_ky) {
     rtb_Switch1_pwrmjy = rtb_Switch_lli5ykm;
   } else {
     rtb_Switch1_pwrmjy = measure_P.int1_Value_mq;
   }
 
-  rtb_Add1_f_idx = std::exp((measure_P.Gain1_Gain_mqc * rtb_Switch1_ie) *
+  rtb_Add1_f_idx_0 = std::exp((measure_P.Gain1_Gain_mqc * rtb_Switch1_ie) *
     measure_P.Gain2_Gain_mqc);
-  rtb_Switch1_l = (measure_P.double1_Value_m - rtb_Add1_f_idx) * rtb_Switch;
-  rtb_VpuIpktoVrmsIrms_re = (measure_P.Gain1_Gain_mqco * rtb_VpuIpktoVrmsIrms_re)
-    + measure_P.Bias_Bias_mqco;
-  if (rtb_VpuIpktoVrmsIrms_re < measure_P.Constant_Value_eu) {
-    rtb_VpuIpktoVrmsIrms_re = measure_P.Constant_Value_h1s;
+  rtb_UnaryMinus_l = (measure_P.double1_Value_m - rtb_Add1_f_idx_0) * rtb_Switch;
+  rtb_Add1_f_idx = (measure_P.Gain1_Gain_mqco * rtb_Add1_f_idx) +
+    measure_P.Bias_Bias_mqco;
+  if (rtb_Add1_f_idx < measure_P.Constant_Value_eu) {
+    rtb_Add1_f_idx = measure_P.Constant_Value_h1s;
   }
 
-  rtb_Gain_pj = (measure_P.Gain_Gain_mqco2g * rtb_VpuIpktoVrmsIrms_re) +
+  rtb_Gain_pj = (measure_P.Gain_Gain_mqco2g * rtb_Add1_f_idx) +
     measure_P.Bias_Bias_mqco2;
   if (rtb_Gain_pj < measure_P.Constant_Value_ndf) {
     rtb_Gain_pj = measure_P.Constant_Value_mqco2gbunewgpha;
@@ -7890,7 +7954,7 @@ void measureModelClass::step0()
   measure_B.Gain1_nt = measure_P.Gain1_Gain_b * measure_U.Vabcpu[0];
   rtb_Ts_FFT_k *= measure_P.Gain5_Gain_li;
   if (rtb_Ts_FFT_k < measure_P.Constant_Value_fi) {
-    rtb_Ts_FFT_k = measure_P.Constant_Value_b;
+    rtb_Ts_FFT_k = measure_P.Constant_Value_bv;
   }
 
   rtb_Ts_FFT_k = 1.0 / rtb_Ts_FFT_k;
@@ -8120,7 +8184,8 @@ void measureModelClass::step0()
            (&measure_B.SFunction_o1_is[0]), (sizeof(real_T)) << 6U);
   }
 
-  measure_Y.TotalHarmonicsIncludingFundamental = measure_P.Constant10_Value;
+  measure_Y.TotalHarmonicsAnalysedIncludingFundamental =
+    measure_P.Constant10_Value;
 
   {
     measure_DWork.SF_FixedDiscreteDelaySfunction_DSTATE = measure_B.Switch_bn;
@@ -8168,7 +8233,7 @@ void measureModelClass::step0()
   measure_DWork.delay1_DSTATE_ce = rtb_Compare_hpz455i02;
   measure_DWork.UnitDelay4_DSTATE_czl44j = measure_B.Switch2_h1w;
   measure_DWork.UnitDelay2_DSTATE_h5brdqc = measure_B.Switch_nulzsg;
-  measure_DWork.UnitDelay2_DSTATE_h5brdqci = rtb_Switch1_iew;
+  measure_DWork.UnitDelay2_DSTATE_h5brdqci = rtb_Divide_la;
   measure_DWork.delay_DSTATE_i2wj = !rtb_Compare_hpz455i02;
   measure_DWork.UnitDelay4_DSTATE_czl44j1 = measure_B.Switch2_h1w;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz = measure_B.Switch_nulzsg5;
@@ -8227,7 +8292,7 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay1_DSTATE_aqjzxpn = rtb_FixPtSum1_ecsn;
   measure_DWork.UnitDelay_DSTATE_mj2f = rtb_LogicalOperator2_n;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnn = rtb_FixPtSum1_ec;
-  measure_DWork.UnitDelay_DSTATE_m = rtb_AbsVI_k + rtb_Sum1_dat;
+  measure_DWork.UnitDelay_DSTATE_m = rtb_Divide_nfu + rtb_SumofElements1;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno = rtb_FixPtSum1_e;
 
   {
@@ -8244,12 +8309,14 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4 = rtb_FixPtSum1_ecsnsvom;
   measure_DWork.UnitDelay_DSTATE_mj2fm = rtb_LogicalOperator2_npq;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4m = rtb_FixPtSum1_ecsnsv;
-  measure_DWork.UnitDelay_DSTATE_mj = rtb_Divide_nfu + rtb_Add1_f_idx_1;
+  measure_DWork.UnitDelay_DSTATE_mj = rtb_TrigonometricFunction_hrx +
+    rtb_Sum1_dat;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml = rtb_FixPtSum1_ecsns;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml3 = rtb_Switch1_dg2as;
   measure_DWork.UnitDelay_DSTATE_mj2fmb = rtb_LogicalOperator2_npqxo;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml3e = rtb_Switch1_mf0c25z;
-  measure_DWork.UnitDelay_DSTATE_mj2 = rtb_Add1_f_idx_0 + rtb_AbsVI;
+  measure_DWork.UnitDelay_DSTATE_mj2 = rtb_TrigonometricFunction_hr +
+    rtb_Sum1_kv;
   measure_DWork.UnitDelay1_DSTATE_aqjzxpnno4ml3e2 = rtb_FixPtSum1_ecsnsvomv;
   measure_DWork.UnitDelay3_DSTATE_i5 = rtb_Add_n;
   measure_DWork.UnitDelay4_DSTATE_i = measure_B.Divide_b4;
@@ -8427,20 +8494,21 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0 = measure_B.Switch_nulzsg5y;
   measure_DWork.UnitDelay4_DSTATE_czl44j1ip = measure_B.ACripple1stestimate;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j = measure_B.Switch_nulzsg5yk;
-  measure_DWork.UnitDelay1_DSTATE_c = rtb_Divide_b4h;
+  measure_DWork.UnitDelay1_DSTATE_c = rtb_Divide_nqz;
   measure_DWork.UnitDelay_DSTATE_lmdwo3 = rtb_Switch_nulzsg5ykq;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j45w = rtb_LogicalOperator9;
-  measure_DWork.UnitDelay_DSTATE_lmd = rtb_Sum1_gh + rtb_SumofElements;
+  measure_DWork.UnitDelay_DSTATE_lmd = rtb_ComplextoRealImag_o2_l +
+    rtb_OutputWatts;
   measure_DWork.delay_DSTATE_i2wj4d = !rtb_LogicalOperator16;
   measure_DWork.delay1_DSTATE_ces = rtb_LogicalOperator16;
   measure_DWork.UnitDelay_DSTATE_lmdwo300ig = measure_P.Constant_Value_h0;
   measure_DWork.UnitDelay2_DSTATE_h5brdqciz0j4 = rtb_Switch2_h;
-  measure_DWork.UnitDelay1_DSTATE_cm = rtb_Divide_b4ha;
-  measure_DWork.UnitDelay1_DSTATE_cmn = rtb_Divide_nqz;
-  measure_DWork.UnitDelay4_DSTATE_czl44j1ipa = rtb_Divide_nqz;
-  measure_DWork.UnitDelay1_DSTATE_cmnb = rtb_Divide_nqzy;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3 = rtb_Switch_jka;
-  measure_DWork.UnitDelay1_DSTATE_cmnb3j = rtb_Switch1_iew;
+  measure_DWork.UnitDelay1_DSTATE_cm = rtb_Divide_nqzy;
+  measure_DWork.UnitDelay1_DSTATE_cmn = rtb_Divide_o1;
+  measure_DWork.UnitDelay4_DSTATE_czl44j1ipa = rtb_Divide_o1;
+  measure_DWork.UnitDelay1_DSTATE_cmnb = rtb_Switch_jka;
+  measure_DWork.UnitDelay1_DSTATE_cmnb3 = rtb_Divide_i;
+  measure_DWork.UnitDelay1_DSTATE_cmnb3j = rtb_Divide_la;
   measure_DWork.UnitDelay_DSTATE_lmdwo30 = rtb_Switch1_fr;
   measure_DWork.UnitDelay1_DSTATE_j = rtb_UnitDelay1_lccp;
   measure_DWork.delay_DSTATE_h = rtb_Any_Phases_Not_Disturbed;
@@ -8456,19 +8524,19 @@ void measureModelClass::step0()
   measure_DWork.UnitDelay2_DSTATE_e5yc1 = measure_B.Switch_lli5;
   measure_DWork.UnitDelay4_DSTATE_edua = measure_B.ACripple1stestimate_n;
   measure_DWork.UnitDelay2_DSTATE_e5yc1i = measure_B.Switch_lli5y;
-  measure_DWork.UnitDelay1_DSTATE_dg = rtb_UnaryMinus_g;
+  measure_DWork.UnitDelay1_DSTATE_dg = rtb_Add1_f_idx_1;
   measure_DWork.UnitDelay_DSTATE_otr = rtb_UnitDelay1_b;
   measure_DWork.UnitDelay2_DSTATE_e5yc1iho = rtb_LogicalOperator1;
-  measure_DWork.UnitDelay_DSTATE_o = (rtb_Divide_nfun * rtb_Add1_f_idx) +
-    rtb_Switch1_l;
+  measure_DWork.UnitDelay_DSTATE_o = (rtb_Sum2_i * rtb_Add1_f_idx_0) +
+    rtb_UnaryMinus_l;
   measure_DWork.delay_DSTATE_j0 = !rtb_LogicalOperator2_npqx;
   measure_DWork.delay1_DSTATE_kz = rtb_LogicalOperator2_npqx;
   measure_DWork.UnitDelay_DSTATE_otrxo = measure_P.Constant_Value_df;
   measure_DWork.UnitDelay2_DSTATE_e5yc1ih = rtb_Switch1_pwrm;
-  measure_DWork.UnitDelay1_DSTATE_dgz = rtb_Divide_nfun;
-  measure_DWork.UnitDelay1_DSTATE_dgzm = rtb_UnaryMinus_l;
-  measure_DWork.UnitDelay4_DSTATE_eduao = rtb_UnaryMinus_l;
-  measure_DWork.UnitDelay1_DSTATE_dgzmv = rtb_Switch_jpt;
+  measure_DWork.UnitDelay1_DSTATE_dgz = rtb_Sum2_i;
+  measure_DWork.UnitDelay1_DSTATE_dgzm = rtb_Switch1_iew;
+  measure_DWork.UnitDelay4_DSTATE_eduao = rtb_Switch1_iew;
+  measure_DWork.UnitDelay1_DSTATE_dgzmv = rtb_Divide_cv;
   measure_DWork.UnitDelay1_DSTATE_dgzmvr = rtb_Switch1_ie;
   measure_DWork.UnitDelay1_DSTATE_dgzmvrp = rtb_MathFunction1;
   measure_DWork.UnitDelay_DSTATE_otrx = rtb_Switch1_ia;
@@ -8662,7 +8730,7 @@ void measureModelClass::step1()
     if (measure_P.Constant6_Value_fu) {
       measure_B.Switch2_e[(i)] = rtb_Divide_g_0 + measure_P.Bias2_Bias_j;
     } else if (rtb_Divide_g_0 < measure_P.Constant_Value_n4s) {
-      measure_B.Switch2_e[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_f;
+      measure_B.Switch2_e[(i)] = rtb_Divide_g_0 + measure_P.Bias_Bias_fy;
     } else {
       measure_B.Switch2_e[(i)] = rtb_Divide_g_0;
     }
@@ -11145,6 +11213,18 @@ measureModelClass::measureModelClass()
     1.0,
     1.0,
     0.0,
+    -6.2831853071795862,
+    3.1415926535897931,
+    6.2831853071795862,
+    1.0E-9,
+    -6.2831853071795862,
+    3.1415926535897931,
+    6.2831853071795862,
+    1.0E-9,
+    -6.2831853071795862,
+    3.1415926535897931,
+    6.2831853071795862,
+    1.0E-9,
     1.0E-9,
     1.0E-9,
     0.0,
@@ -11889,6 +11969,12 @@ measureModelClass::measureModelClass()
     0.0,
     0.0,
     0.0,
+    1.0E-9,
+    1.0E-9,
+    1.0E-9,
+    -3.1415926535897931,
+    -3.1415926535897931,
+    -3.1415926535897931,
     0.0,
     0.0,
     0.0,

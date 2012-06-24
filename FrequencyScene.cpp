@@ -88,7 +88,7 @@ void FrequencyScene::draw() {
         return;
     }
 
-    const quint32 totalHarmonics = stream->getData()->TotalHarmonicsIncludingFundamental;
+    const quint32 totalHarmonics = stream->getData()->TotalHarmonicsAnalysedIncludingFundamental;
 
     if (!xLabels.isEmpty()) {
         QListIterator<QGraphicsTextItem *> labels (xLabels);
