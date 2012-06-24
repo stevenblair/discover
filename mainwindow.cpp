@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     phasorPlotTab = new PhasorPlotTab(tabWidget);
     frequencyTab = new FrequencyTab(tabWidget);
+    powerTab = new PowerTab(tabWidget);
 
     interfaceComboBox = new QComboBox;
     networkInterfaceLabel = new QLabel(tr("Network interface:"));
@@ -37,12 +38,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     phasorPlotTabView = new ProxyItemView(phasorPlotTab, tableModel);
     frequencyTabView = new ProxyItemView(frequencyTab, tableModel);
+    powerTabView = new ProxyItemView(powerTab, tableModel);
 
     // TODO: is this necessary? where do PersistentSelectionModels fit in?
     QItemSelectionModel *itemSelectionModel = new QItemSelectionModel(tableModel);
     phasorPlotTabView->setSelectionModel(itemSelectionModel);
     frequencyTabView->setSelectionModel(itemSelectionModel);
     tableView->setSelectionModel(itemSelectionModel);
+    powerTabView->setSelectionModel(itemSelectionModel);
 
     streamsLayout->addWidget(tableView);
     connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotTabView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
@@ -54,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
     tabWidget->addTab(frequencyTab, tr("Frequency analysis"));
     tabWidget->addTab(new QWidget(), tr("Symmetrical components"));
-    tabWidget->addTab(new QWidget(), tr("Power analysis"));
+    tabWidget->addTab(powerTab, tr("Power analysis"));
     tabWidget->addTab(new QWidget(), tr("Power quality"));
 
     //currentPhasorView->show();

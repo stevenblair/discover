@@ -54,7 +54,10 @@ SOURCES += main.cpp\
     PhasorPlotTab.cpp \
     FrequencyTab.cpp \
     FrequencyScene.cpp \
-    measure/measure_data.cpp
+    measure/measure_data.cpp \
+    TreeItem.cpp \
+    PowerTreeModel.cpp \
+    PowerTab.cpp
 
 HEADERS  += mainwindow.h \
     stream.h \
@@ -100,7 +103,10 @@ HEADERS  += mainwindow.h \
     ProxyItemView.h \
     PhasorPlotTab.h \
     FrequencyTab.h \
-    FrequencyScene.h
+    FrequencyScene.h \
+    TreeItem.h \
+    PowerTreeModel.h \
+    PowerTab.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

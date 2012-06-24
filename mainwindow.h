@@ -13,6 +13,7 @@
 #include "commsthread.h"
 #include "PhasorPlotTab.h"
 #include "FrequencyTab.h"
+#include "PowerTab.h"
 
 extern CommsThread commsThread;
 
@@ -40,11 +41,13 @@ private:
     QTableView *tableView;
     ProxyItemView *phasorPlotTabView;
     ProxyItemView *frequencyTabView;
+    ProxyItemView *powerTabView;
 
     // the tab container, and the tabs
     QTabWidget *tabWidget;
     PhasorPlotTab *phasorPlotTab;
     FrequencyTab *frequencyTab;
+    PowerTab *powerTab;
 };
 
 #endif // MAINWINDOW_H
