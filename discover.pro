@@ -108,4 +108,6 @@ HEADERS  += mainwindow.h \
 INCLUDEPATH += C:/Users/Steven/discover/Include
 LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
 
+win32:RC_FILE += icon.rc
+
 FORMS +=
