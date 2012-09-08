@@ -13,9 +13,6 @@ CONFIG += console
 QMAKE_CFLAGS_RELEASE	= -O3
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    stream.cpp \
-    streamtablemodel.cpp \
     rapid61850/svEncodePacket.c \
     rapid61850/svEncodeBasic.c \
     rapid61850/svEncode.c \
@@ -36,20 +33,11 @@ SOURCES += main.cpp\
     rapid61850/decodePacket.c \
     rapid61850/datatypes.c \
     rapid61850/ctypes.c \
-    commsthread.cpp \
-    phasorscene.cpp \
-    phasorview.cpp \
-    plotview.cpp \
     measure/rtGetNaN.cpp \
     measure/rtGetInf.cpp \
     measure/rt_nonfinite.cpp \
     measure/measure_parameters.cpp \
     measure/measure.cpp \
-    samplerate.cpp \
-    plotscene.cpp \
-    streammanager.cpp \
-    streamtablerow.cpp \
-    tabviewwidget.cpp \
     ProxyItemView.cpp \
     PhasorPlotTab.cpp \
     FrequencyTab.cpp \
@@ -57,12 +45,21 @@ SOURCES += main.cpp\
     measure/measure_data.cpp \
     TreeItem.cpp \
     PowerTreeModel.cpp \
-    PowerTab.cpp
+    PowerTab.cpp \
+    MainWindow.cpp \
+    CommsThread.cpp \
+    PhasorScene.cpp \
+    PhasorView.cpp \
+    PlotScene.cpp \
+    PlotView.cpp \
+    Stream.cpp \
+    StreamManager.cpp \
+    StreamTableRow.cpp \
+    TabViewWidget.cpp \
+    SampleRate.cpp \
+    StreamTableModel.cpp
 
-HEADERS  += mainwindow.h \
-    stream.h \
-    sample.h \
-    streamtablemodel.h \
+HEADERS  += \
     rapid61850/svPacketData.h \
     rapid61850/svEncodeBasic.h \
     rapid61850/svEncode.h \
@@ -81,11 +78,6 @@ HEADERS  += mainwindow.h \
     rapid61850/decodePacket.h \
     rapid61850/datatypes.h \
     rapid61850/ctypes.h \
-    commsthread.h \
-    phasorscene.h \
-    phasorview.h \
-    statuscolumndelegate.h \
-    plotview.h \
     measure/rtwtypes.h \
     measure/rtGetNaN.h \
     measure/rtGetInf.h \
@@ -95,18 +87,27 @@ HEADERS  += mainwindow.h \
     measure/measure_parameters.h \
     measure/measure.h \
     measure/measure_types.h \
-    samplerate.h \
-    plotscene.h \
-    streammanager.h \
-    streamtablerow.h \
-    tabviewwidget.h \
     ProxyItemView.h \
     PhasorPlotTab.h \
     FrequencyTab.h \
     FrequencyScene.h \
     TreeItem.h \
     PowerTreeModel.h \
-    PowerTab.h
+    PowerTab.h \
+    CommsThread.h \
+    MainWindow.h \
+    StatusColumnDelegate.h \
+    StreamManager.h \
+    Stream.h \
+    PlotView.h \
+    PlotScene.h \
+    PhasorView.h \
+    PhasorScene.h \
+    Sample.h \
+    SampleRate.h \
+    StreamTableModel.h \
+    StreamTableRow.h \
+    TabviewWidget.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

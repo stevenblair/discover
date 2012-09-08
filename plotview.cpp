@@ -1,11 +1,31 @@
-#include "plotview.h"
-#include "phasorscene.h"
+/**
+ * discover - a real-time monitoring and analysis tool for IEC 61850-9-2LE Sampled Values
+ *
+ * Copyright (c) 2012 Steven Blair
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * some code from: http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming
+ */
+
+
+#include "PlotView.h"
+#include "PhasorScene.h"
 
 #include <QtGui>
 
-//#ifndef QT_NO_OPENGL
-//#include <QtOpenGL>
-//#endif
 
 PlotView::PlotView(QObject *parent)
 {
@@ -22,8 +42,6 @@ PlotView::PlotView(QObject *parent)
     matrix.scale(7000.0, 0.05);
     this->setMatrix(matrix);*/
     //this->centerOn(0.0, 0.0);
-
-    //setViewport(new QGLWidget);
 }
 
 
@@ -113,47 +131,3 @@ void PlotView::wheelEvent(QWheelEvent* event) {
     QPointF newCenter = screenCenter + offset;
     SetCenter(newCenter);
 }
-
-///**
-//  * Handles when the mouse button is pressed
-//  */
-//void PlotView::mousePressEvent(QMouseEvent* event) {
-//    //For panning the view
-//    LastPanPoint = event->pos();
-//    setCursor(Qt::ClosedHandCursor);
-//}
-
-///**
-//  * Handles when the mouse button is released
-//  */
-//void PlotView::mouseReleaseEvent(QMouseEvent* event) {
-//    setCursor(Qt::OpenHandCursor);
-//    LastPanPoint = QPoint();
-//}
-
-///**
-//*Handles the mouse move event
-//*/
-//void PlotView::mouseMoveEvent(QMouseEvent* event) {
-//    if(!LastPanPoint.isNull()) {
-//        //Get how much we panned
-//        QPointF delta = mapToScene(LastPanPoint) - mapToScene(event->pos());
-//        LastPanPoint = event->pos();
-
-//        //Update the center ie. do the pan
-//        SetCenter(GetCenter() + delta);
-//    }
-//}
-
-///**
-//  * Need to update the center so there is no jolt in the
-//  * interaction after resizing the widget.
-//  */
-//void PlotView::resizeEvent(QResizeEvent* event) {
-//    //Get the rectangle of the visible area in scene coords
-//    QRectF visibleArea = mapToScene(rect()).boundingRect();
-//    SetCenter(visibleArea.center());
-
-//    //Call the subclass resize so the scrollbars are updated correctly
-//    QGraphicsView::resizeEvent(event);
-//}

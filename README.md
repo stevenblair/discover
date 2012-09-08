@@ -6,7 +6,7 @@
 
 This program uses the open source [rapid61850](https://github.com/stevenblair/rapid61850) project to listen to Sampled Value streams in real-time. Sampled Value data are put through the measurement and analysis code by [Andrew Roscoe](http://personal.strath.ac.uk/andrew.j.roscoe/), described in [this paper](http://dx.doi.org/10.1049/iet-gtd.2008.0517). This provides detailed information on the voltage and current fundamental magnitude and phase, harmonics, power flow, etc. Frequency analysis is done using the resampled DFT method described in [this paper](http://dx.doi.org/10.1049/cp.2011.0140).
 
-The voltage and current information is visualised using a Qt-based GUI. The program is designed to be lightweight, efficient, and cross-platform (although is has only been tested on Windows so far).
+The voltage and current information is visualised using a Qt-based GUI. The program is designed to be lightweight, efficient, open source, and cross-platform (although is has only been tested on Windows so far).
 
 ## Implemented features ##
 
