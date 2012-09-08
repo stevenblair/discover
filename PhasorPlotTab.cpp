@@ -2,7 +2,6 @@
 
 void PhasorPlotTab::update()
 {
-    //qDebug() << "in update()";
     voltagePhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
     currentPhasorScene->streamTableModelSelectionChanged(this->model, &this->index);
     voltagePlotScene->streamTableModelSelectionChanged(this->model, &this->index);

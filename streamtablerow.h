@@ -81,7 +81,7 @@ public:
     QString getCurrent()
     {
         if (analysed) {
-            return QString("%1 kA").arg(sqrt(3) * (measure_Y.Current[0] + measure_Y.Current[1] + measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 kA").arg((measure_Y.Current[0] + measure_Y.Current[1] + measure_Y.Current[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
         }
         else {
             return QString("--");
