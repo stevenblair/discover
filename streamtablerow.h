@@ -80,7 +80,7 @@ public:
     QString getPower()
     {
         if (analysed) {
-            qreal power = measure_Y.WattsFundamental3[0];
+            qreal power = measure_Y.VA;
             QString units;
             if (power > 1000.0 && power < 1000000.0) {
                 power = power / 1000.0;
