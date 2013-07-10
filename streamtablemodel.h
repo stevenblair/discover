@@ -27,7 +27,7 @@
 #include <QItemSelectionModel>
 #include "Stream.h"
 
-#define STREAM_TABLE_NUMBER_OF_COLUMNS                  9
+#define STREAM_TABLE_NUMBER_OF_COLUMNS                  10
 
 #define STREAM_TABLE_COLUMNS_STATUS                     0
 #define STREAM_TABLE_COLUMNS_SVID                       1
@@ -38,6 +38,7 @@
 #define STREAM_TABLE_COLUMNS_CURRENT                    6
 #define STREAM_TABLE_COLUMNS_POWER                      7
 #define STREAM_TABLE_COLUMNS_THD                        8
+#define STREAM_TABLE_COLUMNS_CURRENT_THD                9
 
 #define STREAM_TABLE_COLUMNS_STATUS_TITLE               "Status"
 #define STREAM_TABLE_COLUMNS_SVID_TITLE                 "svID"
@@ -48,6 +49,7 @@
 #define STREAM_TABLE_COLUMNS_CURRENT_TITLE              "Current (RMS, L-N)"
 #define STREAM_TABLE_COLUMNS_POWER_TITLE                "Power (3-phase)"
 #define STREAM_TABLE_COLUMNS_THD_TITLE                  "Voltage THD"
+#define STREAM_TABLE_COLUMNS_CURRENT_THD_TITLE          "Current THD"
 
 
 class StreamTableModel : public QAbstractTableModel

@@ -26,7 +26,7 @@
 #include <QGraphicsPathItem>
 #include "StreamTableModel.h"
 
-#define ONE_PU_HEIGHT               200.0
+#define ONE_PU_HEIGHT               200
 #define DISPLAY_HARMONIC_CUTOFF     (1.0e-4)
 
 
@@ -74,6 +74,7 @@ private:
     QList<QGraphicsLineItem *> harmonicLine[TOTAL_SIGNALS];
     QList<QGraphicsTextItem *> xLabels;
 
+    virtual qreal getFundamental(QPointer<StreamTableRow> stream, int phase);
     virtual qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
     virtual qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
 };
@@ -91,6 +92,7 @@ public slots:
 protected:
 
 private:
+    qreal getFundamental(QPointer<StreamTableRow> stream, int phase);
     qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
     qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
 };

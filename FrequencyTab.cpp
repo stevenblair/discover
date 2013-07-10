@@ -54,8 +54,8 @@ FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
         checkBoxLayout->addWidget(activeWaveformCheckBox[i]);
     }
 
-    connect(checkBoxMapper, SIGNAL(mapped(int)), this, SIGNAL(checkBoxToggled(int)));
-    connect(this, SIGNAL(checkBoxToggled(int)), this, SLOT(setActiveWavefrom(int)));
+//    connect(checkBoxMapper, SIGNAL(mapped(int)), this, SIGNAL(checkBoxToggled(int)));
+//    connect(this, SIGNAL(checkBoxToggled(int)), this, SLOT(setActiveWavefrom(int)));
 
 
     //verticalLayout->addLayout(checkBoxLayout);
@@ -65,8 +65,8 @@ FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
     this->views.append(frequencyView);
     this->views.append(currentFrequencyView);
 
-    connect(this, SIGNAL(redrawFrequencyScene()), this->frequencyScene, SLOT(redrawFrequencyScene()));
-    connect(this, SIGNAL(redrawFrequencyScene()), this->currentFrequencyScene, SLOT(redrawFrequencyScene()));
+//    connect(this, SIGNAL(redrawFrequencyScene()), this->frequencyScene, SLOT(redrawFrequencyScene()));
+//    connect(this, SIGNAL(redrawFrequencyScene()), this->currentFrequencyScene, SLOT(redrawFrequencyScene()));
 }
 
 void FrequencyTab::update()

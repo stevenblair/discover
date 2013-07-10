@@ -75,7 +75,9 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
                 case STREAM_TABLE_COLUMNS_POWER:
                     return ((StreamTableRow*) i.value())->getPower();
                 case STREAM_TABLE_COLUMNS_THD:
-                    return ((StreamTableRow*) i.value())->getTHD();
+                    return ((StreamTableRow*) i.value())->getVoltageTHD();
+                case STREAM_TABLE_COLUMNS_CURRENT_THD:
+                    return ((StreamTableRow*) i.value())->getCurrentTHD();
                 default:
                     return QVariant();
                 }
@@ -136,6 +138,8 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
             return tr(STREAM_TABLE_COLUMNS_POWER_TITLE);
         case STREAM_TABLE_COLUMNS_THD:
             return tr(STREAM_TABLE_COLUMNS_THD_TITLE);
+        case STREAM_TABLE_COLUMNS_CURRENT_THD:
+            return tr(STREAM_TABLE_COLUMNS_CURRENT_THD_TITLE);
         default:
             return QVariant();
         }

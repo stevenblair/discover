@@ -30,6 +30,7 @@ class Stream;
 
 #define SIGNIFICANT_DIGITS_DIPLAYED      3
 #define SIGNIFICANT_DIGITS_DIPLAYED_FREQ 4
+#define SIGNIFICANT_DIGITS_DIPLAYED_THD  2
 //#define MAX_SAMPLES                 (256 * NUMBER_OF_CYCLES_TO_ANALYSE)
 
 class StreamTableRow : public QObject
@@ -98,10 +99,20 @@ public:
         }
     }
 
-    QString getTHD()
+    QString getVoltageTHD()
     {
         if (analysed) {
-            return QString("%1 %").arg((measure_Y.VoltageTHDPercent3[0] + measure_Y.VoltageTHDPercent3[1] + measure_Y.VoltageTHDPercent3[2]) / 3.0, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 %").arg((measure_Y.VoltageTHDPercent3[0] + measure_Y.VoltageTHDPercent3[1] + measure_Y.VoltageTHDPercent3[2]) / 3.0, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED_THD);
+        }
+        else {
+            return QString("--");
+        }
+    }
+
+    QString getCurrentTHD()
+    {
+        if (analysed) {
+            return QString("%1 %").arg((measure_Y.Current[6] + measure_Y.Current[7] + measure_Y.Current[8]) / 3.0, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED_THD);
         }
         else {
             return QString("--");
