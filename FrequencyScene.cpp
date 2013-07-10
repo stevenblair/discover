@@ -81,7 +81,7 @@ void FrequencyScene::streamTableModelSelectionChanged(StreamTableModel *streamTa
 
 void FrequencyScene::streamRemoved()
 {
-    for (int i = 0; i < TOTAL_SIGNALS; i++) {
+    for (int i = 0; i < 3; i++) {
         if (!harmonicLine[i].isEmpty()) {
             QListIterator<QGraphicsLineItem *> lines (harmonicLine[i]);
             while (lines.hasNext()) {

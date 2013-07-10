@@ -71,7 +71,7 @@ public:
     QString getVoltage()
     {
         if (analysed) {
-            return QString("%1 kV").arg(sqrt(3) * (measure_Y.VoltageFundMagVoltsRMS3[0] + measure_Y.VoltageFundMagVoltsRMS3[1] + measure_Y.VoltageFundMagVoltsRMS3[2]) / 3000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
+            return QString("%1 kV").arg((qSqrt(3) / qSqrt(2)) * measure_Y.VoltagePosSeqMagPu / 1000.0, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED);
         }
         else {
             return QString("--");
@@ -112,6 +112,7 @@ public:
     QString getCurrentTHD()
     {
         if (analysed) {
+            // TODO change to positve seq current?
             return QString("%1 %").arg((measure_Y.Current[6] + measure_Y.Current[7] + measure_Y.Current[8]) / 3.0, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED_THD);
         }
         else {

@@ -71,8 +71,9 @@ private:
     QPen pen[TOTAL_SIGNALS];
     QGraphicsLineItem *horizontalPlotLine;
     QGraphicsLineItem *verticalPlotLine;
-    QList<QGraphicsLineItem *> harmonicLine[TOTAL_SIGNALS];
+    QList<QGraphicsLineItem *> harmonicLine[3];
     QList<QGraphicsTextItem *> xLabels;
+    QList<QGraphicsLineItem *> AxisTicks;
 
     virtual qreal getFundamental(QPointer<StreamTableRow> stream, int phase);
     virtual qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
