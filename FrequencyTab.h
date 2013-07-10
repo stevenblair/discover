@@ -40,10 +40,8 @@ public:
 
 signals:
     void redrawFrequencyScene();
-    void checkBoxToggled(int id);
 
 public slots:
-    void setActiveWavefrom(int id);
 
 private:
     QList<QGraphicsView*> views;
@@ -53,9 +51,6 @@ private:
 
     CurrentFrequencyScene *currentFrequencyScene;
     QGraphicsView *currentFrequencyView;
-
-    QCheckBox *activeWaveformCheckBox[8];
-    QSignalMapper *checkBoxMapper;
 };
 
 #endif // FREQUENCYTAB_H

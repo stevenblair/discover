@@ -65,7 +65,7 @@ PowerTreeModel::~PowerTreeModel()
 
 void PowerTreeModel::streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index)
 {
-    qDebug() << "PowerTreeModel::streamTableModelSelectionChanged()" << this->rowCount();
+    //qDebug() << "PowerTreeModel::streamTableModelSelectionChanged()" << this->rowCount();
     if (this->rowCount() == 0) {
         beginInsertRows(QModelIndex(), 0, 0);
         this->streamTableModel = streamTableModel;

@@ -72,7 +72,7 @@ void ProxyItemView::rowsInserted(const QModelIndex &parent, int start, int end)
 
 void ProxyItemView::rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end)
 {
-    qDebug() << "in rowsAboutToBeRemoved()" << start << end;
+    //qDebug() << "in rowsAboutToBeRemoved()" << start << end;
 
     this->widget->removeView();
 }

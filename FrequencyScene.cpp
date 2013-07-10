@@ -23,22 +23,24 @@
 #define VOLTAGE_LINE_ALPHA  255
 #define CURRENT_LINE_ALPHA  180
 #define MIN_Y_VALUE         0.0//1       // -log10(0.1)
-#define LINE_WIDTH          6
+#define LINE_WIDTH          8
+#define LINE_SPACING        1.0
 
 const QString FrequencyScene::PhaseLables[3] = {QString("A"), QString("B"), QString("C")};
 
-const QColor FrequencyScene::waveformColors[TOTAL_SIGNALS] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
-                                                              QColor(240, 181, 0, VOLTAGE_LINE_ALPHA),
-                                                              QColor(36, 78, 198, VOLTAGE_LINE_ALPHA),
-                                                              QColor(180, 180, 180, VOLTAGE_LINE_ALPHA),
-                                                              QColor(180, 33, 38, CURRENT_LINE_ALPHA),
-                                                              QColor(240, 181, 0, CURRENT_LINE_ALPHA),
-                                                              QColor(36, 78, 198, CURRENT_LINE_ALPHA),
-                                                              QColor(180, 180, 180, CURRENT_LINE_ALPHA)};
+const QColor FrequencyScene::waveformColors[3] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
+                                                  QColor(240, 181, 0, VOLTAGE_LINE_ALPHA),
+                                                  QColor(36, 78, 198, VOLTAGE_LINE_ALPHA)};
 
 
 FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 {
+    QColor plotLineColor = QColor(180, 180, 180);
+
+    plotLinePenDashed = QPen(plotLineColor);
+    plotLinePenDashed.setCosmetic(true);
+    plotLinePenDashed.setStyle(Qt::DashLine);
+
     for (int i = 0; i < 3; i++) {
         activeWaveform[i] = true;
 //        // enable only the first waveform by default
@@ -53,8 +55,6 @@ FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
         pen[i].setCapStyle(Qt::FlatCap);
         pen[i].setWidth(LINE_WIDTH);
     }
-
-    QColor plotLineColor = QColor(180, 180, 180);
 
     QPen plotLinePen = QPen(plotLineColor);
     plotLinePen.setCosmetic(true);
@@ -158,8 +158,8 @@ qreal CurrentFrequencyScene::getHarmonicMag(QPointer<StreamTableRow> stream, int
 }
 
 void FrequencyScene::draw() {
-    //qDebug() << "in FrequencyScene::draw()";
     QPointer<StreamTableRow> stream;
+    QColor plotLineColor = QColor(180, 180, 180);
 
     if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
         stream = this->streamTableModel->getRowFromIndex(this->index);
@@ -185,29 +185,46 @@ void FrequencyScene::draw() {
         xLabels.clear();
     }
 
+    if (!xAxisTicks.isEmpty()) {
+        QListIterator<QGraphicsLineItem *> ticks (xAxisTicks);
+        while (ticks.hasNext()) {
+            QGraphicsLineItem *tick = ticks.next();
+            xAxisTicks.removeOne(tick);
+            this->removeItem(tick);
+            delete tick;
+        }
+        xAxisTicks.clear();
+    }
+
     for (quint32 n = 0; n < totalHarmonics; n++) {
         //QFont font = QFont();
         //font.setPixelSize(8);
-        if (n % 2 == 0) {
+
+        qreal x = 0.0;
+
+        if (n == 0) {
+            // fundamental, or 1st harmonic
+            x = 1.0 * stream->getData()->Frequency;
+        }
+        else {
+            // all other harmonics
+            int harmonicIndex = (totalHarmonics - 1) + n - 1;
+            x = getHarmonic(stream, harmonicIndex) * stream->getData()->Frequency;
+        }
+
+        QGraphicsLineItem *tickLine = QGraphicsScene::addLine(x, 0.0, x, -ONE_PU_HEIGHT, plotLinePenDashed);
+        xAxisTicks.append(tickLine);
+
+        if (n == 0 || n % 3 == 2) {
             QGraphicsTextItem *label = new QGraphicsTextItem;
+            label->setDefaultTextColor(plotLineColor);
             label->setFlag(QGraphicsItem::ItemIgnoresTransformations);
             this->addItem(label);
             label->hide();
             xLabels.append(label);
 
-            qreal x = 0.0;
-
-            if (n == 0) {
-                // fundamental, or 1st harmonic
-                x = 1.0 * stream->getData()->Frequency;
-            }
-            else {
-                // all other harmonics
-                int harmonicIndex = (totalHarmonics - 1) + n - 1;
-                x = getHarmonic(stream, harmonicIndex) * stream->getData()->Frequency;
-            }
-
-            label->setPlainText(QString("%1").arg(x, 0, 'f', 1));
+            label->setPlainText(QString("%1 Hz").arg(x, 0, 'f', 1));
+            label->setToolTip(QString("%1 Hz (%2 harmonic number)").arg(x, 0, 'f', 1).arg(n + 1, 0, 'f', 0));
             //qDebug() << label->boundingRect().width() << label->boundingRect().right() - label->boundingRect().left();
             // TODO: fix scale of offset
             label->setPos(x - (label->boundingRect().width() / 1.5), 0.0);
@@ -285,10 +302,10 @@ void FrequencyScene::draw() {
                     qreal x_adjusted = x;
 
                     if (signal == 0) {
-                        x_adjusted -= LINE_WIDTH * 1.2;
+                        x_adjusted -= LINE_WIDTH * LINE_SPACING;
                     }
                     else if (signal == 2) {
-                        x_adjusted += LINE_WIDTH * 1.2;
+                        x_adjusted += LINE_WIDTH * LINE_SPACING;
                     }
 
                     if (y > DISPLAY_HARMONIC_CUTOFF) {
@@ -311,6 +328,7 @@ void FrequencyScene::draw() {
     }
 
     view->fitInView(this->sceneRect(), Qt::IgnoreAspectRatio);
+
 
     for (quint32 n = 0; n < totalHarmonics; n++) {
 //        QGraphicsLineItem *line = harmonicLine[0].at(n);
