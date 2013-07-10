@@ -23,6 +23,9 @@
 #define VOLTAGE_LINE_ALPHA  255
 #define CURRENT_LINE_ALPHA  180
 #define MIN_Y_VALUE         0.0//1       // -log10(0.1)
+#define LINE_WIDTH          8
+
+const QString FrequencyScene::PhaseLables[3] = {QString("A"), QString("B"), QString("C")};
 
 const QColor FrequencyScene::waveformColors[TOTAL_SIGNALS] = {QColor(180, 33, 38, VOLTAGE_LINE_ALPHA),
                                                               QColor(240, 181, 0, VOLTAGE_LINE_ALPHA),
@@ -32,6 +35,7 @@ const QColor FrequencyScene::waveformColors[TOTAL_SIGNALS] = {QColor(180, 33, 38
                                                               QColor(240, 181, 0, CURRENT_LINE_ALPHA),
                                                               QColor(36, 78, 198, CURRENT_LINE_ALPHA),
                                                               QColor(180, 180, 180, CURRENT_LINE_ALPHA)};
+
 
 FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 {
@@ -47,7 +51,7 @@ FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 
         pen[i] = QPen(waveformColors[i]);
         pen[i].setCapStyle(Qt::FlatCap);
-        pen[i].setWidth(8);
+        pen[i].setWidth(LINE_WIDTH);
     }
 
     QColor plotLineColor = QColor(180, 180, 180);
@@ -91,6 +95,47 @@ void FrequencyScene::streamRemoved()
 void FrequencyScene::redrawFrequencyScene()
 {
     draw();
+}
+
+qreal FrequencyScene::getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->VoltageHarmonicsAnalysed[harmonicIndex];
+    }
+
+    return 0.0;
+}
+
+qreal FrequencyScene::getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
+    }
+
+    return 0.0;
+}
+
+
+CurrentFrequencyScene::CurrentFrequencyScene(QObject *parent) : FrequencyScene(parent)
+{
+}
+
+qreal CurrentFrequencyScene::getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->CurrentHarmonicsAnalysed[harmonicIndex];
+    }
+
+    return 0.0;
+}
+
+qreal CurrentFrequencyScene::getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->CurrentAmplitudesRelativeToFundamental[harmonicIndex];
+    }
+
+    return 0.0;
 }
 
 void FrequencyScene::draw() {
@@ -140,7 +185,7 @@ void FrequencyScene::draw() {
             else {
                 // all other harmonics
                 int harmonicIndex = (totalHarmonics - 1) + n - 1;
-                x = stream->getData()->VoltageHarmonicsAnalysed[harmonicIndex] * stream->getData()->Frequency;
+                x = getHarmonic(stream, harmonicIndex) * stream->getData()->Frequency;
             }
 
             label->setPlainText(QString("%1").arg(x, 0, 'f', 1));
@@ -173,7 +218,7 @@ void FrequencyScene::draw() {
         }
     }
 
-    qreal maxFreqValue = stream->getData()->VoltageHarmonicsAnalysed[totalHarmonics - 2] * stream->getData()->Frequency;//(stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
+    qreal maxFreqValue = getHarmonic(stream, totalHarmonics - 2) * stream->getData()->Frequency;//(stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x());
     qreal maxMagnitudeValue = -(1.0 * ONE_PU_HEIGHT/*stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).y()*/);
 
     horizontalPlotLine->setLine(0.0, MIN_Y_VALUE, maxFreqValue, MIN_Y_VALUE);
@@ -201,19 +246,31 @@ void FrequencyScene::draw() {
                     if (n == 0) {
                         // fundamental, or 1st harmonic
                         x = 1.0 * stream->getData()->PhaseFrequency[signal];
-                        y = stream->getData()->VoltageFundMagVoltsRMS3[signal] * qSqrt(2.0) / stream->getMaxInstantaneous(Stream::Voltage); // TODO: get max magnitude from model
+                        //y = stream->getData()->VoltageFundMagVoltsRMS3[signal] * qSqrt(2.0) / stream->getMaxInstantaneous(Stream::Voltage); // TODO: get max magnitude from model
+
+                        // fundamental is always the 1 pu reference
+                        y = 1.0;
                     }
                     else {
                         // all other harmonics
                         int harmonicIndex = (signal * (totalHarmonics - 1)) + n - 1;
 
-                        x = stream->getData()->VoltageHarmonicsAnalysed[harmonicIndex] * stream->getData()->PhaseFrequency[signal];
-                        y = stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
+                        x = getHarmonic(stream, harmonicIndex) * stream->getData()->PhaseFrequency[signal];
+                        y = getHarmonicMag(stream, harmonicIndex);//stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
+                    }
+
+                    qreal x_adjusted = x;
+
+                    if (signal == 0) {
+                        x_adjusted -= LINE_WIDTH * 1.2;
+                    }
+                    else if (signal == 2) {
+                        x_adjusted += LINE_WIDTH * 1.2;
                     }
 
                     if (y > DISPLAY_HARMONIC_CUTOFF) {
-                        line->setLine(x, 0.0, x, -ONE_PU_HEIGHT * y);
-                        line->setToolTip(QString("%1 p.u. at %2 Hz").arg(y).arg(x));
+                        line->setLine(x_adjusted, 0.0, x_adjusted, -ONE_PU_HEIGHT * y);
+                        line->setToolTip(QString("Phase %1: %2 p.u. at %3 Hz").arg(FrequencyScene::PhaseLables[signal]).arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED).arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
                         line->show();
                     }
                 }

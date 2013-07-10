@@ -29,6 +29,7 @@
 #define ONE_PU_HEIGHT               200.0
 #define DISPLAY_HARMONIC_CUTOFF     (1.0e-4)
 
+
 class FrequencyScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -51,6 +52,8 @@ public:
         return false;
     }
 
+    static const QString PhaseLables[3];
+
 signals:
     void callRedrawFrequencyScene();
     
@@ -70,7 +73,27 @@ private:
     QGraphicsLineItem *verticalPlotLine;
     QList<QGraphicsLineItem *> harmonicLine[TOTAL_SIGNALS];
     QList<QGraphicsTextItem *> xLabels;
-    
+
+    virtual qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
+    virtual qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
 };
+
+
+
+class CurrentFrequencyScene : public FrequencyScene
+{
+    Q_OBJECT
+public:
+    CurrentFrequencyScene(QObject *parent = 0);
+
+public slots:
+
+protected:
+
+private:
+    qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
+    qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
+};
+
 
 #endif // FREQUENCYSCENE_H

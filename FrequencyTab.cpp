@@ -31,8 +31,12 @@ FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
     frequencyScene = new FrequencyScene();
     frequencyView = new QGraphicsView();
     frequencyView->setScene(frequencyScene);
-
     frequencyView->setRenderHint(QPainter::Antialiasing);    // TODO: move into subclass?
+
+    currentFrequencyScene = new CurrentFrequencyScene();
+    currentFrequencyView = new QGraphicsView();
+    currentFrequencyView->setScene(currentFrequencyScene);
+    currentFrequencyView->setRenderHint(QPainter::Antialiasing);    // TODO: move into subclass?
 
 
     checkBoxMapper = new QSignalMapper(this);
@@ -54,22 +58,27 @@ FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
     connect(this, SIGNAL(checkBoxToggled(int)), this, SLOT(setActiveWavefrom(int)));
 
 
-    verticalLayout->addLayout(checkBoxLayout);
+    //verticalLayout->addLayout(checkBoxLayout);
     verticalLayout->addWidget(frequencyView, 0, 0);
+    verticalLayout->addWidget(currentFrequencyView, 0, 0);
 
     this->views.append(frequencyView);
+    this->views.append(currentFrequencyView);
 
     connect(this, SIGNAL(redrawFrequencyScene()), this->frequencyScene, SLOT(redrawFrequencyScene()));
+    connect(this, SIGNAL(redrawFrequencyScene()), this->currentFrequencyScene, SLOT(redrawFrequencyScene()));
 }
 
 void FrequencyTab::update()
 {
     frequencyScene->streamTableModelSelectionChanged(this->model, &this->index);
+    currentFrequencyScene->streamTableModelSelectionChanged(this->model, &this->index);
 }
 
 void FrequencyTab::removeView()
 {
     frequencyScene->streamRemoved();
+    currentFrequencyScene->streamRemoved();
 }
 
 void FrequencyTab::setActiveWavefrom(int id)

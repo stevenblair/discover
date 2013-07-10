@@ -74,6 +74,8 @@ QVariant StreamTableModel::data(const QModelIndex &index, int role) const
                     return ((StreamTableRow*) i.value())->getSamplesPerCycle();
                 case STREAM_TABLE_COLUMNS_POWER:
                     return ((StreamTableRow*) i.value())->getPower();
+                case STREAM_TABLE_COLUMNS_THD:
+                    return ((StreamTableRow*) i.value())->getTHD();
                 default:
                     return QVariant();
                 }
@@ -132,6 +134,8 @@ QVariant StreamTableModel::headerData(int section, Qt::Orientation orientation, 
             return tr(STREAM_TABLE_COLUMNS_SAMPLES_PER_CYCLE_TITLE);
         case STREAM_TABLE_COLUMNS_POWER:
             return tr(STREAM_TABLE_COLUMNS_POWER_TITLE);
+        case STREAM_TABLE_COLUMNS_THD:
+            return tr(STREAM_TABLE_COLUMNS_THD_TITLE);
         default:
             return QVariant();
         }

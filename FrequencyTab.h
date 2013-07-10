@@ -51,6 +51,9 @@ private:
     FrequencyScene *frequencyScene;
     QGraphicsView *frequencyView;
 
+    CurrentFrequencyScene *currentFrequencyScene;
+    QGraphicsView *currentFrequencyView;
+
     QCheckBox *activeWaveformCheckBox[8];
     QSignalMapper *checkBoxMapper;
 };

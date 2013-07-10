@@ -98,6 +98,16 @@ public:
         }
     }
 
+    QString getTHD()
+    {
+        if (analysed) {
+            return QString("%1 %").arg((measure_Y.VoltageTHDPercent3[0] + measure_Y.VoltageTHDPercent3[1] + measure_Y.VoltageTHDPercent3[2]) / 3.0, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED);
+        }
+        else {
+            return QString("--");
+        }
+    }
+
     QString getCurrent()
     {
         if (analysed) {
