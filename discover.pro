@@ -9,7 +9,7 @@ QT       += core gui
 TARGET = discover
 TEMPLATE = app
 
-CONFIG += console
+#CONFIG += console
 QMAKE_CFLAGS_RELEASE	= -O3
 
 SOURCES += main.cpp\

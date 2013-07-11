@@ -26,7 +26,7 @@
 #include <QGraphicsView>
 #include "StreamTableModel.h"
 
-#define PHASOR_VIEW_MAX_PHASOR_SIZE 70.0
+#define PHASOR_VIEW_MAX_PHASOR_SIZE 80.0
 #define PHASOR_VIEW_MAX_SIZE        (PHASOR_VIEW_MAX_PHASOR_SIZE + 25.0)    // defines max distance from centre in any direction
 #define PHASOR_VIEW_WIDTH           (2.0 * PHASOR_VIEW_MAX_SIZE)
 

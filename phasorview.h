@@ -29,6 +29,12 @@ class PhasorView : public QGraphicsView
 public:
     explicit PhasorView(QObject *parent = 0);
 
+protected:
+    void scrollContentsBy(int, int)
+    {
+        // do nothing
+    }
+
 signals:
     
 public slots:
