@@ -85,17 +85,17 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 
 void PlotScene::streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index)
 {
+    if (!this->index.isValid() || this->index.row() != index->row()) {
+        drawnOnce = false;
+    }
+
     this->streamTableModel = streamTableModel;
-    this->index = index;
-
-    //qDebug() << "in streamTableModelSelectionChanged()" << this->index->row() << this->streamTableModel;
-
-    drawnOnce = false;
+    this->index = QPersistentModelIndex(*index);    // create copy of QPersistentModelIndex
 
     QPointer<StreamTableRow> stream;
 
-    if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
-        stream = this->streamTableModel->getRowFromIndex(this->index);
+    if (this->streamTableModel != NULL && /*this->index != NULL &&*/ this->index.isValid()) {
+        stream = this->streamTableModel->getRowFromIndex(&this->index);
     }
     else {
         return;
@@ -190,8 +190,8 @@ void PlotScene::draw() {
     //qDebug() << "in PlotScene::draw()";
     QPointer<StreamTableRow> stream;
 
-    if (this->streamTableModel != NULL && this->index != NULL && this->index->isValid()) {
-        stream = this->streamTableModel->getRowFromIndex(this->index);
+    if (this->streamTableModel != NULL && /*this->index != NULL &&*/ this->index.isValid()) {
+        stream = this->streamTableModel->getRowFromIndex(&this->index);
     }
     else {
         return;

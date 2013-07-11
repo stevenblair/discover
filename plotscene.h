@@ -38,6 +38,11 @@ public:
 
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
     void streamRemoved();
+
+    void setDrawnStatus(bool status) {
+        this->drawnOnce = status;
+    }
+
 signals:
 
 public slots:
@@ -53,7 +58,7 @@ protected:
     QString yUnits;
 
     StreamTableModel *streamTableModel;
-    QPersistentModelIndex *index;
+    QPersistentModelIndex index;
 
     //QRectF itemsBoundingRectWithoutText();
     //QRectF itemsBoundingRect() const;

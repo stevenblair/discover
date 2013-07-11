@@ -22,6 +22,7 @@
 
 
 #include "PlotView.h"
+#include "PlotScene.h"
 #include "PhasorScene.h"
 
 #include <QtGui>
@@ -52,12 +53,12 @@ PlotView::PlotView(QObject *parent)
   * sidebar case.  This function will claim the centerPoint to sceneRec ie.
   * the centerPoint must be within the sceneRec.
   */
-//Set the current centerpoint in the
+// Set the current centerpoint in the
 void PlotView::SetCenter(const QPointF& centerPoint) {
-    //Get the rectangle of the visible area in scene coords
+    // Get the rectangle of the visible area in scene coords
     QRectF visibleArea = mapToScene(rect()).boundingRect();
 
-    //Get the scene area
+    // Get the scene area
     QRectF sceneBounds = sceneRect();
 
     double boundX = visibleArea.width() / 2.0;
@@ -65,38 +66,41 @@ void PlotView::SetCenter(const QPointF& centerPoint) {
     double boundWidth = sceneBounds.width() - 2.0 * boundX;
     double boundHeight = sceneBounds.height() - 2.0 * boundY;
 
-    //The max boundary that the centerPoint can be to
+    // The max boundary that the centerPoint can be to
     QRectF bounds(boundX, boundY, boundWidth, boundHeight);
 
-    if(bounds.contains(centerPoint)) {
-        //We are within the bounds
+    if (bounds.contains(centerPoint)) {
+        // We are within the bounds
         CurrentCenterPoint = centerPoint;
-    } else {
-        //We need to clamp or use the center of the screen
-        if(visibleArea.contains(sceneBounds)) {
-            //Use the center of scene ie. we can see the whole scene
+    }
+    else {
+        // We need to clamp or use the center of the screen
+        if (visibleArea.contains(sceneBounds)) {
+            // Use the center of scene ie. we can see the whole scene
             CurrentCenterPoint = sceneBounds.center();
-        } else {
-
+        }
+        else {
             CurrentCenterPoint = centerPoint;
 
-            //We need to clamp the center. The centerPoint is too large
-            if(centerPoint.x() > bounds.x() + bounds.width()) {
+            // We need to clamp the center. The centerPoint is too large
+            if (centerPoint.x() > bounds.x() + bounds.width()) {
                 CurrentCenterPoint.setX(bounds.x() + bounds.width());
-            } else if(centerPoint.x() < bounds.x()) {
+            }
+            else if(centerPoint.x() < bounds.x()) {
                 CurrentCenterPoint.setX(bounds.x());
             }
 
-            if(centerPoint.y() > bounds.y() + bounds.height()) {
+            if (centerPoint.y() > bounds.y() + bounds.height()) {
                 CurrentCenterPoint.setY(bounds.y() + bounds.height());
-            } else if(centerPoint.y() < bounds.y()) {
+            }
+            else if(centerPoint.y() < bounds.y()) {
                 CurrentCenterPoint.setY(bounds.y());
             }
 
         }
     }
 
-    //Update the scrollbars
+    // Update the scrollbars
     centerOn(CurrentCenterPoint);
 }
 
@@ -105,29 +109,50 @@ void PlotView::SetCenter(const QPointF& centerPoint) {
   */
 void PlotView::wheelEvent(QWheelEvent* event) {
 
-    //Get the position of the mouse before scaling, in scene coords
+    // Get the position of the mouse before scaling, in scene coords
     QPointF pointBeforeScale(mapToScene(event->pos()));
 
-    //Get the original screen centerpoint
+    // Get the original screen centerpoint
     QPointF screenCenter = GetCenter(); //CurrentCenterPoint; //(visRect.center());
 
-    //Scale the view ie. do the zoom
-    double scaleFactor = 1.25; //How fast we zoom
-    if(event->delta() > 0) {
-        //Zoom in
+    // Scale the view ie. do the zoom
+    double scaleFactor = 1.25; // How fast we zoom
+    if (event->delta() > 0) {
+        // Zoom in
         scale(scaleFactor, scaleFactor);
-    } else {
-        //Zooming out
+    }
+    else {
+        // Zooming out
         scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     }
 
-    //Get the position after scaling, in scene coords
+    // Get the position after scaling, in scene coords
     QPointF pointAfterScale(mapToScene(event->pos()));
 
-    //Get the offset of how the screen moved
+    // Get the offset of how the screen moved
     QPointF offset = pointBeforeScale - pointAfterScale;
 
-    //Adjust to the new center for correct zooming
+    // Adjust to the new center for correct zooming
     QPointF newCenter = screenCenter + offset;
     SetCenter(newCenter);
+}
+
+void PlotView::resizeEvent(QResizeEvent *event)
+{
+    qDebug() << "resize";
+    PlotScene *scene = (PlotScene *) this->scene();
+    scene->setDrawnStatus(false);
+
+    fitInView(scene->itemsBoundingRect(), Qt::IgnoreAspectRatio);
+    QGraphicsView::resizeEvent(event);
+}
+
+void PlotView::mousePressEvent(QMouseEvent *event){
+    if(event->button() == Qt::RightButton ){
+        PlotScene *scene = (PlotScene *) this->scene();
+        scene->setDrawnStatus(false);
+
+        fitInView(scene->itemsBoundingRect(), Qt::IgnoreAspectRatio);
+    }
+    QGraphicsView::mousePressEvent(event);
 }
