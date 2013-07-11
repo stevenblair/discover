@@ -11,6 +11,7 @@ TEMPLATE = app
 
 #CONFIG += console
 QMAKE_CFLAGS_RELEASE	= -O3
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
 SOURCES += main.cpp\
     rapid61850/svEncodePacket.c \

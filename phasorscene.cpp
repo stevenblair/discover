@@ -173,7 +173,7 @@ void PhasorScene::draw() {
         qreal maxMag = qMax(getPhasorMag(stream, 0), qMax(getPhasorMag(stream, 1), getPhasorMag(stream, 2)));
         qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
 
-        onePuText->setPlainText(QString("%1 %2").arg(maxMag / 1000.0, 0, 'g', 3).arg(getUnits()));
+        onePuText->setPlainText(QString("%1 %2").arg(maxMag, 0, 'g', 3).arg(getUnits()));
         onePuText->show();
 
         //TODO: scale mags to maximum View size; always centre on (0,0)
@@ -268,7 +268,7 @@ CurrentPhasorScene::CurrentPhasorScene(QObject *parent) : PhasorScene(parent)
 qreal CurrentPhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getData()->Current[phase];
+        return stream->getData()->Current[phase] / 1000.0;
     }
     else {
         return PhasorScene::getPhasorMag(stream, phase);
@@ -299,7 +299,7 @@ QString CurrentPhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
     return QString("I%1: %2 %3 %4° %5")
             .arg(phaseNumberToText(stream, phase))
-            .arg(getPhasorMag(stream, phase), 0, 'f', 1)
+            .arg(getPhasorMag(stream, phase), 0, 'f', 3)
             .arg(QString::fromUtf8("\u2220"))
             .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
             .arg(getUnits());
@@ -315,7 +315,7 @@ VoltagePhasorScene::VoltagePhasorScene(QObject *parent) : PhasorScene(parent)
 qreal VoltagePhasorScene::getPhasorMag(StreamTableRow *stream, int phase)
 {
     if (stream != NULL) {
-        return stream->getData()->VoltageFundMagVoltsRMS3[phase];
+        return stream->getData()->VoltageFundMagVoltsRMS3[phase] / 1000.0;
     }
     else {
         return PhasorScene::getPhasorMag(stream, phase);
@@ -346,7 +346,7 @@ QString VoltagePhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
     return QString("V%1: %2 %3 %4° %5")
             .arg(phaseNumberToText(stream, phase))
-            .arg(getPhasorMag(stream, phase), 0, 'f', 1)
+            .arg(getPhasorMag(stream, phase), 0, 'f', 3)
             .arg(QString::fromUtf8("\u2220"))
             .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
             .arg(getUnits());

@@ -26,3 +26,10 @@ The voltage and current information is visualised using a Qt-based GUI. The prog
  - Power quality analysis
  - Improved zooming and panning of waveforms and frequency plots
  - Update SV stream status
+
+# Installation #
+
+ - Install [Qt Creator](http://qt-project.org/downloads) and a compiler. So far, the code has been tested with Qt Creator 4.8.0 and MinGW 3.18.
+ - Download or clone the code from https://github.com/stevenblair/discover.
+
+Alternatively, the pre-built Windows binary can be executed without Qt Creator. The WinPcap runtime must be installed (if you have Wireshark installed, this includes WinPcap) and the two DLLs must be in the same directory as the .exe file.
