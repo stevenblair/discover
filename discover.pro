@@ -58,7 +58,8 @@ SOURCES += main.cpp\
     StreamTableRow.cpp \
     TabViewWidget.cpp \
     SampleRate.cpp \
-    StreamTableModel.cpp
+    StreamTableModel.cpp \
+    FrequencyView.cpp
 
 HEADERS  += \
     rapid61850/svPacketData.h \
@@ -108,7 +109,8 @@ HEADERS  += \
     SampleRate.h \
     StreamTableModel.h \
     StreamTableRow.h \
-    TabviewWidget.h
+    TabviewWidget.h \
+    FrequencyView.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

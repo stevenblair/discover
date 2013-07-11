@@ -19,6 +19,9 @@
  */
 
 #include "FrequencyScene.h"
+#include <qmath.h>
+#include <QTextBlockFormat>
+#include <QTextCursor>
 
 #define VOLTAGE_LINE_ALPHA  255
 #define CURRENT_LINE_ALPHA  180
@@ -125,6 +128,15 @@ qreal FrequencyScene::getHarmonicMag(QPointer<StreamTableRow> stream, int harmon
     return 0.0;
 }
 
+qreal FrequencyScene::getHarmonicAng(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
+    }
+
+    return 0.0;
+}
+
 
 CurrentFrequencyScene::CurrentFrequencyScene(QObject *parent) : FrequencyScene(parent)
 {
@@ -152,6 +164,15 @@ qreal CurrentFrequencyScene::getHarmonicMag(QPointer<StreamTableRow> stream, int
 {
     if (stream != NULL) {
         return stream->getData()->CurrentAmplitudesRelativeToFundamental[harmonicIndex];
+    }
+
+    return 0.0;
+}
+
+qreal CurrentFrequencyScene::getHarmonicAng(QPointer<StreamTableRow> stream, int harmonicIndex)
+{
+    if (stream != NULL) {
+        return stream->getData()->CurrentPhasesRelativeToFundamental[harmonicIndex];
     }
 
     return 0.0;
@@ -225,9 +246,29 @@ void FrequencyScene::draw() {
 
             label->setPlainText(QString("%1 Hz").arg(x, 0, 'f', 1));
             label->setToolTip(QString("%1 Hz (%2 harmonic number)").arg(x, 0, 'f', 1).arg(n + 1, 0, 'f', 0));
-            //qDebug() << label->boundingRect().width() << label->boundingRect().right() - label->boundingRect().left();
-            // TODO: fix scale of offset
-            label->setPos(x - (label->boundingRect().width() / 1.5), 0.0);
+
+            // centre the text
+            QTextBlockFormat format;
+            format.setAlignment(Qt::AlignHCenter);
+            QTextCursor cursor = label->textCursor();
+            cursor.select(QTextCursor::Document);
+            cursor.mergeBlockFormat(format);
+            cursor.clearSelection();
+            label->setTextCursor(cursor);
+
+            // find width of text and set position
+            QPointF topLeft = this->views().first()->mapToScene(
+                    (int) label->boundingRect().topLeft().x(),
+                    (int) label->boundingRect().topLeft().y() );
+            QPointF bottomRight = this->views().first()->mapToScene(
+                    (int) label->boundingRect().bottomRight().x(),
+                    (int) label->boundingRect().bottomRight().y() );
+            double width = bottomRight.x() - topLeft.x();
+            QPoint offset;
+            offset.setX((int) (-width / 2.0));
+            offset.setY(0);
+            label->setPos(x + offset.x(), 0 + offset.y());
+
             if (!label->isVisible()) {
                 label->show();
             }
@@ -281,6 +322,7 @@ void FrequencyScene::draw() {
                 if (line != NULL) {
                     qreal x;
                     qreal y;
+                    qreal phaseDeg = 0.0;
                     qreal absoluteScale = getFundamental(stream, signal) / maxFundamental;
 
                     if (n == 0) {
@@ -297,6 +339,7 @@ void FrequencyScene::draw() {
 
                         x = getHarmonic(stream, harmonicIndex) * stream->getData()->PhaseFrequency[signal];
                         y = absoluteScale * getHarmonicMag(stream, harmonicIndex);//stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
+                        phaseDeg = 180.0 * getHarmonicAng(stream, harmonicIndex) / M_PI;
                     }
 
                     qreal x_adjusted = x;
@@ -310,7 +353,12 @@ void FrequencyScene::draw() {
 
                     if (y > DISPLAY_HARMONIC_CUTOFF) {
                         line->setLine(x_adjusted, 0.0, x_adjusted, -ONE_PU_HEIGHT * y);
-                        line->setToolTip(QString("Phase %1: %2 p.u. at %3 Hz").arg(FrequencyScene::PhaseLables[signal]).arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED).arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
+                        line->setToolTip(QString("Phase %1: %2 pu %3 %4°, at %5 Hz")
+                                         .arg(FrequencyScene::PhaseLables[signal])
+                                         .arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED)
+                                         .arg(QString::fromUtf8("\u2220"))
+                                         .arg(phaseDeg, 0, 'f', 0)
+                                         .arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
                         line->show();
                     }
                 }

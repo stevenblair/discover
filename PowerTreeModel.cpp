@@ -211,12 +211,12 @@ int PowerTreeModel::rowCount(const QModelIndex &parent) const
 //    return parentItem->childCount();
     QPointer<StreamTableRow> stream;
 
-    if (this->streamTableModel != NULL && this->modelIndex != NULL && this->modelIndex->isValid()) {
-        stream = this->streamTableModel->getRowFromIndex(this->modelIndex);
-    }
-    else {
-        return 0;
-    }
+//    if (this->streamTableModel != NULL && this->modelIndex != NULL && this->modelIndex->isValid()) {
+//        stream = this->streamTableModel->getRowFromIndex(this->modelIndex);
+//    }
+//    else {
+//        return 0;
+//    }
 
     if (stream.isNull()) {
         return 0;

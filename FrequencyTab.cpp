@@ -26,18 +26,12 @@ FrequencyTab::FrequencyTab(QWidget *parent) : TabViewWidget(parent)
     QVBoxLayout *verticalLayout = new QVBoxLayout(this);
 
     frequencyScene = new FrequencyScene();
-    frequencyView = new QGraphicsView();
+    frequencyView = new FrequencyView();
     frequencyView->setScene(frequencyScene);
-    frequencyView->setRenderHint(QPainter::Antialiasing);    // TODO: move into subclass?
-    frequencyView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    frequencyView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     currentFrequencyScene = new CurrentFrequencyScene();
-    currentFrequencyView = new QGraphicsView();
+    currentFrequencyView = new FrequencyView();
     currentFrequencyView->setScene(currentFrequencyScene);
-    currentFrequencyView->setRenderHint(QPainter::Antialiasing);    // TODO: move into subclass?
-    currentFrequencyView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    currentFrequencyView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     verticalLayout->addWidget(frequencyView, 0, 0);
     verticalLayout->addWidget(currentFrequencyView, 0, 0);

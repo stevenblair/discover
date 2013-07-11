@@ -307,6 +307,9 @@ void Stream::analyse()
     //qDebug() << "in analysis";
     //QElapsedTimer timer;
     //timer.start();
+    if (analysisInstance.getRTM() == NULL) {
+        return;
+    }
 
     setAnalysed(false);
     quint32 iterations = sampleRate.getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
