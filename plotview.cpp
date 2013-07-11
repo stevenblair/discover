@@ -139,7 +139,6 @@ void PlotView::wheelEvent(QWheelEvent* event) {
 
 void PlotView::resizeEvent(QResizeEvent *event)
 {
-    qDebug() << "resize";
     PlotScene *scene = (PlotScene *) this->scene();
     scene->setDrawnStatus(false);
 

@@ -19,6 +19,7 @@
  */
 
 #include "PhasorPlotTab.h"
+//#include <qgl.h>
 
 void PhasorPlotTab::update()
 {
@@ -59,6 +60,11 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
     voltagePlotView = new PlotView(this);
     currentPlotView->setScene(currentPlotScene);
     voltagePlotView->setScene(voltagePlotScene);
+
+//    currentPhasorView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+//    voltagePhasorView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+//    currentPlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+//    voltagePlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 
     graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
     graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);
