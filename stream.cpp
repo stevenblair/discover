@@ -349,7 +349,7 @@ void Stream::analyse()
             maxInstantaneousCurrent = timestepMaxCurrent;
         }
 
-        if ((taskCounter[1] == 0)) {
+        if (taskCounter[1] == 0) {
             if (eventFlags[1]) {
                 return;
             }
