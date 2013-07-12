@@ -79,6 +79,7 @@ private:
     virtual qreal getFundamental(QPointer<StreamTableRow> stream, int phase);
     virtual qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
     virtual qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
+    virtual qreal getHarmonicAng(QPointer<StreamTableRow> stream, int harmonicIndex);
 };
 
 
@@ -97,6 +98,7 @@ private:
     qreal getFundamental(QPointer<StreamTableRow> stream, int phase);
     qreal getHarmonic(QPointer<StreamTableRow> stream, int harmonicIndex);
     qreal getHarmonicMag(QPointer<StreamTableRow> stream, int harmonicIndex);
+    qreal getHarmonicAng(QPointer<StreamTableRow> stream, int harmonicIndex);
 };
 
 

@@ -20,7 +20,6 @@
  * some code from: http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming
  */
 
-
 #include "PlotView.h"
 #include "PlotScene.h"
 #include "PhasorScene.h"

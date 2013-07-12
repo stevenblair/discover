@@ -16,42 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * some code from: http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming
  */
 
-#ifndef FREQUENCYTAB_H
-#define FREQUENCYTAB_H
-
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QCheckBox>
-#include <QSignalMapper>
-#include "TabviewWidget.h"
-#include "FrequencyScene.h"
+#include <QGraphicsView>
 #include "FrequencyView.h"
+#include "FrequencyScene.h"
 
-class FrequencyTab : public TabViewWidget
+FrequencyView::FrequencyView(QObject *parent)
 {
-    Q_OBJECT
-public:
-    explicit FrequencyTab(QWidget *parent = 0);
-    void update();
-    void removeView();
+    this->setRenderHint(QPainter::Antialiasing);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+}
 
-    static const QString checkBoxLabels[8];
 
-signals:
-    void redrawFrequencyScene();
+void FrequencyView::resizeEvent(QResizeEvent *event)
+{
+    FrequencyScene *scene = (FrequencyScene *) this->scene();
 
-public slots:
-
-private:
-    QList<QGraphicsView*> views;
-
-    FrequencyScene *frequencyScene;
-    QGraphicsView *frequencyView;
-
-    CurrentFrequencyScene *currentFrequencyScene;
-    QGraphicsView *currentFrequencyView;
-};
-
-#endif // FREQUENCYTAB_H
+    fitInView(scene->itemsBoundingRect(), Qt::IgnoreAspectRatio);
+    QGraphicsView::resizeEvent(event);
+}

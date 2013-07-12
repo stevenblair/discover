@@ -24,7 +24,6 @@ The voltage and current information is visualised using a Qt-based GUI. The prog
  - Power flow analysis
  - Symmetrical component visualisation
  - Power quality analysis
- - Improved zooming and panning of waveforms and frequency plots
  - Update SV stream status
 
 # Installation #
