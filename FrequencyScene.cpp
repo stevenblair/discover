@@ -353,11 +353,12 @@ void FrequencyScene::draw() {
 
                     if (y > DISPLAY_HARMONIC_CUTOFF) {
                         line->setLine(x_adjusted, 0.0, x_adjusted, -ONE_PU_HEIGHT * y);
-                        line->setToolTip(QString("Phase %1: %2 pu %3 %4°, at %5 Hz")
+                        line->setToolTip(QString("Phase %1: %2 pu %3 %4%5, at %6 Hz")
                                          .arg(FrequencyScene::PhaseLables[signal])
                                          .arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED)
                                          .arg(QString::fromUtf8("\u2220"))
                                          .arg(phaseDeg, 0, 'f', 0)
+                                         .arg(QString::fromUtf8("\u00B0"))
                                          .arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
                         line->show();
                     }

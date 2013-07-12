@@ -2,7 +2,14 @@
 #define PHASORLINE_H
 
 #include <QtGui/QColor>
-#include <QtWidgets/QGraphicsItem>
+
+#include <qglobal.h>
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
+    #include <QtWidgets/QGraphicsItem>
+#else
+    #include <QtGui/QGraphicsItem>
+#endif
+
 #include <QPainter>
 #include "stream.h"
 #include "phasorscene.h"

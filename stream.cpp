@@ -24,11 +24,10 @@
 #include <qglobal.h>
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
     #include <QtWidgets/QApplication>
+    #include <QtConcurrent/QtConcurrent>
 #else
     #include <QtGui/QApplication>
 #endif
-
-#include <QtConcurrent/QtConcurrent>
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {

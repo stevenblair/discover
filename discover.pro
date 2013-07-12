@@ -115,15 +115,14 @@ HEADERS  += \
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
-#win32{
-#    INCLUDEPATH += C:/Users/Steven/discover/Include
-#    LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
-#    RC_FILE += icon.rc
-#}
-#macx{
-    INCLUDEPATH += "$$_PRO_FILE_PWD_/Include"
+INCLUDEPATH += "$$_PRO_FILE_PWD_/Include"
+
+win32{
+    LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lwpcap
+    RC_FILE += icon.rc
+}
+macx{
     LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lpcap
-#}
-win32:RC_FILE += icon.rc
+}
 
 FORMS +=

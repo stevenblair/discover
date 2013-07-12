@@ -37,16 +37,20 @@ PhasorScene::PhasorScene(QObject *parent) : QGraphicsScene(parent)
     outerPlotLine = this->addEllipse(-PHASOR_VIEW_MAX_PHASOR_SIZE / 2, -PHASOR_VIEW_MAX_PHASOR_SIZE / 2, PHASOR_VIEW_MAX_PHASOR_SIZE, PHASOR_VIEW_MAX_PHASOR_SIZE, plotLineCiclePen);
     horizontalPlotLine = QGraphicsScene::addLine(-PHASOR_VIEW_MAX_SIZE, 0.0, PHASOR_VIEW_MAX_SIZE, 0.0, plotLinePen);
     verticalPlotLine = QGraphicsScene::addLine(0.0, -PHASOR_VIEW_MAX_SIZE, 0.0, PHASOR_VIEW_MAX_SIZE, plotLinePen);
-    zeroDegText = QGraphicsScene::addText(QString("0°"));
+    zeroDegText = QGraphicsScene::addText(QString("0%1")
+                                          .arg(QString::fromUtf8("\u00B0")));
     zeroDegText->setPos(PHASOR_VIEW_MAX_PHASOR_SIZE, 0.0);
     zeroDegText->setDefaultTextColor(plotLineColor);
-    nintyDegText = QGraphicsScene::addText(QString("90°"));
+    nintyDegText = QGraphicsScene::addText(QString("90%1")
+                                           .arg(QString::fromUtf8("\u00B0")));
     nintyDegText->setPos(0.0, -PHASOR_VIEW_MAX_PHASOR_SIZE/* - twoSeventyDegText->boundingRect().height()*/);
     nintyDegText->setDefaultTextColor(plotLineColor);
-    oneEightyDegText = QGraphicsScene::addText(QString("180°"));
+    oneEightyDegText = QGraphicsScene::addText(QString("180%1")
+                                               .arg(QString::fromUtf8("\u00B0")));
     oneEightyDegText->setPos(-PHASOR_VIEW_MAX_PHASOR_SIZE/* - oneEightyDegText->boundingRect().width()*/, 0.0);
     oneEightyDegText->setDefaultTextColor(plotLineColor);
-    minusNinetyDegText = QGraphicsScene::addText(QString("-90°"));
+    minusNinetyDegText = QGraphicsScene::addText(QString("-90%1")
+                                                 .arg(QString::fromUtf8("\u00B0")));
     minusNinetyDegText->setPos(0.0, PHASOR_VIEW_MAX_PHASOR_SIZE);
     minusNinetyDegText->setDefaultTextColor(plotLineColor);
 
@@ -297,11 +301,12 @@ QString CurrentPhasorScene::getUnits()
 
 QString CurrentPhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
-    return QString("I%1: %2 %3 %4° %5")
+    return QString("I%1: %2 %3 %4%5 %6")
             .arg(phaseNumberToText(stream, phase))
             .arg(getPhasorMag(stream, phase), 0, 'f', 3)
             .arg(QString::fromUtf8("\u2220"))
             .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
+            .arg(QString::fromUtf8("\u00B0"))
             .arg(getUnits());
 }
 
@@ -344,10 +349,11 @@ QString VoltagePhasorScene::getUnits()
 
 QString VoltagePhasorScene::getToolTipText(StreamTableRow *stream, int phase)
 {
-    return QString("V%1: %2 %3 %4° %5")
+    return QString("V%1: %2 %3 %4%5 %6")
             .arg(phaseNumberToText(stream, phase))
             .arg(getPhasorMag(stream, phase), 0, 'f', 3)
             .arg(QString::fromUtf8("\u2220"))
             .arg(getPhasorAngle(stream, phase) * 180.0 / M_PI, 0, 'f', 1)
+            .arg(QString::fromUtf8("\u00B0"))
             .arg(getUnits());
 }
