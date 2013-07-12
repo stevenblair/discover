@@ -8,6 +8,7 @@ QT       += core gui
 
 TARGET = discover
 TEMPLATE = app
+QT += widgets
 
 #CONFIG += console
 QMAKE_CFLAGS_RELEASE	= -O3
@@ -112,10 +113,15 @@ HEADERS  += \
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
-# winpcap
-INCLUDEPATH += C:/Users/Steven/discover/Include
-LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
-
+#win32{
+#    INCLUDEPATH += C:/Users/Steven/discover/Include
+#    LIBS += -L C:/Users/Steven/discover/Lib -lwpcap
+#    RC_FILE += icon.rc
+#}
+#macx{
+    INCLUDEPATH += "$$_PRO_FILE_PWD_/Include"
+    LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lpcap
+#}
 win32:RC_FILE += icon.rc
 
 FORMS +=
