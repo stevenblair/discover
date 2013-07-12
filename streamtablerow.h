@@ -43,7 +43,7 @@ public:
 
     void setup(Stream *stream);
     void appendFreqPoint(quint32 i, qreal x, qreal y) {
-        if (i >= 0 && i < TOTAL_SIGNALS) {
+        if (i < TOTAL_SIGNALS) {
             this->freq[i].append(QPointF(x, y));
         }
     }
