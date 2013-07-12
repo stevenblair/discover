@@ -222,7 +222,7 @@ int PowerTreeModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    return 1;
+    return 1;   // TODO ok to simply return 1?
 }
 
 void PowerTreeModel::setupModelData(const QStringList &lines, TreeItem *parent)
