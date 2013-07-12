@@ -26,7 +26,7 @@
 #include <QGraphicsPathItem>
 #include "StreamTableModel.h"
 
-#define ONE_PU_HEIGHT               200
+#define ONE_PU_HEIGHT               50
 #define DISPLAY_HARMONIC_CUTOFF     (1.0e-4)
 
 
