@@ -2,7 +2,7 @@
 #define PHASORLINE_H
 
 #include <QtGui/QColor>
-#include <QtGui/QGraphicsItem>
+#include <QtWidgets/QGraphicsItem>
 #include <QPainter>
 #include "stream.h"
 #include "phasorscene.h"

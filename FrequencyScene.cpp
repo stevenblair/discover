@@ -245,7 +245,7 @@ void FrequencyScene::draw() {
             xLabels.append(label);
 
             label->setPlainText(QString("%1 Hz").arg(x, 0, 'f', 1));
-            label->setToolTip(QString("%1 Hz (%2 harmonic number)").arg(x, 0, 'f', 1).arg(n + 1, 0, 'f', 0));
+            label->setToolTip(QString("%1 Hz (%2 harmonic number)").arg(x, 0, 'f', 1).arg((qreal) n + 1, 0, 'f', 0));
 
             // centre the text
             QTextBlockFormat format;

@@ -24,10 +24,12 @@
 #include <QThread>
 #include <QTimer>
 
-#define WPCAP
-#define HAVE_REMOTE
+#ifdef _WIN32
+    #define WPCAP
+    #define HAVE_REMOTE
+    #include <windows.h>
+#endif
 #include <pcap.h>
-#include <windows.h>
 extern "C" {
 #include "rapid61850/iec61850.h"
 }

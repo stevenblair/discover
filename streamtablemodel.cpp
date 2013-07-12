@@ -201,8 +201,8 @@ void StreamTableModel::setStreamTableRow(StreamTableRow *row)
         // only emit dataChanged() for changed row
         int rowIndex = getIndexFromKey(row->getSvID());
         if (rowIndex >= 0) {
-            QModelIndex top = createIndex(rowIndex, 0, 0);
-            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1, 0);
+            QModelIndex top = createIndex(rowIndex, 0);
+            QModelIndex bottom = createIndex(rowIndex, STREAM_TABLE_NUMBER_OF_COLUMNS - 1);
 
             emit dataChanged(top, bottom);
         }
