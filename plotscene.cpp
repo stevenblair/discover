@@ -42,6 +42,8 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(QColor(lineColors[i]));
+        //pen[i].setWidthF(0.3);
+        pen[i].setCosmetic(true);
         plot[i] = QGraphicsScene::addPath(path[i], pen[i]);
         plot[i]->hide();
     }
