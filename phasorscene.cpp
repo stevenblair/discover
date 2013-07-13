@@ -61,7 +61,7 @@ PhasorScene::PhasorScene(QObject *parent) : QGraphicsScene(parent)
 
     QFont font;
     font.setBold(true);
-    font.setPointSize(9);
+    //font.setPointSize(9);
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);

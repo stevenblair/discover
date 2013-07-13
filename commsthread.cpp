@@ -121,14 +121,12 @@ void CommsThread::findNetworkInterfaces() {
     }
 #endif
 
-//    /* Retrieve the device list from the local machine */
-//    if (pcap_findalldevs_ex((char *) PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &list_if, CommsThread::errbuf) == -1) {
-//        fprintf(stderr, "Error in pcap_findalldevs_ex: %s\n", CommsThread::errbuf);
-//        exit(1);
-//    }
-
     while (list_if != NULL) {
+#ifdef _WIN32
         emit addInterface(interfaceCount, QString(list_if->description));
+#else
+        emit addInterface(interfaceCount, QString(list_if->name));
+#endif
         list_if = list_if->next;
         interfaceCount++;
     }
@@ -152,12 +150,6 @@ pcap_t *CommsThread::initWinpcap(int interfaceNumber) {
         exit(1);
     }
 #endif
-
-//    /* Retrieve the device list from the local machine */
-//    if (pcap_findalldevs_ex((char *) PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &alldevs, CommsThread::errbuf) == -1) {
-//        fprintf(stderr, "Error in pcap_findalldevs_ex: %s\n", CommsThread::errbuf);
-//        exit(1);
-//    }
 
     // list all interfaces
     list_if = alldevs;
