@@ -41,9 +41,6 @@ public:
     void streamRemoved();
 
 public slots:
-    //void streamSelectionChanged(Stream *stream);
-    //void streamChanged();
-    //void streamRemoved();
 
 protected:
     //Stream *stream;
@@ -87,7 +84,6 @@ public:
     CurrentPhasorScene(QObject *parent = 0);
 
 public slots:
-    //void streamSelectionChanged(QString svID);
 
 protected:
 
@@ -112,7 +108,6 @@ public:
     VoltagePhasorScene(QObject *parent = 0);
 
 public slots:
-    //void streamSelectionChanged(QString svID);
 
 protected:
 

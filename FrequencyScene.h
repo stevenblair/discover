@@ -39,18 +39,6 @@ public:
     explicit FrequencyScene(QObject *parent = 0);
     void streamTableModelSelectionChanged(StreamTableModel *streamTableModel, QPersistentModelIndex *index);
     void streamRemoved();
-    void setWaveformState(int waveform, bool newState) {
-        if (waveform >= 0 && waveform < 3) {
-            activeWaveform[waveform] = newState;
-            draw();
-        }
-    }
-    bool getWaveformState(int waveform) {
-        if (waveform >= 0 && waveform < 3) {
-            return activeWaveform[waveform];
-        }
-        return false;
-    }
 
     static const QString PhaseLables[3];
 
@@ -63,7 +51,6 @@ public slots:
 protected:
     StreamTableModel *streamTableModel;
     QPersistentModelIndex *index;
-    bool activeWaveform[3];
 
 private:
     void draw();

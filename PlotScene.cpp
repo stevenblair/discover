@@ -150,38 +150,6 @@ QRectF PlotScene::sceneRect() const
     return this->itemsBoundingRect();
 }
 
-//void PlotScene::streamSelectionChanged(Stream *stream)
-//{
-//    if (this->stream != NULL) {
-//        //disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));  // TODO: enable this?
-//        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-//    }
-
-//    this->stream = stream;
-
-//    if (this->stream != NULL) {
-//        drawnOnce = false;
-
-//        // pre-initialise paths with the correct number of elements
-//        quint32 iterations = stream->getSampleRate()->getSamplesPerCycle() * NUMBER_OF_CYCLES_TO_ANALYSE;
-//        for (int i = 0; i < 3; i++) {
-//            if (path[i].length() <= 1) {
-//                for (quint32 t = 0; t < iterations; t++) {
-//                    path[i].lineTo(0.001 * t, 0.001 * t);
-//                }
-//            }
-//        }
-
-//        //connect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved())); // TODO: just use streamSelectionChanged(Stream *stream) (i.e., this function) to handle deleted Stream?
-//        connect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-//        draw();
-//    }
-//}
-
-//void PlotScene::streamChanged()
-//{
-//    draw();
-//}
 
 Stream::PowerSystemQuantity PlotScene::getPowerSystemQuantity()
 {
@@ -283,9 +251,6 @@ void PlotScene::draw() {
 
 
 
-
-
-
 VoltagePlotScene::VoltagePlotScene(QObject *parent) : PlotScene(parent)
 {
     yUnits = QString("kV");
@@ -295,9 +260,6 @@ Stream::PowerSystemQuantity VoltagePlotScene::getPowerSystemQuantity()
 {
     return Stream::Voltage;
 }
-
-
-
 
 
 

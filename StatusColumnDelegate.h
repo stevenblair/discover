@@ -73,7 +73,7 @@ protected:
         painter->setRenderHint(QPainter::Antialiasing);
         painter->drawEllipse(rect.center(), STATUS_ICON_RADIUS, STATUS_ICON_RADIUS);
 
-        // TODO: could use this (below) to add more than one line or text per cell
+        // TODO could use this (below) to add more than one line or text per cell
         // draw 2 lines of text
         //painter->drawText(QRect(rect.left(), rect.top(), rect.width(), rect.height()/2), opt.displayAlignment, line0);
         //painter->drawText(QRect(rect.left(), rect.top()+rect.height()/2, rect.width(), rect.height()/2), opt.displayAlignment, line1);

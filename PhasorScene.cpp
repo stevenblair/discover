@@ -61,7 +61,6 @@ PhasorScene::PhasorScene(QObject *parent) : QGraphicsScene(parent)
 
     QFont font;
     font.setBold(true);
-    //font.setPointSize(9);
 
     for (int i = 0; i < 3; i++) {
         pen[i] = QPen(lineColors[i]);
@@ -86,58 +85,6 @@ void PhasorScene::streamTableModelSelectionChanged(StreamTableModel *streamTable
 
     draw();
 }
-
-//void PhasorScene::streamSelectionChanged(Stream *stream)
-//{
-//    if (this->stream != NULL) {
-//        disconnect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
-//        disconnect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-//    }
-
-//    this->stream = stream;
-
-//    if (this->stream != NULL) {
-//        connect(this->stream, SIGNAL(removeView()), this, SLOT(streamRemoved()));
-//        connect(this->stream, SIGNAL(updateView()), this, SLOT(streamChanged()));
-//        draw();
-//        //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-//    }
-
-////    if (this->stream != NULL) {
-////        // TODO: connect to stream for updates; first disconnect any updates from an old stream
-
-////        qreal maxMag = qMax(getPhasorMag(0), qMax(getPhasorMag(1), getPhasorMag(2)));
-////        qreal scaleFactor = ((qreal) PHASOR_VIEW_MAX_PHASOR_SIZE) / maxMag;
-
-////        //TODO: scale mags to maximum View size; always centre on (0,0)
-////        for (int i = 0; i < 3; i++) {
-////            qreal mag = scaleFactor * getPhasorMag(i);
-////            qreal angle = getPhasorAngle(i);
-
-////            //qDebug() << getPhasorMag(i) << maxMag << scaleFactor << mag << "coords:" << 0.0 << 0.0 << mag * cos(angle) << -1.0 * mag * sin(angle);
-
-////            phaseLine[i]->setLine(0.0, 0.0, mag * cos(angle), -1.0 * mag * sin(angle));
-////        }
-
-////        //((QGraphicsView *) this->views().first())->update();
-////        //((QGraphicsView *) this->views().first())->fitInView(this->itemsBoundingRect(), Qt::KeepAspectRatio);
-////        //((QGraphicsView *) this->views().first())->scale(0.5, 0.5);
-////        //((QGraphicsView *) this->views().first())->centerOn(0.0, 0.0);
-////        //((QGraphicsView *) this->views().first())->fitInView(QRect(0, 0, 300, 300));
-
-////        /*const QRectF rect = QRectF(-1 * PHASOR_VIEW_MAX_SIZE - 5, -1 * PHASOR_VIEW_MAX_SIZE - 5, PHASOR_VIEW_WIDTH, PHASOR_VIEW_WIDTH);
-////        ((QGraphicsView *) this->views().first())->fitInView(rect, Qt::KeepAspectRatio);
-////        ((QGraphicsView *) this->views().first())->setSceneRect(rect);
-
-////        invalidate(this->itemsBoundingRect());*/
-//    //    }
-//}
-
-//void PhasorScene::streamChanged()
-//{
-//    draw();
-//    //update(QRect(-PHASOR_VIEW_MAX_PHASOR_SIZE, -PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE, 2 * PHASOR_VIEW_MAX_PHASOR_SIZE));
-//}
 
 void PhasorScene::streamRemoved()
 {
@@ -212,13 +159,6 @@ void PhasorScene::draw() {
             phaseLabel[i]->setPos(labelPoint);
             phaseLabel[i]->show();
         }
-
-        // TODO: need this?
-//        PhasorView *view = ((PhasorView *)this->views().first());
-//        /*QMatrix matrix;
-//        matrix.scale(1.0, 1.0);
-//        view->setMatrix(matrix);*/
-//        view->fitInView(sceneRect(), Qt::IgnoreAspectRatio);
     }
 }
 
@@ -261,7 +201,6 @@ QString PhasorScene::phaseNumberToText(StreamTableRow *stream, int phase) {
     }
     return QString("");
 }
-
 
 
 
@@ -309,7 +248,6 @@ QString CurrentPhasorScene::getToolTipText(StreamTableRow *stream, int phase)
             .arg(QString::fromUtf8("\u00B0"))
             .arg(getUnits());
 }
-
 
 
 

@@ -62,7 +62,6 @@ void CommsThread::setNetworkInterface(int value) {
         }
 
         streamManager.removeAll();
-        //emit networkInterfaceStopped();
 
         if (interfaceTimeout == NULL) {
             interfaceTimeout = new QTimer(this);
@@ -79,7 +78,7 @@ void CommsThread::setNetworkInterface(int value) {
             interfaceTimeout->start();
         }
 
-        // TODO: still not correct: "left over" data in table
+        // TODO still not correct: "left over" data in table
         //QTimer::singleShot(NETWORK_INTERFACE_OFF_DELAY, this, SLOT(timerDone()));   // allow time for network interface to stop
     }
 }

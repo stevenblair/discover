@@ -22,8 +22,8 @@
 #define SAMPLERATE_H
 
 #include <QGlobalStatic>
-#include "Sample.h"
 #include <QtCore/qmath.h>
+#include "Sample.h"
 
 #define SAMPLES_50HZ_80_PER_CYCLE   4000
 #define SAMPLES_60HZ_80_PER_CYCLE   4800

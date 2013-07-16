@@ -99,7 +99,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     commsThread.getStreamManager()->setTableModelPtr(tableModel);
 
     connect(interfaceComboBox, SIGNAL(currentIndexChanged(int)), &commsThread, SLOT(setNetworkInterface(int)));
-    //connect(interfaceComboBox, SIGNAL(currentIndexChanged(int)), tableModel, SLOT(networkInterfaceChanged()));
     connect(&commsThread, SIGNAL(networkInterfaceStopped()), tableModel, SLOT(networkInterfaceStopped()));
     connect(tableModel, SIGNAL(streamTableEmpty()), &commsThread, SLOT(startNetworkInterface()));
 }

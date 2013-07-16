@@ -31,7 +31,6 @@ class Stream;
 #define SIGNIFICANT_DIGITS_DIPLAYED      3
 #define SIGNIFICANT_DIGITS_DIPLAYED_FREQ 4
 #define SIGNIFICANT_DIGITS_DIPLAYED_THD  2
-//#define MAX_SAMPLES                 (256 * NUMBER_OF_CYCLES_TO_ANALYSE)
 
 class StreamTableRow : public QObject
 {
@@ -148,16 +147,6 @@ public:
         return &measure_Y;
     }
 
-//    qreal getMaxInstantaneous(Stream::PowerSystemQuantity powerSystemQuantity) {
-//        if (powerSystemQuantity == Stream::Voltage) {
-//            return maxInstantaneousVoltage;
-//        }
-//        else if (powerSystemQuantity == Stream::Current) {
-//            return maxInstantaneousCurrent;
-//        }
-//        return 0.0;
-//    }
-
     qreal getMaxInstantaneous(int powerSystemQuantity) {
         if (powerSystemQuantity == 0) {
             return maxInstantaneousVoltage;
@@ -191,7 +180,6 @@ private:
     bool analysed;
     ExternalOutputs_measure measure_Y;
     QPainterPath paths[TOTAL_SIGNALS];
-    //qreal sampledData[8][MAX_SAMPLES];
     QList<Sample> sampledData;
     QList<QPointF> freq[TOTAL_SIGNALS];
     qreal maxInstantaneousVoltage;

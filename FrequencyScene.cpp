@@ -18,14 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "FrequencyScene.h"
 #include <qmath.h>
 #include <QTextBlockFormat>
 #include <QTextCursor>
+#include "FrequencyScene.h"
 
 #define VOLTAGE_LINE_ALPHA  255
 #define CURRENT_LINE_ALPHA  180
-#define MIN_Y_VALUE         0.0//1       // -log10(0.1)
+#define MIN_Y_VALUE         0.0/*1       // -log10(0.1)*/
 #define LINE_WIDTH          8
 #define LINE_SPACING        1.0
 
@@ -45,15 +45,6 @@ FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
     plotLinePenDashed.setStyle(Qt::DashLine);
 
     for (int i = 0; i < 3; i++) {
-        activeWaveform[i] = true;
-//        // enable only the first waveform by default
-//        if (i == 0) {
-//            activeWaveform[i] = true;
-//        }
-//        else {
-//            activeWaveform[i] = false;
-//        }
-
         pen[i] = QPen(waveformColors[i]);
         pen[i].setCapStyle(Qt::FlatCap);
         pen[i].setWidth(LINE_WIDTH);
@@ -61,8 +52,6 @@ FrequencyScene::FrequencyScene(QObject *parent) : QGraphicsScene(parent)
 
     QPen plotLinePen = QPen(plotLineColor);
     plotLinePen.setCosmetic(true);
-    //plotLinePen.setWidth(5);
-    //plotLinePen.setCapStyle(Qt::RoundCap);
 
     horizontalPlotLine = QGraphicsScene::addLine(0.0, 0.0, 0.0, 0.0, plotLinePen);
     //horizontalPlotLine->setFlag(QGraphicsItem::ItemIgnoresTransformations);
@@ -275,7 +264,7 @@ void FrequencyScene::draw() {
         }
     }
 
-    //TODO: only delete existing lines if index has changed
+    //TODO only delete existing lines if index has changed
     for (int i = 0; i < 3; i++) {
         if (!harmonicLine[i].isEmpty()) {
             QListIterator<QGraphicsLineItem *> lines (harmonicLine[i]);
@@ -315,84 +304,54 @@ void FrequencyScene::draw() {
     qreal maxFundamental = qMax(getFundamental(stream, 0), qMax(getFundamental(stream, 1), getFundamental(stream, 2)));
 
     for (int signal = 0; signal < 3; signal++) {
-        if (this->getWaveformState(signal) == true) {
-            for (quint32 n = 0; n < totalHarmonics; n++) {
-                QGraphicsLineItem *line = harmonicLine[signal].at(n);
+        for (quint32 n = 0; n < totalHarmonics; n++) {
+            QGraphicsLineItem *line = harmonicLine[signal].at(n);
 
-                if (line != NULL) {
-                    qreal x;
-                    qreal y;
-                    qreal phaseDeg = 0.0;
-                    qreal absoluteScale = getFundamental(stream, signal) / maxFundamental;
+            if (line != NULL) {
+                qreal x;
+                qreal y;
+                qreal phaseDeg = 0.0;
+                qreal absoluteScale = getFundamental(stream, signal) / maxFundamental;
 
-                    if (n == 0) {
-                        // fundamental, or 1st harmonic
-                        x = 1.0 * stream->getData()->PhaseFrequency[signal];
-                        //y = stream->getData()->VoltageFundMagVoltsRMS3[signal] * qSqrt(2.0) / stream->getMaxInstantaneous(Stream::Voltage); // TODO: get max magnitude from model
+                if (n == 0) {
+                    // fundamental, or 1st harmonic
+                    x = 1.0 * stream->getData()->PhaseFrequency[signal];
 
-                        // set fundamental relative to 1 pu reference
-                        y = absoluteScale;
-                    }
-                    else {
-                        // all other harmonics
-                        int harmonicIndex = (signal * (totalHarmonics - 1)) + n - 1;
-
-                        x = getHarmonic(stream, harmonicIndex) * stream->getData()->PhaseFrequency[signal];
-                        y = absoluteScale * getHarmonicMag(stream, harmonicIndex);//stream->getData()->VoltageAmplitudesRelativeToFundamental[harmonicIndex];
-                        phaseDeg = 180.0 * getHarmonicAng(stream, harmonicIndex) / M_PI;
-                    }
-
-                    qreal x_adjusted = x;
-
-                    if (signal == 0) {
-                        x_adjusted -= LINE_WIDTH * LINE_SPACING;
-                    }
-                    else if (signal == 2) {
-                        x_adjusted += LINE_WIDTH * LINE_SPACING;
-                    }
-
-                    if (y > DISPLAY_HARMONIC_CUTOFF) {
-                        line->setLine(x_adjusted, 0.0, x_adjusted, -ONE_PU_HEIGHT * y);
-                        line->setToolTip(QString("Phase %1: %2 pu %3 %4%5, at %6 Hz")
-                                         .arg(FrequencyScene::PhaseLables[signal])
-                                         .arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED)
-                                         .arg(QString::fromUtf8("\u2220"))
-                                         .arg(phaseDeg, 0, 'f', 0)
-                                         .arg(QString::fromUtf8("\u00B0"))
-                                         .arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
-                        line->show();
-                    }
+                    // set fundamental relative to 1 pu reference
+                    y = absoluteScale;
                 }
-            }
-        }
-        else {
-            for (quint32 n = 0; n < totalHarmonics; n++) {
-                QGraphicsLineItem *line = harmonicLine[signal].at(n);
+                else {
+                    // all other harmonics
+                    int harmonicIndex = (signal * (totalHarmonics - 1)) + n - 1;
 
-                if (line != NULL) {
-                    line->hide();
+                    x = getHarmonic(stream, harmonicIndex) * stream->getData()->PhaseFrequency[signal];
+                    y = absoluteScale * getHarmonicMag(stream, harmonicIndex);
+                    phaseDeg = 180.0 * getHarmonicAng(stream, harmonicIndex) / M_PI;
+                }
+
+                qreal x_adjusted = x;
+
+                if (signal == 0) {
+                    x_adjusted -= LINE_WIDTH * LINE_SPACING;
+                }
+                else if (signal == 2) {
+                    x_adjusted += LINE_WIDTH * LINE_SPACING;
+                }
+
+                if (y > DISPLAY_HARMONIC_CUTOFF) {
+                    line->setLine(x_adjusted, 0.0, x_adjusted, -ONE_PU_HEIGHT * y);
+                    line->setToolTip(QString("Phase %1: %2 pu %3 %4%5, at %6 Hz")
+                                     .arg(FrequencyScene::PhaseLables[signal])
+                                     .arg(y, 0, 'f', SIGNIFICANT_DIGITS_DIPLAYED)
+                                     .arg(QString::fromUtf8("\u2220"))
+                                     .arg(phaseDeg, 0, 'f', 0)
+                                     .arg(QString::fromUtf8("\u00B0"))
+                                     .arg(x, 0, 'g', SIGNIFICANT_DIGITS_DIPLAYED_FREQ));
+                    line->show();
                 }
             }
         }
     }
 
     view->fitInView(this->sceneRect(), Qt::IgnoreAspectRatio);
-
-
-    for (quint32 n = 0; n < totalHarmonics; n++) {
-//        QGraphicsLineItem *line = harmonicLine[0].at(n);
-
-//        if (line != NULL) {
-//            QFont font = QFont();
-//            font.setPixelSize(10);
-//            QGraphicsTextItem *text = new QGraphicsTextItem;
-//            text->setFont(font);
-//            text->setPos(line->x(), 0.02);
-//            text->setPlainText(QString("%1").arg(-line->y()));
-//            text->setFlag(QGraphicsItem::ItemIgnoresTransformations);
-//            this->addItem(text);
-//        }
-    }
-
-    //qDebug() << stream->getFreqPoint(0, stream->getNumberOfFreqPoints(0) - 1).x();
 }

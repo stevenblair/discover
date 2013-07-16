@@ -63,8 +63,6 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
     Stream *getPhasorData(QString svID);
-    //void addStreamData(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 *dataset, quint16 smpCnt); // TODO: make private
-
     StreamTableRow *getRowFromIndex(QPersistentModelIndex *index);
 
 signals:
@@ -74,16 +72,11 @@ signals:
     void setGraphicsViewRow(StreamTableRow *row);
     
 public slots:
-    //void addStreamDataSlot(QString svID, QString sourceMAC, LE_IED_MUnn_PhsMeas1 dataset, quint16 smpCnt);
-    //void sampleRateDetermined(QString svID);
-    //void updateAll(bool resizeColumns);
-    //void getSelectedSvID(const QItemSelection &selected, const QItemSelection &prev);
     void networkInterfaceStopped();
     void setStreamTableRow(StreamTableRow *row);
 
 private:
     QMap<QString, QPointer<StreamTableRow> > rows;
-    //QMap<QString, Stream*> streams;
     bool blockUpdates;
 
     int getIndexFromKey(QString key);

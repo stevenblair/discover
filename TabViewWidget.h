@@ -52,7 +52,6 @@ public:
 signals:
     
 public slots:
-    //void setRow(StreamTableRow *row);
 
 protected:
 

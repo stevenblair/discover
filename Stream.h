@@ -87,7 +87,7 @@ private:
     void updateStreamTableModel();
     void scheduleAnalysis();
 
-    //TODO: add QPainterPath which is explicitly shared with UI thread?
+    //TODO add QPainterPath which is explicitly shared with UI thread?
 
     bool disabled;
     bool capturing;

@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ * some code from: http://www.qtcentre.org/wiki/index.php?title=QGraphicsView:_Smooth_Panning_and_Zooming
  */
 
 #ifndef PLOTVIEW_H
@@ -38,22 +40,19 @@ signals:
 public slots:
 
 protected:
-    //Holds the current centerpoint for the view, used for panning and zooming
+    // Holds the current centerpoint for the view, used for panning and zooming
     QPointF CurrentCenterPoint;
 
-    //From panning the view
+    // From panning the view
     QPoint LastPanPoint;
 
-    //Set the current centerpoint in the
+    // Set the current centerpoint in the
     void SetCenter(const QPointF& centerPoint);
     QPointF GetCenter() { return CurrentCenterPoint; }
 
-    //Take over the interaction
+    // Take over the interaction
     virtual void mousePressEvent(QMouseEvent* event);
-    //virtual void mouseReleaseEvent(QMouseEvent* event);
-    //virtual void mouseMoveEvent(QMouseEvent* event);
     virtual void wheelEvent(QWheelEvent* event);
-    //virtual void resizeEvent(QResizeEvent* event);
     virtual void resizeEvent(QResizeEvent* event);
     
 };

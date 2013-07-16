@@ -46,8 +46,6 @@ public:
 signals:
 
 public slots:
-    //void streamSelectionChanged(Stream *stream);
-    //void streamChanged();
 
 protected:
     virtual Stream::PowerSystemQuantity getPowerSystemQuantity();
@@ -60,12 +58,7 @@ protected:
     StreamTableModel *streamTableModel;
     QPersistentModelIndex index;
 
-    //QRectF itemsBoundingRectWithoutText();
-    //QRectF itemsBoundingRect() const;
-
 private:
-    //Stream *stream;
-
     QPen pen[3];
     QPen plotLinePen;
     QPen plotLinePenDashed;
@@ -86,8 +79,6 @@ private:
 
 
 
-
-
 class VoltagePlotScene : public PlotScene
 {
     Q_OBJECT
@@ -102,8 +93,6 @@ protected:
     Stream::PowerSystemQuantity getPowerSystemQuantity();
 
 };
-
-
 
 
 class CurrentPlotScene : public PlotScene
