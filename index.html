@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>discover by stevenblair</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>discover</h1>
+        <p>A real-time monitoring and analysis tool for IEC 61850-9-2 LE Sampled Values</p>
+
+        <p class="view"><a href="https://github.com/stevenblair/discover">View the Project on GitHub <small>stevenblair/discover</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/stevenblair/discover/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/stevenblair/discover/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/stevenblair/discover">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="discover---a-real-time-monitoring-and-analysis-tool-for-iec-61850-9-2-le-sampled-values" class="anchor" href="#discover---a-real-time-monitoring-and-analysis-tool-for-iec-61850-9-2-le-sampled-values"><span class="octicon octicon-link"></span></a>discover - a real-time monitoring and analysis tool for IEC 61850-9-2 LE Sampled Values</h1>
+
+<p><em>The code is a work in progress. Several features are missing.</em></p>
+
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>This program uses the open source <a href="https://github.com/stevenblair/rapid61850">rapid61850</a> project to listen to Sampled Value streams in real-time. Sampled Value data are put through the measurement and analysis code by <a href="http://personal.strath.ac.uk/andrew.j.roscoe/">Andrew Roscoe</a>, described in <a href="http://dx.doi.org/10.1049/iet-gtd.2008.0517">this paper</a>. This provides detailed information on the voltage and current fundamental magnitude and phase, harmonics, power flow, etc. Frequency analysis is done using the resampled DFT method described in <a href="http://dx.doi.org/10.1049/cp.2011.0140">this paper</a>, which is very efficient and offers low spectral leakage.</p>
+
+<p>The voltage and current information is visualised using a Qt-based GUI. The program is designed to be lightweight, efficient, open source, and cross-platform.</p>
+
+<h2>
+<a name="screenshots" class="anchor" href="#screenshots"><span class="octicon octicon-link"></span></a>Screenshots</h2>
+
+<p><img src="http://personal.strath.ac.uk/steven.m.blair/discover-sv-61850-screenshot-2.png"><img src="http://personal.strath.ac.uk/steven.m.blair/discover-windows-dft.png"><img src="http://personal.strath.ac.uk/steven.m.blair/discover-osx.png"><img src="http://personal.strath.ac.uk/steven.m.blair/discover-ubuntu-gtk.png"></p>
+
+<h2>
+<a name="implemented-features" class="anchor" href="#implemented-features"><span class="octicon octicon-link"></span></a>Implemented features</h2>
+
+<ul>
+<li>Capture multiple SV streams</li>
+<li>Supports 50 or 60 Hz nominal frequency, and 80 or 256 samples per cycle</li>
+<li>Performs detailed analysis on voltage and current</li>
+<li>Displays a summary of voltage, current, and power</li>
+<li>Plots of fundamental voltage and current phasors</li>
+<li>Plots of voltage and current waveforms</li>
+<li>Supports multiple network interfaces</li>
+<li>Resampled DFT for frequency analysis - efficient, and with low spectral leakage</li>
+<li>Runs on Windows, OS X, and Linux</li>
+</ul><h2>
+<a name="features-to-be-added" class="anchor" href="#features-to-be-added"><span class="octicon octicon-link"></span></a>Features to be added</h2>
+
+<ul>
+<li>Power flow analysis</li>
+<li>Symmetrical component visualisation</li>
+<li>Power quality analysis</li>
+<li>Update SV stream status</li>
+</ul><h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<ul>
+<li>Install <a href="http://qt-project.org/downloads">Qt Creator</a> and a compiler for your platform. So far, the code has been tested with Qt Creator 4.8.0 (or 4.8.1) on Windows 7 64-bit, Mac OS X Mountain Lion, and Ubuntu 12.04 64-bit.</li>
+<li>Download or clone the code from <a href="https://github.com/stevenblair/discover">https://github.com/stevenblair/discover</a>.</li>
+</ul><p>Alternatively, the pre-built Windows binary, in the <code>/release</code> directory, can be executed without Qt Creator. The WinPcap runtime must be installed (if you have Wireshark installed, this includes WinPcap) and the two DLLs must be in the same directory as the .exe file.</p>
+
+<p>The program can be tested using the <a href="https://github.com/stevenblair/rapid61850">rapid61850</a> project. Point the code generator to  the <code>LE.scd</code> SCD file in the repo. Then build and run the <code>main_SV_LE.c</code> example file.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/stevenblair">stevenblair</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
