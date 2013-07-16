@@ -29,7 +29,7 @@ class StreamTableRow;
 #include <QGraphicsScene>
 #include <QPainter>
 #include "Sample.h"
-#include "Samplerate.h"
+#include "SampleRate.h"
 extern "C" {
 #include "rapid61850/iec61850.h"
 }

@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QTableView>
-#include "TabviewWidget.h"
+#include "TabViewWidget.h"
 #include "PowerTreeModel.h"
 
 class PowerTab : public TabViewWidget

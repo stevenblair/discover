@@ -11,8 +11,8 @@
 #endif
 
 #include <QPainter>
-#include "stream.h"
-#include "phasorscene.h"
+#include "Stream.h"
+#include "PhasorScene.h"
 
 class PhasorLine : public QGraphicsItem
 {

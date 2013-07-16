@@ -117,11 +117,14 @@ HEADERS  += \
 
 INCLUDEPATH += "$$_PRO_FILE_PWD_/Include"
 
-win32{
+win32 {
     LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lwpcap
     RC_FILE += icon.rc
 }
-macx{
+macx {
+    LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lpcap
+}
+unix {
     LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lpcap
 }
 

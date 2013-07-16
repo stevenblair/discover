@@ -25,7 +25,7 @@
 #include <QVBoxLayout>
 #include <QCheckBox>
 #include <QSignalMapper>
-#include "TabviewWidget.h"
+#include "TabViewWidget.h"
 #include "FrequencyScene.h"
 #include "FrequencyView.h"
 
