@@ -1,7 +1,7 @@
 /**
  * discover - a real-time monitoring and analysis tool for IEC 61850-9-2LE Sampled Values
  *
- * Copyright (c) 2012 Steven Blair
+ * Copyright (c) 2013 Steven Blair
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
