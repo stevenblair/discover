@@ -11,6 +11,7 @@ The voltage and current information is visualised using a Qt-based GUI. The prog
 ## Screenshots ##
 
 <img src="http://personal.strath.ac.uk/steven.m.blair/discover-sv-61850-screenshot-2.png" />
+<img src="http://personal.strath.ac.uk/steven.m.blair/discover-windows-dft.png" />
 <img src="http://personal.strath.ac.uk/steven.m.blair/discover-osx.png" />
 <img src="http://personal.strath.ac.uk/steven.m.blair/discover-ubuntu-gtk.png" />
 
