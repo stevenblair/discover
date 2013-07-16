@@ -8,6 +8,12 @@ This program uses the open source [rapid61850](https://github.com/stevenblair/ra
 
 The voltage and current information is visualised using a Qt-based GUI. The program is designed to be lightweight, efficient, open source, and cross-platform.
 
+## Screenshots ##
+
+<img src="http://personal.strath.ac.uk/steven.m.blair/discover-sv-61850-screenshot-2.png" />
+<img src="http://personal.strath.ac.uk/steven.m.blair/discover-osx.png" />
+<img src="http://personal.strath.ac.uk/steven.m.blair/discover-ubuntu-gtk.png" />
+
 ## Implemented features ##
 
  - Capture multiple SV streams
