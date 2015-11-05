@@ -34,6 +34,10 @@ The voltage and current information is visualised using a Qt-based GUI. The prog
  - Power quality analysis
  - Update SV stream status
 
+## Running the program on Windows ##
+
+The code can be build from source on Windows, OS X, and Linux. However, a pre-build Windows .exe (and the required DLLs) is included in the `release` directory.
+
 # Installation #
 
  - Install [Qt Creator](http://qt-project.org/downloads) and a compiler for your platform. So far, the code has been tested with Qt Creator 4.8.0 (or 4.8.1) on Windows 7 64-bit, Mac OS X Mountain Lion, and Ubuntu 12.04 64-bit.
