@@ -28,6 +28,7 @@
 #include "PhasorView.h"
 #include "PlotScene.h"
 #include "PlotView.h"
+#include <QPushButton>
 
 class PhasorPlotTab : public TabViewWidget
 {
@@ -41,6 +42,9 @@ signals:
     
 public slots:
 
+private slots:
+    void saveOscillograms();
+
 private:
     QList<QGraphicsView*> views;
 
@@ -52,7 +56,8 @@ private:
     PhasorView *voltagePhasorView;
     PlotView *currentPlotView;
     PlotView *voltagePlotView;
-    
+
+    QPushButton * saveOscButton;
 };
 
 #endif // PHASORPLOTTAB_H

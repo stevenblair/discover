@@ -20,6 +20,7 @@
 
 #include "PhasorPlotTab.h"
 //#include <qgl.h>
+#include <QFileDialog>
 
 void PhasorPlotTab::update()
 {
@@ -41,6 +42,55 @@ void PhasorPlotTab::removeView()
     currentPhasorScene->streamRemoved();
     voltagePlotScene->streamRemoved();
     currentPlotScene->streamRemoved();
+}
+
+void PhasorPlotTab::saveOscillograms()
+{
+    const int currentPathCount = currentPlotScene->getPathCount();
+    const QPainterPath * currentPath = currentPlotScene->getPath();
+
+    const int voltagePathCount = voltagePlotScene->getPathCount();
+    const QPainterPath * voltagePath = voltagePlotScene->getPath();
+
+    if (currentPathCount != voltagePathCount) {
+        return;
+    }
+
+    const int pathCount = currentPathCount;
+
+    if (pathCount <= 0) {
+        return;
+    }
+
+    const int elementCount = currentPath[0].elementCount();
+
+    for (int i = 0; i < pathCount; i++) {
+        if (
+            currentPath[i].elementCount() != elementCount
+            || voltagePath[i].elementCount() != elementCount
+        ) {
+            return;
+        }
+    }
+
+    QString filename = QFileDialog::getSaveFileName(this, "Saving oscillograms");
+
+    if (filename.isEmpty()) {
+        return;
+    }
+
+    QFile file(filename);
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return;
+    }
+
+    for (int e = 0; e < elementCount; e++) {
+        for (int p = 0; p < pathCount; p++) {
+            currentPath[p].elementAt(e).x;
+            voltagePath[p].elementAt(e).x;
+        }
+    }
 }
 
 PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
@@ -66,10 +116,14 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 //    currentPlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 //    voltagePlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 
+    saveOscButton = new QPushButton(tr("Save oscillograms"), this);
+    connect(saveOscButton, SIGNAL(clicked()), this, SLOT(saveOscillograms()));
+
     graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
     graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);
     graphLayout->addWidget(voltagePlotView, 0, 1, 0);
     graphLayout->addWidget(currentPlotView, 1, 1, 0);
+    graphLayout->addWidget(saveOscButton, 2, 1);
     graphLayout->setColumnStretch(0, 0);
     graphLayout->setColumnStretch(1, 1);
 
