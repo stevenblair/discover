@@ -81,15 +81,46 @@ void PhasorPlotTab::saveOscillograms()
 
     QFile file(filename);
 
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (!file.open(QIODevice::WriteOnly)) {
         return;
     }
 
+    QString header = "\"Time, ms\"";
+    for (int p = 0; p < pathCount; p++) {
+        header += QString(",\"Current%1, A\"").arg(p);
+        header += QString(",\"Voltage%1, V\"").arg(p);
+    }
+    header += "\n";
+    file.write(header.toLatin1());
+
     for (int e = 0; e < elementCount; e++) {
+        const qreal time_ms  = currentPath[0].elementAt(e).x;
+
+        qreal current[pathCount];
+        qreal voltage[pathCount];
+
         for (int p = 0; p < pathCount; p++) {
-            currentPath[p].elementAt(e).x;
-            voltagePath[p].elementAt(e).x;
+            if (
+                currentPath[p].elementAt(e).x != time_ms
+                || voltagePath[p].elementAt(e).x != time_ms
+            ) {
+                return;
+            }
+
+            current[p] = currentPath[p].elementAt(e).y;
+            voltage[p] = voltagePath[p].elementAt(e).y;
         }
+
+        QByteArray line;
+
+        line += QByteArray::number(time_ms);
+
+        for (int p = 0; p < pathCount; p++) {
+            line += ',' + QByteArray::number(current[p]);
+            line += ',' + QByteArray::number(voltage[p]);
+        }
+
+        file.write(line + '\n');
     }
 }
 

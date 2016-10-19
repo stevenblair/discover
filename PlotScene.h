@@ -62,6 +62,8 @@ protected:
     QPersistentModelIndex index;
 
 private:
+    static const int pathCount = 3;
+
     QPen pen[pathCount];
     QPen plotLinePen;
     QPen plotLinePenDashed;
@@ -77,8 +79,6 @@ private:
 
     bool drawnOnce;
     void draw();
-
-    static const int pathCount = 3;
 };
 
 
