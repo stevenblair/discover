@@ -85,10 +85,12 @@ void PhasorPlotTab::saveOscillograms()
         return;
     }
 
+    const char columnDelimiter = ';';
+
     QString header = "\"Time, ms\"";
     for (int p = 0; p < pathCount; p++) {
-        header += QString(",\"Current%1, A\"").arg(p);
-        header += QString(",\"Voltage%1, V\"").arg(p);
+        header += QString(columnDelimiter) + QString("\"Current%1, A\"").arg(p);
+        header += QString(columnDelimiter) + QString("\"Voltage%1, V\"").arg(p);
     }
     header += "\n";
     file.write(header.toLatin1());
@@ -116,8 +118,8 @@ void PhasorPlotTab::saveOscillograms()
         line += QByteArray::number(time_ms);
 
         for (int p = 0; p < pathCount; p++) {
-            line += ',' + QByteArray::number(current[p]);
-            line += ',' + QByteArray::number(voltage[p]);
+            line += columnDelimiter + QByteArray::number(current[p]);
+            line += columnDelimiter + QByteArray::number(voltage[p]);
         }
 
         file.write(line + '\n');
