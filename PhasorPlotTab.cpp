@@ -73,7 +73,7 @@ void PhasorPlotTab::saveOscillograms()
         }
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, "Saving oscillograms");
+    QString filename = QFileDialog::getSaveFileName(this, tr("Saving oscillograms"));
 
     if (filename.isEmpty()) {
         return;
@@ -87,13 +87,13 @@ void PhasorPlotTab::saveOscillograms()
 
     const char columnDelimiter = ';';
 
-    QString header = "\"Time, ms\"";
+    QString header = tr("Time, ms");
     for (int p = 0; p < pathCount; p++) {
-        header += QString(columnDelimiter) + QString("\"Current%1, A\"").arg(p);
-        header += QString(columnDelimiter) + QString("\"Voltage%1, V\"").arg(p);
+        header += columnDelimiter + tr("Current %L1, A").arg(p);
+        header += columnDelimiter + tr("Voltage %L1, V").arg(p);
     }
     header += "\n";
-    file.write(header.toLatin1());
+    file.write(header.toUtf8());
 
     for (int e = 0; e < elementCount; e++) {
         const qreal time_ms  = currentPath[0].elementAt(e).x;
@@ -115,15 +115,17 @@ void PhasorPlotTab::saveOscillograms()
 
         QByteArray line;
 
-        line += QByteArray::number(time_ms);
+        line += QString("%L1").arg(time_ms, 0, 'e').toUtf8();
 
         for (int p = 0; p < pathCount; p++) {
-            line += columnDelimiter + QByteArray::number(current[p]);
-            line += columnDelimiter + QByteArray::number(voltage[p]);
+            line += columnDelimiter + QString("%L1").arg(current[p], 0, 'e').toUtf8();
+            line += columnDelimiter + QString("%L1").arg(voltage[p], 0, 'e').toUtf8();
         }
 
         file.write(line + '\n');
     }
+
+    file.close();
 }
 
 PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
