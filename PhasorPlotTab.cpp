@@ -73,33 +73,7 @@ void PhasorPlotTab::saveOscillograms()
         }
     }
 
-    const QString timeFormat = "yyyy-MM-dd hh-mm-ss UTC";
-    const QString time = QDateTime::currentDateTimeUtc().toString(timeFormat);
-
-    QString filename = QString("Discover (%1)").arg(time);
-
-    filename = QFileDialog::getSaveFileName(
-        this,
-        tr("Saving oscillograms"),
-        filename,
-        "CSV (*.csv)"
-    );
-
-    if (filename.isEmpty()) {
-        return;
-    }
-
-    QString fileExtension = ".csv";
-
-    if (filename.endsWith(fileExtension) == false) {
-        filename += fileExtension;
-    }
-
-    QFile file(filename);
-
-    if (!file.open(QIODevice::WriteOnly)) {
-        return;
-    }
+    QByteArray content;
 
     const char columnDelimiter = ';';
 
@@ -109,11 +83,11 @@ void PhasorPlotTab::saveOscillograms()
         header += columnDelimiter + tr("Voltage %L1, V").arg(p);
     }
     header += "\n";
-    file.write(header.toUtf8());
+
+    content += header.toUtf8();
 
     for (int e = 0; e < elementCount; e++) {
         const qreal time_ms  = currentPath[0].elementAt(e).x;
-
         qreal current[pathCount];
         qreal voltage[pathCount];
 
@@ -129,18 +103,41 @@ void PhasorPlotTab::saveOscillograms()
             voltage[p] = voltagePath[p].elementAt(e).y;
         }
 
-        QByteArray line;
-
-        line += QString("%L1").arg(time_ms, 0, 'e').toUtf8();
+        content += QString("%L1").arg(time_ms, 0, 'e').toUtf8();
 
         for (int p = 0; p < pathCount; p++) {
-            line += columnDelimiter + QString("%L1").arg(current[p], 0, 'e').toUtf8();
-            line += columnDelimiter + QString("%L1").arg(voltage[p], 0, 'e').toUtf8();
+            content += columnDelimiter + QString("%L1").arg(current[p], 0, 'e').toUtf8();
+            content += columnDelimiter + QString("%L1").arg(voltage[p], 0, 'e').toUtf8();
         }
 
-        file.write(line + '\n');
+        content += '\n';
     }
 
+    const QString timeFormat = "yyyy-MM-dd hh-mm-ss UTC";
+    const QString time = QDateTime::currentDateTimeUtc().toString(timeFormat);
+    QString filename = QString("Discover (%1)").arg(time);
+
+    filename = QFileDialog::getSaveFileName(
+        this,
+        tr("Saving oscillograms"),
+        filename,
+        "CSV (*.csv)"
+    );
+
+    if (filename.isEmpty()) {
+        return;
+    }
+
+    QString fileExtension = ".csv";
+    if (filename.endsWith(fileExtension) == false) {
+        filename += fileExtension;
+    }
+
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly)) {
+        return;
+    }
+    file.write(content);
     file.close();
 }
 
