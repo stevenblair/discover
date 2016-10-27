@@ -73,10 +73,26 @@ void PhasorPlotTab::saveOscillograms()
         }
     }
 
-    QString filename = QFileDialog::getSaveFileName(this, tr("Saving oscillograms"));
+    const QString timeFormat = "yyyy-MM-dd hh-mm-ss UTC";
+    const QString time = QDateTime::currentDateTimeUtc().toString(timeFormat);
+
+    QString filename = QString("Discover (%1)").arg(time);
+
+    filename = QFileDialog::getSaveFileName(
+        this,
+        tr("Saving oscillograms"),
+        filename,
+        "CSV (*.csv)"
+    );
 
     if (filename.isEmpty()) {
         return;
+    }
+
+    QString fileExtension = ".csv";
+
+    if (filename.endsWith(fileExtension) == false) {
+        filename += fileExtension;
     }
 
     QFile file(filename);
