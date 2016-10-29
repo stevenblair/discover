@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "settings.h"
 #include "MainWindow.h"
 #include "StatusColumnDelegate.h"
 #include <QHeaderView>
@@ -96,6 +97,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         )
     );
 
+    restoreSettings();
+
     commsThread.getStreamManager()->setTableModelPtr(tableModel);
 
     connect(interfaceComboBox, SIGNAL(currentIndexChanged(int)), &commsThread, SLOT(setNetworkInterface(int)));
@@ -122,4 +125,24 @@ QTableView *MainWindow::getStreamTableView()
 
 void MainWindow::addInterface(int value, QString name) {
     interfaceComboBox->addItem(name, value);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    saveSettings();
+    QMainWindow::closeEvent(event);
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings;
+    settings.setValue(Settings::MainWindowGeometry, saveGeometry());
+    settings.setValue(Settings::MainWindowState, saveState());
+}
+
+void MainWindow::restoreSettings()
+{
+    QSettings settings;
+    restoreGeometry(settings.value(Settings::MainWindowGeometry).toByteArray());
+    restoreState(settings.value(Settings::MainWindowState).toByteArray());
 }

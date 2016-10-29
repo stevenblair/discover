@@ -35,6 +35,9 @@ CommsThread commsThread;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setApplicationName("Discover");
+    a.setOrganizationName(a.applicationName());
+
     MainWindow w;
 
     qRegisterMetaType<LE_IED_MUnn_PhsMeas1>("LE_IED_MUnn_PhsMeas1");
