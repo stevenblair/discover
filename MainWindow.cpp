@@ -34,8 +34,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
     QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
-    QVBoxLayout *streamsLayout = new QVBoxLayout;
+    splitter = new QSplitter(Qt::Vertical, centralWidget);
+    QWidget *streamsLayoutWidget = new QWidget(splitter);
+    QVBoxLayout *streamsLayout = new QVBoxLayout(streamsLayoutWidget);
     tabWidget = new QTabWidget(centralWidget);
+
+    splitter->setChildrenCollapsible(false);
 
     phasorPlotTab = new PhasorPlotTab(tabWidget);
     frequencyTab = new FrequencyTab(tabWidget);
@@ -72,8 +76,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotTabView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
     mainLayout->addLayout(networkInterfaceLayout, 0);
-    mainLayout->addLayout(streamsLayout, 1);
-    mainLayout->addWidget(tabWidget, 0);
+    mainLayout->addWidget(splitter);
+    splitter->addWidget(streamsLayoutWidget);
+    splitter->addWidget(tabWidget);
 
     tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
     tabWidget->addTab(frequencyTab, tr("Frequency analysis"));
@@ -138,6 +143,7 @@ void MainWindow::saveSettings()
     QSettings settings;
     settings.setValue(Settings::MainWindowGeometry, saveGeometry());
     settings.setValue(Settings::MainWindowState, saveState());
+    settings.setValue(Settings::MainWindowSplitterState, splitter->saveState());
 }
 
 void MainWindow::restoreSettings()
@@ -145,4 +151,5 @@ void MainWindow::restoreSettings()
     QSettings settings;
     restoreGeometry(settings.value(Settings::MainWindowGeometry).toByteArray());
     restoreState(settings.value(Settings::MainWindowState).toByteArray());
+    splitter->restoreState(settings.value(Settings::MainWindowSplitterState).toByteArray());
 }

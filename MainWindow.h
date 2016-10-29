@@ -41,6 +41,7 @@
 #include "FrequencyTab.h"
 #include "PowerTab.h"
 #include <QCloseEvent>
+#include <QSplitter>
 
 extern CommsThread commsThread;
 
@@ -78,6 +79,8 @@ private:
     PhasorPlotTab *phasorPlotTab;
     FrequencyTab *frequencyTab;
     PowerTab *powerTab;
+
+    QSplitter *splitter;
 
     void saveSettings();
     void restoreSettings();
