@@ -144,6 +144,7 @@ void MainWindow::saveSettings()
     settings.setValue(Settings::MainWindowGeometry, saveGeometry());
     settings.setValue(Settings::MainWindowState, saveState());
     settings.setValue(Settings::MainWindowSplitterState, splitter->saveState());
+    settings.setValue(Settings::CurrentTabIndex, tabWidget->currentIndex());
 }
 
 void MainWindow::restoreSettings()
@@ -152,4 +153,5 @@ void MainWindow::restoreSettings()
     restoreGeometry(settings.value(Settings::MainWindowGeometry).toByteArray());
     restoreState(settings.value(Settings::MainWindowState).toByteArray());
     splitter->restoreState(settings.value(Settings::MainWindowSplitterState).toByteArray());
+    tabWidget->setCurrentIndex(settings.value(Settings::CurrentTabIndex, -1).toInt());
 }
