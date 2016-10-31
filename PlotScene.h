@@ -43,6 +43,9 @@ public:
         this->drawnOnce = status;
     }
 
+    int getPathCount() { return pathCount; }
+    const QPainterPath * getPath() const { return path; }
+
 signals:
 
 public slots:
@@ -59,11 +62,13 @@ protected:
     QPersistentModelIndex index;
 
 private:
-    QPen pen[3];
+    static const int pathCount = 3;
+
+    QPen pen[pathCount];
     QPen plotLinePen;
     QPen plotLinePenDashed;
-    QPainterPath path[3];
-    QGraphicsPathItem *plot[3];
+    QPainterPath path[pathCount];
+    QGraphicsPathItem *plot[pathCount];
     QGraphicsLineItem *horizontalPlotLine;
     QGraphicsLineItem *verticalPlotLine;
     QGraphicsTextItem *xAxisLabels[NUMBER_OF_CYCLES_TO_ANALYSE + 1];
@@ -74,7 +79,6 @@ private:
 
     bool drawnOnce;
     void draw();
-
 };
 
 
