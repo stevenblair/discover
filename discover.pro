@@ -125,7 +125,8 @@ HEADERS  += \
     StreamTableModel.h \
     StreamTableRow.h \
     TabviewWidget.h \
-    FrequencyView.h
+    FrequencyView.h \
+    settings.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 

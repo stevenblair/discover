@@ -40,6 +40,9 @@
 #include "PhasorPlotTab.h"
 #include "FrequencyTab.h"
 #include "PowerTab.h"
+#include <QCloseEvent>
+#include <QSplitter>
+#include <QMenuBar>
 
 extern CommsThread commsThread;
 
@@ -58,6 +61,12 @@ public:
 public slots:
     void addInterface(int value, QString name);
 
+protected:
+    void closeEvent(QCloseEvent *event);
+
+private slots:
+    void about();
+
 private:
     QLabel *networkInterfaceLabel;
     QComboBox *interfaceComboBox;
@@ -74,6 +83,12 @@ private:
     PhasorPlotTab *phasorPlotTab;
     FrequencyTab *frequencyTab;
     PowerTab *powerTab;
+
+    QSplitter *splitter;
+    QMenuBar * menuBar;
+
+    void saveSettings();
+    void restoreSettings();
 };
 
 #endif // MAINWINDOW_H

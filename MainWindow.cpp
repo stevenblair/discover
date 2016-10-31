@@ -18,13 +18,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "settings.h"
 #include "MainWindow.h"
 #include "StatusColumnDelegate.h"
 #include <QHeaderView>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QItemSelectionModel>
-
+#include <QMessageBox>
 #include <QDoubleSpinBox>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -33,8 +34,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
     QHBoxLayout *networkInterfaceLayout = new QHBoxLayout;
-    QVBoxLayout *streamsLayout = new QVBoxLayout;
+    splitter = new QSplitter(Qt::Vertical, centralWidget);
+    QWidget *streamsLayoutWidget = new QWidget(splitter);
+    QVBoxLayout *streamsLayout = new QVBoxLayout(streamsLayoutWidget);
     tabWidget = new QTabWidget(centralWidget);
+
+    splitter->setChildrenCollapsible(false);
 
     phasorPlotTab = new PhasorPlotTab(tabWidget);
     frequencyTab = new FrequencyTab(tabWidget);
@@ -70,9 +75,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     streamsLayout->addWidget(tableView);
     connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotTabView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
+    menuBar = new QMenuBar(centralWidget);
+    QMenu * helpMenu = menuBar->addMenu(tr("Help"));
+    helpMenu->addAction(tr("About..."), this, SLOT(about()));
+
+    setMenuBar(menuBar);
     mainLayout->addLayout(networkInterfaceLayout, 0);
-    mainLayout->addLayout(streamsLayout, 1);
-    mainLayout->addWidget(tabWidget, 0);
+    mainLayout->addWidget(splitter);
+    splitter->addWidget(streamsLayoutWidget);
+    splitter->addWidget(tabWidget);
 
     tabWidget->addTab(phasorPlotTab, tr("Phasors and waveforms"));
     tabWidget->addTab(frequencyTab, tr("Frequency analysis"));
@@ -95,6 +106,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
             qApp->desktop()->availableGeometry()
         )
     );
+
+    restoreSettings();
 
     commsThread.getStreamManager()->setTableModelPtr(tableModel);
 
@@ -122,4 +135,41 @@ QTableView *MainWindow::getStreamTableView()
 
 void MainWindow::addInterface(int value, QString name) {
     interfaceComboBox->addItem(name, value);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    saveSettings();
+    QMainWindow::closeEvent(event);
+}
+
+void MainWindow::about()
+{
+    QString text =
+        "<html>"
+        "Discover version %1<br><br>Site: <a href=\"%2\">%2</a>"
+        "</html>";
+    text = text.arg(
+        QApplication::applicationVersion(),
+        QApplication::organizationDomain()
+    );
+    QMessageBox::about(this, tr("About"), text);
+}
+
+void MainWindow::saveSettings()
+{
+    QSettings settings;
+    settings.setValue(Settings::MainWindowGeometry, saveGeometry());
+    settings.setValue(Settings::MainWindowState, saveState());
+    settings.setValue(Settings::MainWindowSplitterState, splitter->saveState());
+    settings.setValue(Settings::CurrentTabIndex, tabWidget->currentIndex());
+}
+
+void MainWindow::restoreSettings()
+{
+    QSettings settings;
+    restoreGeometry(settings.value(Settings::MainWindowGeometry).toByteArray());
+    restoreState(settings.value(Settings::MainWindowState).toByteArray());
+    splitter->restoreState(settings.value(Settings::MainWindowSplitterState).toByteArray());
+    tabWidget->setCurrentIndex(settings.value(Settings::CurrentTabIndex, -1).toInt());
 }
