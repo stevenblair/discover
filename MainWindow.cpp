@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QItemSelectionModel>
-
+#include <QMessageBox>
 #include <QDoubleSpinBox>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
@@ -75,6 +75,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     streamsLayout->addWidget(tableView);
     connect(itemSelectionModel, SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)), this->phasorPlotTabView, SLOT(selectionChanged(const QItemSelection &, const QItemSelection &)));
 
+    menuBar = new QMenuBar(centralWidget);
+    QMenu * helpMenu = menuBar->addMenu(tr("Help"));
+    helpMenu->addAction(tr("About..."), this, SLOT(about()));
+
+    setMenuBar(menuBar);
     mainLayout->addLayout(networkInterfaceLayout, 0);
     mainLayout->addWidget(splitter);
     splitter->addWidget(streamsLayoutWidget);
@@ -136,6 +141,19 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     saveSettings();
     QMainWindow::closeEvent(event);
+}
+
+void MainWindow::about()
+{
+    QString text =
+        "<html>"
+        "Discover version %1<br><br>Site: <a href=\"%2\">%2</a>"
+        "</html>";
+    text = text.arg(
+        QApplication::applicationVersion(),
+        QApplication::organizationDomain()
+    );
+    QMessageBox::about(this, tr("About"), text);
 }
 
 void MainWindow::saveSettings()

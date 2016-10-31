@@ -42,6 +42,7 @@
 #include "PowerTab.h"
 #include <QCloseEvent>
 #include <QSplitter>
+#include <QMenuBar>
 
 extern CommsThread commsThread;
 
@@ -63,6 +64,9 @@ public slots:
 protected:
     void closeEvent(QCloseEvent *event);
 
+private slots:
+    void about();
+
 private:
     QLabel *networkInterfaceLabel;
     QComboBox *interfaceComboBox;
@@ -81,6 +85,7 @@ private:
     PowerTab *powerTab;
 
     QSplitter *splitter;
+    QMenuBar * menuBar;
 
     void saveSettings();
     void restoreSettings();
