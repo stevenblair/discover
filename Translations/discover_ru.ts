@@ -11,12 +11,12 @@
     <message>
         <location filename="../MainWindow.cpp" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="80"/>
         <source>About...</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе...</translation>
     </message>
     <message>
         <location filename="../MainWindow.cpp" line="88"/>
@@ -49,9 +49,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MainWindow.cpp" line="156"/>
+        <location filename="../MainWindow.cpp" line="148"/>
+        <source>&lt;html&gt;Discover version %1&lt;br&gt;&lt;br&gt;Site: &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;Discover версии %1&lt;br&gt;&lt;br&gt;Сайт: &lt;a href=&quot;%2&quot;&gt;%2&lt;/a&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../MainWindow.cpp" line="157"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе</translation>
     </message>
 </context>
 <context>
@@ -74,12 +79,12 @@
     <message>
         <location filename="../PhasorPlotTab.cpp" line="122"/>
         <source>Saving oscillograms</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранение осциллограммы</translation>
     </message>
     <message>
         <location filename="../PhasorPlotTab.cpp" line="167"/>
         <source>Save oscillograms</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить осциллограмму</translation>
     </message>
 </context>
 <context>

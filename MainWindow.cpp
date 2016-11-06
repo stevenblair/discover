@@ -145,10 +145,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::about()
 {
-    QString text =
+    QString text = tr(
         "<html>"
         "Discover version %1<br><br>Site: <a href=\"%2\">%2</a>"
-        "</html>";
+        "</html>"
+    );
     text = text.arg(
         QApplication::applicationVersion(),
         QApplication::organizationDomain()
