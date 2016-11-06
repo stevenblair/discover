@@ -40,8 +40,8 @@ int main(int argc, char *argv[])
 
     a.setApplicationName("Discover");
     a.setOrganizationName(a.applicationName());
-    a.setApplicationVersion("0.0.0");
-    a.setOrganizationDomain("http://stevenblair.github.io/discover/");
+    a.setApplicationVersion("1.1.0");
+    a.setOrganizationDomain("https://github.com/bravikov/discover/tree/bravikov");
 
     QTranslator translator;
     bool ok = translator.load(":/Translations/discover_" + QLocale::system().name());

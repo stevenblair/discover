@@ -2,8 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Discover"
-#define MyAppVersion "1.0.0"
-#define MyAppURL "http://stevenblair.github.io/discover/"
+#define MyAppVersion "1.1.0"
+#define MyAppURL "https://github.com/bravikov/discover/tree/bravikov"
 #define MyAppExeName "discover.exe"
 
 [Setup]
