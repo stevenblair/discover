@@ -62,27 +62,27 @@
 <context>
     <name>PhasorPlotTab</name>
     <message>
-        <location filename="../PhasorPlotTab.cpp" line="80"/>
+        <location filename="../PhasorPlotTab.cpp" line="81"/>
         <source>Time, ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PhasorPlotTab.cpp" line="82"/>
+        <location filename="../PhasorPlotTab.cpp" line="83"/>
         <source>Current %L1, A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PhasorPlotTab.cpp" line="83"/>
+        <location filename="../PhasorPlotTab.cpp" line="84"/>
         <source>Voltage %L1, V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PhasorPlotTab.cpp" line="122"/>
+        <location filename="../PhasorPlotTab.cpp" line="123"/>
         <source>Saving oscillograms</source>
         <translation>Сохранение осциллограммы</translation>
     </message>
     <message>
-        <location filename="../PhasorPlotTab.cpp" line="167"/>
+        <location filename="../PhasorPlotTab.cpp" line="181"/>
         <source>Save oscillograms</source>
         <translation>Сохранить осциллограмму</translation>
     </message>

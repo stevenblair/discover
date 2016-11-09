@@ -21,6 +21,7 @@
 #include "PhasorPlotTab.h"
 //#include <qgl.h>
 #include <QFileDialog>
+#include <QSplitter>
 
 void PhasorPlotTab::update()
 {
@@ -145,6 +146,19 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 {
     QGridLayout *graphLayout = new QGridLayout(this);
 
+    QSplitter *splitter = new QSplitter(Qt::Vertical);
+    graphLayout->addWidget(splitter);
+    splitter->setChildrenCollapsible(false);
+    splitter->setContentsMargins(0, 0, 0, 0);
+    QWidget *voltageLayoutWidget = new QWidget(splitter);
+    voltageLayoutWidget->setContentsMargins(0, 0, 0, 0);
+    QWidget *currentLayoutWidget = new QWidget(splitter);
+    splitter->addWidget(voltageLayoutWidget);
+    splitter->addWidget(currentLayoutWidget);
+
+    QHBoxLayout *voltageLayout = new QHBoxLayout(voltageLayoutWidget);
+    QHBoxLayout *currentLayout = new QHBoxLayout(currentLayoutWidget);
+
     currentPhasorScene = new CurrentPhasorScene();
     voltagePhasorScene = new VoltagePhasorScene();
     currentPhasorView = new PhasorView(this);
@@ -167,13 +181,15 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
     saveOscButton = new QPushButton(tr("Save oscillograms"), this);
     connect(saveOscButton, SIGNAL(clicked()), this, SLOT(saveOscillograms()));
 
-    graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
-    graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);
-    graphLayout->addWidget(voltagePlotView, 0, 1, 0);
-    graphLayout->addWidget(currentPlotView, 1, 1, 0);
-    graphLayout->addWidget(saveOscButton, 2, 1);
-    graphLayout->setColumnStretch(0, 0);
-    graphLayout->setColumnStretch(1, 1);
+    voltageLayout->setContentsMargins(0, 0, 0, 0);
+    voltageLayout->addWidget(voltagePhasorView, 0, Qt::AlignLeft);
+    voltageLayout->addWidget(voltagePlotView, 1);
+
+    currentLayout->setContentsMargins(0, 0, 0, 0);
+    currentLayout->addWidget(currentPhasorView, 0, Qt::AlignLeft);
+    currentLayout->addWidget(currentPlotView, 1);
+
+    graphLayout->addWidget(saveOscButton, 1, 0);
 
     this->views.append(currentPhasorView);
     this->views.append(voltagePhasorView);
