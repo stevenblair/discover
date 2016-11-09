@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     a.setApplicationName("Discover");
     a.setOrganizationName(a.applicationName());
-    a.setApplicationVersion("1.1.0");
+    a.setApplicationVersion("1.2.0");
     a.setOrganizationDomain("https://github.com/bravikov/discover/tree/bravikov");
 
     QTranslator translator;
