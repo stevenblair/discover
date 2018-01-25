@@ -20,6 +20,8 @@
 
 #include "PhasorPlotTab.h"
 //#include <qgl.h>
+#include <QFileDialog>
+#include <QSplitter>
 
 void PhasorPlotTab::update()
 {
@@ -43,9 +45,119 @@ void PhasorPlotTab::removeView()
     currentPlotScene->streamRemoved();
 }
 
+void PhasorPlotTab::saveOscillograms()
+{
+    const int currentPathCount = currentPlotScene->getPathCount();
+    const QPainterPath * currentPath = currentPlotScene->getPath();
+
+    const int voltagePathCount = voltagePlotScene->getPathCount();
+    const QPainterPath * voltagePath = voltagePlotScene->getPath();
+
+    if (currentPathCount != voltagePathCount) {
+        return;
+    }
+
+    const int pathCount = currentPathCount;
+
+    if (pathCount <= 0) {
+        return;
+    }
+
+    const int elementCount = currentPath[0].elementCount();
+
+    for (int i = 0; i < pathCount; i++) {
+        if (
+            currentPath[i].elementCount() != elementCount
+            || voltagePath[i].elementCount() != elementCount
+        ) {
+            return;
+        }
+    }
+
+    QByteArray content;
+
+    const char columnDelimiter = ';';
+
+    QString header = tr("Time, ms");
+    for (int p = 0; p < pathCount; p++) {
+        header += columnDelimiter + tr("Current %L1, A").arg(p);
+        header += columnDelimiter + tr("Voltage %L1, V").arg(p);
+    }
+    header += "\n";
+
+    content += header.toUtf8();
+
+    for (int e = 0; e < elementCount; e++) {
+        const qreal time_ms  = currentPath[0].elementAt(e).x;
+        qreal current[pathCount];
+        qreal voltage[pathCount];
+
+        for (int p = 0; p < pathCount; p++) {
+            if (
+                currentPath[p].elementAt(e).x != time_ms
+                || voltagePath[p].elementAt(e).x != time_ms
+            ) {
+                return;
+            }
+
+            current[p] = currentPath[p].elementAt(e).y;
+            voltage[p] = voltagePath[p].elementAt(e).y;
+        }
+
+        content += QString("%L1").arg(time_ms, 0, 'e').toUtf8();
+
+        for (int p = 0; p < pathCount; p++) {
+            content += columnDelimiter + QString("%L1").arg(current[p], 0, 'e').toUtf8();
+            content += columnDelimiter + QString("%L1").arg(voltage[p], 0, 'e').toUtf8();
+        }
+
+        content += '\n';
+    }
+
+    const QString timeFormat = "yyyy-MM-dd hh-mm-ss UTC";
+    const QString time = QDateTime::currentDateTimeUtc().toString(timeFormat);
+    QString filename = QString("Discover (%1)").arg(time);
+
+    filename = QFileDialog::getSaveFileName(
+        this,
+        tr("Saving oscillograms"),
+        filename,
+        "CSV (*.csv)"
+    );
+
+    if (filename.isEmpty()) {
+        return;
+    }
+
+    QString fileExtension = ".csv";
+    if (filename.endsWith(fileExtension) == false) {
+        filename += fileExtension;
+    }
+
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly)) {
+        return;
+    }
+    file.write(content);
+    file.close();
+}
+
 PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 {
     QGridLayout *graphLayout = new QGridLayout(this);
+
+    QSplitter *splitter = new QSplitter(Qt::Vertical);
+    graphLayout->addWidget(splitter);
+    splitter->setChildrenCollapsible(false);
+    splitter->setContentsMargins(0, 0, 0, 0);
+    QWidget *voltageLayoutWidget = new QWidget(splitter);
+    voltageLayoutWidget->setContentsMargins(0, 0, 0, 0);
+    QWidget *currentLayoutWidget = new QWidget(splitter);
+    splitter->addWidget(voltageLayoutWidget);
+    splitter->addWidget(currentLayoutWidget);
+
+    QHBoxLayout *voltageLayout = new QHBoxLayout(voltageLayoutWidget);
+    QHBoxLayout *currentLayout = new QHBoxLayout(currentLayoutWidget);
 
     currentPhasorScene = new CurrentPhasorScene();
     voltagePhasorScene = new VoltagePhasorScene();
@@ -66,12 +178,18 @@ PhasorPlotTab::PhasorPlotTab(QWidget *parent) : TabViewWidget(parent)
 //    currentPlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 //    voltagePlotView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
 
-    graphLayout->addWidget(voltagePhasorView, 0, 0, Qt::AlignLeft);
-    graphLayout->addWidget(currentPhasorView, 1, 0, Qt::AlignLeft);
-    graphLayout->addWidget(voltagePlotView, 0, 1, 0);
-    graphLayout->addWidget(currentPlotView, 1, 1, 0);
-    graphLayout->setColumnStretch(0, 0);
-    graphLayout->setColumnStretch(1, 1);
+    saveOscButton = new QPushButton(tr("Save oscillograms"), this);
+    connect(saveOscButton, SIGNAL(clicked()), this, SLOT(saveOscillograms()));
+
+    voltageLayout->setContentsMargins(0, 0, 0, 0);
+    voltageLayout->addWidget(voltagePhasorView, 0, Qt::AlignLeft);
+    voltageLayout->addWidget(voltagePlotView, 1);
+
+    currentLayout->setContentsMargins(0, 0, 0, 0);
+    currentLayout->addWidget(currentPhasorView, 0, Qt::AlignLeft);
+    currentLayout->addWidget(currentPlotView, 1);
+
+    graphLayout->addWidget(saveOscButton, 1, 0);
 
     this->views.append(currentPhasorView);
     this->views.append(voltagePhasorView);

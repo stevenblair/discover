@@ -30,7 +30,7 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
     //path = new QPainterPath();
     xUnits = QString("ms");
 
-    QColor lineColors[3] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
+    QColor lineColors[pathCount] = {QColor(180, 33, 38, PHASOR_LINE_ALPHA), QColor(240, 181, 0, PHASOR_LINE_ALPHA), QColor(36, 78, 198, PHASOR_LINE_ALPHA)};
     QColor plotLineColor = QColor(180, 180, 180);
 
     plotLinePen = QPen(plotLineColor);
@@ -40,7 +40,7 @@ PlotScene::PlotScene(QObject *parent) : QGraphicsScene(parent)
     plotLinePenDashed.setCosmetic(true);
     plotLinePenDashed.setStyle(Qt::DashLine);
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < pathCount; i++) {
         pen[i] = QPen(QColor(lineColors[i]));
         //pen[i].setWidthF(0.3);
         pen[i].setCosmetic(true);
@@ -110,7 +110,7 @@ void PlotScene::streamTableModelSelectionChanged(StreamTableModel *streamTableMo
     // pre-initialise paths with the correct number of elements
     quint32 iterations = stream->getSampledData()->size();
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < pathCount; i++) {
         if (path[i].length() <= 1) {
             for (quint32 t = 0; t < iterations; t++) {
                 path[i].lineTo(0.001 * t, 0.001 * t);
@@ -123,7 +123,7 @@ void PlotScene::streamTableModelSelectionChanged(StreamTableModel *streamTableMo
 
 void PlotScene::streamRemoved()
 {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < pathCount; i++) {
         plot[i]->hide();
     }
 }
@@ -228,7 +228,7 @@ void PlotScene::draw() {
         view->fitInView(itemsBoundingRect(), Qt::IgnoreAspectRatio);
     }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < pathCount; i++) {
         stream->getPainterPath(&path[i], getPowerSystemQuantity(), i);
         plot[i]->setPath(path[i]);
         plot[i]->show();
