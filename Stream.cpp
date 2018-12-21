@@ -31,7 +31,7 @@
 
 Stream::Stream(QString svID, QString sourceMAC, QObject *parent) : QObject(parent)
 {
-    this->disabled = false; // ADDED BY SHG
+    this->disabled = false;
     this->capturing = true;
     this->alive = true;
     this->checkAlive = false;
