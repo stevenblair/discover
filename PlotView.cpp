@@ -31,8 +31,6 @@ PlotView::PlotView(QObject *parent)
 {
     this->setMinimumWidth(PLOT_VIEW_WIDTH);
     this->setMinimumHeight(PLOT_VIEW_HEIGHT);
-    this->setMaximumHeight(PLOT_VIEW_HEIGHT);
-    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
     this->setDragMode(QGraphicsView::ScrollHandDrag);
     this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

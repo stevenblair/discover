@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include <QTranslator>
+#include <QLocale>
 #include <qglobal.h>
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 0, 0))
     #include <QtWidgets/QApplication>
@@ -35,9 +37,24 @@ CommsThread commsThread;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+
+    a.setApplicationName("Discover");
+    a.setOrganizationName(a.applicationName());
+    a.setApplicationVersion("1.2.0");
+    a.setOrganizationDomain("https://github.com/bravikov/discover/tree/bravikov");
+
+    QTranslator translator;
+    bool ok = translator.load(":/Translations/discover_" + QLocale::system().name());
+    if (ok) {
+        a.installTranslator(&translator);
+    }
+    else {
+        qDebug() << "Translation is not loaded.";
+    }
 
     qRegisterMetaType<LE_IED_MUnn_PhsMeas1>("LE_IED_MUnn_PhsMeas1");
+
+    MainWindow w;
 
     QObject::connect(&commsThread, SIGNAL(addInterface(int, QString)), &w, SLOT(addInterface(int, QString)));
     QObject::connect(w.getStreamTableModel(), SIGNAL(resizeColumnsToContents()), w.getStreamTableView(), SLOT(resizeColumnsToContents()));

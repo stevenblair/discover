@@ -125,7 +125,8 @@ HEADERS  += \
     StreamTableModel.h \
     StreamTableRow.h \
     TabviewWidget.h \
-    FrequencyView.h
+    FrequencyView.h \
+    settings.h
 
 #contains(QT_CONFIG, opengl):QT += opengl
 
@@ -141,3 +142,13 @@ macx {
 unix {
     LIBS += -L"$$_PRO_FILE_PWD_/Lib" -lpcap
 }
+
+TRANSLATIONS += \
+    Translations/discover_ru.ts
+
+tr.commands = lupdate $$_PRO_FILE_ && lrelease $$_PRO_FILE_
+    PRE_TARGETDEPS += tr
+    QMAKE_EXTRA_TARGETS += tr
+
+RESOURCES += \
+    discover.qrc
