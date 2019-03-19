@@ -43,7 +43,7 @@ struct ASDU {
 	int showDatset;
 	int showRefrTm;
 	int showSmpRate;
-	struct data {
+    struct struct_data {
 		unsigned char data[SV_MAX_DATASET_SIZE];
 		CTYPE_INT32U size;
 	} data;

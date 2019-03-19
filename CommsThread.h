@@ -27,6 +27,7 @@
 #ifdef _WIN32
     #define WPCAP
     #define HAVE_REMOTE
+    #include <winsock2.h>
     #include <windows.h>
 #endif
 #include <pcap.h>
